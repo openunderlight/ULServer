@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+
+use GDBM_File;
+
+# This script dumps out all the records stored in the files passed in 
+
+foreach $filename (@ARGV) {
+    tie(%db, GDBM_File, $filename, 0, 0666);
+    foreach (sort keys %db) {
+        print "$_: ".$db{$_}."\n";
+    }
+    untie(%db);
+    $isone = 1;
+}
+unless ($isone) {
+    print "Usage: gdbm_dump files...\n";
+}
+

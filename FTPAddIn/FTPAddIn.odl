@@ -1,0 +1,61 @@
+// FTPAddIn.odl : type library source for FTPAddIn.dll
+
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (FTPAddIn.tlb).
+
+[	uuid(60C4C93A-1155-4887-A2FB-27570B0352DA), version(1.0),
+	helpstring ("FTPADDIN Developer Studio Add-in") ]
+library FTPAddIn
+{
+	importlib("stdole32.tlb");
+	importlib("devshl.dll");
+	importlib("ide\devdbg.pkg");
+	
+
+	//  Dual interface for CCommands
+	//
+	//  All commands that your add-in adds to DevStudio
+	//   must appear in this interface.  You may use the
+	//   ClassView to add methods to this interface, which
+	//   will cause stub implementations of those methods to
+	//   appear in your CCommands class.
+	
+	[	uuid(0BFA8094-0D15-4D30-AFDF-A2C26F133ADC),
+		oleautomation,
+		dual
+	]
+
+	interface ICommands : IDispatch
+	{
+		// methods
+		[id(1)]
+		HRESULT FTPFile();
+		[id(2), helpstring("method FTPProject")] HRESULT FTPProject();
+		[id(3), helpstring("method FTPAll")] HRESULT FTPAll();
+		[id(4), helpstring("method FTPGetFile")] HRESULT FTPGetFile();
+		[id(5), helpstring("method FTPFileLive")] HRESULT FTPFileLive();
+	};
+
+	//  Class information for CCommands
+
+	[ uuid(3D3DCDC6-B654-4D21-A076-692FAB54A1FB) ]
+	coclass Commands
+	{
+		[default] interface ICommands;
+	};
+
+	[ hidden, uuid(CEDEDE60-E0AA-47AC-A0ED-92AB61FEC7AD) ]
+	coclass ApplicationEvents
+	{
+		[default] interface IApplicationEvents;
+	}
+
+	[ hidden, uuid(8ECAE3F1-C1F8-4B86-A63F-E057E75DADA0) ]
+	coclass DebuggerEvents
+	{
+		[default] interface IDebuggerEvents;
+	}
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

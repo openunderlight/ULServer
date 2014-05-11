@@ -1,0 +1,8 @@
+PThAttr.o: PThAttr.cpp PThAttr.h ../include/LyraDefs.h ../include/tchar.h \
+ ../include/LmNew.h PThAttr.i
+PThCond.o: PThCond.cpp PThCond.h ../include/LyraDefs.h ../include/tchar.h \
+ ../include/LmNew.h PThMutex.h PThCond.i
+PTh.o: PTh.cpp PTh.h ../include/LyraDefs.h ../include/tchar.h \
+ ../include/LmNew.h PThAttr.h PTh.i
+PThMutex.o: PThMutex.cpp PThMutex.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h PThMutex.i

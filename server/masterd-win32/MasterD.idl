@@ -1,0 +1,20 @@
+// MasterD.idl : IDL source for MasterD.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MasterD.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(912A9BD6-2FA0-45E5-94C6-1ED804715C77),
+	version(1.0),
+	helpstring("MasterD 1.0 Type Library")
+]
+library MASTERDLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+};

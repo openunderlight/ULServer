@@ -1,0 +1,80 @@
+LmDispatch.o: LmDispatch.cpp LmDispatch.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/LmMesg.h \
+ ../include/LyraDefs.h LmSrvMesgBuf.h ../include/LmMesgBuf.h \
+ ../include/LmMesgHdr.h ../include/LmMesgHdr.h LmMesgBufPool.h \
+ ../include/PThMutex.h LmThread.h ../include/PTh.h ../include/PThAttr.h \
+ ../include/LmConnectionList.h ../include/LyraMessage.h LmDispatch.i
+LmInventory.o: LmInventory.cpp LmInventory.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/LmItem.h \
+ ../include/LyraDefs.h ../include/LmItemHdr.h ../include/LmBit32.h \
+ ../include/LmItemDefs.h LmInventory.i
+LmItemGenColors.o: LmItemGenColors.cpp
+LmItemGen.o: LmItemGen.cpp LmItemGen.h ../include/LmItem.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmItemHdr.h ../include/LmBit32.h ../include/LmItemDefs.h \
+ ../include/LmItemDefs.h ../include/LyraDefs.h ../include/LmRand.h \
+ ../include/LmItemHdr.h ../include/SharedConstants.h LmItemGenTables.h \
+ LmItemGenNames.h LmItemGen.i LmItemGenColors.cpp
+LmMesgBufPool.o: LmMesgBufPool.cpp LmMesgBufPool.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/PThMutex.h \
+ ../include/LyraDefs.h ../include/LmMesgBufPoolImp.h \
+ ../include/LmLocker.h ../include/PThMutex.h LmMesgBufPool.i
+LmMessageReader.o: LmMessageReader.cpp LmMessageReader.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h LmThread.h \
+ ../include/PTh.h ../include/LyraDefs.h ../include/PThAttr.h \
+ ../include/PThMutex.h LmDispatch.h LmSrvMesgBuf.h ../include/LmMesgBuf.h \
+ ../include/LmMesgHdr.h ../include/LmMesgHdr.h LmMesgBufPool.h \
+ ../include/LmConnection.h ../include/LmSocket.h ../include/LmSockType.h \
+ ../include/LmSockAddrInet.h ../include/LmSockAddr.h ../include/LmUtil.h \
+ ../include/PThMutex.h ../include/LmLog.h ../include/SMsg_RecvMesg.h \
+ ../include/LmMesg.h ../include/SMsg.h ../include/LyraMessage.h \
+ ../include/LmLocker.h LmMessageReader.i
+LmNetworkInput.o: LmNetworkInput.cpp LmNetworkInput.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h LmThread.h \
+ ../include/PTh.h ../include/LyraDefs.h ../include/PThAttr.h \
+ ../include/LmSocket.h ../include/LmSockType.h \
+ ../include/LmSockAddrInet.h ../include/LmSockAddr.h \
+ ../include/LmConnection.h ../include/LmSocket.h ../include/LmUtil.h \
+ ../include/PThMutex.h ../include/LmConnectionSet.h ../include/LmLog.h \
+ LmMessageReader.h ../include/PThMutex.h ../include/SMsg_RecvMesg.h \
+ ../include/LmMesg.h ../include/SMsg.h LmSrvMesgBuf.h \
+ ../include/LmMesgBuf.h ../include/LmMesgHdr.h ../include/LmMesgHdr.h \
+ LmMesgBufPool.h ../include/LmRand.h LmNetworkInput.i
+LmNetworkOutput.o: LmNetworkOutput.cpp LmNetworkOutput.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h LmThread.h \
+ ../include/PTh.h ../include/LyraDefs.h ../include/PThAttr.h \
+ ../include/LmConnection.h ../include/LmSocket.h ../include/LmSockType.h \
+ ../include/LmSockAddrInet.h ../include/LmSockAddr.h ../include/LmUtil.h \
+ ../include/PThMutex.h ../include/LmConnectionSet.h ../include/LmLog.h \
+ LmSrvMesgBuf.h ../include/LmMesgBuf.h ../include/LmMesgHdr.h \
+ ../include/LmMesgHdr.h ../include/SMsg_SendMesg.h ../include/LmMesg.h \
+ ../include/SMsg.h LmMesgBufPool.h ../include/PThMutex.h \
+ LmNetworkOutput.i
+LmParty.o: LmParty.cpp LmParty.h ../include/LyraDefs.h ../include/tchar.h \
+ ../include/LmNew.h LmParty.i
+LmRoomItem.o: LmRoomItem.cpp LmRoomItem.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/LmItem.h \
+ ../include/LyraDefs.h ../include/LmItemHdr.h ../include/LmBit32.h \
+ ../include/LmItemDefs.h ../include/LmPosition.h ../include/LmUtil.h \
+ LmRoomItem.i
+LmSignalThread.o: LmSignalThread.cpp LmSignalThread.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h LmThread.h \
+ ../include/PTh.h ../include/LyraDefs.h ../include/PThAttr.h \
+ LmSignalThread.i
+LmSrvMesgBuf.o: LmSrvMesgBuf.cpp LmSrvMesgBuf.h ../include/LmMesgBuf.h \
+ ../include/LmMesgHdr.h ../include/LyraDefs.h ../include/tchar.h \
+ ../include/LmNew.h ../include/LmMesgHdr.h ../include/LmMesg.h \
+ ../include/LmUtil.h LmSrvMesgBuf.i
+LmThread.o: LmThread.cpp LmThread.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/PTh.h \
+ ../include/LyraDefs.h ../include/PThAttr.h ../include/LmLocker.h \
+ ../include/PThMutex.h LmSrvMesgBuf.h ../include/LmMesgBuf.h \
+ ../include/LmMesgHdr.h ../include/LmMesgHdr.h LmMesgBufPool.h \
+ ../include/PThMutex.h ../include/LmConnection.h ../include/LmSocket.h \
+ ../include/LmSockType.h ../include/LmSockAddrInet.h \
+ ../include/LmSockAddr.h ../include/LmUtil.h ../include/LmThreadMQ.h \
+ ../include/PThCond.h ../include/LmLog.h LmThread.i
+LmThreadPool.o: LmThreadPool.cpp LmThreadPool.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/PThMutex.h \
+ ../include/LyraDefs.h ../include/LmLocker.h ../include/PThMutex.h \
+ LmThread.h ../include/PTh.h ../include/PThAttr.h LmThreadPool.i

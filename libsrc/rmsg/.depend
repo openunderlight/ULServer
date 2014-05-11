@@ -1,0 +1,96 @@
+RmRemotePlayer.o: RmRemotePlayer.cpp RmRemotePlayer.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h RMsg.h \
+ ../include/LmPeerUpdate.h ../include/LyraDefs.h ../include/LmBit32.h \
+ ../include/LmAvatar.h RmRemotePlayer.i
+RMsg_ChangeAvatar.o: RMsg_ChangeAvatar.cpp RMsg_ChangeAvatar.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h RMsg.h ../include/LmAvatar.h \
+ ../include/LmBit32.h RMsg_ChangeAvatar.i
+RMsg_CupSummons.o: RMsg_CupSummons.cpp RMsg_CupSummons.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h ../include/GMsg.h RMsg.h \
+ RMsg_CupSummons.i
+RMsg_EnterRoom.o: RMsg_EnterRoom.cpp RMsg_EnterRoom.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h RMsg.h RmRemotePlayer.h \
+ ../include/LmPeerUpdate.h ../include/LmBit32.h ../include/LmAvatar.h \
+ RMsg_EnterRoom.i
+RMsg_Error.o: RMsg_Error.cpp RMsg_Error.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/LmMesg.h \
+ ../include/LyraDefs.h RMsg.h RMsg_Error.i
+RMsg_GetAvatarDescription.o: RMsg_GetAvatarDescription.cpp \
+ RMsg_GetAvatarDescription.h ../include/LyraDefs.h ../include/tchar.h \
+ ../include/LmNew.h ../include/LmMesg.h ../include/LyraDefs.h RMsg.h \
+ RMsg_GetAvatarDescription.i
+RMsg_GotoRoom.o: RMsg_GotoRoom.cpp RMsg_GotoRoom.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/LmMesg.h \
+ ../include/LyraDefs.h ../include/LmPeerUpdate.h ../include/LmBit32.h \
+ RMsg.h RMsg_GotoRoom.i
+RMsg_ItemDrop.o: RMsg_ItemDrop.cpp RMsg_ItemDrop.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/LmMesg.h \
+ ../include/LyraDefs.h RMsg.h ../include/LmItem.h ../include/LmItemHdr.h \
+ ../include/LmBit32.h ../include/LmItemDefs.h ../include/LmPosition.h \
+ RMsg_ItemDrop.i
+RMsg_ItemHdrDrop.o: RMsg_ItemHdrDrop.cpp RMsg_ItemHdrDrop.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h RMsg.h ../include/LmItem.h \
+ ../include/LmItemHdr.h ../include/LmBit32.h ../include/LmItemDefs.h \
+ ../include/LmItemHdr.h ../include/LmPosition.h RMsg_ItemHdrDrop.i
+RMsg_ItemPickup.o: RMsg_ItemPickup.cpp RMsg_ItemPickup.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h ../include/LmItem.h \
+ ../include/LmItemHdr.h ../include/LmBit32.h ../include/LmItemDefs.h \
+ ../include/LmItemHdr.h RMsg.h RMsg_ItemPickup.i
+RMsg_JoinedParty.o: RMsg_JoinedParty.cpp RMsg_JoinedParty.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h RMsg.h RmRemotePlayer.h \
+ ../include/LmPeerUpdate.h ../include/LmBit32.h ../include/LmAvatar.h \
+ RMsg_JoinedParty.i
+RMsg_LeaveRoom.o: RMsg_LeaveRoom.cpp RMsg_LeaveRoom.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h RMsg.h RMsg_LeaveRoom.i
+RMsg_LoginAck.o: RMsg_LoginAck.cpp ../include/LmSockAddrInet.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmSockAddr.h RMsg_LoginAck.h ../include/LyraDefs.h \
+ ../include/LmMesg.h RMsg.h RMsg_LoginAck.i
+RMsg_Logout.o: RMsg_Logout.cpp RMsg_Logout.h ../include/LmMesg.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h RMsg.h \
+ ../include/LyraDefs.h RMsg_Logout.i
+RMsg_NewlyAwakened.o: RMsg_NewlyAwakened.cpp RMsg_NewlyAwakened.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h ../include/GMsg.h RMsg.h \
+ RMsg_NewlyAwakened.i
+RMsg_Party.o: RMsg_Party.cpp RMsg_Party.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/LmMesg.h \
+ ../include/LyraDefs.h RMsg.h RMsg_Party.i
+RMsg_PartyInfo.o: RMsg_PartyInfo.cpp RMsg_PartyInfo.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h RMsg.h RmRemotePlayer.h \
+ ../include/LmPeerUpdate.h ../include/LmBit32.h ../include/LmAvatar.h \
+ RMsg_PartyInfo.i
+RMsg_Ping.o: RMsg_Ping.cpp RMsg_Ping.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/LmMesg.h \
+ ../include/LyraDefs.h RMsg.h RMsg_Ping.i
+RMsg_PlayerMsg.o: RMsg_PlayerMsg.cpp RMsg_PlayerMsg.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h RMsg.h \
+ ../include/SharedConstants.h RMsg_PlayerMsg.i
+RMsg_PlayerUpdate.o: RMsg_PlayerUpdate.cpp RMsg_PlayerUpdate.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h RMsg.h \
+ ../include/LmPeerUpdate.h ../include/LmBit32.h RMsg_PlayerUpdate.i
+RMsg_RcvAvatarDescription.o: RMsg_RcvAvatarDescription.cpp \
+ RMsg_RcvAvatarDescription.h ../include/LyraDefs.h ../include/tchar.h \
+ ../include/LmNew.h ../include/LmMesg.h ../include/LyraDefs.h RMsg.h \
+ RMsg_RcvAvatarDescription.i
+RMsg_RoomLoginAck.o: RMsg_RoomLoginAck.cpp ../include/LmSockAddrInet.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmSockAddr.h RMsg_RoomLoginAck.h ../include/LyraDefs.h \
+ ../include/LmMesg.h RMsg.h RMsg_RoomLoginAck.i
+RMsg_Speech.o: RMsg_Speech.cpp RMsg_Speech.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/LmMesg.h \
+ ../include/LyraDefs.h RMsg.h RMsg_Speech.i
+RMsg_Update.o: RMsg_Update.cpp RMsg_Update.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h ../include/LmMesg.h \
+ ../include/LyraDefs.h RMsg.h ../include/LmPeerUpdate.h \
+ ../include/LmBit32.h RMsg_Update.i

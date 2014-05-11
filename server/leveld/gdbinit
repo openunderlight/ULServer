@@ -1,0 +1,37 @@
+set args /opt/lyra/ul/prod 7420 20 207.215.63.184
+handle SIGALRM nostop pass print
+handle SIGUSR1 nostop pass noprint
+handle SIGUSR2 nostop pass print
+handle SIGTERM nostop pass print
+handle SIGHUP  nostop pass print
+
+break Main.cpp:48
+break LsMain.cpp:166
+break LsLevelState.cpp:9999
+break LsRoomState.cpp:9999
+break LsPositionThread.cpp:9999
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,408 @@
+check_level.o: check_level.cpp /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmGlobalDB.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/LmServerDBC.h /usr/include/mysql/mysql.h \
+ /usr/include/mysql/mysql_version.h /usr/include/mysql/mysql_com.h \
+ /usr/include/mysql/mysql_time.h /usr/include/mysql/my_list.h \
+ /usr/include/mysql/typelib.h /usr/include/mysql/my_alloc.h \
+ /home/brent/lyra/src/include/PThMutex.h \
+ /home/brent/lyra/src/include/SharedConstants.h \
+ /home/brent/lyra/src/include/LmLevelDBC.h
+check_serverdb.o: check_serverdb.cpp \
+ /home/brent/lyra/src/include/LmGlobalDB.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmServerDBC.h /usr/include/mysql/mysql.h \
+ /usr/include/mysql/mysql_version.h /usr/include/mysql/mysql_com.h \
+ /usr/include/mysql/mysql_time.h /usr/include/mysql/my_list.h \
+ /usr/include/mysql/typelib.h /usr/include/mysql/my_alloc.h \
+ /home/brent/lyra/src/include/PThMutex.h \
+ /home/brent/lyra/src/include/SharedConstants.h \
+ /home/brent/lyra/src/include/LyraDefs.h
+dump_item2.o: dump_item2.cpp /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmItem.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmBit32.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/SharedConstants.h
+dump_item.o: dump_item.cpp /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmItem.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmBit32.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/SharedConstants.h
+dump_state.o: dump_state.cpp /home/brent/lyra/src/include/LmGlobalDB.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmSocket.h \
+ /home/brent/lyra/src/include/LmSockType.h \
+ /home/brent/lyra/src/include/LmSockAddrInet.h \
+ /home/brent/lyra/src/include/LmSockAddr.h \
+ /home/brent/lyra/src/include/LmServerDBC.h /usr/include/mysql/mysql.h \
+ /usr/include/mysql/mysql_version.h /usr/include/mysql/mysql_com.h \
+ /usr/include/mysql/mysql_time.h /usr/include/mysql/my_list.h \
+ /usr/include/mysql/typelib.h /usr/include/mysql/my_alloc.h \
+ /home/brent/lyra/src/include/PThMutex.h \
+ /home/brent/lyra/src/include/SharedConstants.h \
+ /home/brent/lyra/src/include/LmConnection.h \
+ /home/brent/lyra/src/include/LmSocket.h \
+ /home/brent/lyra/src/include/LmUtil.h \
+ /home/brent/lyra/src/include/LmSrvMesgBuf.h \
+ /home/brent/lyra/src/include/LmMesgBuf.h \
+ /home/brent/lyra/src/include/LmMesgHdr.h \
+ /home/brent/lyra/src/include/SMsg_All.h \
+ /home/brent/lyra/src/include/SMsg.h \
+ /home/brent/lyra/src/include/SMsg_ConnStatus.h \
+ /home/brent/lyra/src/include/LmMesg.h \
+ /home/brent/lyra/src/include/SMsg_DestroyRoomItem.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmBit32.h \
+ /home/brent/lyra/src/include/SMsg_DumpState.h \
+ /home/brent/lyra/src/include/SMsg_Error.h \
+ /home/brent/lyra/src/include/SMsg_GetItem.h \
+ /home/brent/lyra/src/include/SMsg_GetLevelPlayers.h \
+ /home/brent/lyra/src/include/SMsg_GetServerStatus.h \
+ /home/brent/lyra/src/include/SMsg_GiveItem.h \
+ /home/brent/lyra/src/include/LmItem.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/SMsg_GiveItemAck.h \
+ /home/brent/lyra/src/include/SMsg_ItemDrop.h \
+ /home/brent/lyra/src/include/SMsg_ItemPickup.h \
+ /home/brent/lyra/src/include/SMsg_LevelLogin.h \
+ /home/brent/lyra/src/include/LmPeerUpdate.h \
+ /home/brent/lyra/src/include/LmAvatar.h \
+ /home/brent/lyra/src/include/SMsg_LocateAvatar.h \
+ /home/brent/lyra/src/include/SMsg_Login.h \
+ /home/brent/lyra/src/include/SMsg_Logout.h \
+ /home/brent/lyra/src/include/SMsg_PartyLeader.h \
+ /home/brent/lyra/src/include/SMsg_Ping.h \
+ /home/brent/lyra/src/include/SMsg_PlayerStatus.h \
+ /home/brent/lyra/src/include/SMsg_Proxy.h \
+ /home/brent/lyra/src/include/SMsg_PutItem.h \
+ /home/brent/lyra/src/include/LmPosition.h \
+ /home/brent/lyra/src/include/SMsg_ResetPort.h \
+ /home/brent/lyra/src/include/SMsg_RotateLogs.h \
+ /home/brent/lyra/src/include/SMsg_ServerStatus.h \
+ /home/brent/lyra/src/include/SMsg_SetAvatarDescription.h \
+ /home/brent/lyra/src/include/SMsg_ShowItem.h \
+ /home/brent/lyra/src/include/SMsg_TakeItemAck.h \
+ /home/brent/lyra/src/include/SMsg_RecvMesg.h \
+ /home/brent/lyra/src/include/SMsg_SendMesg.h \
+ /home/brent/lyra/src/include/SMsg_GS_Action.h \
+ /home/brent/lyra/src/include/SMsg_GS_Login.h \
+ /home/brent/lyra/src/include/SMsg_GS_Logout.h \
+ /home/brent/lyra/src/include/SMsg_LS_Action.h \
+ /home/brent/lyra/src/include/SMsg_LS_Login.h \
+ /home/brent/lyra/src/include/SMsg_DS_Action.h \
+ /home/brent/lyra/src/include/SMsg_DBQuery.h \
+ /home/brent/lyra/src/include/SMsg_DBQueryAck.h
+fix_ghost.o: fix_ghost.cpp /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmGlobalDB.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/LmPlayerDBC.h /usr/include/mysql/mysql.h \
+ /usr/include/mysql/mysql_version.h /usr/include/mysql/mysql_com.h \
+ /usr/include/mysql/mysql_time.h /usr/include/mysql/my_list.h \
+ /usr/include/mysql/typelib.h /usr/include/mysql/my_alloc.h \
+ /home/brent/lyra/src/include/PThMutex.h \
+ /home/brent/lyra/src/include/SharedConstants.h \
+ /home/brent/lyra/src/include/GMsg_LocateNewliesAck.h \
+ /home/brent/lyra/src/include/LmMesg.h \
+ /home/brent/lyra/src/include/GMsg.h \
+ /home/brent/lyra/src/include/GMsg_LocateMaresAck.h \
+ /home/brent/lyra/src/include/LmPlayerDB.h \
+ /home/brent/lyra/src/include/LmStats.h \
+ /home/brent/lyra/src/include/LmInventory.h \
+ /home/brent/lyra/src/include/LmItem.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmBit32.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/LmAvatar.h \
+ /home/brent/lyra/src/include/LmArts.h \
+ /home/brent/lyra/src/include/LmIdSet.h \
+ /home/brent/lyra/src/include/LnMD5.h \
+ /home/brent/lyra/src/include/md5global.h \
+ /home/brent/lyra/src/include/md5.h \
+ /home/brent/lyra/src/include/LmServerDBC.h
+gdbm_clean.o: gdbm_clean.cpp /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h
+gen_item.o: gen_item.cpp /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmRand.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/LmItem.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmBit32.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/SharedConstants.h \
+ /home/brent/lyra/src/include/LmItemGen.h \
+ /home/brent/lyra/src/include/LmItem.h
+get_hostid.o: get_hostid.cpp
+get_server_status2.o: get_server_status2.cpp \
+ /home/brent/lyra/src/include/LmDatabase.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h /home/brent/lyra/src/include/Gdbm.h \
+ /home/brent/lyra/src/include/LmSocket.h \
+ /home/brent/lyra/src/include/LmSockType.h \
+ /home/brent/lyra/src/include/LmSockAddrInet.h \
+ /home/brent/lyra/src/include/LmSockAddr.h \
+ /home/brent/lyra/src/include/LmConnection.h \
+ /home/brent/lyra/src/include/LmSocket.h \
+ /home/brent/lyra/src/include/LmUtil.h \
+ /home/brent/lyra/src/include/PThMutex.h \
+ /home/brent/lyra/src/include/LmSrvMesgBuf.h \
+ /home/brent/lyra/src/include/LmMesgBuf.h \
+ /home/brent/lyra/src/include/LmMesgHdr.h \
+ /home/brent/lyra/src/include/SMsg_All.h \
+ /home/brent/lyra/src/include/SMsg.h \
+ /home/brent/lyra/src/include/SMsg_ConnStatus.h \
+ /home/brent/lyra/src/include/LmMesg.h \
+ /home/brent/lyra/src/include/SMsg_DestroyRoomItem.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmBit32.h \
+ /home/brent/lyra/src/include/SMsg_DumpState.h \
+ /home/brent/lyra/src/include/SMsg_Error.h \
+ /home/brent/lyra/src/include/SMsg_GetItem.h \
+ /home/brent/lyra/src/include/SMsg_GetLevelPlayers.h \
+ /home/brent/lyra/src/include/SMsg_GetServerStatus.h \
+ /home/brent/lyra/src/include/SMsg_GiveItem.h \
+ /home/brent/lyra/src/include/LmItem.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/SMsg_GiveItemAck.h \
+ /home/brent/lyra/src/include/SMsg_ItemDrop.h \
+ /home/brent/lyra/src/include/SMsg_ItemPickup.h \
+ /home/brent/lyra/src/include/SMsg_LevelLogin.h \
+ /home/brent/lyra/src/include/LmPeerUpdate.h \
+ /home/brent/lyra/src/include/LmAvatar.h \
+ /home/brent/lyra/src/include/SMsg_LocateAvatar.h \
+ /home/brent/lyra/src/include/SMsg_Login.h \
+ /home/brent/lyra/src/include/SMsg_Logout.h \
+ /home/brent/lyra/src/include/SMsg_PartyLeader.h \
+ /home/brent/lyra/src/include/SMsg_Ping.h \
+ /home/brent/lyra/src/include/SMsg_PlayerStatus.h \
+ /home/brent/lyra/src/include/SMsg_Proxy.h \
+ /home/brent/lyra/src/include/SMsg_PutItem.h \
+ /home/brent/lyra/src/include/LmPosition.h \
+ /home/brent/lyra/src/include/SMsg_ResetPort.h \
+ /home/brent/lyra/src/include/SMsg_RotateLogs.h \
+ /home/brent/lyra/src/include/SMsg_ServerStatus.h \
+ /home/brent/lyra/src/include/SMsg_SetAvatarDescription.h \
+ /home/brent/lyra/src/include/SMsg_ShowItem.h \
+ /home/brent/lyra/src/include/SMsg_TakeItemAck.h \
+ /home/brent/lyra/src/include/SMsg_RecvMesg.h \
+ /home/brent/lyra/src/include/SMsg_SendMesg.h \
+ /home/brent/lyra/src/include/SMsg_GS_Action.h \
+ /home/brent/lyra/src/include/SMsg_GS_Login.h \
+ /home/brent/lyra/src/include/SMsg_GS_Logout.h \
+ /home/brent/lyra/src/include/SMsg_LS_Action.h \
+ /home/brent/lyra/src/include/SMsg_LS_Login.h \
+ /home/brent/lyra/src/include/SMsg_DS_Action.h \
+ /home/brent/lyra/src/include/SMsg_DBQuery.h \
+ /home/brent/lyra/src/include/SMsg_DBQueryAck.h
+get_server_status.o: get_server_status.cpp \
+ /home/brent/lyra/src/include/LmGlobalDB.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmSocket.h \
+ /home/brent/lyra/src/include/LmSockType.h \
+ /home/brent/lyra/src/include/LmSockAddrInet.h \
+ /home/brent/lyra/src/include/LmSockAddr.h \
+ /home/brent/lyra/src/include/LmServerDBC.h /usr/include/mysql/mysql.h \
+ /usr/include/mysql/mysql_version.h /usr/include/mysql/mysql_com.h \
+ /usr/include/mysql/mysql_time.h /usr/include/mysql/my_list.h \
+ /usr/include/mysql/typelib.h /usr/include/mysql/my_alloc.h \
+ /home/brent/lyra/src/include/PThMutex.h \
+ /home/brent/lyra/src/include/SharedConstants.h \
+ /home/brent/lyra/src/include/LmConnection.h \
+ /home/brent/lyra/src/include/LmSocket.h \
+ /home/brent/lyra/src/include/LmUtil.h \
+ /home/brent/lyra/src/include/LmSrvMesgBuf.h \
+ /home/brent/lyra/src/include/LmMesgBuf.h \
+ /home/brent/lyra/src/include/LmMesgHdr.h \
+ /home/brent/lyra/src/include/SMsg_All.h \
+ /home/brent/lyra/src/include/SMsg.h \
+ /home/brent/lyra/src/include/SMsg_ConnStatus.h \
+ /home/brent/lyra/src/include/LmMesg.h \
+ /home/brent/lyra/src/include/SMsg_DestroyRoomItem.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmBit32.h \
+ /home/brent/lyra/src/include/SMsg_DumpState.h \
+ /home/brent/lyra/src/include/SMsg_Error.h \
+ /home/brent/lyra/src/include/SMsg_GetItem.h \
+ /home/brent/lyra/src/include/SMsg_GetLevelPlayers.h \
+ /home/brent/lyra/src/include/SMsg_GetServerStatus.h \
+ /home/brent/lyra/src/include/SMsg_GiveItem.h \
+ /home/brent/lyra/src/include/LmItem.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/SMsg_GiveItemAck.h \
+ /home/brent/lyra/src/include/SMsg_ItemDrop.h \
+ /home/brent/lyra/src/include/SMsg_ItemPickup.h \
+ /home/brent/lyra/src/include/SMsg_LevelLogin.h \
+ /home/brent/lyra/src/include/LmPeerUpdate.h \
+ /home/brent/lyra/src/include/LmAvatar.h \
+ /home/brent/lyra/src/include/SMsg_LocateAvatar.h \
+ /home/brent/lyra/src/include/SMsg_Login.h \
+ /home/brent/lyra/src/include/SMsg_Logout.h \
+ /home/brent/lyra/src/include/SMsg_PartyLeader.h \
+ /home/brent/lyra/src/include/SMsg_Ping.h \
+ /home/brent/lyra/src/include/SMsg_PlayerStatus.h \
+ /home/brent/lyra/src/include/SMsg_Proxy.h \
+ /home/brent/lyra/src/include/SMsg_PutItem.h \
+ /home/brent/lyra/src/include/LmPosition.h \
+ /home/brent/lyra/src/include/SMsg_ResetPort.h \
+ /home/brent/lyra/src/include/SMsg_RotateLogs.h \
+ /home/brent/lyra/src/include/SMsg_ServerStatus.h \
+ /home/brent/lyra/src/include/SMsg_SetAvatarDescription.h \
+ /home/brent/lyra/src/include/SMsg_ShowItem.h \
+ /home/brent/lyra/src/include/SMsg_TakeItemAck.h \
+ /home/brent/lyra/src/include/SMsg_RecvMesg.h \
+ /home/brent/lyra/src/include/SMsg_SendMesg.h \
+ /home/brent/lyra/src/include/SMsg_GS_Action.h \
+ /home/brent/lyra/src/include/SMsg_GS_Login.h \
+ /home/brent/lyra/src/include/SMsg_GS_Logout.h \
+ /home/brent/lyra/src/include/SMsg_LS_Action.h \
+ /home/brent/lyra/src/include/SMsg_LS_Login.h \
+ /home/brent/lyra/src/include/SMsg_DS_Action.h \
+ /home/brent/lyra/src/include/SMsg_DBQuery.h \
+ /home/brent/lyra/src/include/SMsg_DBQueryAck.h
+ping_servers.o: ping_servers.cpp \
+ /home/brent/lyra/src/include/LmGlobalDB.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmServerDBC.h /usr/include/mysql/mysql.h \
+ /usr/include/mysql/mysql_version.h /usr/include/mysql/mysql_com.h \
+ /usr/include/mysql/mysql_time.h /usr/include/mysql/my_list.h \
+ /usr/include/mysql/typelib.h /usr/include/mysql/my_alloc.h \
+ /home/brent/lyra/src/include/PThMutex.h \
+ /home/brent/lyra/src/include/SharedConstants.h \
+ /home/brent/lyra/src/include/LmSocket.h \
+ /home/brent/lyra/src/include/LmSockType.h \
+ /home/brent/lyra/src/include/LmSockAddrInet.h \
+ /home/brent/lyra/src/include/LmSockAddr.h
+print_xp.o: print_xp.cpp /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmStats.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/SharedConstants.h
+rotate_logs.o: rotate_logs.cpp /home/brent/lyra/src/include/LmGlobalDB.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmSocket.h \
+ /home/brent/lyra/src/include/LmSockType.h \
+ /home/brent/lyra/src/include/LmSockAddrInet.h \
+ /home/brent/lyra/src/include/LmSockAddr.h \
+ /home/brent/lyra/src/include/LmServerDBC.h /usr/include/mysql/mysql.h \
+ /usr/include/mysql/mysql_version.h /usr/include/mysql/mysql_com.h \
+ /usr/include/mysql/mysql_time.h /usr/include/mysql/my_list.h \
+ /usr/include/mysql/typelib.h /usr/include/mysql/my_alloc.h \
+ /home/brent/lyra/src/include/PThMutex.h \
+ /home/brent/lyra/src/include/SharedConstants.h \
+ /home/brent/lyra/src/include/LmConnection.h \
+ /home/brent/lyra/src/include/LmSocket.h \
+ /home/brent/lyra/src/include/LmUtil.h \
+ /home/brent/lyra/src/include/LmSrvMesgBuf.h \
+ /home/brent/lyra/src/include/LmMesgBuf.h \
+ /home/brent/lyra/src/include/LmMesgHdr.h \
+ /home/brent/lyra/src/include/SMsg_All.h \
+ /home/brent/lyra/src/include/SMsg.h \
+ /home/brent/lyra/src/include/SMsg_ConnStatus.h \
+ /home/brent/lyra/src/include/LmMesg.h \
+ /home/brent/lyra/src/include/SMsg_DestroyRoomItem.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmBit32.h \
+ /home/brent/lyra/src/include/SMsg_DumpState.h \
+ /home/brent/lyra/src/include/SMsg_Error.h \
+ /home/brent/lyra/src/include/SMsg_GetItem.h \
+ /home/brent/lyra/src/include/SMsg_GetLevelPlayers.h \
+ /home/brent/lyra/src/include/SMsg_GetServerStatus.h \
+ /home/brent/lyra/src/include/SMsg_GiveItem.h \
+ /home/brent/lyra/src/include/LmItem.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/SMsg_GiveItemAck.h \
+ /home/brent/lyra/src/include/SMsg_ItemDrop.h \
+ /home/brent/lyra/src/include/SMsg_ItemPickup.h \
+ /home/brent/lyra/src/include/SMsg_LevelLogin.h \
+ /home/brent/lyra/src/include/LmPeerUpdate.h \
+ /home/brent/lyra/src/include/LmAvatar.h \
+ /home/brent/lyra/src/include/SMsg_LocateAvatar.h \
+ /home/brent/lyra/src/include/SMsg_Login.h \
+ /home/brent/lyra/src/include/SMsg_Logout.h \
+ /home/brent/lyra/src/include/SMsg_PartyLeader.h \
+ /home/brent/lyra/src/include/SMsg_Ping.h \
+ /home/brent/lyra/src/include/SMsg_PlayerStatus.h \
+ /home/brent/lyra/src/include/SMsg_Proxy.h \
+ /home/brent/lyra/src/include/SMsg_PutItem.h \
+ /home/brent/lyra/src/include/LmPosition.h \
+ /home/brent/lyra/src/include/SMsg_ResetPort.h \
+ /home/brent/lyra/src/include/SMsg_RotateLogs.h \
+ /home/brent/lyra/src/include/SMsg_ServerStatus.h \
+ /home/brent/lyra/src/include/SMsg_SetAvatarDescription.h \
+ /home/brent/lyra/src/include/SMsg_ShowItem.h \
+ /home/brent/lyra/src/include/SMsg_TakeItemAck.h \
+ /home/brent/lyra/src/include/SMsg_RecvMesg.h \
+ /home/brent/lyra/src/include/SMsg_SendMesg.h \
+ /home/brent/lyra/src/include/SMsg_GS_Action.h \
+ /home/brent/lyra/src/include/SMsg_GS_Login.h \
+ /home/brent/lyra/src/include/SMsg_GS_Logout.h \
+ /home/brent/lyra/src/include/SMsg_LS_Action.h \
+ /home/brent/lyra/src/include/SMsg_LS_Login.h \
+ /home/brent/lyra/src/include/SMsg_DS_Action.h \
+ /home/brent/lyra/src/include/SMsg_DBQuery.h \
+ /home/brent/lyra/src/include/SMsg_DBQueryAck.h
+save_player.o: save_player.cpp /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/tchar.h \
+ /home/brent/lyra/src/include/LmNew.h \
+ /home/brent/lyra/src/include/LmGlobalDB.h \
+ /home/brent/lyra/src/include/LyraDefs.h \
+ /home/brent/lyra/src/include/LmServerDBC.h /usr/include/mysql/mysql.h \
+ /usr/include/mysql/mysql_version.h /usr/include/mysql/mysql_com.h \
+ /usr/include/mysql/mysql_time.h /usr/include/mysql/my_list.h \
+ /usr/include/mysql/typelib.h /usr/include/mysql/my_alloc.h \
+ /home/brent/lyra/src/include/PThMutex.h \
+ /home/brent/lyra/src/include/SharedConstants.h \
+ /home/brent/lyra/src/include/LmDatabase.h \
+ /home/brent/lyra/src/include/Gdbm.h \
+ /home/brent/lyra/src/include/LmPlayerDBF.h \
+ /home/brent/lyra/src/include/LmPlayerDBC.h \
+ /home/brent/lyra/src/include/GMsg_LocateNewliesAck.h \
+ /home/brent/lyra/src/include/LmMesg.h \
+ /home/brent/lyra/src/include/GMsg.h \
+ /home/brent/lyra/src/include/GMsg_LocateMaresAck.h \
+ /home/brent/lyra/src/include/LmPlayerDB.h \
+ /home/brent/lyra/src/include/LmStats.h \
+ /home/brent/lyra/src/include/LmInventory.h \
+ /home/brent/lyra/src/include/LmItem.h \
+ /home/brent/lyra/src/include/LmItemHdr.h \
+ /home/brent/lyra/src/include/LmBit32.h \
+ /home/brent/lyra/src/include/LmItemDefs.h \
+ /home/brent/lyra/src/include/LmAvatar.h \
+ /home/brent/lyra/src/include/LmArts.h \
+ /home/brent/lyra/src/include/LmIdSet.h \
+ /home/brent/lyra/src/include/LnMD5.h \
+ /home/brent/lyra/src/include/md5global.h \
+ /home/brent/lyra/src/include/md5.h \
+ /home/brent/lyra/src/include/LmItemDBC.h

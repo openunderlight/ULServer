@@ -1,0 +1,10 @@
+set args /opt/lyra/ul/prod 1
+
+handle SIGALRM nostop pass print
+handle SIGUSR1 nostop pass noprint
+handle SIGUSR2 nostop pass print
+handle SIGTERM nostop pass print
+handle SIGHUP  nostop pass print
+
+break Main.cpp:50
+break MsServerInfo.cpp:350

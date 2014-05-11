@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+
+use GDBM_File;
+
+# This script "converts" a GDBM database into a tab-delimited text
+# file (one line per field, key/value separated by a tab)
+
+$verbose = 0;
+
+# check args
+if ($#ARGV != 1) {
+    print "usage: gdbm2text infile.db outfile.txt\n";
+    exit;
+}
+
+$infile = $ARGV[0];
+$outfile = $ARGV[1];
+
+open(OUT, ">$outfile"); 
+tie(%db, GDBM_File, $infile, 0, 0444);
+foreach (sort keys %db) {
+    print OUT "$_\t".$db{$_}."\n";
+    if ($verbose) {
+	print "$_ => ".$db{$_}."\n";
+    }
+}
+untie(%db);
+close(OUT);
+
+chmod 0444, "$outfile";
+

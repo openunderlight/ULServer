@@ -1,0 +1,1 @@
+../rmsg/RMsg_Logout.i

@@ -1,0 +1,45 @@
+#!/usr/bin/perl
+
+use GDBM_File;
+
+# This script converts a newline-delimited text file into a GDBM
+# database suitable for use by codex generators
+
+# check args
+if ($#ARGV != 1) {
+    print "usage: text2codex infile.txt outfile.db\n";
+    exit;
+}
+
+$infile = $ARGV[0];
+$outfile = $ARGV[1];
+
+# input file readable?
+if (! -r $infile) {
+    exit;
+}
+
+$num_lines = 0;
+open(IN, "<$infile");
+unlink($outfile);
+tie(%db, GDBM_File, $outfile, 2, 0666);
+while (<IN>) {
+    # comment?
+    next if /^\#.*$/;
+    # blank line?
+    next if /^\W*$/;
+    # get rid of newline
+    chop;
+    # interpolate newlines
+    $_ =~ s/\\n/\n/g;
+    # add to db
+    $db{"Text_${num_lines}"} = $_;
+    $num_lines++;
+}
+# store total number of lines
+$db{"NumLines"} = $num_lines;
+untie(%db);
+close(IN);
+
+chmod 0666, "$outfile";
+

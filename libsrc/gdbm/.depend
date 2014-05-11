@@ -1,0 +1,7 @@
+Gdbm.o: Gdbm.cpp ../include/LyraDefs.h ../include/tchar.h \
+ ../include/LmNew.h Gdbm.h
+LmDatabase.o: LmDatabase.cpp LmDatabase.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h Gdbm.h LmDatabaseKey.h \
+ LmDatabase.i
+LmDatabaseKey.o: LmDatabaseKey.cpp LmDatabaseKey.h ../include/LyraDefs.h \
+ ../include/tchar.h ../include/LmNew.h LmDatabaseKey.i

@@ -1,0 +1,14 @@
+#!/usr/local/bin/tcsh -f
+
+# save_all_players: writes all player db files in the "var" directory to the database
+
+# get Underlight environ vars
+setenv UL_UNIVERSE prod
+source /opt/lyra/ul/prod/bin/ulctl_vars.csh
+
+chdir ${UL_VARDIR}/db/player
+set files=`find . -name '*.db' -print`
+foreach f ($files)
+  echo "saving $f"
+  ${UL_BINDIR}/save_player $f
+end

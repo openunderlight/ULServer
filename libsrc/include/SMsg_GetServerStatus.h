@@ -1,0 +1,1 @@
+../smsg/SMsg_GetServerStatus.h

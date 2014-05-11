@@ -1,0 +1,8 @@
+#!/usr/bin/tcsh -f
+
+foreach f (*.db)
+  echo $f
+  mv $f $f.bak
+  gdbm_clean $f.bak $f
+end
+
