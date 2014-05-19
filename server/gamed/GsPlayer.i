@@ -127,6 +127,11 @@ INLINE bool GsPlayer::Firewall() const
 }
 
 
+INLINE bool GsPlayer::TCPOnly() const
+{
+        return tcp_only_;
+}
+
 INLINE bool GsPlayer::BeenHit() const
 {
   return been_hit_;

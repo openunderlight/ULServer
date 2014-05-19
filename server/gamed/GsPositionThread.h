@@ -54,7 +54,7 @@ private:
 
   // RMsg_* message handlers (redirectors)
   void handle_RMsg_PlayerUpdate(LmSrvMesgBuf* msgbuf, LmSockAddrInet& caddr);
-//  void handle_RMsg_Update_TCP(LmSrvMesgBuf* msgbuf, LmConnection* conn);
+  void handle_RMsg_Update_TCP(LmSrvMesgBuf* msgbuf, LmConnection* conn);
   void handle_RMsg_Update_UDP(LmSrvMesgBuf* msgbuf, LmSockAddrInet& caddr);
   
   // SMsg_ send

@@ -422,12 +422,13 @@ int GsPlayer::SaveToDB(bool force)
 // Init
 ////
 
-void GsPlayer::Init(LmConnection* conn, int serv_port, LmLog* log, bool firewall)
+void GsPlayer::Init(LmConnection* conn, int serv_port, LmLog* log, bool firewall, short tcp_only)
 {
   LmLocker mon(lock_); // lock object during method duration
   conn_ = conn;
   log_ = log;
   firewall_ = firewall;
+  tcp_only_ = tcp_only;
   // determine client IP address, and UDP update address
   if (conn->Socket().SockType() == LmSockType::Inet_Stream()) {
     client_addr_ = conn->Socket().PeerName(); // this is guaranteed to be valid

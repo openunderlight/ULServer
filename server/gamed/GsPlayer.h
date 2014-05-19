@@ -61,7 +61,7 @@ public:
   void SetMain(GsMain* gsmain);
 
   int Login(lyra_id_t playerid, int pmare_type);
-  void Init(LmConnection* conn, int serv_port, LmLog* log, bool firewall);
+  void Init(LmConnection* conn, int serv_port, LmLog* log, bool firewall, short tcp_only);
   void Logout(bool save = true);
 
   int SaveToFile() const;
@@ -214,6 +214,7 @@ public:
   void AddKill(int orbit);
   void AddDeath();
   bool Firewall() const;
+  bool TCPOnly() const;
   int PPEvoking() const;
   void SetPPEvoking(int value);
   int PPSkill() const;
@@ -279,6 +280,7 @@ private:
   bool ds_decreased_;          // true if player's DS has decreased
   bool hidden_;                // true if player is hidden (non-locatable)
   bool firewall_;			   // true if we need to send UDP updates back via the game server
+  bool tcp_only_; // true if we're tcp only
   int pp_evoking_;			   // set to the art # being evoked via pp; usually NO_ART
   int pp_skill_;
 

@@ -252,7 +252,7 @@ void GsPositionThread::register_message_handlers()
   // SMsg_LS_* handlers
   RegisterHandler(SMsg::GS_ACTION, (MsgHandler)&GsPositionThread::handle_SMsg_GS_Action);
   // RMsg handles
-//  REGISTER(RMsg::UPDATE, (GsPositionThread::handle_RMsg_Update_TCP));
+  RegisterHandler(RMsg::UPDATE, (MsgHandler)&GsPositionThread::handle_RMsg_Update_TCP);
 }
 
 
@@ -381,7 +381,7 @@ void GsPositionThread::handle_RMsg_Update_UDP(LmSrvMesgBuf* msgbuf, LmSockAddrIn
 // handle_RMsg_Update_TCP: updates for TCP-only clients - deprecated
 ////
 
-#if 0
+//#if 0
 void GsPositionThread::handle_RMsg_Update_TCP(LmSrvMesgBuf* msgbuf, LmConnection* conn)
 {
   DEFMETHOD(GsPositionThread, handle_RMsg_Update_TCP);
@@ -433,13 +433,15 @@ void GsPositionThread::handle_RMsg_Update_TCP(LmSrvMesgBuf* msgbuf, LmConnection
     return;
   }
 
+  TLOG_Debug("%s: player %u sending TCP position update", method, msg.PlayerID());
+
   // forward to player's level server via UDP
   //TLOG_Debug(_T("%s: redirecting update from player %u to %s:%d"), method, playerid, saddr.AddressString(), saddr.Port());
   usock_->SendTo(msgbuf->BufferAddress(), msgbuf->BufferSize(), player->LevelAddress());
   
   return;
 }
-#endif
+//#endif
 
 ////
 // handle_RMsg_PlayerUpdate
@@ -481,7 +483,11 @@ void GsPositionThread::handle_RMsg_PlayerUpdate(LmSrvMesgBuf* msgbuf, LmSockAddr
   // player->ReceivedServerUpdate(msg);
   // forward to player via UDP
   //TLOG_Debug(_T("%s: redirecting player update for player %u to %s:%d"), method, playerid, player->UpdateAddress().AddressString(), player->UpdateAddress().Port());
-  usock_->SendTo(msgbuf->BufferAddress(), msgbuf->BufferSize(), player->UpdateAddress());
+   if( player->TCPOnly() )
+     main_->OutputDispatch()->SendMessage(&msg, player->Connection());
+   else
+      usock_->SendTo(msgbuf->BufferAddress(), msgbuf->BufferSize(), player->UpdateAddress());
+
   // update stats
   cl_udp_out_msgs_++;
   cl_udp_out_bytes_ += msgbuf->BufferSize();

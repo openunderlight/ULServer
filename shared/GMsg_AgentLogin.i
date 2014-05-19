@@ -36,6 +36,16 @@ INLINE int GMsg_AgentLogin::ServerPort() const
   return data_.serv_port;
 }
 
+INLINE short GMsg_AgentLogin::TCPOnly() const
+{
+  return data_.tcp_only;
+}
+
+INLINE void GMsg_AgentLogin::SetTCPOnly(short tcp_only) 
+{
+  data_.tcp_only = tcp_only;
+}
+
 INLINE lyra_id_t GMsg_AgentLogin::BillingID() const
 {
   return data_.billing_id;

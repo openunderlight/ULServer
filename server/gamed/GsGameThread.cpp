@@ -424,7 +424,8 @@ void GsGameThread::handle_GMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
   }
 
   // load player database
-  player->Init(conn, msg.ServerPort(), Log(), msg.Firewall());
+  player->Init(conn, msg.ServerPort(), Log(), true, msg.TCPOnly());
+  TLOG_Debug("%s: initialized player %d, firewall is true, TCPOnly is %d", method, playerid, msg.TCPOnly());
   if (player->Login(playerid, pmare_type) < 0) {
     TLOG_Error(_T("%s: could not load database for player %u"), method, playerid);
     send_GMsg_LoginAck(conn, conn_time, GMsg_LoginAck::LOGIN_UNKNOWNERROR);
@@ -671,7 +672,7 @@ void GsGameThread::handle_GMsg_AgentLogin(LmSrvMesgBuf* msgbuf, LmConnection* co
     return;
   }
   // load player database
-  player->Init(conn, msg.ServerPort(), Log(), false); // mare server shouldn't be behind a firewall
+  player->Init(conn, msg.ServerPort(), Log(), false, false); // mare server shouldn't be behind a firewall
   if (player->Login(playerid, 0) < 0) {
     TLOG_Error(_T("%s: could not load database for player %u"), method, playerid);
     send_GMsg_LoginAck(conn, conn_time, GMsg_LoginAck::LOGIN_USERNOTFOUND);
