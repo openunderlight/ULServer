@@ -463,6 +463,53 @@ bool LmBillingDBC::CanRedeemToken(lyra_id_t player_id, int maturity_days)
 // LogoutPMare
 ////
 
+int LmBillingDBC::AddPMareCredit(lyra_id_t player_id, unsigned int amount)
+{
+	DEFMETHOD(LmBillingDBC, AddPMareCredit);
+	LmLocker mon(lock_);
+	
+	TCHAR query[1024];
+	MYSQL_RES *res;
+	MYSQL_ROW row;	
+
+	// first get the billing id.
+	_stprintf(query, _T("select billing_id from underlight where underlight_id=%u"), player_id);
+  ////timer.Start();
+  	int error = mysql_query(&mysql_, query);
+  //    ////timer.Stop();
+  
+       if (error)
+       {
+  	     LOG_Error(_T("%s: Could not check billing status for player %u; mysql error %s"), method, player_id, mysql_error(&mysql_));
+             return MYSQL_ERROR;
+       }
+  
+       res = mysql_store_result(&mysql_);
+       if (!mysql_num_rows(res)) {
+  	     mysql_free_result(res);
+             return MYSQL_ERROR;
+     }
+  
+      row = mysql_fetch_row(res);
+  
+      int billing_id = ATOI(row[0]);
+      _stprintf(query, _T("update billing set pmare_only_credit=pmare_only_credit+%u where billing_id=%u"),
+	amount, billing_id);
+  ////timer.Start()
+     error = mysql_query(&mysql_, query);
+  //    ////timer.Stop();
+  //
+  if (error)
+          {
+                LOG_Error(_T("%s: Could not add pmare credit for player %u account %u; mysql error %s"), method, player_id, billing_id, mysql_error(&mysql_));
+                      return MYSQL_ERROR;
+                        }
+  //
+
+return 1;		
+  //
+}
+
 int LmBillingDBC::LogoutPMare(lyra_id_t player_id, unsigned int num_seconds_online, int pmare_type, lyra_id_t billing_id)
 {
   DEFMETHOD(LmBillingDBC, GetBillingStatus);

@@ -44,7 +44,7 @@
 #include "LmItemDBC.h"
 #include "LmPlayerDBC.h"
 #include "GsPlayerSet.h"
-
+#include "LmBillingDBC.h"
 ////
 // handle_GMsg_Ping
 ////
@@ -214,7 +214,7 @@ void GsPlayerThread::handle_GMsg_UsePPoint(LmSrvMesgBuf* msgbuf, LmConnection* c
 	  adjust_xp(xp_gain2, why, player_->DB().PlayerID(), true);
 	}
 	break;
-
+#if 0
   case GMsg_UsePPoint::BYPASS_TRAIN:  { // train
 	  int art_id = msg.Var2();
 	  int skill = msg.Var3();
@@ -278,6 +278,7 @@ void GsPlayerThread::handle_GMsg_UsePPoint(LmSrvMesgBuf* msgbuf, LmConnection* c
 		}
 		break;
 	}
+#endif
   case GMsg_UsePPoint::USE_ART: { // art
 	  int art_id = msg.Var2();
 	  int skill = msg.Var3();
@@ -294,8 +295,25 @@ void GsPlayerThread::handle_GMsg_UsePPoint(LmSrvMesgBuf* msgbuf, LmConnection* c
 	  player_->SetPPSkill(skill);
 	  break;
 	}
+  case GMsg_UsePPoint::BUY_PMARE_TIME: {
+	int creds = msg.Var1();
+	cost = PPOINTS_PER_PMARE_CREDIT * creds;
+	if(cost > pps) {
+		send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::USE_NOT_ENOUGH);
+		return;
+	}
+	SECLOG(-1, _T("%s: player %u using PPs to buy pmare credit"), method, player_->PlayerID());
+ 	main_->BillingDBC()->AddPMareCredit(player_->PlayerID(), creds);
+	break;
+  }
   case GMsg_UsePPoint::STAT_INCREASE: { // stat
 	    int stat = msg.Var1();
+	    if(stat == Stats::DREAMSOUL)
+	    {
+		SECLOG( -3, _T("%s: player %u trying to imp dreamsoul but dreamsoul is disabled!"), method, player_->PlayerID());
+		send_GMsg_PPointAck( conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::UNKNOWN_ERR );
+		return;
+	   }
 		int curstat = player_->DB().Stats().MaxStat(stat);
 		if (curstat == Stats::STAT_MAX) {
 			send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::USE_STAT_MAX);

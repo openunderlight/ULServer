@@ -433,7 +433,7 @@ void GsPositionThread::handle_RMsg_Update_TCP(LmSrvMesgBuf* msgbuf, LmConnection
     return;
   }
 
-  TLOG_Debug("%s: player %u sending TCP position update", method, msg.PlayerID());
+  //TLOG_Debug("%s: player %u sending TCP position update", method, msg.PlayerID());
 
   // forward to player's level server via UDP
   //TLOG_Debug(_T("%s: redirecting update from player %u to %s:%d"), method, playerid, saddr.AddressString(), saddr.Port());

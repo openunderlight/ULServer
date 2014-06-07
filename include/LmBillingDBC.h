@@ -50,7 +50,7 @@ public:
   int LogoutPMare(lyra_id_t player_id, unsigned int num_seconds_online, 
 	  int pmare_type, lyra_id_t billing_id);
   int DisablePlayer(lyra_id_t player_id);
-
+  int AddPMareCredit(lyra_id_t player_id, unsigned int amount);
   long LastSQLCode() const;
   void SetLog(LmLog* log);
   long LastCallTime() const;

@@ -2093,18 +2093,23 @@ int LmPlayerDBC::UsePP(lyra_id_t player_id, int cost, int how, int var1, int var
   case GMsg_UsePPoint::STAT_INCREASE:
 	  _stprintf(howstr, _T("PPoint: raised state %d by %d, cost = %d"), var1, 1, cost);
 	  break;
+#if 0
   case GMsg_UsePPoint::BYPASS_TRAIN:
 	  _stprintf(howstr, _T("PPoint: learned art %d to level %d, cost = %d"), var2, var3, cost);
 	  break;
   case GMsg_UsePPoint::BYPASS_SPHERE:
 	  _stprintf(howstr, _T("PPoint: bypassed sphere requirement, cost = %d"), cost);
 	  break;
+#endif
   case GMsg_UsePPoint::USE_ART:
 	  _stprintf(howstr, _T("PPoint used an art %d I don't know at level %d, cost = %d"), var2, var3, cost);
 	  break;
   case GMsg_UsePPoint::GAIN_XP:
 	  _stprintf(howstr, _T("PPoints used to gain %d XP; cost = %d"), var1, cost);
 	  break;
+  case GMsg_UsePPoint::BUY_PMARE_TIME:
+	_stprintf(howstr, _T("PPoints used to buy %d mare credits, cost = %d"), var1, cost);
+	break;
   default:
 	  _stprintf(howstr, _T("Unknown grant reason! cost = %d how = %d, var1=%d, var2=%d, var3=%d\n"), cost, how, var1, var2, var3);
 	  break;
