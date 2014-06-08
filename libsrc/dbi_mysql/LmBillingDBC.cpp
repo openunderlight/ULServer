@@ -493,7 +493,7 @@ int LmBillingDBC::AddPMareCredit(lyra_id_t player_id, unsigned int amount)
       row = mysql_fetch_row(res);
   
       int billing_id = ATOI(row[0]);
-      _stprintf(query, _T("update billing set pmare_only_credit=pmare_only_credit+%u where billing_id=%u"),
+      _stprintf(query, _T("update accounts set pmare_only_credit=pmare_only_credit+%u where billing_id=%u"),
 	amount, billing_id);
   ////timer.Start()
      error = mysql_query(&mysql_, query);
