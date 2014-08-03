@@ -1530,7 +1530,7 @@ int LmPlayerDBC::LocateNewlyAwakened(GMsg_LocateNewliesAck* pnewly_msg)
   short room_id, level_id;
 
 //  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE logged_in = 1 AND (acct_type = %u OR acct_type = %u) AND time_online < 72000 ORDER BY time_online ASC"), 
-  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND level_id != 0 AND (acct_type = %u OR acct_type = %u) AND time_online < 72000 ORDER BY time_online ASC"), // Prior fix_ghosted.pl script interferrence, fixed with this change - DiscoWay 
+  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND time_online < 72000 ORDER BY time_online ASC"), // Prior fix_ghosted.pl script interferrence, fixed with this change - DiscoWay 
 	  LmPlayerDB::ACCT_PLAYER, LmPlayerDB::ACCT_ADMIN); 
 	 
   ////timer.Start();
