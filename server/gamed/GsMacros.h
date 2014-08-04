@@ -144,18 +144,18 @@
 #define HANDLER_ENTRY(verbose) \
   int msg_type = msgbuf->Header().MessageType(); \
   int msg_size = msgbuf->Header().MessageSize(); \
-  if (!conn) { \
-    if (verbose) TLOG_Debug("%s: msgbuf=[%p] (t=%d, s=%d) conn=null", method, msgbuf, msg_type, msg_size); \
-  } \
-  else { \
-    if (verbose) TLOG_Debug("%s: msgbuf=[%p] (t=%d, s=%d) conn=[%p] (%c,%u)", method, msgbuf, msg_type, msg_size, conn, conn->Type(), conn->ID()); \
-  }
+//  if (!conn) { \
+//    if (verbose) TLOG_Debug("%s: msgbuf=[%p] (t=%d, s=%d) conn=null", method, msgbuf, msg_type, msg_size); \
+//  } \
+//  else { \
+//    if (verbose) TLOG_Debug("%s: msgbuf=[%p] (t=%d, s=%d) conn=[%p] (%c,%u)", method, msgbuf, msg_type, msg_size, conn, conn->Type(), conn->ID()); \
+//  }
 
 // define message size/type, print debugging info
 #define PROXY_HANDLER_ENTRY(verbose) \
   int msg_type = msgbuf->Header().MessageType(); \
   int msg_size = msgbuf->Header().MessageSize(); \
-  if (verbose) TLOG_Debug("%s: msgbuf=[%p] (t=%d, s=%d)", method, msgbuf, msg_type, msg_size);
+//  if (verbose) TLOG_Debug("%s: msgbuf=[%p] (t=%d, s=%d)", method, msgbuf, msg_type, msg_size);
 
 // read message buffer into message
 #define PROXY_ACCEPT_MSG(T) \
