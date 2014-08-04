@@ -1349,7 +1349,7 @@ int LmPlayerDBC::LoadPlayer(lyra_id_t player_id, LmPlayerDB& player_record, int 
 		// now, if there is a login alert set, send email
 		
 		if (login_alert) {
-			LmUtil::SendMail(_T("gamed@lyrastudios.com"), login_email,
+			LmUtil::SendMail(_T("accounts@koiware.com"), login_email, // Added correct email - DiscoWay
 				_T("Underlight login alert"), _T("Underlight account %s, controlled by player %s, has just logged in. \n\n -gamed"), player_record.PlayerName(), player_record.RealName());	
 			
 		}
@@ -1588,7 +1588,8 @@ int LmPlayerDBC::LocateMares(GMsg_LocateMaresAck* pmare_msg)
 	  LmPlayerDB::ACCT_PMARE, LmPlayerDB::ACCT_ADMIN); 
 	 */
   // Modified to only work for PMares. MDA 8/02/2005
-  _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player WHERE logged_in = 1 AND acct_type = %u"), 
+  // _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player WHERE logged_in = 1 AND acct_type = %u"), 
+  _stprintf(query, _T("SELECT player_name, level_id FROM player WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND acct_type = %u"), // Removed room_id, modified string to work with fix_ghosted script - DiscoWay 
 	 LmPlayerDB::ACCT_PMARE); 
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
