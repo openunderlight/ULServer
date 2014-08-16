@@ -1347,9 +1347,9 @@ int LmPlayerDBC::LoadPlayer(lyra_id_t player_id, LmPlayerDB& player_record, int 
 	}
 		
 		// now, if there is a login alert set, send email
-		
+		// Added correct email - DiscoWay
 		if (login_alert) {
-			LmUtil::SendMail(_T("accounts@koiware.com"), login_email, // Added correct email - DiscoWay
+			LmUtil::SendMail(_T("accounts@koiware.com"), login_email, 
 				_T("Underlight login alert"), _T("Underlight account %s, controlled by player %s, has just logged in. \n\n -gamed"), player_record.PlayerName(), player_record.RealName());	
 			
 		}
@@ -1530,8 +1530,9 @@ int LmPlayerDBC::LocateNewlyAwakened(GMsg_LocateNewliesAck* pnewly_msg)
   short room_id, level_id;
 
 //  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE logged_in = 1 AND (acct_type = %u OR acct_type = %u) AND time_online < 72000 ORDER BY time_online ASC"), 
-  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND xp < 10000 AND time_online < 72000 ORDER BY time_online ASC"), // Prior fix_ghosted.pl script interferrence, fixed with this change; added check for only unsphered - DiscoWay 
-	  LmPlayerDB::ACCT_PLAYER, LmPlayerDB::ACCT_ADMIN); 
+// Prior fix_ghosted.pl script interferrence, fixed with this change; added check for only unsphered - DiscoWay
+  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND xp < 10000 AND time_online < 72000 ORDER BY time_online ASC"),
+	  LmPlayerDB::ACCT_PLAYER, LmPlayerDB::ACCT_ADMIN);
 	 
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
@@ -1589,8 +1590,10 @@ int LmPlayerDBC::LocateMares(GMsg_LocateMaresAck* pmare_msg)
 	 */
   // Modified to only work for PMares. MDA 8/02/2005
   // _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player WHERE logged_in = 1 AND acct_type = %u"), 
-  _stprintf(query, _T("SELECT player_name, level_id FROM player WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND acct_type = %u"), // Removed room_id, modified string to work with fix_ghosted script - DiscoWay 
-	 LmPlayerDB::ACCT_PMARE); 
+  
+  // Removed room_id, modified string to work with fix_ghosted script - DiscoWay
+  _stprintf(query, _T("SELECT player_name, level_id FROM player WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND acct_type = %u"),
+	 LmPlayerDB::ACCT_PMARE);
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
   ////timer.Stop();
@@ -1642,8 +1645,10 @@ int LmPlayerDBC::FindHouseMembers(GMsg_LocateAvatarAck& locate_msg, lyra_id_t gu
   lyra_id_t room_id, level_id;
 
 //  _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player, guildplayer WHERE logged_in = 1 AND (acct_type = %u OR acct_type = %u) AND player.player_id = guildplayer.player_id AND guildplayer.guild_id = %u AND guildplayer.rank > 0 AND player.player_id != %u LIMIT %u"),
-  _stprintf(query, _T("SELECT player_name, level_id FROM player, guildplayer WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND player.player_id = guildplayer.player_id AND guildplayer.guild_id = %u AND guildplayer.rank > 0 AND player.player_id != %u LIMIT %u"),  // Same issue as LocateNewlyAwakened, applied same fix - DiscoWay
-	  LmPlayerDB::ACCT_PLAYER, LmPlayerDB::ACCT_ADMIN, guild_id, player_id, GMsg_LocateAvatarAck::MAX_PLAYERS);
+
+// Same issue as LocateNewlyAwakened, applied same fix - DiscoWay
+  _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player, guildplayer WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND player.player_id = guildplayer.player_id AND guildplayer.guild_id = %u AND guildplayer.rank > 0 AND player.player_id != %u LIMIT %u"),
+  LmPlayerDB::ACCT_PLAYER, LmPlayerDB::ACCT_ADMIN, guild_id, player_id, GMsg_LocateAvatarAck::MAX_PLAYERS);
 	 
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);

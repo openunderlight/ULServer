@@ -130,6 +130,20 @@ void GsPlayerThread::handle_RMsg_GotoRoom(LmSrvMesgBuf* msgbuf, LmConnection* co
   player_->ReceivedUpdate(msg.PeerUpdate());
   // create proxy message, copy message bytes into it, send to player's level server
   send_SMsg_Proxy(player_->LevelConnection(), msgbuf);
+  
+  // Added by DiscoWay from server/gamed/GsPlayerThread1.cpp in GotoLevel.  Goal is for more accurate room updates and to fix sense dakote
+  // update player database
+  if (player_->IsHidden()) {
+    levelid += Lyra::HIDDEN_DELTA; // player hidden from location?
+  }
+  int rc = main_->PlayerDBC()->UpdateLocation(player_->PlayerID(), levelid, roomid);
+  int sc = main_->PlayerDBC()->LastSQLCode();
+  // int lt = main_->PlayerDBC()->LastCallTime();
+  // main_->Log()->Debug(_T("%s: LmPlayerDBC::UpdateLocation took %d ms"), method, lt);
+  if (rc < 0) {
+    main_->Log()->Error(_T("%s: could not update player location; rc=%d, sqlcode=%d"), method, rc, sc);
+    //    GsUtil::HandlePlayerError(main_, method, rc, sc);
+  }
 }
 
 ////
