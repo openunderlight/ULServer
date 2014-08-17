@@ -1096,8 +1096,10 @@ int LmPlayerDBC::LoadPlayer(lyra_id_t player_id, LmPlayerDB& player_record, int 
 
   player_record.SetNewlyAwakened(0);
   if (row[19]) {
+        // Added unsphered check for NewlyAlert - DiscoWay
+        int xpna = player_record.Stats().XP();
 	unsigned long time_online = ATOI(row[19]);
-	if (time_online < 72000) {
+	if ((time_online < 72000) && (xpna < 10000)) {
 		if ((player_record.AccountType() == LmPlayerDB::ACCT_PLAYER) ||
 			(player_record.AccountType() == LmPlayerDB::ACCT_ADMIN))
 		player_record.SetNewlyAwakened(1);
