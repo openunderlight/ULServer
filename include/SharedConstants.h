@@ -734,8 +734,8 @@ struct Guild { // these values CAN NOT be changed or rearranged
 
 	enum { // number of tokens required to demote one rank
 	  DEMOTE_INITIATE = 1,
-	  DEMOTE_KNIGHT = 3,
-	  DEMOTE_RULER = 5
+	  DEMOTE_KNIGHT = 2,
+	  DEMOTE_RULER = 3
 	};
 
 	enum { // report flags -- max of six (2 digit num in db)
@@ -802,7 +802,7 @@ struct UsePPoint {
 };
 
 const int no_dreamstrike_levels[] = 
-{1, 17, 18, 20, 21, 22, 23, 24, 25, 26, 42, 44, 45, 39, 41};
+{1, 17, 18, 20, 21, 22, 23, 24, 25, 26, 42, 44, 45, 39, 41, 47};
 
 const int num_no_dreamstrike_levels =
   sizeof(no_dreamstrike_levels) / sizeof(int);
