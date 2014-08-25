@@ -469,6 +469,29 @@ bool GsPlayer::CanTrain(int art, int skill) const
   }
 #endif
   // normal skill training
+
+  // auto-training house arts doesn't require skill/halo
+  if (db_.Stats().IsKnight() || db_.Stats().IsRuler()) {
+	  switch (art) {
+		case Arts::HOUSE_MEMBERS:
+		case Arts::CUP_SUMMONS:
+		case Arts::ASCEND:
+		case Arts::INITIATE:
+		case Arts::SUPPORT_DEMOTION:
+		case Arts::SUPPORT_ASCENSION:
+		case Arts::DEMOTE:
+		case Arts::POWER_TOKEN:
+		case Arts::EXPEL:
+		case Arts::KNIGHT:
+		case Arts::CREATE_ID_TOKEN:
+		case Arts::SUMMON_PRIME:
+			return true;
+			break;
+		default:
+			break;
+	  }
+  }
+
   // must have art at that skill or greater
   if (skill > db_.Arts().Skill(art)) {
     return false;

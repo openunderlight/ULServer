@@ -1562,7 +1562,8 @@ GsPlayerThread1.o: GsPlayerThread1.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/LmThreadPool.h GsPlayerThreadSet.h \
  /home/brent/lyra/src/include/LmItemDBC.h \
  /home/brent/lyra/src/include/LmPlayerDBC.h \
- /home/brent/lyra/src/include/LmPlayerDB.h
+ /home/brent/lyra/src/include/LmPlayerDB.h \
+ /home/brent/lyra/src/include/LmBillingDBC.h
 GsPlayerThread2.o: GsPlayerThread2.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/LyraDefs.h \
  /home/brent/lyra/src/include/tchar.h \
