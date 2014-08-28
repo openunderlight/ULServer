@@ -154,6 +154,7 @@ public:
   bool ChangeGuildRank(int guild_num, int rank);
   bool ChangeSkill(int art_num, int skill, bool trained = false);
   bool ChangeXP(int xp);
+  bool HouseArt(int art);
   int AdjustXP(int xpdelta, GMsg_ChangeStat& changemsg);
   int AdjustOfflineXP(int xpdelta);
   void AdvanceToNextSphere(GMsg_ChangeStat& changemsg);

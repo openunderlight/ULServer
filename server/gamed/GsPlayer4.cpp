@@ -278,6 +278,7 @@ bool GsPlayer::ChangeSkill(int art_num, int skill, bool trained)
   LmLocker mon(lock_); // lock object during method duration
   int my_skill = db_.Arts().Skill(art_num);
   bool trained_by_gm = false;
+  bool house_art = this->HouseArt(art_num);
   if (trained && (skill > 100)) {
     trained_by_gm = true;
     skill = skill - 100;
@@ -306,7 +307,7 @@ bool GsPlayer::ChangeSkill(int art_num, int skill, bool trained)
     return true;
   }
   // can we learn this on our own?
-  if (!trained) {
+  if ((!trained) && (!house_art)) {
     // can only increase by 1, can't learn something by oneself, can't go past plateau boundary
     if (((my_skill % 10) == 9) || (skill != (my_skill + 1)) || (my_skill == 0)) {
       PDEBUG((_T("%s: not trained, and cannot learn more"), method));
@@ -471,26 +472,11 @@ bool GsPlayer::CanTrain(int art, int skill) const
   // normal skill training
 
   // auto-training house arts doesn't require skill/halo
-  if (db_.Stats().IsKnight() || db_.Stats().IsRuler()) {
-	  switch (art) {
-		case Arts::HOUSE_MEMBERS:
-		case Arts::CUP_SUMMONS:
-		case Arts::ASCEND:
-		case Arts::INITIATE:
-		case Arts::SUPPORT_DEMOTION:
-		case Arts::SUPPORT_ASCENSION:
-		case Arts::DEMOTE:
-		case Arts::POWER_TOKEN:
-		case Arts::EXPEL:
-		case Arts::KNIGHT:
-		case Arts::CREATE_ID_TOKEN:
-		case Arts::SUMMON_PRIME:
-			return true;
-			break;
-		default:
-			break;
-	  }
+  bool house_art = this->HouseArt(art);
+  if (house_art) {
+	  return true;
   }
+  
 
   // must have art at that skill or greater
   if (skill > db_.Arts().Skill(art)) {
@@ -599,6 +585,30 @@ bool GsPlayer::CanCompleteQuest(LmItem& item, GMsg_RcvGoalDetails& msg) const {
 	return false;
 }
 
+// Check if an art is an Auto-Trained House Art.  Return True if yes, False if no.
+bool GsPlayer::HouseArt(int art)
+{
+	if (db_.Stats().IsKnight() || db_.Stats().IsRuler()) {
+	 switch (art) {
+		case Arts::HOUSE_MEMBERS:
+		case Arts::CUP_SUMMONS:
+		case Arts::ASCEND:
+		case Arts::INITIATE:
+		case Arts::SUPPORT_DEMOTION:
+		case Arts::SUPPORT_ASCENSION:
+		case Arts::DEMOTE:
+		case Arts::POWER_TOKEN:
+		case Arts::EXPEL:
+		case Arts::KNIGHT:
+		case Arts::CREATE_ID_TOKEN:
+		case Arts::SUMMON_PRIME:
+			return true;
+		default:
+			return false;
+	  }
+	 return false;
+	}
+}
 
 // this is a helper function borrowed from the client
 void GsPlayer::ItemToQuestItem(LmItem& item, quest_item_t& questitem) const
