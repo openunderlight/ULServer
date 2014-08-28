@@ -278,7 +278,7 @@ bool GsPlayer::ChangeSkill(int art_num, int skill, bool trained)
   LmLocker mon(lock_); // lock object during method duration
   int my_skill = db_.Arts().Skill(art_num);
   bool trained_by_gm = false;
-  bool house_art = this->HouseArt(art_num);
+  bool house_art = HouseArt(art_num);
   if (trained && (skill > 100)) {
     trained_by_gm = true;
     skill = skill - 100;
@@ -426,6 +426,30 @@ bool GsPlayer::CanDreamStrike(lyra_id_t /* target */) const
   return true;
 }
 
+// Check if an art is an Auto-Trained House Art.  Return True if yes, False if no.
+bool GsPlayer::HouseArt(int art) const {
+	if (db_.Stats().IsKnight() || db_.Stats().IsRuler()) {
+	 switch (art) {
+		case Arts::HOUSE_MEMBERS:
+		case Arts::CUP_SUMMONS:
+		case Arts::ASCEND:
+		case Arts::INITIATE:
+		case Arts::SUPPORT_DEMOTION:
+		case Arts::SUPPORT_ASCENSION:
+		case Arts::DEMOTE:
+		case Arts::POWER_TOKEN:
+		case Arts::EXPEL:
+		case Arts::KNIGHT:
+		case Arts::CREATE_ID_TOKEN:
+		case Arts::SUMMON_PRIME:
+			return true;
+		default:
+			return false;
+	  }
+	 return false;
+	}
+}
+
 ////
 // CanTrain - return true if player can train the given art at the given skill level
 ////
@@ -472,7 +496,7 @@ bool GsPlayer::CanTrain(int art, int skill) const
   // normal skill training
 
   // auto-training house arts doesn't require skill/halo
-  bool house_art = this->HouseArt(art);
+  bool house_art = HouseArt(art);
   if (house_art) {
 	  return true;
   }
@@ -583,31 +607,6 @@ bool GsPlayer::CanCompleteQuest(LmItem& item, GMsg_RcvGoalDetails& msg) const {
 	}
 	
 	return false;
-}
-
-// Check if an art is an Auto-Trained House Art.  Return True if yes, False if no.
-bool GsPlayer::HouseArt(int art)
-{
-	if (db_.Stats().IsKnight() || db_.Stats().IsRuler()) {
-	 switch (art) {
-		case Arts::HOUSE_MEMBERS:
-		case Arts::CUP_SUMMONS:
-		case Arts::ASCEND:
-		case Arts::INITIATE:
-		case Arts::SUPPORT_DEMOTION:
-		case Arts::SUPPORT_ASCENSION:
-		case Arts::DEMOTE:
-		case Arts::POWER_TOKEN:
-		case Arts::EXPEL:
-		case Arts::KNIGHT:
-		case Arts::CREATE_ID_TOKEN:
-		case Arts::SUMMON_PRIME:
-			return true;
-		default:
-			return false;
-	  }
-	 return false;
-	}
 }
 
 // this is a helper function borrowed from the client
