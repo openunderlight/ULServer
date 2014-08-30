@@ -303,15 +303,17 @@ int GsPlayer::Demote(int guild_num, int& tokens_used, GMsg_ChangeStat& changemsg
   if (!has_knight) {
     remove_art(53, changemsg); // initiate
     remove_art(56, changemsg); // ascend
+	remove_art(61, changemsg); // support_demo
+	remove_art(117, changemsg); // cup_summons
   }
 
   if (!has_ruler) {
     remove_art(54, changemsg); // knight
     remove_art(55, changemsg); // support_ascend
-    remove_art(61, changemsg); // support_demo
     remove_art(62, changemsg); // demote
     remove_art(97, changemsg); // expel
     remove_art(95, changemsg); // create id token
+	remove_art(121, changemsg); // summon_prime
   }
 
 //  main_->PlayerDBC()->SavePlayer(db_, false);
