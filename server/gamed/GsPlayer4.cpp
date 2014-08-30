@@ -428,7 +428,6 @@ bool GsPlayer::CanDreamStrike(lyra_id_t /* target */) const
 
 // Check if an art is an Auto-Trained House Art.  Return True if yes, False if no.
 bool GsPlayer::HouseArt(int art) const {
-	if (db_.Stats().IsKnight() || db_.Stats().IsRuler()) {
 	 switch (art) {
 		case Arts::HOUSE_MEMBERS:
 		case Arts::CUP_SUMMONS:
@@ -443,11 +442,10 @@ bool GsPlayer::HouseArt(int art) const {
 		case Arts::CREATE_ID_TOKEN:
 		case Arts::SUMMON_PRIME:
 			return true;
+			break;
 		default:
 			return false;
 	  }
-	 return false;
-	}
 }
 
 ////

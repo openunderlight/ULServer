@@ -334,7 +334,7 @@ private:
 
 
 // macro to make debug logging easier (usage: PDEBUG(("level 3 warning %d", foo)); )
-#define PDEBUG(x) if (log_) { log_->Debug x ; }
+#define PDEBUG(x) if (log_) { log_->Debug(x) ; }
 
 #ifdef USE_INLINE
 #include "GsPlayer.i"
