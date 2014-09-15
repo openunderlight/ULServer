@@ -433,6 +433,7 @@ bool GsPlayer::HouseArt(int art) const {
 		case Arts::CUP_SUMMONS:
 		case Arts::ASCEND:
 		case Arts::INITIATE:
+		case Arts::EMPATHY:
 		case Arts::SUPPORT_DEMOTION:
 		case Arts::SUPPORT_ASCENSION:
 		case Arts::DEMOTE:
