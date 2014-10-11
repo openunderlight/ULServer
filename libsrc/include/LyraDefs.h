@@ -63,7 +63,7 @@ struct ByteOrder {
 // global constants that don't belong anywhere else
 struct Lyra {
   enum {
-    GAME_VERSION = 16430,      // build / protocol version number
+    GAME_VERSION = 16435,      // build / protocol version number
     GAME_SUBVERSION = GAME_VERSION,
 
     ID_UNKNOWN = 0,         // invalid id
@@ -92,7 +92,7 @@ struct Lyra {
 	PP_PER_DAY_TEACHER= 6,  // base personality points to grant per day for teachers
     PP_PER_DAY_ADMIN = 99, // base personality points to grant per day for GMs
 
-    MAX_SPEECHLEN = 256,    // maximum length of speech text
+    MAX_SPEECHLEN = 512,    // maximum length of speech text
     MAX_ITEMDESC = 512,     // maximum length of an item's description
     MAX_AVATARDESC = 512,   // max length of avatar description
 
@@ -150,9 +150,9 @@ struct Lyra {
 };
 
 
-const float BOG_PRICE = (float)0.95;
-const float AGO_PRICE = (float)1.95;
-const float SHAM_PRICE = (float)3.95;
+const int BOG_PRICE = (int)1;
+const int AGO_PRICE = (int)2;
+const int SHAM_PRICE = (int)3;
 
 ////
 //// Base Data Types
