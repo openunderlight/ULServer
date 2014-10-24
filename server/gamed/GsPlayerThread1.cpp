@@ -805,13 +805,6 @@ void GsPlayerThread::handle_GMsg_CreateItem(LmSrvMesgBuf* msgbuf, LmConnection* 
   item.Header().SetSerial(serial);
   // log creation
   item.UnParse(itemstr, sizeof(itemstr));
-  if (item.StateFunction(StateField(0)) == LyraItem::SCROLL_FUNCTION) {
-      lyra_item_scroll_t state;
-      memcpy(&state, item.StateField(0), sizeof(state));
-	  if (state.targetid() > 0)
-		SECLOG(-6, "%s: player %u: created quest item %s for player %u for art $u with text: %s", method, player_->PlayerID(), 
-	      state.name(), state.targetid(), (state.art_id()-1), msg.Description ());
-  }
   if (msg.Description ())
     SECLOG(-6, "%s: player %u: created item: %s with text: %s", method, player_->PlayerID(), itemstr, msg.Description ());
   else
