@@ -2160,7 +2160,7 @@ int LmPlayerDBC::UsePP(lyra_id_t player_id, int cost, int how, int var1, int var
 ////
 // LogQuest - pairs a training log with the used Quest item into a database log - Alex 10/22/2014
 ////
-int LogQuest(lyra_id_t origin_id, lyra_id_t target_id, int art, int skill)
+int LmPlayerDBC::LogQuest(lyra_id_t origin_id, lyra_id_t target_id, int art, int skill)
 {
   DEFMETHOD(LmPlayerDBC, LogQuest);
   LmLocker mon(lock_); // lock object for method duration
