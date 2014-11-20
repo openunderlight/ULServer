@@ -416,10 +416,10 @@ int GsUtil::NightmareXP(int mare_index)
     xp = 1000;
     break;
   case Avatars::SHAMBLIX:
-    xp = 2500;
+    xp = 10000;
     break;
   case Avatars::HORRON:
-    xp = 5000;
+    xp = 25000;
     break;
   }
   return xp;
