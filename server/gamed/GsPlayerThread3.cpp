@@ -655,8 +655,16 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       if (player_->ChangeSkill(art, skill, true)) {
 		// get actual skill level
 		skill = player_->DB().Arts().Skill(art);
+		int target = player_->PlayerID();
+		int origin = msg.SenderID();
 		SECLOG(-4, _T("%s: player %u: trained in art %d, skill %d -> %d, by player %u"), method,
-	       player_->PlayerID(), art, old_skill, skill, msg.SenderID());
+	       target, art, old_skill, skill, origin);
+		int rc = main_->PlayerDBC()->LogQuest(origin, target, art, skill);
+		int sc = main_->PlayerDBC()->LastSQLCode();
+		if (rc < 0) {
+			TLOG_Warning(_T("%s: FAILED to log train and quest to DB for player %u training art %d to skill %d to player %u"), method, origin, art, skill, target);
+			GsUtil::HandlePlayerError(main_, method, rc, sc, false);
+		}
 		// put actual skill back into message being sent to client
 		msg.SetState2(skill);
 		// if we've just gotten ordained, we get a quest XP pool

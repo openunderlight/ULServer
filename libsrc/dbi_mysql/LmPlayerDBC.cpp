@@ -2157,5 +2157,28 @@ int LmPlayerDBC::UsePP(lyra_id_t player_id, int cost, int how, int var1, int var
 
 }
 
+////
+// LogQuest - pairs a training log with the used Quest item into a database log - Alex 10/22/2014
+////
+int LmPlayerDBC::LogQuest(lyra_id_t origin_id, lyra_id_t target_id, int art, int skill)
+{
+  DEFMETHOD(LmPlayerDBC, LogQuest);
+  LmLocker mon(lock_); // lock object for method duration
+
+  TCHAR query[256];
+      
+ _stprintf(query, _T("INSERT INTO ul_player.trainlog (item_name, item_descrip, origin_id, target_id, art_id, skill) SELECT item_name, item_descrip, %u, %u, %u, %u FROM ul_item.quest_active WHERE art_id = %u AND target_id = %u AND creator_id = %u"), origin_id, target_id, art, skill, art, target_id, origin_id);
+
+  ////timer.Start();
+  int error = mysql_query(&m_mysql, query);
+  ////timer.Stop();
+  
+  if (error)
+    {
+      LOG_Error(_T("%s: Could not log train and quest for player %u training player %u in art %u to %u; mysql error %s"), method, origin_id, target_id, art, skill, mysql_error(&m_mysql));
+      return MYSQL_ERROR;
+    }
 
 
+   return 0;
+}

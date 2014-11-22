@@ -65,6 +65,7 @@ public:
   int AddOfflineXP(lyra_id_t playerid, int xp_gain);
   int DeleteArt(lyra_id_t playerid, lyra_id_t artid);
   int SaveGuildRanks(lyra_id_t playerid, LmStats& stats);
+  int LogQuest(lyra_id_t origin_id, lyra_id_t target_id, int art, int skill);
   int UnGhost(TCHAR* gamed_ip, unsigned int gamed_port, LmGlobalDB* globaldb_);
   int PutLocalFileInDB(lyra_id_t player_id, LmGlobalDB* globaldb_);
   int GrantPP(lyra_id_t granter, lyra_id_t grantee, TCHAR* why, int acct_type);

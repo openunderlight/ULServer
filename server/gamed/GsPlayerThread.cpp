@@ -632,7 +632,7 @@ void GsPlayerThread::send_motd()
   }
   // read it into a speech-sized buffer
   TCHAR tbuf[Lyra::MAX_SPEECHLEN];
-  int bytes_read = fread(tbuf, 1, sizeof(tbuf), inf);
+  int bytes_read = fread(tbuf, 1, sizeof(tbuf) - 1, inf);
   tbuf[bytes_read] = '\0';
   // close file
   fclose(inf);
