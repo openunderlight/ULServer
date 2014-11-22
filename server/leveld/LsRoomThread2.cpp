@@ -457,13 +457,34 @@ void LsRoomThread::perform_create_essence(LsPlayer* player, LsRoomState* room, l
   // if it's a mare of any kind, also spawn an item
   if (state1 > 100) { // player: state1 = orbit, state2 = DS
 	  int num_items = 1;
-	  int item_type = player->Avatar().AvatarType()-2;
-	  item_type = player->Avatar().AvatarType()-1;
+	  int item_type = player->Avatar().AvatarType()-1;
 	  if (player->Avatar().AvatarType() == Avatars::HORRON) {
 		  num_items = 2; 
 		  item_type = item_type - 1;
 	  }
-	  
+	  if (state1 > 200) { // dark mares drop more items
+          switch (player->Avatar().AvatarType()){
+              case Avatars::EMPHANT:
+                  num_items = 2;
+                  break;
+              case Avatars::BOGROM:
+                  num_items = 4;
+                  break;
+              case Avatars::AGOKNIGHT:
+                  num_items = 6;
+                  break;
+              case Avatars::SHAMBLIX:
+                  num_items = 8;
+                  break;
+              case Avatars::HORRON:
+                  num_items = 10;
+                  break;
+              default:
+                  num_items = 2;
+                  break;
+          }
+      }
+
       for (int i = 0; i<num_items; i++) {
 		  perform_spawn_mare_item(player, room, item_type);
 	  }
