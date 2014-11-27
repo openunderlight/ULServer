@@ -32,6 +32,7 @@
 #include "LsPlayerList.h"
 #include "LmItemDBC.h"
 #include "LmItemGen.h"
+#include "LmRand.h"
 
 DECLARE_TheFileName;
 
@@ -497,9 +498,11 @@ void LsRoomThread::perform_create_essence(LsPlayer* player, LsRoomState* room, l
 // get_random_neighbor_position
 /////
 const LmPosition& LsRoomThread::get_random_neighbor_position(LsRoomState* room, LsPlayer* player)
-{	
-	lyra_id_t playerId = (*std::advance(room->PlayerList().begin(), LmRand::Generate(0, room->PlayerList().size() - 1)));
-	LsPlayer* p = main_->PlayerSet()->GetPlayer(playerId);
+{
+	unsigned int distance = LmRand::Generate(0, room->PlayerList().size() - 1);		
+	std::list<lyra_id_t>::const_iterator li = room->PlayerList().begin();
+	std::advance(li, distance);
+	LsPlayer* p = main_->PlayerSet()->GetPlayer((*li));
 	if(p)
 		return p->Position();
 	else

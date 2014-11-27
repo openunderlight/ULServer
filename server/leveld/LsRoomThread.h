@@ -129,7 +129,7 @@ private:
   void perform_create_essence(LsPlayer* player, LsRoomState* room, lyra_id_t slaverid, int s1, int s2);
   void perform_create_soulessence(LsPlayer* player, LsRoomState* room, lyra_id_t killer);
   void perform_spawn_mare_item(LsPlayer* player, LsRoomState* room, int item_type, const LmPosition& spawnPoint);
-	const LmPosition& get_random_neighbor_position(LsRoomState* room, LsPlayer* player)  
+	const LmPosition& get_random_neighbor_position(LsRoomState* room, LsPlayer* player);  
 
   void handle_RMsg_Party_Join(LsPlayer* player, RMsg_Party& msg);
   void handle_RMsg_Party_Accept(LsPlayer* player, RMsg_Party& msg);
