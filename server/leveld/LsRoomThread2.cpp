@@ -503,7 +503,7 @@ const LmPosition& LsRoomThread::get_random_neighbor_position(LsRoomState* room, 
 	std::list<lyra_id_t>::const_iterator li = room->PlayerList().begin();
 	std::advance(li, distance);
 	LsPlayer* p = main_->PlayerSet()->GetPlayer((*li));
-	if(p)
+	if(p && !p->Avatar().Hidden())
 		return p->Position();
 	else
 		return player->Position();
