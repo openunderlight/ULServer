@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Unicode|Win32">
+      <Configuration>Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName>$/UlServer/server/gamed</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <ProjectGuid>{4D312C81-6C09-4675-90B9-D3E739B51639}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'">
+    <OutDir>.\Unicode\</OutDir>
+    <IntDir>.\Unicode\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>../../../MySQL/include;../../libsrc/shared;../../libsrc/rmsg;../../libsrc/gmsg;../../libsrc/smsg;../../libsrc/dbi_mysql;../../libsrc/server;../../libsrc/util;../../libsrc/private;../../libsrc/net;../../libsrc/db;../../libsrc/dbi_gdbm;../../libsrc/gdbm;../../../pthreads-win32;../../libsrc/pth;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;UL_SERVER_WIN32;USE_INLINE;_DEBUG;WIN32;_MBCS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Unicode\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Unicode\GameD.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader />
+      <ObjectFileName>.\Unicode\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Unicode\</ProgramDataBaseFileName>
+      <AdditionalOptions> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Unicode\GameD.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Unicode\GameD.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries>libcd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <OutputFile>\projects\UlServer\Prod\Bin\Debug\GameD.exe</OutputFile>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;../../libsrc/db/debug/db.lib;../../libsrc/dbi_mysql/debug/dbi_mysql.lib;../../libsrc/gmsg/debug/gmsg.lib;../../libsrc/net/debug/net.lib;../../libsrc/private/debug/private.lib;../../libsrc/pth/debug/pth.lib;../../libsrc/rmsg/debug/rmsg.lib;../../libsrc/server/debug/server.lib;../../libsrc/shared/debug/shared.lib;../../libsrc/smsg/debug/smsg.lib;../../libsrc/util/debug/util.lib;../../libsrc/gdbm/debug/gdbm.lib;../../libsrc/dbi_gdbm/debug/dbi_gdbm.lib;../../../MySQL/lib_debug/LibMySQL.lib;../../../pthreads-win32/pthread.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>../../../MySQL/include;../../libsrc/shared;../../libsrc/rmsg;../../libsrc/gmsg;../../libsrc/smsg;../../libsrc/dbi_mysql;../../libsrc/server;../../libsrc/util;../../libsrc/private;../../libsrc/net;../../libsrc/db;../../libsrc/dbi_gdbm;../../libsrc/gdbm;../../../pthreads-win32;../../libsrc/pth;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;UL_SERVER_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Release\GameD.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <AdditionalOptions> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Release\GameD.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\GameD.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>\projects\UlServer\Prod\Bin\Release\GameD.exe</OutputFile>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;../../libsrc/db/release/db.lib;../../libsrc/dbi_mysql/release/dbi_mysql.lib;../../libsrc/gmsg/release/gmsg.lib;../../libsrc/net/release/net.lib;../../libsrc/private/release/private.lib;../../libsrc/pth/release/pth.lib;../../libsrc/rmsg/release/rmsg.lib;../../libsrc/server/release/server.lib;../../libsrc/shared/release/shared.lib;../../libsrc/smsg/release/smsg.lib;../../libsrc/util/release/util.lib;../../libsrc/gdbm/release/gdbm.lib;../../libsrc/dbi_gdbm/release/dbi_gdbm.lib;../../../MySQL/lib_release/LibMySQL.lib;../../../pthreads-win32/pthread.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>../../../MySQL/include;../../libsrc/shared;../../libsrc/rmsg;../../libsrc/gmsg;../../libsrc/smsg;../../libsrc/dbi_mysql;../../libsrc/server;../../libsrc/util;../../libsrc/private;../../libsrc/net;../../libsrc/db;../../libsrc/dbi_gdbm;../../libsrc/gdbm;../../../pthreads-win32;../../libsrc/pth;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;_DEBUG;WIN32;UL_SERVER_WIN32;USE_INLINE;CHINESE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Debug\GameD.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader />
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <AdditionalOptions> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Debug\GameD.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\GameD.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries>libcd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <OutputFile>\projects\UlServer\Prod\Bin\Debug\GameD.exe</OutputFile>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;../../libsrc/db/debug/db.lib;../../libsrc/dbi_mysql/debug/dbi_mysql.lib;../../libsrc/gmsg/debug/gmsg.lib;../../libsrc/net/debug/net.lib;../../libsrc/private/debug/private.lib;../../libsrc/pth/debug/pth.lib;../../libsrc/rmsg/debug/rmsg.lib;../../libsrc/server/debug/server.lib;../../libsrc/shared/debug/shared.lib;../../libsrc/smsg/debug/smsg.lib;../../libsrc/util/debug/util.lib;../../libsrc/gdbm/debug/gdbm.lib;../../libsrc/dbi_gdbm/debug/dbi_gdbm.lib;../../../MySQL/lib_debug/LibMySQL.lib;../../../pthreads-win32/pthread.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="GsForwardThread.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsGameThread.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsInputDispatch.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsLevelSet.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsMain.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsMessageReader.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsNetworkInput.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsNetworkOutput.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsOutputDispatch.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayer.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayer1.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayer2.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayer3.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayer4.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayerSet.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayerThread.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayerThread1.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayerThread2.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayerThread3.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayerThread4.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPlayerThreadSet.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsPositionThread.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsSignalThread.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GsUtil.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GsForwardThread.h" />
+    <ClInclude Include="GsGameThread.h" />
+    <ClInclude Include="GsInputDispatch.h" />
+    <ClInclude Include="GsLevelSet.h" />
+    <ClInclude Include="GsMacros.h" />
+    <ClInclude Include="GsMain.h" />
+    <ClInclude Include="GsMessageReader.h" />
+    <ClInclude Include="GsNetworkInput.h" />
+    <ClInclude Include="GsNetworkOutput.h" />
+    <ClInclude Include="GsOutputDispatch.h" />
+    <ClInclude Include="GsPlayer.h" />
+    <ClInclude Include="GsPlayerList.h" />
+    <ClInclude Include="GsPlayerSet.h" />
+    <ClInclude Include="GsPlayerThread.h" />
+    <ClInclude Include="GsPlayerThreadSet.h" />
+    <ClInclude Include="GsPositionThread.h" />
+    <ClInclude Include="GsSignalThread.h" />
+    <ClInclude Include="GsUtil.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="GsForwardThread.i" />
+    <CustomBuild Include="GsGameThread.i" />
+    <CustomBuild Include="GsInputDispatch.i" />
+    <CustomBuild Include="GsLevelSet.i" />
+    <CustomBuild Include="GsMain.i" />
+    <CustomBuild Include="GsMessageReader.i" />
+    <CustomBuild Include="GsNetworkInput.i" />
+    <CustomBuild Include="GsNetworkOutput.i" />
+    <CustomBuild Include="GsOutputDispatch.i" />
+    <CustomBuild Include="GsPlayer.i" />
+    <CustomBuild Include="GsPlayerSet.i" />
+    <CustomBuild Include="GsPlayerThread.i" />
+    <CustomBuild Include="GsPlayerThreadSet.i" />
+    <CustomBuild Include="GsPositionThread.i" />
+    <CustomBuild Include="GsSignalThread.i" />
+    <CustomBuild Include="GsUtil.i" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\libsrc\dbi_gdbm\DBI_gdbm.vcxproj">
+      <Project>{546de9bc-215f-4495-a862-27c302861bb0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\DBI_MySQL\DBI_MySQL.vcxproj">
+      <Project>{23e178c5-1a88-4b16-bc67-b3315b5a279e}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\db\DB.vcxproj">
+      <Project>{5822f66a-8603-45dc-be6d-8a550a119e9f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\gdbm\gdbm.vcxproj">
+      <Project>{c3f255a5-2681-4499-bb34-fd5e8c4e7f98}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\gmsg\GMsg.vcxproj">
+      <Project>{6ec1f850-b10b-4762-b698-904675510528}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\net\Net.vcxproj">
+      <Project>{e543c54f-c7cc-4a06-b90a-52eb89536f87}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\private\Private.vcxproj">
+      <Project>{619f6eee-3c62-4829-9248-c1207017c2e3}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\pth\Pth.vcxproj">
+      <Project>{b60f21f2-bf6c-47e7-915d-7abddedc194d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\rmsg\RMsg.vcxproj">
+      <Project>{70566122-146c-4c72-b982-b04f1557cb93}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\server\Server.vcxproj">
+      <Project>{36937984-302c-4055-ac66-d4ffc432f15f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\shared\Shared.vcxproj">
+      <Project>{903a5bbe-7e87-4b4d-b22b-3fef781ca281}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\smsg\SMsg.vcxproj">
+      <Project>{733c3106-b1a5-4550-b228-715c63d759b3}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libsrc\util\Util.vcxproj">
+      <Project>{49389aca-5ed1-4144-b164-ccc72a0f42b4}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

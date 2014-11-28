@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0d53bdac-0350-4ab6-bfe5-2067ee8f3a26}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{9b8d1499-5ddb-4b6b-8374-c39da47515dd}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Inline FIles">
+      <UniqueIdentifier>{3d8fe387-ece4-45cb-a9fa-31fdf38b1985}</UniqueIdentifier>
+      <Extensions>*.i</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LmGlobalDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmGoalInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmItemGenDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmPlayerDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmPlayerNameMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmRoomDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LmGlobalDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmGoalInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmItemGenDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmPlayerDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmPlayerNameMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmRoomDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="LmGlobalDB.i">
+      <Filter>Inline FIles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmGoalInfo.i">
+      <Filter>Inline FIles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmItemGenDB.i">
+      <Filter>Inline FIles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmPlayerDB.i">
+      <Filter>Inline FIles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmPlayerNameMap.i">
+      <Filter>Inline FIles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmRoomDB.i">
+      <Filter>Inline FIles</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>
