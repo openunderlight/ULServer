@@ -971,10 +971,10 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       xp_adj = GsUtil::NightmareXP(orbit - 100);
 	}
     else if (orbit < 200) { // player nightmare, state1 = 150 + nightmare index
-      xp_adj = GsUtil::NightmareXP(orbit - 150)*3;
+      xp_adj = GsUtil::NightmareXP(orbit - 150)*4;
     }
     else { // dark or posessed mare = 200 + nightmare index
-      xp_adj = GsUtil::NightmareXP(orbit - 200)*4;
+      xp_adj = GsUtil::NightmareXP(orbit - 200)*8;
     }
 
     // TLOG_Debug(_T("%s: party kill: xp=%d shares=%d/%d"), method, xp_adj, my_shares, all_shares);
