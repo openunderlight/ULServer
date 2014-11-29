@@ -228,6 +228,7 @@ typedef unsigned int realmid_t;  // backwards compatibility
 // on Linux, include pth.h to use soft system call mapping for user-level threads
 // on Win32, alias all of pth_ types and calls to use pthread_ 
 #if !defined(WIN32)
+#define PTH_SYSCALL_SOFT 1
 #include "pth.h"
 #else
 #ifdef UL_SERVER_WIN32
