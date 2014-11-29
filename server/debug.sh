@@ -1,7 +1,6 @@
 #!/bin/bash
 
 PID_USER="ulprod"
-#SOURCE_ROOT="/home/brent/lyra/src"
 COMMAND=`basename $0`
 COMMAND_PATH=`dirname $0`
 SOURCE_ROOT=$(readlink -f $COMMAND_PATH/..)
@@ -46,6 +45,7 @@ validate_target_pid() {
   if [[ $TARGET_PID -eq -1 ]]; then
     echo "Could not find running process for command."
     echo ""
+    exit
   elif [[ ! $TARGET_PID =~ ^[1-9][0-9]*$ ]]; then
     print_usage
   fi
@@ -63,7 +63,7 @@ case "$KEY" in
     SOURCE_ROOT=$(readlink -f $1)
     shift
     ;;
-  -p|--pid-user)
+  -u|--pid-user)
     PID_USER=$1
     shift
     ;;
@@ -101,8 +101,6 @@ done
 validate_source_dir
 validate_target_pid
 
-
 echo "Attaching to pid $TARGET_PID..."
 
-# remove echo below after tested
-echo gdb attach $TARGET_PID -x $COMMAND_PATH/gdbinit -d $SOURCE_ROOT/server/gamed -d $SOURCE_ROOT/server/leveld -d $SOURCE_ROOT/libsrc/server -d $SOURCE_ROOT/libsrc/net -d $SOURCE_ROOT/libsrc/util -d $SOURCE_ROOT/libsrc/smsg -d $SOURCE_ROOT/libsrc/gmsg -d $SOURCE_ROOT/libsrc/rmsg -d $SOURCE_ROOT/libsrc/db -d $SOURCE_ROOT/libsrc/dbi_mysql -d $SOURCE_ROOT/libsrc/gdbm -d $SOURCE_ROOT/libsrc/dbi_gdbm 
+gdb attach $TARGET_PID -x $COMMAND_PATH/gdbinit -d $SOURCE_ROOT/server/gamed -d $SOURCE_ROOT/server/leveld -d $SOURCE_ROOT/libsrc/server -d $SOURCE_ROOT/libsrc/net -d $SOURCE_ROOT/libsrc/util -d $SOURCE_ROOT/libsrc/smsg -d $SOURCE_ROOT/libsrc/gmsg -d $SOURCE_ROOT/libsrc/rmsg -d $SOURCE_ROOT/libsrc/db -d $SOURCE_ROOT/libsrc/dbi_mysql -d $SOURCE_ROOT/libsrc/gdbm -d $SOURCE_ROOT/libsrc/dbi_gdbm 
