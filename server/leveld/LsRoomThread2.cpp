@@ -32,6 +32,7 @@
 #include "LsPlayerList.h"
 #include "LmItemDBC.h"
 #include "LmItemGen.h"
+#include "LmRand.h"
 
 DECLARE_TheFileName;
 
@@ -483,12 +484,29 @@ void LsRoomThread::perform_create_essence(LsPlayer* player, LsRoomState* room, l
                   num_items = 2;
                   break;
           }
+
+					
       }
 
       for (int i = 0; i<num_items; i++) {
-		  perform_spawn_mare_item(player, room, item_type);
+		  	perform_spawn_mare_item(player, room, item_type, state1 > 200 ? get_random_neighbor_position(room, player) : player->Position());
 	  }
   }
+}
+
+/////
+// get_random_neighbor_position
+/////
+const LmPosition& LsRoomThread::get_random_neighbor_position(LsRoomState* room, LsPlayer* player)
+{
+	unsigned int distance = LmRand::Generate(0, room->PlayerList().size() - 1);		
+	std::list<lyra_id_t>::const_iterator li = room->PlayerList().begin();
+	std::advance(li, distance);
+	LsPlayer* p = main_->PlayerSet()->GetPlayer((*li));
+	if(p && !p->Avatar().Hidden())
+		return p->Position();
+	else
+		return player->Position();
 }
 
 ////
@@ -556,7 +574,7 @@ void LsRoomThread::perform_create_soulessence(LsPlayer* player, LsRoomState* roo
 // perform_spawn_mare_item
 ////
 
-void LsRoomThread::perform_spawn_mare_item(LsPlayer* player, LsRoomState* room, int item_type)
+void LsRoomThread::perform_spawn_mare_item(LsPlayer* player, LsRoomState* room, int item_type, const LmPosition& spawnPoint)
 {
   DEFMETHOD(LsRoomThread, perform_spawn_mare_item);
   DECLARE_TheLineNum;
@@ -576,8 +594,8 @@ void LsRoomThread::perform_spawn_mare_item(LsPlayer* player, LsRoomState* room, 
   LmItem it; 
   LmItemGen::GenerateItem(item_type, LmItemGen::ITEM_ANY, it);
   it.Header().SetSerial(serial);
-  int ttl = 300; 
-  roomitem.Init(it, player->Position(), ttl);
+  int ttl = 300; 	
+  roomitem.Init(it, spawnPoint, ttl);
   
   // drop item in room, notify clients
   // TLOG_Debug(_T("%s: essence being dropped:"), method);
