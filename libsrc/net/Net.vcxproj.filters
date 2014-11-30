@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{3895e97f-dfac-46e3-a92c-9e2ddfc225f6}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{808264e9-f644-4c4d-8bd4-8acba74beb68}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Inline Files">
+      <UniqueIdentifier>{13b43f91-3c48-4187-b0da-aa767705bac9}</UniqueIdentifier>
+      <Extensions>*.i</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LmConnection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmConnectionSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmSockAddr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmSockAddrInet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmSocket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmSockType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LmConnection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmConnectionList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmConnectionSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmSockAddr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmSockAddrInet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmSockType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="LmConnection.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmConnectionSet.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmSockAddr.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmSockAddrInet.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmSocket.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmSockType.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>
