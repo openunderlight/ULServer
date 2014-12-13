@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Unicode|Win32">
+      <Configuration>Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName>$/UlServer/libsrc/smsg</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <ProjectGuid>{733C3106-B1A5-4550-B228-715C63D759B3}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'">
+    <OutDir>.\Unicode\</OutDir>
+    <IntDir>.\Unicode\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>../../../MySQL/include;../shared;../rmsg;../gmsg;../smsg;../dbi_mysql;../server;../util;../private;../net;../db;../dbi_gdbm;../gdbm;../../../pthreads-win32;../pth;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_LIB;UL_SERVER_WIN32;USE_INLINE;_DEBUG;WIN32;_MBCS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Unicode\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Unicode\SMsg.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Unicode\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Unicode\</ProgramDataBaseFileName>
+      <AdditionalOptions> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Unicode\SMsg.bsc</OutputFile>
+    </Bscmake>
+    <Lib>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Unicode\SMsg.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>../../../MySQL/include;../shared;../rmsg;../gmsg;../smsg;../dbi_mysql;../server;../util;../private;../net;../db;../dbi_gdbm;../gdbm;../../../pthreads-win32;../pth;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_LIB;_DEBUG;WIN32;UL_SERVER_WIN32;USE_INLINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Debug\SMsg.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <AdditionalOptions> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\SMsg.bsc</OutputFile>
+    </Bscmake>
+    <Lib>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\SMsg.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>../../../MySQL/include;../shared;../rmsg;../gmsg;../smsg;../dbi_mysql;../server;../util;../private;../net;../db;../dbi_gdbm;../gdbm;../../../pthreads-win32;../pth;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_LIB;WIN32;UL_SERVER_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Release\SMsg.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <AdditionalOptions> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\SMsg.bsc</OutputFile>
+    </Bscmake>
+    <Lib>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\SMsg.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="SMsg_ConnStatus.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_DBQuery.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_DBQueryAck.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_DestroyRoomItem.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_DS_Action.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_DumpState.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_Error.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_GetItem.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_GetLevelPlayers.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_GetServerStatus.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_GiveItem.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_GiveItemAck.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_GS_Action.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_GS_Login.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_GS_Logout.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_ItemDrop.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_ItemPickup.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_LevelLogin.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_LocateAvatar.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_Login.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_Logout.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_LS_Action.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_LS_Login.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_PartyLeader.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_Ping.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_PlayerStatus.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_Proxy.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_PutItem.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_RecvMesg.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_ResetPort.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_RotateLogs.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_SendMesg.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_ServerStatus.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_SetAvatarDescription.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_ShowItem.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="SMsg_TakeItemAck.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Unicode|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /projects/stl" " " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "  /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" /I /Projects/STL" " " " "</AdditionalOptions>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SMsg.h" />
+    <ClInclude Include="SMsg_All.h" />
+    <ClInclude Include="SMsg_ConnStatus.h" />
+    <ClInclude Include="SMsg_DBQuery.h" />
+    <ClInclude Include="SMsg_DBQueryAck.h" />
+    <ClInclude Include="SMsg_DestroyRoomItem.h" />
+    <ClInclude Include="SMsg_DS_Action.h" />
+    <ClInclude Include="SMsg_DumpState.h" />
+    <ClInclude Include="SMsg_Error.h" />
+    <ClInclude Include="SMsg_GetItem.h" />
+    <ClInclude Include="SMsg_GetLevelPlayers.h" />
+    <ClInclude Include="SMsg_GetServerStatus.h" />
+    <ClInclude Include="SMsg_GiveItem.h" />
+    <ClInclude Include="SMsg_GiveItemAck.h" />
+    <ClInclude Include="SMsg_GS_Action.h" />
+    <ClInclude Include="SMsg_GS_Login.h" />
+    <ClInclude Include="SMsg_GS_Logout.h" />
+    <ClInclude Include="SMsg_ItemDrop.h" />
+    <ClInclude Include="SMsg_ItemPickup.h" />
+    <ClInclude Include="SMsg_LevelLogin.h" />
+    <ClInclude Include="SMsg_LocateAvatar.h" />
+    <ClInclude Include="SMsg_Login.h" />
+    <ClInclude Include="SMsg_Logout.h" />
+    <ClInclude Include="SMsg_LS_Action.h" />
+    <ClInclude Include="SMsg_LS_Login.h" />
+    <ClInclude Include="SMsg_PartyLeader.h" />
+    <ClInclude Include="SMsg_Ping.h" />
+    <ClInclude Include="SMsg_PlayerStatus.h" />
+    <ClInclude Include="SMsg_Proxy.h" />
+    <ClInclude Include="SMsg_PutItem.h" />
+    <ClInclude Include="SMsg_RecvMesg.h" />
+    <ClInclude Include="SMsg_ResetPort.h" />
+    <ClInclude Include="SMsg_RotateLogs.h" />
+    <ClInclude Include="SMsg_SendMesg.h" />
+    <ClInclude Include="SMsg_ServerStatus.h" />
+    <ClInclude Include="SMsg_SetAvatarDescription.h" />
+    <ClInclude Include="SMsg_ShowItem.h" />
+    <ClInclude Include="SMsg_TakeItemAck.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="SMsg_ConnStatus.i" />
+    <CustomBuild Include="SMsg_DBQuery.i" />
+    <CustomBuild Include="SMsg_DBQueryAck.i" />
+    <CustomBuild Include="SMsg_DestroyRoomItem.i" />
+    <CustomBuild Include="SMsg_DS_Action.i" />
+    <CustomBuild Include="SMsg_DumpState.i" />
+    <CustomBuild Include="SMsg_Error.i" />
+    <CustomBuild Include="SMsg_GetItem.i" />
+    <CustomBuild Include="SMsg_GetLevelPlayers.i" />
+    <CustomBuild Include="SMsg_GetServerStatus.i" />
+    <CustomBuild Include="SMsg_GiveItem.i" />
+    <CustomBuild Include="SMsg_GiveItemAck.i" />
+    <CustomBuild Include="SMsg_GS_Action.i" />
+    <CustomBuild Include="SMsg_GS_Login.i" />
+    <CustomBuild Include="SMsg_GS_Logout.i" />
+    <CustomBuild Include="SMsg_ItemDrop.i" />
+    <CustomBuild Include="SMsg_ItemPickup.i" />
+    <CustomBuild Include="SMsg_LevelLogin.i" />
+    <CustomBuild Include="SMsg_LocateAvatar.i" />
+    <CustomBuild Include="SMsg_Login.i" />
+    <CustomBuild Include="SMsg_Logout.i" />
+    <CustomBuild Include="SMsg_LS_Action.i" />
+    <CustomBuild Include="SMsg_LS_Login.i" />
+    <CustomBuild Include="SMsg_PartyLeader.i" />
+    <CustomBuild Include="SMsg_Ping.i" />
+    <CustomBuild Include="SMsg_PlayerStatus.i" />
+    <CustomBuild Include="SMsg_Proxy.i" />
+    <CustomBuild Include="SMsg_PutItem.i" />
+    <CustomBuild Include="SMsg_RecvMesg.i" />
+    <CustomBuild Include="SMsg_ResetPort.i" />
+    <CustomBuild Include="SMsg_RotateLogs.i" />
+    <CustomBuild Include="SMsg_SendMesg.i" />
+    <CustomBuild Include="SMsg_ServerStatus.i" />
+    <CustomBuild Include="SMsg_SetAvatarDescription.i" />
+    <CustomBuild Include="SMsg_ShowItem.i" />
+    <CustomBuild Include="SMsg_TakeItemAck.i" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

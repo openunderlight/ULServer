@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>rmsg</ProjectName>
+    <SccProjectName>$/UlServer/libsrc/rmsg</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <ProjectGuid>{70566122-146C-4C72-B982-B04F1557CB93}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Release\RMsg.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\RMsg.bsc</OutputFile>
+    </Bscmake>
+    <Lib>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\RMsg.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Debug\RMsg.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\RMsg.bsc</OutputFile>
+    </Bscmake>
+    <Lib>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\RMsg.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="RmRemotePlayer.cpp" />
+    <ClCompile Include="RMsg_ChangeAvatar.cpp" />
+    <ClCompile Include="RMsg_CupSummons.cpp" />
+    <ClCompile Include="RMsg_EnterRoom.cpp" />
+    <ClCompile Include="RMsg_Error.cpp" />
+    <ClCompile Include="RMsg_GetAvatarDescription.cpp" />
+    <ClCompile Include="RMsg_GotoRoom.cpp" />
+    <ClCompile Include="RMsg_ItemDrop.cpp" />
+    <ClCompile Include="RMsg_ItemHdrDrop.cpp" />
+    <ClCompile Include="RMsg_ItemPickup.cpp" />
+    <ClCompile Include="RMsg_JoinedParty.cpp" />
+    <ClCompile Include="RMsg_LeaveRoom.cpp" />
+    <ClCompile Include="RMsg_LoginAck.cpp" />
+    <ClCompile Include="RMsg_Logout.cpp" />
+    <ClCompile Include="RMsg_NewlyAwakened.cpp" />
+    <ClCompile Include="RMsg_Party.cpp" />
+    <ClCompile Include="RMsg_PartyInfo.cpp" />
+    <ClCompile Include="RMsg_Ping.cpp" />
+    <ClCompile Include="RMsg_PlayerMsg.cpp" />
+    <ClCompile Include="RMsg_PlayerUpdate.cpp" />
+    <ClCompile Include="RMsg_RcvAvatarDescription.cpp" />
+    <ClCompile Include="RMsg_RoomLoginAck.cpp" />
+    <ClCompile Include="RMsg_Speech.cpp" />
+    <ClCompile Include="RMsg_Update.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LmStats.h" />
+    <ClInclude Include="RmRemotePlayer.h" />
+    <ClInclude Include="RMsg.h" />
+    <ClInclude Include="RMsg_All.h" />
+    <ClInclude Include="RMsg_ChangeAvatar.h" />
+    <ClInclude Include="RMsg_CupSummons.h" />
+    <ClInclude Include="RMsg_EnterRoom.h" />
+    <ClInclude Include="RMsg_Error.h" />
+    <ClInclude Include="RMsg_GetAvatarDescription.h" />
+    <ClInclude Include="RMsg_GotoRoom.h" />
+    <ClInclude Include="RMsg_ItemDrop.h" />
+    <ClInclude Include="RMsg_ItemHdrDrop.h" />
+    <ClInclude Include="RMsg_ItemPickup.h" />
+    <ClInclude Include="RMsg_JoinedParty.h" />
+    <ClInclude Include="RMsg_LeaveRoom.h" />
+    <ClInclude Include="RMsg_LoginAck.h" />
+    <ClInclude Include="RMsg_Logout.h" />
+    <ClInclude Include="RMsg_NewlyAwakened.h" />
+    <ClInclude Include="RMsg_Party.h" />
+    <ClInclude Include="RMsg_PartyInfo.h" />
+    <ClInclude Include="RMsg_Ping.h" />
+    <ClInclude Include="RMsg_PlayerMsg.h" />
+    <ClInclude Include="RMsg_PlayerUpdate.h" />
+    <ClInclude Include="RMsg_RcvAvatarDescription.h" />
+    <ClInclude Include="RMsg_RoomLoginAck.h" />
+    <ClInclude Include="RMsg_Speech.h" />
+    <ClInclude Include="RMsg_Update.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="RmRemotePlayer.i" />
+    <CustomBuild Include="RMsg_ChangeAvatar.i" />
+    <CustomBuild Include="RMsg_CupSummons.i" />
+    <CustomBuild Include="RMsg_EnterRoom.i" />
+    <CustomBuild Include="RMsg_Error.i" />
+    <CustomBuild Include="RMsg_GetAvatarDescription.i" />
+    <CustomBuild Include="RMsg_GotoRoom.i" />
+    <CustomBuild Include="RMsg_ItemDrop.i" />
+    <CustomBuild Include="RMsg_ItemHdrDrop.i" />
+    <CustomBuild Include="RMsg_ItemPickup.i" />
+    <CustomBuild Include="RMsg_JoinedParty.i" />
+    <CustomBuild Include="RMsg_LeaveRoom.i" />
+    <CustomBuild Include="RMsg_LoginAck.i" />
+    <CustomBuild Include="RMsg_Logout.i" />
+    <CustomBuild Include="RMsg_NewlyAwakened.i" />
+    <CustomBuild Include="RMsg_Party.i" />
+    <CustomBuild Include="RMsg_PartyInfo.i" />
+    <CustomBuild Include="RMsg_Ping.i" />
+    <CustomBuild Include="RMsg_PlayerMsg.i" />
+    <CustomBuild Include="RMsg_PlayerUpdate.i" />
+    <CustomBuild Include="RMsg_RcvAvatarDescription.i" />
+    <CustomBuild Include="RMsg_RoomLoginAck.i" />
+    <CustomBuild Include="RMsg_Speech.i" />
+    <CustomBuild Include="RMsg_Update.i" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

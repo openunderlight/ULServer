@@ -1186,7 +1186,8 @@ LsRoomThread2.o: LsRoomThread2.cpp LsRoomThread.h \
  /home/brent/lyra/src/include/LmThread.h \
  /home/brent/lyra/src/include/LmThreadPool.h \
  /home/brent/lyra/src/include/LmItemDBC.h \
- /home/brent/lyra/src/include/LmItemGen.h
+ /home/brent/lyra/src/include/LmItemGen.h \
+ /home/brent/lyra/src/include/LmRand.h
 LsRoomThread3.o: LsRoomThread3.cpp LsRoomThread.h \
  /home/brent/lyra/src/include/LyraDefs.h \
  /home/brent/lyra/src/include/tchar.h \
