@@ -434,7 +434,7 @@ bool GsPlayer::CanCreateItem(const LmItem& item) const
   }  
   break;
   case LyraItem::META_ESSENCE_NEXUS_FUNCTION: {
-    int nexusSkill = db_.Arts().Skill(Arts::ESSENCE_CONTAINER);
+    int nexusSkill = db_.Arts().Skill(Arts::CHAOS_WELL);
     if (nexusSkill < 1) 
       return false;
     lyra_item_meta_essence_nexus_t nexus;
