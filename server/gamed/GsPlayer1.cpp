@@ -281,8 +281,8 @@ bool GsPlayer::can_update_state(const void* old_state, const void* new_state) co
     lyra_item_meta_essence_nexus_t old_nexus, new_nexus;
     memcpy(&old_nexus, old_state, sizeof(lyra_item_meta_essence_nexus_t));
     memcpy(&new_nexus, new_state, sizeof(lyra_item_meta_essence_nexus_t));
-    if (old_nexus.essence_cap != new_essence.essence_cap || 
-      old_nexus.strength_cap != new_essence.strength_cap)
+    if (old_nexus.essence_cap != new_nexus.essence_cap || 
+      old_nexus.strength_cap != new_nexus.strength_cap)
       return false;
     
     if (new_nexus.essences < old_nexus.essences)
