@@ -196,6 +196,7 @@ art_t art_info[NUM_ARTS] = // 					Evoke
 {IDS_KINESIS, 			       Stats::WILLPOWER,	  30,  5,  0,	1, 	-1, FOCUS|NEIGH},
 {IDS_MISDIRECTION,         Stats::DREAMSOUL,    60,  30, 0, 5,  -1, NEIGH},
 {IDS_CHAOTIC_VORTEX,       Stats::DREAMSOUL,    70,  40, 4, 5,  -1, NEIGH|NEED_ITEM},
+{IDS_CHAOS_WELL,				Stats::DREAMSOUL, 30, 5, 0, 5, -1, SANCT|MAKE_ITEM|LEARN },
 };
 
 
