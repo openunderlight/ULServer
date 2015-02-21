@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0c936cbe-7766-4311-8a2a-3825b1383098}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{89d0ac57-2e7c-4130-8e20-e952be49896d}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Inline Files">
+      <UniqueIdentifier>{131e9260-3e95-4fe5-9a59-ffad6a9b543c}</UniqueIdentifier>
+      <Extensions>*.i</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LmAssert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmFuncTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmIdSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmLocker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmLogFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmNew.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmRand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LmAssert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmDebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmFuncTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmIdSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmLocker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmLogFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmLogNull.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmNew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmRand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="LmFuncTimer.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmIdSet.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmLocker.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmLog.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmLogFile.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmRand.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmTimer.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmUtil.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

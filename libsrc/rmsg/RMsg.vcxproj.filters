@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{cb149ac6-498b-4b8e-8cfd-b3a85af3e1d4}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{9d2143ba-e80c-4638-853a-1b4a845021fc}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Inline Files">
+      <UniqueIdentifier>{6974cc97-c405-474d-ac54-dd839b686aa6}</UniqueIdentifier>
+      <Extensions>*.i</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RmRemotePlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_ChangeAvatar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_CupSummons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_EnterRoom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_Error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_GetAvatarDescription.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_GotoRoom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_ItemDrop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_ItemHdrDrop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_ItemPickup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_JoinedParty.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_LeaveRoom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_LoginAck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_Logout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_NewlyAwakened.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_Party.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_PartyInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_Ping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_PlayerMsg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_PlayerUpdate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_RcvAvatarDescription.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_RoomLoginAck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_Speech.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_Update.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LmStats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RmRemotePlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_All.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_ChangeAvatar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_CupSummons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_EnterRoom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_Error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_GetAvatarDescription.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_GotoRoom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_ItemDrop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_ItemHdrDrop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_ItemPickup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_JoinedParty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_LeaveRoom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_LoginAck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_Logout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_NewlyAwakened.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_Party.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_PartyInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_Ping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_PlayerMsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_PlayerUpdate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_RcvAvatarDescription.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_RoomLoginAck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_Speech.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_Update.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="RmRemotePlayer.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_ChangeAvatar.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_CupSummons.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_EnterRoom.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_Error.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_GetAvatarDescription.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_GotoRoom.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_ItemDrop.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_ItemHdrDrop.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_ItemPickup.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_JoinedParty.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_LeaveRoom.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_LoginAck.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_Logout.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_NewlyAwakened.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_Party.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_PartyInfo.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_Ping.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_PlayerMsg.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_PlayerUpdate.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_RcvAvatarDescription.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_RoomLoginAck.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_Speech.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RMsg_Update.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

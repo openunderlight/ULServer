@@ -1,3 +1,0 @@
-#!/bin/sh
-
-gdb ./masterd_exec -x gdbinit -d /home/brent/lyra/src/server/masterd -d /home/brent/lyra/src/libsrc/server -d /home/brent/lyra/src/libsrc/net -d /home/brent/lyra/src/libsrc/util -d /home/brent/lyra/src/libsrc/smsg -d /home/brent/lyra/src/libsrc/gmsg -d /home/brent/lyra/src/libsrc/rmsg -d /home/brent/lyra/src/libsrc/db -d /home/brent/lyra/src/libsrc/dbi_mysql -d /home/brent/lyra/src/libsrc/gdbm -d /home/brent/lyra/src/libsrc/dbi_gdbm 

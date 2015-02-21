@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{79a0e5e0-6a02-450b-b900-7d29267b7a0e}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{598a3617-b3b7-4ca3-8162-c6629f98ce5f}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Inline Files">
+      <UniqueIdentifier>{60bcfef1-8323-46e6-851a-3785b5ac8332}</UniqueIdentifier>
+      <Extensions>*.i</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LmDispatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmInventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmItemGen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmItemGenColors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmMesgBufPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmMessageReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmNetworkInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmNetworkOutput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmParty.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmRoomItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmSignalThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmSrvMesgBuf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LmThreadPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LmDispatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmInventory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmItemGen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmItemGenTables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmMesgBufPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmMessageReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmNetworkInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmNetworkOutput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmParty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmRoomItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmRoomItemList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmSignalThread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmSrvMesgBuf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmThread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LmThreadPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="LmDispatch.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmInventory.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmItemGen.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmMesgBufPool.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmMessageReader.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmNetworkInput.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmNetworkOutput.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmParty.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmRoomItem.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmSignalThread.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmSrvMesgBuf.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmThread.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LmThreadPool.i">
+      <Filter>Inline Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

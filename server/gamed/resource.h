@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by Underlight.rc
 //
 #define RESID_TOOLBOX_BITMAP            1
@@ -15,6 +15,7 @@
 #define IDS_NO_MEMORY                   9
 #define IDS_STRING10                    10
 #define IDS_GOALBOOK_ERR                11
+#define IDS_IDENTIFY_ESSENCE_NEXUS      12
 #define IDR_AgentSvr                    100
 #define IDS_SERVICENAME                 100
 #define IDD_LOGIN                       101
@@ -374,6 +375,7 @@
 #define IDC_BPP_32                      1435
 #define IDC_BPP_GP                      1437
 #define IDC_SERVER_GP                   1438
+#define IDC_TCP_ONLY                    1441
 #define IDC_OK                          1800
 #define IDC_CANCEL                      1801
 #define IDC_FIREWALL_FAQ                1801
@@ -442,6 +444,7 @@
 #define IDC_BIND_LOCAL                  1859
 #define IDC_UDP_PROXY                   1859
 #define IDC_INVERTMOUSE                 1860
+#define IDC_ART_PROMPTS                 1861
 #define IDC_TURNSPD                     1862
 #define IDC_FAST                        1863
 #define IDC_SLOW                        1864
@@ -1276,6 +1279,7 @@
 #define IDS_NEED_POWER_TOKEN            2770
 #define IDS_MUST_HAVE_POWER_TOKENS      2771
 #define IDS_NO_DREAM_STRIKE_LEVEL       2772
+#define IDS_TEL_MUST_KNOW_ART           2773
 #define IDS_BASELINE_NOT_SET            2777
 #define IDS_INCORRECT_INDEX             2778
 #define IDS_ERROR_READ_GS_LOGOUT        2779
@@ -2523,7 +2527,6 @@
 #define IDS_ITEM_SELECT_INSPECT         4004
 #define IDS_JOIN_SELECT                 4005
 #define IDS_ITEM_NONE                   4006
-#define IDS_ITEM_SELECTED               4007
 #define IDS_ART_SELECT                  4008
 #define IDS_ITEM_SELECT_USE             4009
 #define IDS_ITEM_SELECT_DROP            4010
@@ -2796,6 +2799,28 @@
 #define IDS_CHAOTIC_VORTEX_NEED_DREAMER_ESSENCE 4267
 #define IDS_KNOW50                      4268
 #define IDS_KNOW51                      4269
+#define IDS_PP_PMARE_TIME               4270
+#define IDS_PP_BOUGHT_PMARE_TIME        4271
+#define IDS_PP_PMARE_TIME_SEL           4272
+#define IDS_CUPSUMMONS_ATTEMPT          4273
+#define IDS_KNOW_52                     4274
+#define IDS_KNOW52                      4274
+#define IDS_LEARNED_HOUSE_ART           4275
+#define IDS_KNOW53                      4276
+#define IDS_SCROLL                      4277
+#define IDS_FLOWER                      4278
+#define IDS_STAFF                       4279
+#define IDS_GIFT                        4280
+#define IDS_RING                        4281
+#define IDS_EGG                         4282
+#define IDS_FEATHER                     4283
+#define IDS_TEL_MUST_BE_FOCUS           4284
+#define IDS_TEL_MUST_HAVE_MARK          4285
+#define IDS_ARRET_CREST                 4286
+#define IDS_CHAOS_WELL                  4287
+#define IDS_CHAOS_WELL_FULL             4288
+#define IDS_CHAOS_WELL_SUCCESS          4289
+#define IDS_CHAOS_WELL_FAILURE          4290
 #define IDC_NUKE_PARTICLES              4802
 #define IDC_PARTICLE_RELOAD             4803
 #define IDC_AVATAR_COMBO                16666
@@ -2805,9 +2830,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        198
+#define _APS_NEXT_RESOURCE_VALUE        202
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1440
+#define _APS_NEXT_CONTROL_VALUE         1442
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

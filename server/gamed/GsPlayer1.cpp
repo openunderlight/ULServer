@@ -277,6 +277,19 @@ bool GsPlayer::can_update_state(const void* old_state, const void* new_state) co
     // not checked: strength (can decrease and increase)
 	break;
   }
+  case LyraItem::META_ESSENCE_NEXUS_FUNCTION: {
+    lyra_item_meta_essence_nexus_t old_nexus, new_nexus;
+    memcpy(&old_nexus, old_state, sizeof(lyra_item_meta_essence_nexus_t));
+    memcpy(&new_nexus, new_state, sizeof(lyra_item_meta_essence_nexus_t));
+    if (old_nexus.essence_cap != new_nexus.essence_cap || 
+      old_nexus.strength_cap != new_nexus.strength_cap)
+      return false;
+    
+    if (new_nexus.essences < old_nexus.essences)
+      return false;
+    
+    break;
+  }
   case LyraItem::GRATITUDE_FUNCTION: {
     lyra_item_gratitude_t gratitude;
     memcpy(&gratitude, old_state, sizeof(lyra_item_gratitude_t));
@@ -418,6 +431,19 @@ bool GsPlayer::CanCreateItem(const LmItem& item) const
       return false;
     }
     // TODO: check strength?
+  }  
+  break;
+  case LyraItem::META_ESSENCE_NEXUS_FUNCTION: {
+    int nexusSkill = db_.Arts().Skill(Arts::CHAOS_WELL);
+    if (nexusSkill < 1) 
+      return false;
+    lyra_item_meta_essence_nexus_t nexus;
+    memcpy(&nexus, func_field, sizeof(lyra_item_meta_essence_nexus_t));
+    if (nexus.essence_cap > 20*((nexusSkill/10)+1) ||
+      nexus.strength_cap > 20*((nexusSkill/10)+1))
+      return false;
+    if (nexus.essences > 0 || nexus.strength > 0)
+      return false;
   }
   break;
   case LyraItem::AMULET_FUNCTION: {
