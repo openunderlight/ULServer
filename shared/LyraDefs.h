@@ -1,4 +1,3 @@
-
 // LyraDefs.h  -*- C++ -*-
 // $Id: LyraDefs.h,v 1.59 1998-04-17 16:38:14-07 jason Exp $
 // Copyright 1996-1997 Lyra LLC, All rights reserved.
@@ -63,7 +62,7 @@ struct ByteOrder {
 // global constants that don't belong anywhere else
 struct Lyra {
   enum {
-    GAME_VERSION = 15306,      // build / protocol version number
+    GAME_VERSION = 15361,      // build / protocol version number (MUST be 5 digits)
     GAME_SUBVERSION = GAME_VERSION,
 
     ID_UNKNOWN = 0,         // invalid id
