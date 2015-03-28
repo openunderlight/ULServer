@@ -1648,10 +1648,13 @@ int LmPlayerDBC::FindHouseMembers(GMsg_LocateAvatarAck& locate_msg, lyra_id_t gu
 
 //  _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player, guildplayer WHERE logged_in = 1 AND (acct_type = %u OR acct_type = %u) AND player.player_id = guildplayer.player_id AND guildplayer.guild_id = %u AND guildplayer.rank > 0 AND player.player_id != %u LIMIT %u"),
 
-// Same issue as LocateNewlyAwakened, applied same fix - DiscoWay
-  _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player, guildplayer WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND player.player_id = guildplayer.player_id AND guildplayer.guild_id = %u AND guildplayer.rank > 0 AND player.player_id != %u LIMIT %u"),
-  LmPlayerDB::ACCT_PLAYER, LmPlayerDB::ACCT_ADMIN, guild_id, player_id, GMsg_LocateAvatarAck::MAX_PLAYERS);
-	 
+// Same issue as LocateNewlyAwakened, applied same fix // Also applied NoGM display fix - DiscoWay
+//  _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player, guildplayer WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND player.player_id = guildplayer.player_id AND guildplayer.guild_id = %u AND guildplayer.rank > 0 AND player.player_id != %u LIMIT %u"),
+//  LmPlayerDB::ACCT_PLAYER, LmPlayerDB::ACCT_ADMIN, guild_id, player_id, GMsg_LocateAvatarAck::MAX_PLAYERS);
+  _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player, guildplayer WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND acct_type = %u AND player.player_id = guildplayer.player_id AND guildplayer.guild_id = %u AND guildplayer.rank > 0 AND player.player_id != %u LIMIT %u"),
+	  LmPlayerDB::ACCT_PLAYER, guild_id, player_id, GMsg_LocateAvatarAck::MAX_PLAYERS);
+
+
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
   ////timer.Stop();
