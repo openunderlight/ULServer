@@ -703,6 +703,12 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
 	int new_sphere = player_->DB().Stats().Sphere();
 	SECLOG(-3, _T("%s: player %u: leveltrained sphere %d -> %d by player %u"), method,
 	       player_->PlayerID(), old_sphere, new_sphere, msg.SenderID());
+	int rc = main_->PlayerDBC()->LogQuest(msg.SenderID(), player_->PlayerID(), Arts::LEVELTRAIN, new_sphere);
+	int sc = main_->PlayerDBC()->LastSQLCode();
+	if (rc < 0) {
+		TLOG_Warning(_T("%s: FAILED to log sphere and quest to DB for player %u sphering player %u to sphere %d"), method, msg.SenderID(), player_->PlayerID(), new_sphere);
+			GsUtil::HandlePlayerError(main_, method, rc, sc, false);
+		}
 	main_->OutputDispatch()->SendMessage(&msg_stat, player_->Connection());
 	msg.SetState1(1); // succeeded
       }

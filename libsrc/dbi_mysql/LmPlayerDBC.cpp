@@ -1648,10 +1648,13 @@ int LmPlayerDBC::FindHouseMembers(GMsg_LocateAvatarAck& locate_msg, lyra_id_t gu
 
 //  _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player, guildplayer WHERE logged_in = 1 AND (acct_type = %u OR acct_type = %u) AND player.player_id = guildplayer.player_id AND guildplayer.guild_id = %u AND guildplayer.rank > 0 AND player.player_id != %u LIMIT %u"),
 
-// Same issue as LocateNewlyAwakened, applied same fix - DiscoWay
-  _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player, guildplayer WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND player.player_id = guildplayer.player_id AND guildplayer.guild_id = %u AND guildplayer.rank > 0 AND player.player_id != %u LIMIT %u"),
-  LmPlayerDB::ACCT_PLAYER, LmPlayerDB::ACCT_ADMIN, guild_id, player_id, GMsg_LocateAvatarAck::MAX_PLAYERS);
-	 
+// Same issue as LocateNewlyAwakened, applied same fix // Also applied NoGM display fix - DiscoWay
+//  _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player, guildplayer WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND player.player_id = guildplayer.player_id AND guildplayer.guild_id = %u AND guildplayer.rank > 0 AND player.player_id != %u LIMIT %u"),
+//  LmPlayerDB::ACCT_PLAYER, LmPlayerDB::ACCT_ADMIN, guild_id, player_id, GMsg_LocateAvatarAck::MAX_PLAYERS);
+  _stprintf(query, _T("SELECT player_name, level_id, room_id FROM player, guildplayer WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND acct_type = %u AND player.player_id = guildplayer.player_id AND guildplayer.guild_id = %u AND guildplayer.rank > 0 AND player.player_id != %u LIMIT %u"),
+	  LmPlayerDB::ACCT_PLAYER, guild_id, player_id, GMsg_LocateAvatarAck::MAX_PLAYERS);
+
+
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
   ////timer.Stop();
@@ -2167,7 +2170,7 @@ int LmPlayerDBC::LogQuest(lyra_id_t origin_id, lyra_id_t target_id, int art, int
 
   TCHAR query[256];
       
- _stprintf(query, _T("INSERT INTO ul_player.trainlog (item_name, item_descrip, origin_id, target_id, art_id, skill) SELECT item_name, item_descrip, %u, %u, %u, %u FROM ul_item.quest_active WHERE art_id = %u AND target_id = %u AND creator_id = %u"), origin_id, target_id, art, skill, art, target_id, origin_id);
+ _stprintf(query, _T("INSERT INTO ul_player.trainlog (item_name, item_descrip, origin_id, target_id, art_id, skill) SELECT item_name, item_descrip, %u, %u, %u, %u FROM ul_item.quest_active WHERE art_id = %u AND target_id = %u AND owner_id = %u"), origin_id, target_id, art, skill, art, target_id, origin_id);
 
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
