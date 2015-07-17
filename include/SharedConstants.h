@@ -12,7 +12,7 @@
 
  
 const int NUM_TIMED_EFFECTS = 29; // add one for NONE
-const int NUM_ARTS = 144;
+const int NUM_ARTS = 145;
 const int NUM_MODIFIERS = 64;
 const int NUM_DURATIONS = 64;
 const int NUM_PLAYER_STATS = 5;
@@ -259,6 +259,7 @@ struct Arts {
   KINESIS,    // Kinesis
   MISDIRECTION, // Misdirection
   CHAOTIC_VORTEX, // Chaotic Vortex
+  CHAOS_WELL, // Essence Container
 
 	// END OF ARTS LIST - below are art-related constants
 
@@ -353,6 +354,7 @@ struct LyraBitmap {
 
 		SCROLL = 43,
 		FLOWER = 44,
+		BOX = 45,
 		GIFT = 46,
 		STAFF = 47,
 		RING = 48,		
@@ -656,9 +658,10 @@ struct LyraEffect {
     PLAYER_CURSED,
     PLAYER_BLIND,
     PLAYER_PARALYZED,
+	PLAYER_BLEED,
 
 	MIN_BAD_EFFECT = PLAYER_DEAF,
-	MAX_BAD_EFFECT = PLAYER_PARALYZED,	
+	MAX_BAD_EFFECT = PLAYER_BLEED,	
 //	MAX_ITEM_EFFECT = PLAYER_PARALYZED, 
 	PLAYER_RECALL, 
 	PLAYER_TRANSFORMED,
@@ -692,6 +695,12 @@ struct Guild { // these values CAN NOT be changed or rearranged
 		KNIGHT				= 2,
 		RULER				= 3,
 		QUEST				= 4
+	};
+
+	enum {
+		IMPRISON = 0,
+		BANISH = 1,
+		CLEANSE = 2
 	};
 
 	enum { // constants for goals; do not make negative!
