@@ -553,12 +553,17 @@ bool GsPlayer::CanBeTrained(int art, int skill) const
     // must be a knight or ruler in some house
     case Arts::INITIATE:
     case Arts::ASCEND:
+	case Arts::SUPPORT_DEMOTION:
+	case Arts::SUPPORT_ASCENSION:
+	case Arts::CUP_SUMMONS:
       if (!db_.Stats().IsKnight() && !db_.Stats().IsRuler()) {
 	return false;
       }
       break;
     // must be a ruler in some house
-    case Arts::KNIGHT:
+	case Arts::EXPEL:
+	case Arts::KNIGHT:
+	case Arts::CREATE_ID_TOKEN:
       if (!db_.Stats().IsRuler()) {
 	return false;
       }

@@ -671,7 +671,8 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::DEMOTE: {            // guild, number tokens available
     int guild = msg.State1();
     int num_tokens = msg.State2();
-    if (!player_->CanDemote(guild, num_tokens, msg.ReceiverID())) {
+    if ((!player_->CanDemote(guild, num_tokens, msg.ReceiverID())) && 
+		(player_->PlayerID() != msg.ReceiverID())) {
       SECLOG(7, _T("%s: player %u: attempted illegal demotion of player %u, guild %d"), method,
 	     player_->PlayerID(), msg.ReceiverID(), guild);
       send_to_level = false; // can't demote
