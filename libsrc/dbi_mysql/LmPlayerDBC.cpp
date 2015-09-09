@@ -1351,7 +1351,7 @@ int LmPlayerDBC::LoadPlayer(lyra_id_t player_id, LmPlayerDB& player_record, int 
 		// now, if there is a login alert set, send email
 		// Added correct email - DiscoWay
 		if (login_alert) {
-			LmUtil::SendMail(_T("accounts@koiware.com"), login_email, 
+			LmUtil::SendMail(_T("accounts@underlight.com"), login_email, 
 				_T("Underlight login alert"), _T("Underlight account %s, controlled by player %s, has just logged in. \n\n -gamed"), player_record.PlayerName(), player_record.RealName());	
 			
 		}
@@ -2170,7 +2170,7 @@ int LmPlayerDBC::LogQuest(lyra_id_t origin_id, lyra_id_t target_id, int art, int
 
   TCHAR query[256];
       
- _stprintf(query, _T("INSERT INTO ul_player.trainlog (item_name, item_descrip, origin_id, target_id, art_id, skill) SELECT item_name, item_descrip, %u, %u, %u, %u FROM ul_item.quest_active WHERE art_id = %u AND target_id = %u AND owner_id = %u"), origin_id, target_id, art, skill, art, target_id, origin_id);
+ _stprintf(query, _T("INSERT INTO ul_player.trainlog (item_name, item_descrip, origin_id, target_id, art_id, skill, created_time) SELECT item_name, item_descrip, %u, %u, %u, %u, created_time FROM ul_item.quest_active WHERE art_id = %u AND target_id = %u AND owner_id = %u"), origin_id, target_id, art, skill, art, target_id, origin_id);
 
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
