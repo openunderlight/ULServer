@@ -2168,7 +2168,7 @@ int LmPlayerDBC::LogQuest(lyra_id_t origin_id, lyra_id_t target_id, int art, int
   DEFMETHOD(LmPlayerDBC, LogQuest);
   LmLocker mon(lock_); // lock object for method duration
 
-  TCHAR query[256];
+  TCHAR query[512];
       
  _stprintf(query, _T("INSERT INTO ul_player.trainlog (item_name, item_descrip, origin_id, target_id, art_id, skill, created_time) SELECT item_name, item_descrip, %u, %u, %u, %u, created_time FROM ul_item.quest_active WHERE art_id = %u AND target_id = %u AND owner_id = %u"), origin_id, target_id, art, skill, art, target_id, origin_id);
 
