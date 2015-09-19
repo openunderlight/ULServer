@@ -555,6 +555,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   case RMsg_PlayerMsg::KINESIS:         // skill, angle
   case RMsg_PlayerMsg::MISDIRECTION:    // skill, unused
   case RMsg_PlayerMsg::CHAOTIC_VORTEX: // skill, unused
+  case RMsg_PlayerMsg::RALLY:				// unused, unused
     // do nothing
     break;
 
@@ -682,7 +683,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
     }
     else {
       // log unsuccessful train
-      // SECLOG(4, _T("%s: player %u: unsuccessful train in art %d, skill %d by player %u"), method, player_->PlayerID(), art, skill, msg.SenderID());
+      SECLOG(4, _T("%s: player %u: unsuccessful train in art %d, skill %d by player %u"), method, player_->PlayerID(), art, skill, msg.SenderID());
       // set skill to 0, so client knows an attempt was made
       msg.SetState2(0);
     }
