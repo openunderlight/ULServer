@@ -282,21 +282,58 @@ int GsPlayer::Demote(int guild_num, int& tokens_used, GMsg_ChangeStat& changemsg
       has_knight = true;
     if (db_.Stats().GuildRank(i) >= Guild::RULER)
       has_ruler = true;
+	if (db_.Stats().GuildRank(i) <= 0){
+		switch (i){ // Remove house-specific arts if no rank held
+		case (Guild::MOON):
+			{
+			remove_art(108, changemsg); // Sable Shield
+			break;
+			}
+		case (Guild::ECLIPSE):
+			{
+			remove_art(93, changemsg); // Sacrifice
+			remove_art(107, changemsg); // Peace Aura
+			break;
+			}
+		case (Guild::SHADOW):
+			{
+			remove_art(110, changemsg); // Shadow Step
+			remove_art(113, changemsg); // Corrupt Essence
+			break;
+			}
+		case (Guild::COVENANT):
+			{
+			remove_art(106, changemsg); // Break Covenant
+			break;
+			}
+		case (Guild::RADIANCE):
+			{
+			remove_art(104, changemsg); // Radiant Blaze
+			break;
+			}
+		case (Guild::CALENTURE):
+			{
+			remove_art(105, changemsg); // Poison Cloud
+			break;
+			}
+		case (Guild::ENTRANCED):
+			{
+			remove_art(109, changemsg); // Entrancement
+			break;
+			}
+		case (Guild::LIGHT):
+			{
+			remove_art(111, changemsg); // Dazzle
+			break;
+			}
+		}
+	}
   }
 
   if (!has_rank) { // no longer has any rank; remove house arts
-    remove_art(93, changemsg); // Sacrifice
+    remove_art(62, changemsg);	// Demote
     remove_art(100, changemsg); // Create Power Token
     remove_art(103, changemsg); // Bequeath
-    remove_art(104, changemsg); // Radiant Blaze
-    remove_art(105, changemsg); // Poison Cloud
-    remove_art(106, changemsg); // Break Covenant
-    remove_art(107, changemsg); // Peace Aura
-    remove_art(108, changemsg); // Sable Shield
-    remove_art(109, changemsg); // Entrancement
-    remove_art(110, changemsg); // Shadow Step
-    remove_art(111, changemsg); // Dazzle						
-	remove_art(113, changemsg); // Corrupt Essence
 	remove_art(118, changemsg); // House Members
   }
 
@@ -310,7 +347,6 @@ int GsPlayer::Demote(int guild_num, int& tokens_used, GMsg_ChangeStat& changemsg
 
   if (!has_ruler) {
     remove_art(54, changemsg); // knight
-    remove_art(62, changemsg); // demote
     remove_art(97, changemsg); // expel
     remove_art(95, changemsg); // create id token
 	remove_art(121, changemsg); // summon_prime

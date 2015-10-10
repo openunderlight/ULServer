@@ -1262,9 +1262,9 @@ int GsPlayer::max_skill(int art_num) const
   // initial max is same as player's orbit
   int the_max = db_.Stats().Orbit();
   // if orbit is < 20, limit is 19, otherwise it is the same as the player's orbit
-  //  if (db_.Stats().Orbit() < 20) {
-  // the_max = 19;
-  //}
+  if (db_.Stats().Orbit() < 20) {
+   the_max = 19;
+  }
 
   // if the art has no focus stat, then the limit is 99 for anyone
   if ((art_info[i].stat == Stats::NO_STAT) ||
