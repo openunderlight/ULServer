@@ -202,12 +202,12 @@ void GsPlayerThread::handle_GMsg_UsePPoint(LmSrvMesgBuf* msgbuf, LmConnection* c
 
   switch (msg.How()) {
   case GMsg_UsePPoint::GAIN_XP: { // sphere
-	  int xp_gain = msg.Var1();
+//	  int xp_gain = msg.Var1();
 	  int xp_gain2 = LmStats::XPPPCost(player_->DB().Stats().XP());
-	  if (xp_gain != xp_gain2) {
-			send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::UNKNOWN_ERR);
-			return;
-	  }
+//	  if (xp_gain != xp_gain2) {
+//			send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::UNKNOWN_ERR);
+//			return;
+//	  }
 	  cost = 1;
 	  TCHAR why[256];
 	  _stprintf(why, _T("Player %d gained %d XP via a Personality Point"), player_->DB().PlayerID(), xp_gain2);
