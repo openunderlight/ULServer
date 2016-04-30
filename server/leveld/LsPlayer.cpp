@@ -120,12 +120,18 @@ void LsPlayer::Init(LmConnection* conn, const TCHAR* playername, int acct_type, 
   // if account type is monster, playername should be modified (format: "X_Y" where X is
   // the actual name (ie. "Horron"), and Y is the playerid, which is stripped away)
   if (acct_type == LmPlayerDB::ACCT_MONSTER) {
-    int pi;
-	// *** STRING LITERAL ***  
-    if (_stscanf(playername, "%[^_]_%d", playername_, &pi) != 2) {
-      // couldn't parse it
-     _tcsnccpy(playername_, playername, sizeof(playername_));
-    }
+	  if (description == "Revenant") {
+		  _tcsncpy(playername_, "Revenant", sizeof(playername_));
+	  }
+	  else
+	  {
+		int pi;
+		// *** STRING LITERAL ***  
+		if (_stscanf(playername, "%[^_]_%d", playername_, &pi) != 2) {
+		  // couldn't parse it
+		 _tcsnccpy(playername_, playername, sizeof(playername_));
+		}
+	  }
   }
   else {
    _tcsnccpy(playername_, playername, sizeof(playername_));
