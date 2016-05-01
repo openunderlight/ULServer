@@ -697,7 +697,6 @@ void GsGameThread::handle_GMsg_AgentLogin(LmSrvMesgBuf* msgbuf, LmConnection* co
   }
 
   // set player description (agentlogin doesn't have a description field)
-  SECLOG(1, _T("%s logging in with Billing ID %i and player ID %i"), msg.PlayerName(), msg.BillingID(), playerid);
   if (msg.BillingID() < 600){
 	((class LmPlayerDB&)player->DB()).SetAvatarDescrip(msg.PlayerName());
   } else {
