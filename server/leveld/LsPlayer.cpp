@@ -120,7 +120,7 @@ void LsPlayer::Init(LmConnection* conn, const TCHAR* playername, int acct_type, 
   // if account type is monster, playername should be modified (format: "X_Y" where X is
   // the actual name (ie. "Horron"), and Y is the playerid, which is stripped away)
   if (acct_type == LmPlayerDB::ACCT_MONSTER) {
-	  if (description == "Revenant") {
+	  if (_tcscmp(_T("Revenant"), description) == 0) {
 		  _tcsncpy(playername_, "Revenant", sizeof(playername_));
 	  }
 	  else
