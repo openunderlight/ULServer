@@ -697,7 +697,7 @@ void GsGameThread::handle_GMsg_AgentLogin(LmSrvMesgBuf* msgbuf, LmConnection* co
   }
 
   // set player description (agentlogin doesn't have a description field)
-  if (player->Avatar().AvatarType() > 1){
+  if (msg.BillingID() < 600){
 	((class LmPlayerDB&)player->DB()).SetAvatarDescrip(msg.PlayerName());
   } else {
 	((class LmPlayerDB&)player->DB()).SetAvatarDescrip("Revenant");
