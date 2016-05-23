@@ -1093,7 +1093,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
     // message may have been modified, so re-read into buffer
     msgbuf->ReadMessage(msg);
 	SECLOG(-1, _T("%s: player %u: sending OutputDispatch to player connection with Arg1: %i & Arg2: %i"), method,
-		player_->PlayerID(), msg.State1(), msg.State2());
+		player_->PlayerID(), msg.State1, msg.State2);
     main_->OutputDispatch()->SendMessage(msgbuf, player_->Connection());
   }
 }
