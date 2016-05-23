@@ -379,7 +379,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
     // check that player can use given art, at the given skill level
     int art = RMsg_PlayerMsg::ArtType(msg.MsgType());
     int skill = msg.State1();
-    if (!(player_->CanUseArt(art, skill))/* && (player_->DB().AccountType() != LmPlayerDB::ACCT_MONSTER)*/) {
+    if (!player_->CanUseArt(art, skill)) {
 		if (player_->PPEvoking() == art) { // we spent pp's to evoke this art once
 			player_->SetPPEvoking(Arts::NONE);
 			player_->SetPPSkill(0);
@@ -974,8 +974,6 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   } // end switch
   // create proxy message, copy message into it, send to player's level server
   if (send_to_level) {
-	  SECLOG(-1, _T("%s: player %u: sending SMsg_Proxy to level server"), method,
-		  player_->PlayerID());
     send_SMsg_Proxy(player_->LevelConnection(), msg);
   }
 }
