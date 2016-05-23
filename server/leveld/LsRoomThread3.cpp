@@ -681,6 +681,6 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
     return;
   }
   // send message to targets
-  TLOG_Warning(_T("%s: sending SMsg_Proxy from room thread with Type %i, Arg1 %i, Arg2 %i"), method, msg.MsgType, msg.State1, msg.State2);
+  TLOG_Warning(_T("%s: sending SMsg_Proxy from room thread with Type %i, Arg1 %i, Arg2 %i"), method, msg.MsgType(), msg.State1(), msg.State2());
   LsUtil::Send_SMsg_Proxy(main_, targets, msg);
 }
