@@ -621,11 +621,11 @@ void GsPlayerThread::handle_GMsg_GetItemDescription(LmSrvMesgBuf* msgbuf, LmConn
   ACCEPT_MSG(GMsg_GetItemDescription, true); // send error
   // process
   LmItemHdr hdr = msg.ItemHeader();
-  // check that player has item
-  if (!player_->DB().Inventory().HasItem(hdr)) {
+  // check that player has item - disabled so players can read descriptions from items on the floor
+/*  if (!player_->DB().Inventory().HasItem(hdr)) {
     TLOG_Warning(_T("%s: player %u does not have item %u"), method, player_->PlayerID(), hdr.Serial());
     return;
-  }
+  } */
   // check that item has a description
   if (!hdr.FlagSet(LyraItem::FLAG_HASDESCRIPTION)) {
     TLOG_Warning(_T("%s: item has no description"), method);
