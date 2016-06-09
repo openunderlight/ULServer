@@ -937,18 +937,6 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   }
   break;
 
-  // player attempting to Rally another player
-  // if the sender is also receiver, it's an ACK
-  // to remove being_summoned flag from player
-  case RMsg_PlayerMsg::RALLY: {				// x-coord, y-coord
-	  if (msg.SenderID() == msg.ReceiverID()) {
-		  player_->SetBeingSummoned(false);
-		  send_to_level = false;
-	  }
-  }
-  break;
-
-
   // No-Processing Messages (just forward to level server)
   //
 
@@ -959,7 +947,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::VAMPIRIC_DRAW_ACK:   // amount, not used
   case RMsg_PlayerMsg::SPHERE_REPLY:   // amount, not used
   case RMsg_PlayerMsg::TEHTHUS_OBLIVION_ACK:		    // unused, unused 
-
+  case RMsg_PlayerMsg::RALLY:
     // do nothing
     break;
 
