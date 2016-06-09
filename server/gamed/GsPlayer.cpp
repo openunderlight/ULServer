@@ -1017,6 +1017,7 @@ void GsPlayer::clear_information()
   been_hit_ = false;
   ds_decreased_ = false;
   hidden_ = false;
+  being_summoned_ = false;
 
   in_level_ = false;
   ldbc_ = 0;
