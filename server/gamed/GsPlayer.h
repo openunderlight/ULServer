@@ -203,6 +203,9 @@ public:
   bool IsHidden() const;
   void SetHidden(bool hidden);
 
+  bool BeingSummoned() const;
+  void SetBeingSummoned(bool being_summoned);
+
   bool DreamsoulDecreased() const;
   bool HasFired() const;
   bool BeenHit() const;
@@ -280,6 +283,7 @@ private:
   bool been_hit_;              // true if player was hit
   bool ds_decreased_;          // true if player's DS has decreased
   bool hidden_;                // true if player is hidden (non-locatable)
+  bool being_summoned_;        // true if player is being summoned or rallied to allow teleport
   bool firewall_;			   // true if we need to send UDP updates back via the game server
   bool tcp_only_; // true if we're tcp only
   int pp_evoking_;			   // set to the art # being evoked via pp; usually NO_ART

@@ -555,7 +555,6 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   case RMsg_PlayerMsg::KINESIS:         // skill, angle
   case RMsg_PlayerMsg::MISDIRECTION:    // skill, unused
   case RMsg_PlayerMsg::CHAOTIC_VORTEX: // skill, unused
-  case RMsg_PlayerMsg::RALLY:				// unused, unused
     // do nothing
     break;
 
@@ -1068,7 +1067,19 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   }
   break;
 
-    
+  // Player is attempting to Rally someone
+  case RMsg_PlayerMsg::RALLY: {				// x-coord, y-coord
+	  GsPlayer* rallied_player = main_->PlayerSet()->GetPlayer(msg.ReceiverID);
+	  if (rallied_player) {
+		  rallied_player->SetBeingSummoned(true);
+	  }
+	  else {
+		  SECLOG(-8, _T("%s: player %u attempting to Rally unknown player %u"), method, player_->PlayerID(), msg.ReceiverID());
+	  }
+  }
+  break;
+
+
   //
   // player should never receive
   //
