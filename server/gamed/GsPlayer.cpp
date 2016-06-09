@@ -470,6 +470,26 @@ void GsPlayer::SetHidden(bool hidden)
 }
 
 ////
+// IsBeingSummoned
+////
+
+bool GsPlayer::BeingSummoned() const
+{
+	LmLocker mon(lock_); // lock object during method duration
+	return being_summoned_;
+}
+
+////
+// SetBeingSummoned
+////
+
+void GsPlayer::SetBeingSummoned(bool being_summoned)
+{
+	LmLocker mon(lock_); // lock object during method duration
+	being_summoned_ = being_summoned;
+}
+
+////
 // Online - return seconds online
 ////
 
@@ -827,6 +847,10 @@ bool GsPlayer::CanGotoRoom(lyra_id_t roomid) const
   // is room a return/recall/goalpost point?
   if ((roomid == r_roomid_) || (roomid == rc_roomid_) || (roomid == g_roomid_)) {
     return true;
+  }
+  // is the player currently being rallied or summoned?
+  if (being_summoned_) {
+	  return true;
   }
   // check for portal to target room
   if (!ldbc_->RoomDB(roomid_).HasPortal(levelid_, roomid)) {
