@@ -1069,7 +1069,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
 
   // Player is attempting to Rally someone
   case RMsg_PlayerMsg::RALLY: {				// x-coord, y-coord
-	  GsPlayer* rallied_player = main_->PlayerSet()->GetPlayer(msg.ReceiverID);
+	  GsPlayer* rallied_player = main_->PlayerSet()->GetPlayer(msg.ReceiverID());
 	  if (rallied_player) {
 		  rallied_player->SetBeingSummoned(true);
 	  }
