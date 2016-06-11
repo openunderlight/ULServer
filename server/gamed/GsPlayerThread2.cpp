@@ -379,7 +379,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
     // check that player can use given art, at the given skill level
     int art = RMsg_PlayerMsg::ArtType(msg.MsgType());
     int skill = msg.State1();
-    if (!player_->CanUseArt(art, skill)) {
+    if ((player_->DB().AccountType() != LmPlayerDB::ACCT_MONSTER) && !(player_->CanUseArt(art, skill))) {
 		if (player_->PPEvoking() == art) { // we spent pp's to evoke this art once
 			player_->SetPPEvoking(Arts::NONE);
 			player_->SetPPSkill(0);
