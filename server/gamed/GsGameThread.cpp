@@ -697,7 +697,11 @@ void GsGameThread::handle_GMsg_AgentLogin(LmSrvMesgBuf* msgbuf, LmConnection* co
   }
 
   // set player description (agentlogin doesn't have a description field)
-  ((class LmPlayerDB&)player->DB()).SetAvatarDescrip(msg.PlayerName());
+  if (msg.BillingID() < 600){
+	((class LmPlayerDB&)player->DB()).SetAvatarDescrip(msg.PlayerName());
+  } else {
+	((class LmPlayerDB&)player->DB()).SetAvatarDescrip("Revenant");
+  }
   // update connection type, message range
   main_->ConnectionSet()->UpdateConnection(conn, LmConnection::CT_CLIENT, playerid);
   // rely on the fact that RMsg's come before GMsg's
