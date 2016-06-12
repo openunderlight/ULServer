@@ -471,26 +471,6 @@ void GsPlayer::SetHidden(bool hidden)
 }
 
 ////
-// IsBeingSummoned
-////
-
-bool GsPlayer::BeingSummoned() const
-{
-	LmLocker mon(lock_); // lock object during method duration
-	return being_summoned_;
-}
-
-////
-// SetBeingSummoned
-////
-
-void GsPlayer::SetBeingSummoned(bool being_summoned)
-{
-	LmLocker mon(lock_); // lock object during method duration
-	being_summoned_ = being_summoned;
-}
-
-////
 // Online - return seconds online
 ////
 
@@ -686,6 +666,17 @@ void GsPlayer::SaveGoalReturnInfo()
 }
 
 ////
+// SaveSummonInfo & SaveRallyInfo
+////
+
+void GsPlayer::SaveSummonInfo(int s_room, int s_level)
+{
+	LmLocker mon(lock_); // lock object during method duration
+	s_roomid_ = s_room;
+	s_levelid_ = s_level;
+}
+
+////
 // LevelID - return player's current level id
 ////
 
@@ -753,6 +744,26 @@ lyra_id_t GsPlayer::GoalReturnRoomID() const
 {
   LmLocker mon(lock_); // lock object during method duration
   return g_roomid_;
+}
+
+////
+// SummonLevelID & RallyLevelID
+////
+
+lyra_id_t GsPlayer::SummonLevelID() const
+{
+	LmLocker mon(lock_); // lock object during method duration
+	return s_levelid_;
+}
+
+////
+// SummonRoomID & RallyRoomID
+////
+
+lyra_id_t GsPlayer::SummonRoomID() const
+{
+	LmLocker mon(lock_); // lock object during method duration
+	return s_roomid_;
 }
 
 
@@ -845,14 +856,12 @@ bool GsPlayer::CanGotoRoom(lyra_id_t roomid) const
   if (roomid == roomid_) {
     return true;
   }
-  // is room a return/recall/goalpost point?
-  if ((roomid == r_roomid_) || (roomid == rc_roomid_) || (roomid == g_roomid_)) {
+
+  // is room a return/recall/goalpost/rally point?
+  if ((roomid == r_roomid_) || (roomid == rc_roomid_) || (roomid == g_roomid_) || roomid == s_roomid_) {
     return true;
   }
-  // is the player currently being rallied or summoned?
-  if (being_summoned_) {
-	  return true;
-  }
+
   // check for portal to target room
   if (!ldbc_->RoomDB(roomid_).HasPortal(levelid_, roomid)) {
     return false;
@@ -1017,7 +1026,6 @@ void GsPlayer::clear_information()
   been_hit_ = false;
   ds_decreased_ = false;
   hidden_ = false;
-  being_summoned_ = false;
 
   in_level_ = false;
   ldbc_ = 0;
@@ -1032,6 +1040,9 @@ void GsPlayer::clear_information()
 
   g_levelid_ = 0;
   g_roomid_ = 0;
+
+  s_levelid_ = 0;
+  s_roomid_ = 0;
 
   if (d_items_.size() > 0) {
     d_items_.erase(d_items_.begin(), d_items_.end());
