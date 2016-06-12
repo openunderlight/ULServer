@@ -674,6 +674,7 @@ void GsPlayer::SaveSummonInfo(int s_room, int s_level)
 	LmLocker mon(lock_); // lock object during method duration
 	s_roomid_ = s_room;
 	s_levelid_ = s_level;
+	SECLOG(-1, _T("player %u: setting s_roomid %u s_levelid %u"), PlayerID(), s_roomid_, s_levelid_);
 }
 
 ////
