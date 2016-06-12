@@ -939,6 +939,12 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 
   // player attemptign to Rally someone
   case RMsg_PlayerMsg::RALLY: {
+	  if (msg.SenderID() == msg.ReceiverID()) { // This is a RALLY ACK, so just clear rally info
+		  player_->SaveSummonInfo(0, 0);
+		  send_to_level = false;
+		  break;
+	  }
+
 	  // check that player can use Rally, skill level doesn't matter
 	  if (!(player_->CanUseArt(Arts::RALLY, 1))) {
 		  if (player_->PPEvoking() == Arts::RALLY) { // we spent pp's to evoke Rally
