@@ -350,15 +350,15 @@ int LmLevelDBC::RoomDescription(short levelid, short roomid, TCHAR* description)
 	_stprintf(query, _T("SELECT description FROM room_desc WHERE level_id = %u AND room_id = %u AND description !='';"), levelid, roomid);
 
 	////timer.Start();
-	int error = mysql_query(&m_mysql, query);
+	int error = mysql_query(&mysql_, query);
 	////timer.Stop();
 	if (error)
 	{
-		LOG_Error(_T("Could not get room description; mysql error %s"), mysql_error(&m_mysql));
+		LOG_Error(_T("Could not get room description; mysql error %s"), mysql_error(&mysql_));
 		return MYSQL_ERROR;
 	}
 
-	res = mysql_store_result(&m_mysql);
+	res = mysql_store_result(&mysql_);
 
 	row = mysql_fetch_row(res);
 
