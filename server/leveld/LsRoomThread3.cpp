@@ -116,8 +116,8 @@ void LsRoomThread::handle_RMsg_GetRoomDescription(LmSrvMesgBuf* msgbuf, LsPlayer
 	// accept message
 	ACCEPT_PLAYERMSG(RMsg_GetRoomDescription, true); // send error
 													 // look up description
-	TCHAR rmDesc[Lyra::ROOMDESC_MAX]
-	main_->LevelDBC()->RoomDescription(msg.LevelID, msg.RoomID, rmDesc);
+	TCHAR rmDesc[Lyra::ROOMDESC_MAX];
+	main_->LevelDBC()->RoomDescription(msg.LevelID(), msg.RoomID(), rmDesc);
 
 	if (rmDesc[0] == _T('\0')) {
 		return; // no description, don't send anything
