@@ -86,6 +86,24 @@ void GsPlayerThread::handle_RMsg_GetAvatarDescription(LmSrvMesgBuf* msgbuf, LmCo
 }
 
 ////
+// handle_RMsg_GetRoomDescription
+////
+
+void GsPlayerThread::handle_RMsg_GetRoomDescription(LmSrvMesgBuf* msgbuf, LmConnection* conn)
+{
+	DEFMETHOD(GsPlayerThread, handle_RMsg_GetRoomDescription);
+	HANDLER_ENTRY(false);
+	// pre-conditions
+	CHECK_CONN_NONNULL();
+	CHECK_CONN_ISCLIENT();
+	CHECK_PLAYER_NONNULL();
+	CHECK_CONN_ID();
+	CHECK_PLAYER_INLEVEL();
+	// create proxy message, copy message bytes into it, send to player's level server
+	send_SMsg_Proxy(player_->LevelConnection(), msgbuf);
+}
+
+////
 // handle_RMsg_GotoRoom
 ////
 

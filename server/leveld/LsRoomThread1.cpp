@@ -395,6 +395,17 @@ void LsRoomThread::send_RMsg_RcvAvatarDescription(LsPlayer* player, lyra_id_t ta
 }
 
 ////
+// send_RMsg_RoomDescription
+////
+
+void LsRoomThread::send_RMsg_RoomDescription(LsPlayer* player, short levelid, short roomid, const TCHAR * roomdesc)
+{
+		RMsg_RoomDescription msg;
+		msg.Init(levelid, roomid, roomdesc);
+		LsUtil::Send_SMsg_Proxy(main_, player, msg);
+}
+
+////
 // send_RMsg_PlayerMsg_DreamStrikeAck
 ////
 

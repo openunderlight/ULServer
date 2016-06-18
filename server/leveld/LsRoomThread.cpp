@@ -467,6 +467,9 @@ void LsRoomThread::handle_SMsg_Proxy(LmSrvMesgBuf* msgbuf, LmConnection* conn)
   case RMsg::GETAVATARDESCRIPTION:
     handle_RMsg_GetAvatarDescription(msgbuf, player);
     break;
+  case RMsg::GETROOMDESCRIPTION:
+	  handle_RMsg_GetRoomDescription(msgbuf, player);
+	  break;
   default:
     TLOG_Error(_T("%s: unknown proxied message type %d"), method, msg.EnclosedMessageType());
     break;

@@ -217,6 +217,7 @@ void GsPlayerThread::register_handlers()
   RegisterHandler(RMsg::SPEECH, (MsgHandler)&GsPlayerThread::handle_RMsg_Speech);
   RegisterHandler(RMsg::PLAYERMSG, (MsgHandler)&GsPlayerThread::handle_RMsg_PlayerMsg);
   RegisterHandler(RMsg::GETAVATARDESCRIPTION, (MsgHandler)&GsPlayerThread::handle_RMsg_GetAvatarDescription);
+  RegisterHandler(RMsg::GETROOMDESCRIPTION, (MsgHandler)&GsPlayerThread::handle_RMsg_GetRoomDescription);
 
   // register SMsg message handlers
   RegisterHandler(SMsg::PROXY, (MsgHandler)&GsPlayerThread::handle_SMsg_Proxy);
