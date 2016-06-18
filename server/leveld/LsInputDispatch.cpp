@@ -120,6 +120,7 @@ static const int room_messages[] = {
   SMsg::LOCATEAVATAR,
   SMsg::SHOWITEM,
   SMsg::SETAVATARDESCRIPTION,
+  RMsg::GETROOMDESCRIPTION,
 };
 static const int num_room_messages = sizeof(room_messages) / sizeof(int);
   

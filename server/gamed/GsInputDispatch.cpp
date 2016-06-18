@@ -199,7 +199,6 @@ static const int player_messages[] = {
   RMsg::PLAYERMSG,
   RMsg::PING,
   RMsg::GETAVATARDESCRIPTION,
-  RMsg::GETROOMDESCRIPTION,
 };
 static const int num_player_messages = sizeof(player_messages) / sizeof(int);
 
