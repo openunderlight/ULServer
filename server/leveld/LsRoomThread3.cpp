@@ -116,7 +116,7 @@ void LsRoomThread::handle_RMsg_GetRoomDescription(LmSrvMesgBuf* msgbuf, LsPlayer
 	// accept message
 	ACCEPT_PLAYERMSG(RMsg_GetRoomDescription, true); // send error
 													 // look up description
-	const TCHAR* rmDesc = main_->LevelDBC()->RoomDB(msg.RoomID).RoomDescription();
+	const TCHAR* rmDesc = main_->LevelDBC()->RoomDB(msg.RoomID()).RoomDescription();
 
 	if (rmDesc[0] == _T('\0')) {
 		return; // no description, don't send anything
