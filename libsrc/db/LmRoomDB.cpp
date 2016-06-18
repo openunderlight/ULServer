@@ -21,6 +21,7 @@
 
 // static objects
 const TCHAR* LmRoomDB::DEFAULT_ROOMNAME = _T("");
+const TCHAR* LmRoomDB::DEFAULT_DESCRIPTION = _T("");
 
 ////
 // Constructor
@@ -38,6 +39,8 @@ LmRoomDB::LmRoomDB()
 {
   _tcscpy(roomname_, DEFAULT_ROOMNAME);
   TRUNC(roomname_, sizeof(roomname_));
+  _tcscpy(description_, DEFAULT_DESCRIPTION);
+  TRUNC(description_, sizeof(description_));
 }
 
 ////
@@ -103,6 +106,11 @@ void LmRoomDB::InitPortal(int index, lyra_id_t levelid, lyra_id_t roomid)
 {
   portals_[index].levelid = levelid;
   portals_[index].roomid = roomid;
+}
+
+void LmRoomDB::SetDescription(TCHAR* description)
+{
+	_tcscpy(description_, description);
 }
 
 

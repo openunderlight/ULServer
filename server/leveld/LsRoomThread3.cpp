@@ -116,13 +116,7 @@ void LsRoomThread::handle_RMsg_GetRoomDescription(LmSrvMesgBuf* msgbuf, LsPlayer
 	// accept message
 	ACCEPT_PLAYERMSG(RMsg_GetRoomDescription, true); // send error
 													 // look up description
-	TCHAR rmDesc[Lyra::ROOMDESC_MAX];
-	int rc = main_->LevelDBC()->RoomDescription(msg.LevelID(), msg.RoomID(), rmDesc);
-	int sc = main_->LevelDBC()->LastSQLCode();
-	if (rc < 0) {
-		LsUtil::HandleItemError(main_, method, rc, sc);
-		return;
-	}
+	const TCHAR* rmDesc = main_->LevelDBC()->RoomDB(msg.RoomID).RoomDescription();
 
 	if (rmDesc[0] == _T('\0')) {
 		return; // no description, don't send anything
