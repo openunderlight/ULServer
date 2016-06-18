@@ -337,9 +337,9 @@ int LmLevelDBC::Load(lyra_id_t level_id, bool load_gens)
 // RoomDescription
 ////
 
-int LmLevelDBC::RoomDescription(short levelid, short roomid, TCHAR* description)
+int LmLevelDBC::RoomDescription(short levelid, short roomid, TCHAR* description) const
 {
-	DEFMETHOD(LmItemDBC, RoomDescription);
+	DEFMETHOD(LmLevelDBC, RoomDescription);
 	LmLocker mon(lock_); // lock object for method duration
 						 //LmFuncTimer( timernum_calls_, num_ms_, last_ms_); // time function
 						 ////LmTimer timer(&sql_ms_); // timer for SQL statements

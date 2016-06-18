@@ -59,7 +59,7 @@ public:
 
   bool ContainsRoom(lyra_id_t roomid) const;
   const LmRoomDB& RoomDB(lyra_id_t roomid) const;
-  int RoomDescription(short levelid, short roomid, TCHAR * description);
+  int RoomDescription(short levelid, short roomid, TCHAR * description) const;
 
   long LastSQLCode() const;
 
