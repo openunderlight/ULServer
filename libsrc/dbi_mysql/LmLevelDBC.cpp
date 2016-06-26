@@ -345,7 +345,9 @@ int LmLevelDBC::Load(lyra_id_t level_id, bool load_gens)
 
 	row = mysql_fetch_row(res);
 	
-	rooms_[i].SetDescription(row[0]);
+	int room_results = mysql_num_rows(res);
+	if ((room_results > 0) && (row[0]))
+		rooms_[i].SetDescription(row[0]);
 
 	mysql_free_result(res);
   }
