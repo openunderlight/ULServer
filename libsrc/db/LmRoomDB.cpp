@@ -28,17 +28,19 @@ const TCHAR* LmRoomDB::DEFAULT_DESCRIPTION = _T("");
 ////
 
 LmRoomDB::LmRoomDB()
-  : roomid_(DEFAULT_ROOMID),
-    maxplayers_(0),
-    num_generators_(0),
-    generators_(0),
-    num_portals_(0),
-    portals_(0),
-    entry_(false),
-    no_reap_items_(false)
+	: roomid_(DEFAULT_ROOMID),
+	maxplayers_(0),
+	num_generators_(0),
+	generators_(0),
+	num_portals_(0),
+	portals_(0),
+	entry_(false),
+	no_reap_items_(false)
 {
-  _tcscpy(roomname_, DEFAULT_ROOMNAME);
-  TRUNC(roomname_, sizeof(roomname_));
+	_tcscpy(roomname_, DEFAULT_ROOMNAME);
+	TRUNC(roomname_, sizeof(roomname_));
+}
+{
   _tcscpy(description_, DEFAULT_DESCRIPTION);
   TRUNC(description_, sizeof(description_));
 }
