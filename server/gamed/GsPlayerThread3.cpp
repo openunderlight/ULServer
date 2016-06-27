@@ -791,7 +791,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
     int num_thousand = msg.State1();
     int num_hundred = msg.State2();
     int xp_adj = (num_thousand * 1000) + (num_hundred * 100);
-    adjust_xp(xp_adj, _T("grant from player"), msg.SenderID(), true);
+    adjust_xp(xp_adj, _T("grant from GM"), msg.SenderID(), true);
   };
   break;
 
@@ -800,16 +800,14 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
     int num_thousand = msg.State1();
     int num_hundred = msg.State2();
     int xp_adj = (num_thousand * 1000) + (num_hundred * 100);
-    if (xp_adj > 5000) { // max rp xp is 5k; if a unsigned value yields
-					// a negative value < 5k, assume negative grant
-		xp_adj = ((signed char)(msg.State1()))*1000 + ((signed char)(msg.State2()))*100;
-		if (xp_adj < -5000) // ignore
-			break;
+    if ((xp_adj > 100000) || (xp_adj < -100000)) { // max rp xp is 100k;
+		send_to_player = false;
+		break;
     }
 
-    adjust_offline_xp(xp_adj, _T("anon rp grant"), msg.SenderID(), true);
-	SECLOG(-3, _T("%s: player %u: change of %d in offline xp due to RP XP grant"), method, 
-	 player_->DB().PlayerID(), xp_adj);
+    adjust_offline_xp(xp_adj, _T("anon rp grant from GM"), msg.SenderID(), true);
+	SECLOG(-3, _T("%s: player %u: change of %d in offline xp due to RP XP grant from GM %u"), method, 
+	 player_->DB().PlayerID(), xp_adj, msg.SenderID());
 
     send_to_player = false; // don't send to client
   };

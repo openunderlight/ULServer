@@ -427,13 +427,9 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
       send_to_level = false;
     }
     int xp = (msg.State1() * 1000) + (msg.State2() * 100);
-    if (xp > 5000) { // max rp xp is 5k; if a unsigned value yields
-					// a negative value < 5k, assume negative grant
-		xp = ((signed char)(msg.State1()))*1000 + ((signed char)(msg.State2()))*100;
-		if (xp < -5000) {
-			SECLOG(5, _T("%s: player %u: attempted to grant %d rp xp"), method, player_->PlayerID(), xp);
-			send_to_level = false;
-		}
+    if ((xp > 100000) || (xp < -100000)) { // max rp xp is 100k;
+		SECLOG(5, _T("%s: player %u: attempted to grant %d rp xp"), method, player_->PlayerID(), xp);
+		send_to_level = false;
     }
   }
   break;
@@ -567,6 +563,11 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::EMPATHY: {
     
         int xp = (msg.State1() * 1000) + (msg.State2() * 100);
+		if ((xp > 50000) || (xp < 100)) {
+			SECLOG(3, _T("%s: player %u: attempted to Bequeath %i xp to %u", method, player_->PlayerID(), xp, msg.ReceiverID()));
+			send_to_level = false;
+			break;
+		}
 	adjust_xp(-2*xp, _T("evoking empathy"), player_->PlayerID(), true);
 	break;
   }
