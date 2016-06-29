@@ -204,14 +204,14 @@ void GsPlayerThread::handle_GMsg_UsePPoint(LmSrvMesgBuf* msgbuf, LmConnection* c
   case GMsg_UsePPoint::GAIN_XP: { // sphere
 	  int xp_gain = msg.Var1();
 	  int xp_gain2 = LmStats::XPPPCost(player_->DB().Stats().XP());
-	  if (xp_gain != xp_gain2) {
+	  cost = xp_gain / xp_gain2;
+	  if ((xp_gain % xp_gain2 != 0) || (cost > pps)) {
 			send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::UNKNOWN_ERR);
 			return;
 	  }
-	  cost = 1;
 	  TCHAR why[256];
-	  _stprintf(why, _T("Player %d gained %d XP via a Personality Point"), player_->DB().PlayerID(), xp_gain2);
-	  adjust_xp(xp_gain2, why, player_->DB().PlayerID(), true);
+	  _stprintf(why, _T("Player %d gained %d XP via %d Personality Point(s)"), player_->DB().PlayerID(), xp_gain, cost);
+	  adjust_xp(xp_gain, why, player_->DB().PlayerID(), true);
 	}
 	break;
 #if 0
