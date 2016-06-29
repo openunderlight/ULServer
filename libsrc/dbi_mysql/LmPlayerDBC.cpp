@@ -2118,7 +2118,7 @@ int LmPlayerDBC::UsePP(lyra_id_t player_id, int cost, int how, int var1, int var
 	  _stprintf(howstr, _T("PPoint used an art %d I don't know at level %d, cost = %d"), var2, var3, cost);
 	  break;
   case GMsg_UsePPoint::GAIN_XP:
-	  _stprintf(howstr, _T("PPoints used to gain %d XP; cost = %d"), var1, cost);
+	  _stprintf(howstr, _T("PPoints used to gain XP; cost = %d"), cost);
 	  break;
   case GMsg_UsePPoint::BUY_PMARE_TIME:
 	_stprintf(howstr, _T("PPoints used to buy %d mare credits, cost = %d"), var1, cost);

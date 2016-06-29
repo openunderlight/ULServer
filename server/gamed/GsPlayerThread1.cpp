@@ -202,11 +202,15 @@ void GsPlayerThread::handle_GMsg_UsePPoint(LmSrvMesgBuf* msgbuf, LmConnection* c
 
   switch (msg.How()) {
   case GMsg_UsePPoint::GAIN_XP: { // sphere
-	  int xp_gain = msg.Var1();
-	  int xp_gain2 = LmStats::XPPPCost(player_->DB().Stats().XP());
-	  cost = xp_gain / xp_gain2;
-	  if ((xp_gain % xp_gain2 != 0) || (cost > pps)) {
-			send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::UNKNOWN_ERR);
+	  cost = msg.Var1();
+	  int curr_xp = player_->DB().Stats().XP();
+	  int xp_gain = cost * LmStats::XPPPCost(curr_xp);
+	  if (player_->DB().Stats().Orbit() < LmStats::OrbitFromXP(curr_xp + xp_gain)) {
+		  send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::UNKNOWN_ERR);
+		  return;
+	  }
+	  if (cost > pps) {
+			send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::USE_NOT_ENOUGH);
 			return;
 	  }
 	  TCHAR why[256];
