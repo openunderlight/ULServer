@@ -564,7 +564,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
     
         int xp = (msg.State1() * 1000) + (msg.State2() * 100);
 		if ((xp > 50000) || (xp < 100)) {
-			SECLOG(3, _T("%s: player %u: attempted to Bequeath %i xp to %u", method, player_->PlayerID(), xp, msg.ReceiverID()));
+			SECLOG(3, _T("%s: player %u: attempted to Bequeath %i xp to %u"), method, player_->PlayerID(), xp, msg.ReceiverID());
 			send_to_level = false;
 			break;
 		}
