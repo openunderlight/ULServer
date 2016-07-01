@@ -277,7 +277,32 @@ void LsLevelThread::handle_SMsg_LevelLogin(LmSrvMesgBuf* msgbuf, LmConnection* c
 			send_RMsg_CupSummons((*p)->Connection(), (*p)->PlayerID(), msg.PlayerName());
 	    }
 	}
+  }
 
+  // Send alert to house members when a visitor enters their house plane
+  if (!alerts && !msg.Avatar().Hidden() && !msg.Hidden()) { // Don't send alert if NewlyAwakened msg already sent, or if GM INVIS or Mind Blanked
+	  const int guildlevels[NUM_GUILDS] = { 25,22,24,26,21,17,23,18 };
+	  for (int guild_id = 0; guild_id < NUM_GUILDS; guild_id++){
+		  if ((main_->LevelNum() == guildlevels[guild_id]) && (msg.Avatar().GuildID() != guild_id)) {
+			  LsPlayerList players;
+			  main_->PlayerSet()->GetPlayerList(players);
+			  alerts = true;
+
+			  for (LsPlayerList::iterator p = players.begin(); !(bool)(p == players.end()); ++p) {
+				  if (((*p)->RoomID() == msg.RoomID()) && ((*p)->Avatar().GuildID() == guild_id)) {
+					  alerts = false; // House member is already in entry room with crest displayed, no need to alert everyone
+					  break;
+				  }
+			  }
+
+			  if (alerts){
+				  for (LsPlayerList::iterator p = players.begin(); !(bool)(p == players.end()); ++p) {
+					  if (((*p)->Avatar().GuildID() == guild_id) && ((*p)->PlayerID() != msg.PlayerID()))  // send alert message
+						  send_RMsg_NewlyAwakened((*p)->Connection(), (*p)->PlayerID(), msg.PlayerName(), msg.RoomID());
+				  }
+			  }
+		  }
+	  }
   }
 
   SMsg_LS_Login msg2;
