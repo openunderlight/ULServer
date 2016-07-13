@@ -428,7 +428,10 @@ int LmPlayerDBC::Logout(lyra_id_t player_id, unsigned int timeonline)
   TCHAR query[256];
 
  if( timeonline > MIN_TIME_FOR_COOLOFF )
+ {
     _stprintf( query, _T("UPDATE player SET time_online = time_online + %u, last_logout = NOW(), logged_in = 0, room_id = 0, level_id = 0 WHERE player_id = %u;"), timeonline, player_id);
+    LOG_Debug( _T( "%s: Logging player out and setting last logout time! player: %u, timeonline: %u" ), method, player_id, timeonline );    
+ }    
  else    
     _stprintf(query, _T("UPDATE player SET time_online = time_online + %u, logged_in = 0, room_id = 0, level_id = 0 WHERE player_id = %u;"), timeonline, player_id);
 
@@ -436,7 +439,7 @@ int LmPlayerDBC::Logout(lyra_id_t player_id, unsigned int timeonline)
   int error = mysql_query(&m_mysql, query);
   ////timer.Stop();
   
-  LOG_Debug(_T("%s: Logging out player %u"), method, player_id);
+  LOG_Debug(_T("%s: Logging out player %u, timeonline was %u"), method, player_id, timeonline);
 
   
   if (error)
