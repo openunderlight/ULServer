@@ -912,6 +912,31 @@ int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_ty
 	//	LOG_Error(_T("%s: %u characters logged in for billing id %u; mysql error %s"), method, count, db_billing_id, mysql_error(&m_mysql));
 	return GMsg_LoginAck::LOGIN_ALREADYIN;
       }
+      
+      if( acct_type == LmPlayerDB::ACCT_PLAYER )
+      {
+        _stprintf( query, _T( "SELECT count(*) FROM player WHERE billing_id=%u AND acct_type=%u AND player_id != %u AND last_logout + INTERVAL %u SECOND > NOW()" ),
+            db_billing_id, LmPlayerDB::ACCT_PLAYER, player_id, COOLOFF_TIME );
+        ////timer.Start();
+        error = mysql_query(&m_mysql, query);
+        ////timer.Stop();
+        
+        if (error)
+          {
+    	LOG_Error(_T("%s: Could not checkin CanLogin for player %u; mysql error %s"), method, player_id, mysql_error(&m_mysql));
+    	return MYSQL_ERROR;
+          }
+        
+        res = mysql_store_result(&m_mysql);
+        
+        row = mysql_fetch_row(res);
+        count = ATOI(row[0]);
+        mysql_free_result(res);
+        if (count > 0)
+          {
+    	return GMsg_LoginAck::LOGIN_COOLOFF;
+          }
+      }
   }
   
   return GMsg_LoginAck::LOGIN_OK;
