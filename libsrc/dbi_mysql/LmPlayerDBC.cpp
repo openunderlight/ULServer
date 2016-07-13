@@ -31,6 +31,8 @@
 
 const int FOCUS_INIT = 30;
 const int NORM_INIT = 10;
+const int MIN_TIME_FOR_COOLOFF = 120; // 2 minutes min login time
+const int COOLOFF_TIME = 60*60; // 1 hour
 
 inline unsigned int ATOI(char* value)
 {
@@ -425,7 +427,10 @@ int LmPlayerDBC::Logout(lyra_id_t player_id, unsigned int timeonline)
 
   TCHAR query[256];
 
- _stprintf(query, _T("UPDATE player SET time_online = time_online + %u, logged_in = 0, room_id = 0, level_id = 0 WHERE player_id = %u;"), timeonline, player_id);
+ if( timeonline > MIN_TIME_FOR_COOLOFF )
+    _stprintf( query, _T("UPDATE player SET time_online = time_online + %u, last_logout = NOW(), logged_in = 0, room_id = 0, level_id = 0 WHERE player_id = %u;"), timeonline, player_id);
+ else    
+    _stprintf(query, _T("UPDATE player SET time_online = time_online + %u, logged_in = 0, room_id = 0, level_id = 0 WHERE player_id = %u;"), timeonline, player_id);
 
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
