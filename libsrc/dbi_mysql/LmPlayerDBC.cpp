@@ -31,7 +31,7 @@
 
 const int FOCUS_INIT = 30;
 const int NORM_INIT = 10;
-const int MIN_TIME_FOR_COOLOFF = 120; // 2 minutes min login time
+const int MIN_TIME_FOR_COOLOFF = 60; // 1 minute min login time
 const int COOLOFF_TIME = 60*60; // 1 hour
 
 inline unsigned int ATOI(char* value)
