@@ -790,6 +790,7 @@ int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_ty
   int acct_type;
   int num_days;
   int logged_in = 0;
+  int count = 0;
   int pmare_session_start;
   bool suspended = false;
   MYSQL_RES *res;
@@ -882,6 +883,26 @@ int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_ty
       LOG_Error(_T("%s: Illegal pmare avatar type %u attempted at login for pmare player %u with avatar type %u"), method, pmare_type, player_id, avatar.AvatarType());
       return GMsg_LoginAck::LOGIN_MISMATCH;
     }
+    
+    //// PMARE GLOBAL LOCKOUT?
+    _stprintf( query, _T( "SELECT count(*) FROM pmare_lock WHERE NOW() BETWEEN start_time AND end_time AND expired=0" ) );
+    error = mysql_query( &m_mysql, query );
+    if (error)
+      {
+	LOG_Error(_T("%s: Could not checkin CanLogin for player %u; mysql error %s"), method, player_id, mysql_error(&m_mysql));
+	return MYSQL_ERROR;
+      }
+    
+    res = mysql_store_result(&m_mysql);
+    
+    row = mysql_fetch_row(res);
+    count = ATOI(row[0]);
+    mysql_free_result(res);
+    if (count > 0)
+      {
+	return GMsg_LoginAck::LOGIN_PMARE_LOCK;
+      }
+    
   } else if (acct_type == LmPlayerDB::ACCT_PLAYER) {
     if (pmare_type != 0) {
       LOG_Error(_T("%s: Illegal pmare type %u attempted at player login for player %u"), method, pmare_type, player_id);
@@ -908,7 +929,7 @@ int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_ty
     res = mysql_store_result(&m_mysql);
     
     row = mysql_fetch_row(res);
-    int count = ATOI(row[0]);
+    count = ATOI(row[0]);
     mysql_free_result(res);
     if (count > 0)
       {

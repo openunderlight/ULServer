@@ -40,6 +40,7 @@ public:
     LOGIN_GAMEFULL     = 'F',  // game is full
     LOGIN_COOLOFF      = 'H',  // cooloff period
 	LOGIN_KILLED	   = 'K',  // player dead
+	LOGIN_PMARE_LOCK   = 'L',  // pmare lock
 	LOGIN_MISMATCH	   = 'M',  // account/build mismatch
     LOGIN_USERNOTFOUND = 'N',  // user not in database
     LOGIN_OK           = 'O',  // successful login
