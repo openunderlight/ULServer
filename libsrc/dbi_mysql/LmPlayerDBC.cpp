@@ -900,7 +900,7 @@ int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_ty
     mysql_free_result(res);
     if (count > 0)
       {
-	return GMsg_LoginAck::LOGIN_MISMATCH;
+	return GMsg_LoginAck::LOGIN_PMARE_LOCK;
       }
     
   } else if (acct_type == LmPlayerDB::ACCT_PLAYER) {
