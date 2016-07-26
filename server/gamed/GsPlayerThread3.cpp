@@ -562,7 +562,19 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   //
   // special handling
   //
-
+  
+  case RMsg_PlayerMsg::CHANNEL: {
+    int channelPlat = player_->DB().Arts().Skill(art) / 10,
+        channelClaim = msg.State1() / 10;
+    if(channelPlat != channelClaim)
+    {
+        send_to_player = false;
+        SECLOG(5, "%s: player %u claiming channel level %d but level is %d?", method, player_->PlayerID(), 
+            channelPlat, channelClaim);
+    }            
+  }
+  break;
+  
   case RMsg_PlayerMsg::GRANT_PPOINT: {         // not used, not used
 	  int newpp = player_->DB().Stats().PP()+1;
 	  player_->SetPPoints(newpp);
