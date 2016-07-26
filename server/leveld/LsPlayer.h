@@ -144,7 +144,12 @@ public:
   void SetDescription(const TCHAR* desc);
 
   void Dump(FILE* f, int indent = 0) const;
-
+  void SetChannelLevel(int channelLevel);
+  void SetChannelTarget(lyra_id_it channelTarget);
+  lyra_id_t ChannelTarget();
+  int ChannelLevel();
+  bool IsChannelling();
+  
 private:
 
   void SetLocalGroup(const LmIdSet& lgroup);
@@ -204,7 +209,8 @@ private:
   unsigned long ipaddr_;
   unsigned long client_ipaddr_;
   LmSockAddrInet update_addr_;
-
+  lyra_id_t channeltarget;
+  unsigned int channellevel;
 };
 
 #ifdef USE_INLINE
