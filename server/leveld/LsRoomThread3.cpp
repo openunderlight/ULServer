@@ -534,7 +534,40 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
     targets.push_back(source); // add source player to list of targets
   }
   break;
-
+  
+  // got a channel request
+  case RMsg_PlayerMsg::CHANNEL: {
+    // make sure source is in a party
+    if(source->Party().PartySize() <= 0)
+    {
+        send_out = false;
+        TLOG_Warning(_T("%s: player %u not in party?!"), method, source_id);
+    }
+    else
+    {
+        LmParty party = target->Party();
+        LsPlayer* channelrecvr = NULL;
+	    for (int i = 0; i < party.PartySize(); ++i) {
+	        lyra_id_t memberid = party.PlayerID(i);
+	        if(memberid != target_id)
+	            continue;
+	            
+	        channelrecvr = main_->PlayerSet()->GetPlayer(memberid);
+        }
+        
+        if(channelrecvr == NULL)
+        {
+            TLOG_Warning(_T("%s: player %u not in %u party?"), method, target_id, source_id);
+            send_out = false;
+        }
+        else
+        {
+            source->SetChannelLevel(msg.State1());
+            source->SetChannelTarget(target_id);
+        }
+    }
+  }
+  break;
   // handle player dissolution
   case RMsg_PlayerMsg::YOUGOTME: {
     if (room) {
