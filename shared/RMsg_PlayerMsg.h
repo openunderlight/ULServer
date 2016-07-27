@@ -180,9 +180,8 @@ private:
     lyra_id_t senderid;
     lyra_id_t receiverid;
     short mtype;
-    short state1;
-    short state2;
-    short _unused;
+    unsigned char state1;
+    unsigned char state2;
   } data_;
 
 };
