@@ -948,7 +948,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::SPHERE_REPLY:   // amount, not used
   case RMsg_PlayerMsg::TEHTHUS_OBLIVION_ACK:		    // unused, unused 
   case RMsg_PlayerMsg::RALLY:				// unused, unused
-
+  case RMsg_PlayerMsg::CHANNEL:
     // do nothing
     break;
 
