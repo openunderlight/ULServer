@@ -11,16 +11,6 @@ INLINE lyra_id_t LsPlayer::PlayerID() const
   return playerid_;
 }
 
-INLINE lyra_id_t LsPlayer::ChannelTarget()
-{
-    return channeltarget;
-}
-
-INLINE int LsPlayer::ChannelLevel()
-{
-    return channellevel;
-}
-
 INLINE unsigned short LsPlayer::RealtimeID() const
 {
   return realtimeid_;
