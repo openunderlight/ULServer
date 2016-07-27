@@ -119,6 +119,8 @@ public:
   MISDIRECTION,   // skill, unused
   CHAOTIC_VORTEX, // skill, unused
   RALLY,			// unused, unused
+  CHANNEL,
+  CHANNELKILL,
   
     // GM-only messages
     FINGER_OF_DEATH = 90,// not used, not used
