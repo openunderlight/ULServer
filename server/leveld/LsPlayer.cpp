@@ -179,6 +179,18 @@ void LsPlayer::SetDescription(const TCHAR* description)
  _tcsnccpy(desc_, description, sizeof(desc_));
 }
 
+lyra_id_t LsPlayer::ChannelTarget()
+{
+    LmLocker mon(lock_);
+    return channeltarget;
+}
+
+int LsPlayer::ChannelLevel()
+{
+    LmLocker mon(lock_);
+    return channellevel;
+}
+
 ////
 // CopyInfo
 ////
