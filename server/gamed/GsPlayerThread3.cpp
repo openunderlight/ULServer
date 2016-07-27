@@ -970,7 +970,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       my_shares = 2;
     }
     double multiplier = 1.0;
-    if(channelKill)
+    if(channelkill)
     {
         multiplier = 0.5 + (0.05 * (all_shares / 10));
         all_shares %= 10;
