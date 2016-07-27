@@ -969,7 +969,10 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   }
   break;
   // player was in a party, party member killed something
-  case RMsg_PlayerMsg::PARTYKILL: {          // victim's orbit/nightmare index, # of party members
+  case RMsg_PlayerMsg::CHANNELKILL:
+  case RMsg_PlayerMsg::PARTYKILL:           // victim's orbit/nightmare index, # of party members
+  {
+    bool channelkill = msg.MsgType() == RMsg_PlayerMsg::CHANNELKILL;
     int orbit = msg.State1();
     int party_size = msg.State2();
     // determine total # of shares, and number of shares we get
@@ -979,6 +982,13 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       all_shares -= 100;
       my_shares = 2;
     }
+    double multiplier = 1.0;
+    if(channelKill)
+    {
+        multiplier = 0.5 + (0.05 * (all_shares / 10));
+        all_shares %= 10;
+    }        
+
     // determine how much XP to gain
     int xp_adj = 0;
     bool agent_killed = true;
@@ -997,14 +1007,17 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
     }
 
     // TLOG_Debug(_T("%s: party kill: xp=%d shares=%d/%d"), method, xp_adj, my_shares, all_shares);
-    xp_adj = my_shares * (xp_adj / all_shares); // divide up among party members
-    if (agent_killed) {
-      adjust_xp(xp_adj, _T("partykill of agent"), msg.SenderID(), true);
+    xp_adj = party_size % 10 == 9 ? 0 : my_shares * (xp_adj / all_shares); // divide up among party members
+    if(xp_adj != 0)
+    {
+        xp_adj = (int) ((double)xp_adj * multiplier);
+        if (agent_killed) {
+            adjust_xp(xp_adj, _T("partykill of agent"), msg.SenderID(), true);
+        }
+        else {
+            adjust_xp(xp_adj, _T("partykill of player"), msg.SenderID(), true);
+        }
     }
-    else {
-      adjust_xp(xp_adj, _T("partykill of player"), msg.SenderID(), true);
-    }
-  }
   break;
 
   case RMsg_PlayerMsg::EMPATHY: {
