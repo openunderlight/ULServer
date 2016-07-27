@@ -537,35 +537,17 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
   
   // got a channel request
   case RMsg_PlayerMsg::CHANNEL: {
-    // make sure source is in a party
-    if(source->Party().PartySize() <= 0)
+    LmParty party = source->Party();
+    if(!party.HasPlayer(targetid) || targetid == source_id || source->Party().PartySize() == 0 || !target)
     {
         send_out = false;
-        TLOG_Warning(_T("%s: player %u not in party?!"), method, source_id);
+        source->SetChannelLevel(0);
+        source->SetChannelTarget(0);
     }
     else
     {
-        LmParty party = target->Party();
-        LsPlayer* channelrecvr = NULL;
-	    for (int i = 0; i < party.PartySize(); ++i) {
-	        lyra_id_t memberid = party.PlayerID(i);
-	        if(memberid != targetid)
-	            continue;
-	            
-	        channelrecvr = main_->PlayerSet()->GetPlayer(memberid);
-        }
-        
-        if(channelrecvr == NULL || targetid == source_id || source->Party().PartySize() == 0)
-        {
-            send_out = false;
-            source->SetChannelLevel(0);
-            source->SetChannelTarget(0);
-        }
-        else
-        {
-            source->SetChannelLevel(msg.State1());
-            source->SetChannelTarget(targetid);
-        }
+        source->SetChannelLevel(msg.State1());
+        source->SetChannelTarget(targetid);
     }
   }
   break;
