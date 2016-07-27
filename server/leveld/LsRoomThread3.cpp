@@ -549,7 +549,7 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
         LsPlayer* channelrecvr = NULL;
 	    for (int i = 0; i < party.PartySize(); ++i) {
 	        lyra_id_t memberid = party.PlayerID(i);
-	        if(memberid != target_id)
+	        if(memberid != targetid)
 	            continue;
 	            
 	        channelrecvr = main_->PlayerSet()->GetPlayer(memberid);
@@ -557,13 +557,13 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
         
         if(channelrecvr == NULL)
         {
-            TLOG_Warning(_T("%s: player %u not in %u party?"), method, target_id, source_id);
+            TLOG_Warning(_T("%s: player %u not in %u party?"), method, targetid, source_id);
             send_out = false;
         }
         else
         {
             source->SetChannelLevel(msg.State1());
-            source->SetChannelTarget(target_id);
+            source->SetChannelTarget(targetid);
         }
     }
   }
