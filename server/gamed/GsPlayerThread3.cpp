@@ -1005,6 +1005,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
             adjust_xp(xp_adj, _T("partykill of player"), msg.SenderID(), true);
         }
     }
+  }    
   break;
 
   case RMsg_PlayerMsg::EMPATHY: {
