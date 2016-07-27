@@ -145,7 +145,7 @@ public:
 
   void Dump(FILE* f, int indent = 0) const;
   void SetChannelLevel(int channelLevel);
-  void SetChannelTarget(lyra_id_it channelTarget);
+  void SetChannelTarget(lyra_id_t channelTarget);
   lyra_id_t ChannelTarget();
   int ChannelLevel();
   bool IsChannelling();
