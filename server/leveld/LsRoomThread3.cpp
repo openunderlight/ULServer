@@ -555,10 +555,11 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
 	        channelrecvr = main_->PlayerSet()->GetPlayer(memberid);
         }
         
-        if(channelrecvr == NULL)
+        if(channelrecvr == NULL || targetid == source_id || source->Party().PartySize() == 0)
         {
-            TLOG_Warning(_T("%s: player %u not in %u party?"), method, targetid, source_id);
             send_out = false;
+            source->SetChannelLevel(0);
+            source->SetChannelTarget(0);
         }
         else
         {
