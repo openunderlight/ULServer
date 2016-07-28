@@ -556,6 +556,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   case RMsg_PlayerMsg::MISDIRECTION:    // skill, unused
   case RMsg_PlayerMsg::CHAOTIC_VORTEX: // skill, unused
   case RMsg_PlayerMsg::RALLY:				// unused, unused
+  case RMsg_PlayerMsg::CHANNEL:
     // do nothing
     break;
 
