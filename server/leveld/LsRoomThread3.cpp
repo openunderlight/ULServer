@@ -603,6 +603,7 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
 	        msg.SetReceiverID(member->ChannelTarget());
 	        LsPlayer* channellee = main_->PlayerSet()->GetPlayer(member->ChannelTarget());
 	        msg.SetSenderID(memberid);
+	        msg.SetState2(state2);
 	        if(channellee)
 	            LsUtil::Send_SMsg_Proxy(main_, channellee, msg);    
         }	        
