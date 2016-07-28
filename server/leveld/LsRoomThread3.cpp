@@ -585,19 +585,17 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
 	        state2 += ( member->ChannelLevel() / 10 ) * 10;
 	    }
 	    
-	    if (memberid == targetid) {
-	      msg.SetState2(100 + state2); // killer share; indicate by 100 + members in state2
-	    }
-	    else {
-	      msg.SetState2(state2); // member share
-	    }
+	    if (memberid == targetid)
+	      state2 += 100;
+	    
+	    msg.SetState2(state2); // member share
 	    LsUtil::Send_SMsg_Proxy(main_, member, msg);
 	    if(state2 % 10 == 9)
 	    {
 	        // if we're channelling take this message and send a ChannelKill to the channellee.
 	        msg.SetMsgType(RMsg_PlayerMsg::CHANNELKILL);
 	        state2 -= 9;
-	        state2 = party.PartySize();
+	        state2 += party.PartySize();
 	        msg.SetReceiverID(member->ChannelTarget());
 	        LsPlayer* channellee = main_->PlayerSet()->GetPlayer(member->ChannelTarget());
 	        msg.SetSenderID(memberid);
