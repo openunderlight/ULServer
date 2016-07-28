@@ -963,6 +963,8 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
     bool channelkill = msg.MsgType() == RMsg_PlayerMsg::CHANNELKILL;
     int orbit = msg.State1();
     int party_size = msg.State2();
+    SECLOG(-7, _T("%s: channelkill/partykill, orbit=%u, party_size=%u, sender=%u, receiver=%u"),
+        method, orbit, party_size, msg.SenderID(), msg.ReceiverID());
     // determine total # of shares, and number of shares we get
     int all_shares = party_size + 1;
     int my_shares = 1;
@@ -973,6 +975,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
     double multiplier = 1.0;
     if(channelkill)
     {
+        SECLOG(-7, _T("%s: received channelkill, all_shares is: %u"), method, all_shares);
         multiplier = 0.5 + (0.05 * (all_shares / 10));
         all_shares %= 10;
     }        
@@ -996,6 +999,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
 
     // TLOG_Debug(_T("%s: party kill: xp=%d shares=%d/%d"), method, xp_adj, my_shares, all_shares);
     xp_adj = party_size % 10 == 9 ? 0 : my_shares * (xp_adj / all_shares); // divide up among party members
+    SECLOG(-7, _T("%s: channelkill/partykill, xp_adj=%u"), method, xp_adj);
     if(xp_adj != 0)
     {
         xp_adj = (int) ((double)xp_adj * multiplier);
