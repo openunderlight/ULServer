@@ -571,9 +571,13 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
       // if target (killer) is in a party, then don't send YOUGOTME, send PARTYKILL to party members
       if (target->Party().PartySize() > 0) {
         send_out = false; // don't send original message to receiver, will do here
-	msg.Init(msg.SenderID(), 0, RMsg_PlayerMsg::PARTYKILL, msg.State1(), 0);
+        
+    lyra_id_t originalSender = msg.SenderID();
+    int originalOrbit = msg.State1();
+    
 	LmParty party = target->Party();
 	for (int i = 0; i < party.PartySize(); ++i) {
+	  msg.Init(originalSender, 0, RMsg_PlayerMsg::PARTYKILL, originalOrbit, 0);
 	  lyra_id_t memberid = party.PlayerID(i);
 	  LsPlayer* member = main_->PlayerSet()->GetPlayer(memberid);
 	  if (member) {
