@@ -239,10 +239,18 @@ void LsRoomThread::perform_Party_Leave(LsPlayer* player, int how, bool grant_xp)
     if (memberid == playerid) {
       continue;
     }
+
     LsPlayer* member = main_->PlayerSet()->GetPlayer(memberid);
     if (!member) {
       TLOG_Error(_T("%s: party member %u not in level!"), method, memberid);
       continue;
+    }
+    
+    if(player->ChannelTarget() == memberid)
+    {
+        RMsg_PlayerMsg chmsg;
+        chmsg.Init(playerid, memberid, RMsg_PlayerMsg::CHANNEL, 0, 0);
+        LsUtil::Send_SMsg_Proxy(main_, member, chmsg);
     }
     // remove; if leader_left, then clear the party instead
     if (leader_left) {
