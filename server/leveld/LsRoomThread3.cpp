@@ -537,21 +537,22 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
   
   // got a channel request
   case RMsg_PlayerMsg::CHANNEL: {
-    TLOG_Warning(_T("%s: channel RECV source %u target %u level %u"), method, source_id, targetid, msg.State1());
     LmParty party = source->Party();
-    if(!party.HasPlayer(targetid) || targetid == source_id || party.PartySize() == 0 || !target)
+    bool isCancel = party.PartySize() > 0 && source->ChannelTarget() != 0 &&
+        party.HasPlayer(source->ChannelTarget()) && !target;
+        
+    if(!isCancel && !party.HasPlayer(targetid) || targetid == source_id || party.PartySize() == 0 || !target)
     {
-        TLOG_Warning(_T("%s: channel NOT GOING TO SEND, party size is %u, hasPlayer is %u"),
-            method, party.PartySize(), party.HasPlayer(targetid));
         send_out = false;
         source->SetChannelLevel(0);
         source->SetChannelTarget(0);
     }
     else
     {
-        TLOG_Warning(_T("%s: CHANNEL setting level and target on source!"), method);
-        source->SetChannelLevel(msg.State1());
-        source->SetChannelTarget(targetid);
+        int s1 = isCancel ? 0 : msg.State1();
+        targetid = isCancel ? source->ChannelTarget() : targetid;
+        source->SetChannelLevel(s1);
+        source->SetChannelTarget(isCancel ? 0 : targetid);
     }
   }
   break;
