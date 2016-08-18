@@ -297,7 +297,7 @@ void LsLevelThread::handle_SMsg_LevelLogin(LmSrvMesgBuf* msgbuf, LmConnection* c
 
 			  if (alerts){
 				  for (LsPlayerList::iterator p = players.begin(); !(bool)(p == players.end()); ++p) {
-					  if (((*p)->Avatar().GuildID() == guild_id) && ((*p)->PlayerID() != msg.PlayerID()))  // send alert message
+					  if ((*p)->Avatar().GuildID() == guild_id)  // send alert message
 						  send_RMsg_NewlyAwakened((*p)->Connection(), (*p)->PlayerID(), msg.PlayerName(), msg.RoomID());
 				  }
 			  }
