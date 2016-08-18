@@ -213,6 +213,7 @@ void GsPlayerThread::handle_GMsg_UsePPoint(LmSrvMesgBuf* msgbuf, LmConnection* c
 	  TCHAR why[256];
 	  _stprintf(why, _T("Player %d gained %d XP via %d Personality Point(s)"), player_->DB().PlayerID(), xp_gain, cost);
 	  adjust_xp(xp_gain, why, player_->DB().PlayerID(), true);
+	  // dummy edit! -MDA
 	}
 	break;
 #if 0
