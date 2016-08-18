@@ -31,6 +31,8 @@
 
 const int FOCUS_INIT = 30;
 const int NORM_INIT = 10;
+const int MIN_TIME_FOR_COOLOFF = 60; // 1 minute min login time
+const int COOLOFF_TIME = 60*60; // 1 hour
 
 inline unsigned int ATOI(char* value)
 {
@@ -425,13 +427,19 @@ int LmPlayerDBC::Logout(lyra_id_t player_id, unsigned int timeonline)
 
   TCHAR query[256];
 
- _stprintf(query, _T("UPDATE player SET time_online = time_online + %u, logged_in = 0, room_id = 0, level_id = 0 WHERE player_id = %u;"), timeonline, player_id);
+ if( timeonline > MIN_TIME_FOR_COOLOFF )
+ {
+    _stprintf( query, _T("UPDATE player SET time_online = time_online + %u, last_logout = NOW(), logged_in = 0, room_id = 0, level_id = 0 WHERE player_id = %u;"), timeonline, player_id);
+    LOG_Debug( _T( "%s: Logging player out and setting last logout time! player: %u, timeonline: %u" ), method, player_id, timeonline );    
+ }    
+ else    
+    _stprintf(query, _T("UPDATE player SET time_online = time_online + %u, logged_in = 0, room_id = 0, level_id = 0 WHERE player_id = %u;"), timeonline, player_id);
 
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
   ////timer.Stop();
   
-  LOG_Debug(_T("%s: Logging out player %u"), method, player_id);
+  LOG_Debug(_T("%s: Logging out player %u, timeonline was %u"), method, player_id, timeonline);
 
   
   if (error)
@@ -782,6 +790,7 @@ int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_ty
   int acct_type;
   int num_days;
   int logged_in = 0;
+  int count = 0;
   int pmare_session_start;
   bool suspended = false;
   MYSQL_RES *res;
@@ -874,6 +883,26 @@ int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_ty
       LOG_Error(_T("%s: Illegal pmare avatar type %u attempted at login for pmare player %u with avatar type %u"), method, pmare_type, player_id, avatar.AvatarType());
       return GMsg_LoginAck::LOGIN_MISMATCH;
     }
+    
+    //// PMARE GLOBAL LOCKOUT?
+    _stprintf( query, _T( "SELECT count(*) FROM pmare_lock WHERE NOW() BETWEEN start_time AND end_time AND expired=0" ) );
+    error = mysql_query( &m_mysql, query );
+    if (error)
+      {
+	LOG_Error(_T("%s: Could not checkin CanLogin for player %u; mysql error %s"), method, player_id, mysql_error(&m_mysql));
+	return MYSQL_ERROR;
+      }
+    
+    res = mysql_store_result(&m_mysql);
+    
+    row = mysql_fetch_row(res);
+    count = ATOI(row[0]);
+    mysql_free_result(res);
+    if (count > 0)
+      {
+	return GMsg_LoginAck::LOGIN_PMARE_LOCK;
+      }
+    
   } else if (acct_type == LmPlayerDB::ACCT_PLAYER) {
     if (pmare_type != 0) {
       LOG_Error(_T("%s: Illegal pmare type %u attempted at player login for player %u"), method, pmare_type, player_id);
@@ -900,12 +929,37 @@ int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_ty
     res = mysql_store_result(&m_mysql);
     
     row = mysql_fetch_row(res);
-    int count = ATOI(row[0]);
+    count = ATOI(row[0]);
     mysql_free_result(res);
     if (count > 0)
       {
 	//	LOG_Error(_T("%s: %u characters logged in for billing id %u; mysql error %s"), method, count, db_billing_id, mysql_error(&m_mysql));
 	return GMsg_LoginAck::LOGIN_ALREADYIN;
+      }
+      
+      if( acct_type == LmPlayerDB::ACCT_PLAYER )
+      {
+        _stprintf( query, _T( "SELECT count(*) FROM player WHERE billing_id=%u AND acct_type=%u AND player_id != %u AND last_logout + INTERVAL %u SECOND > NOW()" ),
+            db_billing_id, LmPlayerDB::ACCT_PLAYER, player_id, COOLOFF_TIME );
+        ////timer.Start();
+        error = mysql_query(&m_mysql, query);
+        ////timer.Stop();
+        
+        if (error)
+          {
+    	LOG_Error(_T("%s: Could not checkin CanLogin for player %u; mysql error %s"), method, player_id, mysql_error(&m_mysql));
+    	return MYSQL_ERROR;
+          }
+        
+        res = mysql_store_result(&m_mysql);
+        
+        row = mysql_fetch_row(res);
+        count = ATOI(row[0]);
+        mysql_free_result(res);
+        if (count > 0)
+          {
+    	return GMsg_LoginAck::LOGIN_COOLOFF;
+          }
       }
   }
   
