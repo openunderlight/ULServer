@@ -105,6 +105,27 @@ void LsRoomThread::handle_RMsg_ChangeAvatar(LmSrvMesgBuf* msgbuf, LsPlayer* sour
 }
 
 ////
+// handle_RMsg_GetRoomDescription
+////
+
+void LsRoomThread::handle_RMsg_GetRoomDescription(LmSrvMesgBuf* msgbuf, LsPlayer* source)
+{
+	DEFMETHOD(LsRoomThread, handle_RMsg_GetRoomDescription);
+	DECLARE_TheLineNum;
+	PROXY_HANDLER_ENTRY(false);
+	// accept message
+	ACCEPT_PLAYERMSG(RMsg_GetRoomDescription, true); // send error
+													 // look up description
+	const TCHAR* rmDesc = main_->LevelDBC()->RoomDB(msg.RoomID()).RoomDescription();
+
+	if (rmDesc[0] == _T('\0')) {
+		return; // no description, don't send anything
+	}
+	// send back description
+	send_RMsg_RoomDescription(source, msg.LevelID(), msg.RoomID(), rmDesc);
+}
+
+////
 // handle_RMsg_GotoRoom
 ////
 

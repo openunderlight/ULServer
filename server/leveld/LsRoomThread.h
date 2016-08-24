@@ -65,6 +65,7 @@ private:
   void handle_RMsg_Ping(LmSrvMesgBuf* msgbuf, LsPlayer* source);
   void handle_RMsg_ChangeAvatar(LmSrvMesgBuf* msgbuf, LsPlayer* source);
   void handle_RMsg_GetAvatarDescription(LmSrvMesgBuf* msgbuf, LsPlayer* source);
+  void handle_RMsg_GetRoomDescription(LmSrvMesgBuf* msgbuf, LsPlayer* source);
 
   // SMsg_* message handlers
   void handle_SMsg_GetItem(LmSrvMesgBuf* msgbuf, LmConnection* conn);
@@ -99,6 +100,7 @@ private:
   void send_RMsg_ChangeAvatar(LsPlayer* source, LsPlayerList& target_list);
   void send_RMsg_PlayerMsg_DreamStrikeAck(LsPlayer* player, lyra_id_t target, bool success);
   void send_RMsg_RcvAvatarDescription(LsPlayer* player, lyra_id_t targetid, const TCHAR* targetdesc);
+  void send_RMsg_RoomDescription(LsPlayer* player, short levelid, short roomid, const TCHAR* roomdesc);
 
   void send_SMsg_ItemPickup(LsPlayer* player, const LmItem& item, int status);
   void send_SMsg_ItemDrop(LsPlayer* player, const LmItem& item, int status);
