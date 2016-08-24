@@ -937,6 +937,40 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   }
   break;
 
+  // player attemptign to Rally someone
+  case RMsg_PlayerMsg::RALLY: {
+	  if (msg.SenderID() == msg.ReceiverID()) { // This is a RALLY ACK, so just clear rally info
+		  player_->SaveSummonInfo(0, 0);
+		  send_to_level = false;
+		  break;
+	  }
+
+	  // check that player can use Rally, skill level doesn't matter
+	  if (!(player_->CanUseArt(Arts::RALLY, 1))) {
+		  if (player_->PPEvoking() == Arts::RALLY) { // we spent pp's to evoke Rally
+			  player_->SetPPEvoking(Arts::NONE);
+			  player_->SetPPSkill(0);
+			  break;
+		  }
+
+		  int p_skill = player_->DB().Arts().Skill(Arts::RALLY);
+		  SECLOG(4, _T("%s: player %u: attempt to use Rally art, own skill is %d"), method,
+			      player_->PlayerID(), p_skill);
+		      send_to_level = false;
+	  }
+
+	  // Rally not allowed on certain levels
+	  for (int i = 0; i < num_no_rally_levels; i++) {
+		  if (no_rally_levels[i] == player_->LevelID()) {
+			  SECLOG(4, _T("%s: player %u: attempt to use Rally in illegal level %d"), method,
+			      player_->PlayerID(), player_->LevelID());
+			  send_to_level = false;
+		  }
+	  }
+  }
+  break;
+
+
   // No-Processing Messages (just forward to level server)
   //
 
@@ -947,8 +981,6 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::VAMPIRIC_DRAW_ACK:   // amount, not used
   case RMsg_PlayerMsg::SPHERE_REPLY:   // amount, not used
   case RMsg_PlayerMsg::TEHTHUS_OBLIVION_ACK:		    // unused, unused 
-  case RMsg_PlayerMsg::RALLY:				// unused, unused
-
     // do nothing
     break;
 

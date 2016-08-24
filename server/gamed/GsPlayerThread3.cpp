@@ -555,7 +555,6 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   case RMsg_PlayerMsg::KINESIS:         // skill, angle
   case RMsg_PlayerMsg::MISDIRECTION:    // skill, unused
   case RMsg_PlayerMsg::CHAOTIC_VORTEX: // skill, unused
-  case RMsg_PlayerMsg::RALLY:				// unused, unused
     // do nothing
     break;
 
@@ -1068,7 +1067,27 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   }
   break;
 
-    
+  // Player is attempting to Rally someone
+  case RMsg_PlayerMsg::RALLY: {				// x-coord, y-coord
+	  lyra_id_t levelid = 0;
+	  lyra_id_t roomid = 0;
+	  int acct_type = 0;
+	  // make db transaction
+  	  int rc = main_->PlayerDBC()->GetLocation(msg.SenderID(), levelid, roomid, acct_type);
+  	  int sc = main_->PlayerDBC()->LastSQLCode();
+
+          if (rc < 0) {
+  	        TLOG_Warning(_T("%s: could not get player %u location"), method, msg.SenderID());
+		return;
+	  }
+	  else 
+	  {
+		  SECLOG(-8, _T("%s: player %u attempting to Rally player %u to %i; %i; %u"), method, msg.SenderID(), msg.ReceiverID(), msg.State1(), msg.State2(), levelid);
+		  player_->SaveSummonInfo(roomid, levelid);
+	  }
+  }
+  break;
+
   //
   // player should never receive
   //
