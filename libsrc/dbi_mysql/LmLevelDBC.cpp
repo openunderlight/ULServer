@@ -326,12 +326,37 @@ int LmLevelDBC::Load(lyra_id_t level_id, bool load_gens)
 	  gen.Init(ATOI(row[0]), ATOI(row[1]), ATOI(row[2]), ATOI(row[3]), _ttoi(row[4]), _ttoi(row[5]), _ttoi(row[6]), ATOI(row[7]), ATOI(row[8]));
     }
     mysql_free_result(res);
+
+
+	// Load room descriptions
+	_stprintf(query, _T("SELECT description FROM room_desc WHERE level_id = %u AND room_id = %u"), level_id, room_id);
+
+	////timer.Start();
+	error = mysql_query(&mysql_, query);
+	////timer.Stop();
+
+	if (error)
+	{
+		LOG_Error(_T("Could not get room description for level %u, room %u; mysql error %s"), level_id, room_id, mysql_error(&mysql_));
+		return MYSQL_ERROR;
+	}
+
+	res = mysql_store_result(&mysql_);
+
+	row = mysql_fetch_row(res);
+	
+	int room_results = mysql_num_rows(res);
+	if ((room_results > 0) && (row[0]))
+		rooms_[i].SetDescription(row[0]);
+
+	mysql_free_result(res);
   }
 
 
   // done
   return 0;
 }
+
 
 ////
 // room_index: returns index into rooms_ of given room, or -1 if not found
@@ -363,5 +388,4 @@ const LmRoomDB& LmLevelDBC::RoomDB(lyra_id_t roomid) const
 {
   return rooms_[room_index(roomid)];
 }
-
 

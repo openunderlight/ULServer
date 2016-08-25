@@ -202,16 +202,18 @@ void GsPlayerThread::handle_GMsg_UsePPoint(LmSrvMesgBuf* msgbuf, LmConnection* c
 
   switch (msg.How()) {
   case GMsg_UsePPoint::GAIN_XP: { // sphere
-	  int xp_gain = msg.Var1();
-	  int xp_gain2 = LmStats::XPPPCost(player_->DB().Stats().XP());
-	  if (xp_gain != xp_gain2) {
-			send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::UNKNOWN_ERR);
+	  cost = msg.Var1();
+	  int curr_xp = player_->DB().Stats().XP();
+	  int xp_gain = cost * LmStats::XPPPCost(curr_xp);
+
+	  if (cost > pps) {
+			send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::USE_NOT_ENOUGH);
 			return;
 	  }
-	  cost = 1;
 	  TCHAR why[256];
-	  _stprintf(why, _T("Player %d gained %d XP via a Personality Point"), player_->DB().PlayerID(), xp_gain2);
-	  adjust_xp(xp_gain2, why, player_->DB().PlayerID(), true);
+	  _stprintf(why, _T("Player %d gained %d XP via %d Personality Point(s)"), player_->DB().PlayerID(), xp_gain, cost);
+	  adjust_xp(xp_gain, why, player_->DB().PlayerID(), true);
+	  // dummy edit! -MDA
 	}
 	break;
 #if 0
@@ -621,11 +623,11 @@ void GsPlayerThread::handle_GMsg_GetItemDescription(LmSrvMesgBuf* msgbuf, LmConn
   ACCEPT_MSG(GMsg_GetItemDescription, true); // send error
   // process
   LmItemHdr hdr = msg.ItemHeader();
-  // check that player has item
-  if (!player_->DB().Inventory().HasItem(hdr)) {
+  // check that player has item - disabled so players can read descriptions from items on the floor
+/*  if (!player_->DB().Inventory().HasItem(hdr)) {
     TLOG_Warning(_T("%s: player %u does not have item %u"), method, player_->PlayerID(), hdr.Serial());
     return;
-  }
+  } */
   // check that item has a description
   if (!hdr.FlagSet(LyraItem::FLAG_HASDESCRIPTION)) {
     TLOG_Warning(_T("%s: item has no description"), method);

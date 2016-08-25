@@ -43,7 +43,9 @@ LsPlayer::LsPlayer()
     neighbors_(Lyra::MAX_OTHERPEOPLE),
     neighbors2_(Lyra::MAX_OTHERPEOPLE),
     joiners_(Lyra::MAX_PARTYSIZE),
-    neighbor_updates_(LmNEW(LsUpdateSet()))
+    neighbor_updates_(LmNEW(LsUpdateSet())),
+    channeltarget(0),
+    channellevel(0)
 {
   DECLARE_TheLineNum;
   lock_.Init();
@@ -175,6 +177,18 @@ void LsPlayer::SetDescription(const TCHAR* description)
 {
   LmLocker mon(lock_); // lock object for method duration
  _tcsnccpy(desc_, description, sizeof(desc_));
+}
+
+lyra_id_t LsPlayer::ChannelTarget()
+{
+    LmLocker mon(lock_);
+    return channeltarget;
+}
+
+int LsPlayer::ChannelLevel()
+{
+    LmLocker mon(lock_);
+    return channellevel;
 }
 
 ////
@@ -521,6 +535,18 @@ void LsPlayer::SetHidden(bool hidden)
   hidden_ = hidden;
 }
 
+ void LsPlayer::SetChannelLevel(int channelLevel)
+ {
+    LmLocker mon(lock_);
+    channellevel = channelLevel;
+ }
+ 
+ void LsPlayer::SetChannelTarget(lyra_id_t channelTarget)
+ {
+    LmLocker mon(lock_);
+    channeltarget = channelTarget;
+ }
+
 //void LsPlayer::SetTCPOnly(bool tcp_only)
 //{ LmLocker mon(lock_); // lock object for method duration
   //tcp_only_ = tcp_only;}
@@ -549,6 +575,12 @@ void LsPlayer::SetNewlyAlert(bool newly_alert)
   newly_alert_ = newly_alert;
 }
 
+bool LsPlayer::IsChannelling()
+{
+    LmLocker mon(lock_);
+    return channeltarget != 0 && channeltarget != playerid_ &&
+        channellevel > 0;
+}
 
 
 ////
@@ -625,4 +657,6 @@ void LsPlayer::clear_information()
   login_time_ = 0;
   t_items_.erase(t_items_.begin(), t_items_.end());
   g_items_.erase(g_items_.begin(), g_items_.end());
+  channeltarget = 0;
+  channellevel = 0;
 }

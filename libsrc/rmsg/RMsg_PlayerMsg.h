@@ -119,6 +119,7 @@ public:
   MISDIRECTION,   // skill, unused
   CHAOTIC_VORTEX, // skill, unused
   RALLY,			// unused, unused
+  CHANNEL,
   
     // GM-only messages
     FINGER_OF_DEATH = 90,// not used, not used
@@ -133,7 +134,8 @@ public:
     // xp related messages
     YOUGOTME = 100,      // (victim's orbit || 100 + nightmare index), dreamsoul at dissolution
     PARTYKILL,           // (victim's orbit || 100 + nightmare index), # of party members (+ 100 if killer)
-
+    CHANNELKILL,         // (victim's orbit || 100 + nightmare index), # of party members (+ 100 if killer, +plat_level*10)
+    
     // other triggers
 	// sound triggers deprecated - put into real time packets instead
     //TRIGGER_SOUND = 200, // sound id, not used
@@ -178,8 +180,9 @@ private:
     lyra_id_t senderid;
     lyra_id_t receiverid;
     short mtype;
-    unsigned char state1;
-    unsigned char state2;
+    short state1;
+    short state2;
+    short state3;
   } data_;
 
 };

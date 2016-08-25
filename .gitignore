@@ -4,6 +4,9 @@
 *.o
 *.obj
 
+# Ignore lyra binaries
+server/[a-z]+d/*exec
+
 # Compiled Dynamic libraries
 *.so
 *.dylib

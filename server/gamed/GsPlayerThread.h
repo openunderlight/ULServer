@@ -116,6 +116,7 @@ private:
   void handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* conn);
   void handle_RMsg_GotoRoom(LmSrvMesgBuf* msgbuf, LmConnection* conn);
   void handle_RMsg_GetAvatarDescription(LmSrvMesgBuf* msgbuf, LmConnection* conn);
+  void handle_RMsg_GetRoomDescription(LmSrvMesgBuf* msgbuf, LmConnection* conn);
 
   // SMsg_* message handlers
   void handle_SMsg_ItemDrop(LmSrvMesgBuf* msgbuf, LmConnection* conn);

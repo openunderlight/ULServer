@@ -217,6 +217,7 @@ void GsPlayerThread::register_handlers()
   RegisterHandler(RMsg::SPEECH, (MsgHandler)&GsPlayerThread::handle_RMsg_Speech);
   RegisterHandler(RMsg::PLAYERMSG, (MsgHandler)&GsPlayerThread::handle_RMsg_PlayerMsg);
   RegisterHandler(RMsg::GETAVATARDESCRIPTION, (MsgHandler)&GsPlayerThread::handle_RMsg_GetAvatarDescription);
+  RegisterHandler(RMsg::GETROOMDESCRIPTION, (MsgHandler)&GsPlayerThread::handle_RMsg_GetRoomDescription);
 
   // register SMsg message handlers
   RegisterHandler(SMsg::PROXY, (MsgHandler)&GsPlayerThread::handle_SMsg_Proxy);
@@ -483,6 +484,8 @@ void GsPlayerThread::adjust_offline_xp(int xp_adj, const TCHAR* why, lyra_id_t w
     return;
   }
   lyra_id_t playerid = player_->DB().PlayerID();
+  // log it
+  SECLOG(5, "%s: Player %u: Offline XP Adjusted due to %s %u, value: %i", method, playerid, why, why_id, xp_adj);
   // update player record/stats
   xp_adj = player_->AdjustOfflineXP(xp_adj);
 

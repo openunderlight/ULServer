@@ -87,6 +87,12 @@
     <ClCompile Include="RMsg_Update.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RMsg_RoomDescription.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RMsg_GetRoomDescription.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LmStats.h">
@@ -170,6 +176,12 @@
     <ClInclude Include="RMsg_Update.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RMsg_RoomDescription.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RMsg_GetRoomDescription.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="RmRemotePlayer.i">
@@ -244,5 +256,9 @@
     <CustomBuild Include="RMsg_Update.i">
       <Filter>Inline Files</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RMsg_GetRoomDescription.i" />
+    <None Include="RMsg_RoomDescription.i" />
   </ItemGroup>
 </Project>

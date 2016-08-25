@@ -86,6 +86,24 @@ void GsPlayerThread::handle_RMsg_GetAvatarDescription(LmSrvMesgBuf* msgbuf, LmCo
 }
 
 ////
+// handle_RMsg_GetRoomDescription
+////
+
+void GsPlayerThread::handle_RMsg_GetRoomDescription(LmSrvMesgBuf* msgbuf, LmConnection* conn)
+{
+	DEFMETHOD(GsPlayerThread, handle_RMsg_GetRoomDescription);
+	HANDLER_ENTRY(false);
+	// pre-conditions
+	CHECK_CONN_NONNULL();
+	CHECK_CONN_ISCLIENT();
+	CHECK_PLAYER_NONNULL();
+	CHECK_CONN_ID();
+	CHECK_PLAYER_INLEVEL();
+	// create proxy message, copy message bytes into it, send to player's level server
+	send_SMsg_Proxy(player_->LevelConnection(), msgbuf);
+}
+
+////
 // handle_RMsg_GotoRoom
 ////
 
@@ -130,7 +148,7 @@ void GsPlayerThread::handle_RMsg_GotoRoom(LmSrvMesgBuf* msgbuf, LmConnection* co
   player_->ReceivedUpdate(msg.PeerUpdate());
   // create proxy message, copy message bytes into it, send to player's level server
   send_SMsg_Proxy(player_->LevelConnection(), msgbuf);
-  
+
   // Added by DiscoWay from server/gamed/GsPlayerThread1.cpp in GotoLevel.  Goal is for more accurate room updates and to fix sense dakote
   // update player database
   if (player_->IsHidden()) {
@@ -211,7 +229,7 @@ void GsPlayerThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LmConnection* conn
   //case RMsg_Speech::REPORT_QUEST: // eliminated unnecessary double sending of text
 //    msg.RemoveNewlines();
     //SECLOG(-2, _T("%s: player %u: QUEST: %s"), method,
-	   //player_->PlayerID(), 
+	   //player_->PlayerID(),
 	   //msg.SpeechText());
     //send_out = false;
     //break;
@@ -325,8 +343,8 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
     //  SECLOG(4, _T("%s: player %u: attempt to use art %d with zero"), method,
 	  //   player_->PlayerID(), art);
       //send_to_level = false;
-  //} else 
-  
+  //} else
+
   switch (msg.MsgType()) {
 
   //
@@ -339,12 +357,12 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::IDENTIFY_CURSE:      // skill, not used
   case RMsg_PlayerMsg::VISION:              // skill, not used
   case RMsg_PlayerMsg::BLAST:               // skill, not used
-  case RMsg_PlayerMsg::RESTORE:             // skill, not used     
+  case RMsg_PlayerMsg::RESTORE:             // skill, not used
   case RMsg_PlayerMsg::PURIFY:              // skill, not used
   case RMsg_PlayerMsg::POISON:              // skill, not used
-  case RMsg_PlayerMsg::ANTIDOTE:            // skill, not used     
+  case RMsg_PlayerMsg::ANTIDOTE:            // skill, not used
   case RMsg_PlayerMsg::CURSE:               // skill, not used
-  case RMsg_PlayerMsg::ENSLAVE:             // skill, not used         
+  case RMsg_PlayerMsg::ENSLAVE:             // skill, not used
   case RMsg_PlayerMsg::SCARE:               // skill, not used
   case RMsg_PlayerMsg::STAGGER:             // skill, not used
   case RMsg_PlayerMsg::DEAFEN:              // skill, not used
@@ -360,17 +378,17 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::TERROR:              // skill, not used
   case RMsg_PlayerMsg::HEALING_AURA:         // skill, not used
   case RMsg_PlayerMsg::ABJURE:              // skill, not used
-  case RMsg_PlayerMsg::SOUL_SHIELD:         // skill, not used     
+  case RMsg_PlayerMsg::SOUL_SHIELD:         // skill, not used
   case RMsg_PlayerMsg::REFLECT_ART:         // skill, art_id
   case RMsg_PlayerMsg::EXPEL:				// skill, guild_id
-  case RMsg_PlayerMsg::CHAOS_PURGE:			// skill, not used 
-  case RMsg_PlayerMsg::CUP_SUMMONS:			// skill, not used 
+  case RMsg_PlayerMsg::CHAOS_PURGE:			// skill, not used
+  case RMsg_PlayerMsg::CUP_SUMMONS:			// skill, not used
   case RMsg_PlayerMsg::SUMMON_PRIME:		// skill, success
-  case RMsg_PlayerMsg::SCAN:				// skill, not used 
-  case RMsg_PlayerMsg::HEAL:				// skill, not used 
-  case RMsg_PlayerMsg::SANCTIFY:			// skill, not used 
-  case RMsg_PlayerMsg::REMOVE_CURSE:		// skill, not used 
-  case RMsg_PlayerMsg::HOLD_AVATAR:			// skill, not used 
+  case RMsg_PlayerMsg::SCAN:				// skill, not used
+  case RMsg_PlayerMsg::HEAL:				// skill, not used
+  case RMsg_PlayerMsg::SANCTIFY:			// skill, not used
+  case RMsg_PlayerMsg::REMOVE_CURSE:		// skill, not used
+  case RMsg_PlayerMsg::HOLD_AVATAR:			// skill, not used
   case RMsg_PlayerMsg::TEMPEST:         // skill, angle
   case RMsg_PlayerMsg::KINESIS:         // skill, angle
   case RMsg_PlayerMsg::MISDIRECTION:    // skill, unused
@@ -427,20 +445,16 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
       send_to_level = false;
     }
     int xp = (msg.State1() * 1000) + (msg.State2() * 100);
-    if (xp > 5000) { // max rp xp is 5k; if a unsigned value yields
-					// a negative value < 5k, assume negative grant
-		xp = ((signed char)(msg.State1()))*1000 + ((signed char)(msg.State2()))*100;
-		if (xp < -5000) {
-			SECLOG(5, _T("%s: player %u: attempted to grant %d rp xp"), method, player_->PlayerID(), xp);
-			send_to_level = false;
-		}
+    if ((xp > 100000) || (xp < -100000)) { // max rp xp is 100k;
+		SECLOG(5, _T("%s: player %u: attempted to grant %d rp xp"), method, player_->PlayerID(), xp);
+		send_to_level = false;
     }
   }
   break;
 
-  // 
+  //
   // Special Processing (XP changes, skill/stat changes, etc)
-  // 
+  //
 
   case RMsg_PlayerMsg::SENSE_DREAMERS:	  {
 
@@ -459,7 +473,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 	}
 	break;
 
-  case RMsg_PlayerMsg::HOUSE_MEMBERS:	{		// guild_id, not used 
+  case RMsg_PlayerMsg::HOUSE_MEMBERS:	{		// guild_id, not used
 	GMsg_LocateAvatarAck locate_msg;
 	bool gm = (player_->DB().AccountType() == LmPlayerDB::ACCT_ADMIN);
 
@@ -520,7 +534,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 					success = false;
 				send_RMsg_PlayerMsg_GratitudeAck(success);
 				// grant 1% XP bonus, or 5000, whichever is more
-				if (success) 
+				if (success)
 				{
 					int xp_bonus = player_->DB().Stats().XP()/20;
 					if (xp_bonus < 5000)
@@ -529,7 +543,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 				}
 			}
 		}
-	}									 
+	}
 	}
 	break;
 
@@ -541,7 +555,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
  case RMsg_PlayerMsg::ROGER_WILCO:           // not used, not used
 	 TLOG_Debug(_T("%s: player %u sending ROGERWILCO msg %d [%d,%d] to %u"), method,
 	     msg.SenderID(),  msg.State1(), msg.State2(), msg.ReceiverID());
- 
+
    break;
 
   // player attempting to train someone in an art
@@ -565,8 +579,13 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 
   // siphon off XP
   case RMsg_PlayerMsg::EMPATHY: {
-    
+
         int xp = (msg.State1() * 1000) + (msg.State2() * 100);
+		if ((xp > 50000) || (xp < 100)) {
+			SECLOG(3, _T("%s: player %u: attempted to Bequeath %i xp to %u"), method, player_->PlayerID(), xp, msg.ReceiverID());
+			send_to_level = false;
+			break;
+		}
 	adjust_xp(-2*xp, _T("evoking empathy"), player_->PlayerID(), true);
 	break;
   }
@@ -656,7 +675,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
       send_to_level = false;
     }  else {
 
-      int max_tokens_sphere = player_->SphereTokens(msg.ReceiverID()); 
+      int max_tokens_sphere = player_->SphereTokens(msg.ReceiverID());
       int max_sphere = MIN(max_tokens_sphere, max_skill_sphere);
       //SECLOG(-3, _T("%s: player %u: max skill = %d, tokens = %d, max = %d"), method, max_tokens_sphere, max_skill_sphere, max_sphere);
       msg.SetState1(1);
@@ -671,7 +690,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::DEMOTE: {            // guild, number tokens available
     int guild = msg.State1();
     int num_tokens = msg.State2();
-    if ((!player_->CanDemote(guild, num_tokens, msg.ReceiverID())) && 
+    if ((!player_->CanDemote(guild, num_tokens, msg.ReceiverID())) &&
 		(player_->PlayerID() != msg.ReceiverID())) {
       SECLOG(7, _T("%s: player %u: attempted illegal demotion of player %u, guild %d"), method,
 	     player_->PlayerID(), msg.ReceiverID(), guild);
@@ -763,7 +782,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
     }
   }
   break;
-							 
+
   // player is acknowledging initiation
   case RMsg_PlayerMsg::INITIATE_ACK: {      // guild, accept
     int guild = msg.State1();
@@ -812,7 +831,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   }
   break;
 
- 
+
   // ascend to ruler
   case RMsg_PlayerMsg::ASCEND: {            // guild, not used (CS) / success (SC)
     int guild = msg.State1();
@@ -843,7 +862,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
       success = player_->ChangeSkill(art, (player_->DB().Arts().Skill(art)) + 1, true);
 
       // now make up a list of all those who contributed to self training
-      
+
       SECLOG(-7, _T("%s: player %u: self training in art %d to level"), method, player_->PlayerID(), art, player_->DB().Arts().Skill(art));
     }
     else {
@@ -937,6 +956,40 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   }
   break;
 
+  // player attemptign to Rally someone
+  case RMsg_PlayerMsg::RALLY: {
+	  if (msg.SenderID() == msg.ReceiverID()) { // This is a RALLY ACK, so just clear rally info
+		  player_->SaveSummonInfo(0, 0);
+		  send_to_level = false;
+		  break;
+	  }
+
+	  // check that player can use Rally, skill level doesn't matter
+	  if (!(player_->CanUseArt(Arts::RALLY, 1))) {
+		  if (player_->PPEvoking() == Arts::RALLY) { // we spent pp's to evoke Rally
+			  player_->SetPPEvoking(Arts::NONE);
+			  player_->SetPPSkill(0);
+			  break;
+		  }
+
+		  int p_skill = player_->DB().Arts().Skill(Arts::RALLY);
+		  SECLOG(4, _T("%s: player %u: attempt to use Rally art, own skill is %d"), method,
+			      player_->PlayerID(), p_skill);
+		      send_to_level = false;
+	  }
+
+	  // Rally not allowed on certain levels
+	  for (int i = 0; i < num_no_rally_levels; i++) {
+		  if (no_rally_levels[i] == player_->LevelID()) {
+			  SECLOG(4, _T("%s: player %u: attempt to use Rally in illegal level %d"), method,
+			      player_->PlayerID(), player_->LevelID());
+			  send_to_level = false;
+		  }
+	  }
+  }
+  break;
+
+
   // No-Processing Messages (just forward to level server)
   //
 
@@ -946,9 +999,9 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::NEWBIE_ENTERED:      // not used, not used
   case RMsg_PlayerMsg::VAMPIRIC_DRAW_ACK:   // amount, not used
   case RMsg_PlayerMsg::SPHERE_REPLY:   // amount, not used
-  case RMsg_PlayerMsg::TEHTHUS_OBLIVION_ACK:		    // unused, unused 
+  case RMsg_PlayerMsg::TEHTHUS_OBLIVION_ACK:		    // unused, unused
   case RMsg_PlayerMsg::RALLY:				// unused, unused
-
+  case RMsg_PlayerMsg::CHANNEL:
     // do nothing
     break;
 

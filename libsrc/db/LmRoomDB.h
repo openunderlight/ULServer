@@ -35,6 +35,7 @@ public:
     DEFAULT_NUMGENS = 0
   };
   static const TCHAR* DEFAULT_ROOMNAME;
+  static const TCHAR* DEFAULT_DESCRIPTION;
 
 public:
 
@@ -57,10 +58,13 @@ public:
 
   bool HasPortal(lyra_id_t levelid, lyra_id_t roomid) const;
 
+  const TCHAR* RoomDescription() const;
+
   // mutators
   void SetNumGens(int num_generators);
   void SetNumPortals(int num_portals);
   void InitPortal(int index, lyra_id_t levelid, lyra_id_t roomid);
+  void SetDescription(TCHAR* description);
 
   void Dump(FILE* f, int indent = 0) const;
  
@@ -86,6 +90,7 @@ private:
   };
   portal_t* portals_;
 
+  TCHAR description_[Lyra::ROOMDESC_MAX];
 };
 
 #ifdef USE_INLINE

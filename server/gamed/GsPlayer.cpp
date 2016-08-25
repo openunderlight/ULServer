@@ -50,8 +50,8 @@
 #include "GsPlayer.i"
 #endif
 
-art_t art_info[NUM_ARTS] = // 					Evoke
-{// CKS  Name				Stat			  Orb Drn Dur Time PP 	Flags
+art_t art_info[NUM_ARTS] = // 		  			    Evoke
+{// CKS  Name				Stat			    Orb Drn Dur Time PP 	Flags
 {IDS_JP,					Stats::NO_STAT,		0,  0,  0,	0,	-1, SANCT|NEIGH|LEARN},
 {IDS_GK, 					Stats::NO_STAT,		0,  0,  0,	0, 	-1, FOCUS},
 {IDS_DREAMSEER,				Stats::NO_STAT,		0,  0,  0,	0,	-1, FOCUS},
@@ -64,7 +64,7 @@ art_t art_info[NUM_ARTS] = // 					Evoke
 {IDS_FA,					Stats::WILLPOWER,	5,  5,  13, 2, 	2, SANCT|LEARN},
 {IDS_WARD, 					Stats::WILLPOWER,	20, 20, 0,	5, 	3, MAKE_ITEM|FOCUS|LEARN},
 {IDS_AMULET,				Stats::WILLPOWER,	20, 1,  0,	2, 	1, SANCT|MAKE_ITEM|FOCUS|LEARN},
-{IDS_SHATTER, 				Stats::WILLPOWER,	40, 40, 0,	8, 	4, SANCT|FOCUS|LEARN},
+{IDS_SHATTER, 				Stats::DREAMSOUL,	0, 15, 0,	8, 	4, SANCT|LEARN},
 {IDS_RETURN,				Stats::WILLPOWER, 50, 20, 23,   2,  2, SANCT|FOCUS|LEARN},
 {IDS_KNOW, 					Stats::INSIGHT,		0,  0,  0,	1, 	-1, SANCT|LEARN},
 {IDS_JUDGEMENT_ART_NAME,	Stats::INSIGHT,		10, 2,  0,	1, 	1, SANCT|NEIGH|LEARN},
@@ -74,14 +74,14 @@ art_t art_info[NUM_ARTS] = // 					Evoke
 {IDS_VISION,				Stats::INSIGHT,		20, 5,  13, 2, 	2, SANCT|FOCUS|LEARN},
 {IDS_BLAST,					Stats::INSIGHT,		30, 2,  0,	1, 	2, NEIGH|FOCUS|LEARN},
 {IDS_BLEND,					Stats::INSIGHT,		50, 30, 6,	5, 	3, SANCT|FOCUS|LEARN},
-{IDS_FORGE,					Stats::DREAMSOUL,	50, 50, 0,	8, 	5, SANCT|MAKE_ITEM|LEARN},
+{IDS_FORGE,					Stats::DREAMSOUL,	50, 50, 0,	8, 	-1, SANCT|MAKE_ITEM|LEARN},
 {IDS_RECHARGE,				Stats::INSIGHT,		40, 15, 0,	8, 	2, SANCT|FOCUS|LEARN|NEED_ITEM},
 {IDS_RESTORE, 				Stats::RESILIENCE,	10, 5,  0,	1, 	1, SANCT|LEARN},
 {IDS_REWEAVE, 				Stats::RESILIENCE,	15, 10, 0,	4, 	1, SANCT|NEED_ITEM|LEARN},
 {IDS_PURIFY,				Stats::RESILIENCE,	5,  15, 0,	2, 	1, SANCT|LEARN},
 {IDS_DRAIN_SELF, 			Stats::RESILIENCE,	20, 5,  0,	2, 	2, SANCT|NEIGH|FOCUS|LEARN},
 {IDS_ABJURE,				Stats::RESILIENCE,	50, 30, 0,	3, 	4, FOCUS|LEARN},
-{IDS_POISON,				Stats::RESILIENCE,	30, 15, 23, 3, 	2, NEIGH| FOCUS|LEARN},
+{IDS_POISON,				Stats::RESILIENCE,	30, 15, 13, 3, 	2, NEIGH|FOCUS|LEARN},
 {IDS_ANTIDOTE,				Stats::RESILIENCE,	30, 10, 0,	2, 	3, SANCT|FOCUS|LEARN},
 {IDS_CURSE,					Stats::RESILIENCE,	40, 10, 13, 3, 	3, NEIGH|FOCUS|LEARN},
 {IDS_DRAIN_ESSENCE,			Stats::RESILIENCE,	0,  0,  0,	1, 	1, SANCT|NEED_ITEM|LEARN},
@@ -95,9 +95,9 @@ art_t art_info[NUM_ARTS] = // 					Evoke
 {IDS_DEAFEN,				Stats::LUCIDITY,	5,  15, 4,	2, 	2, NEIGH|LEARN},
 {IDS_BLIND,					Stats::LUCIDITY,	45, 15, 3,	3, 	3, NEIGH|FOCUS|LEARN},
 {IDS_DARKNESS_ART_NAME,		Stats::LUCIDITY,	50, 25, 4,	5, 	3, NEIGH|FOCUS|LEARN},
-{IDS_PARALYZE,				Stats::LUCIDITY,	30, 20, 2,	3, 	3, NEIGH|FOCUS|LEARN},  
+{IDS_PARALYZE,				Stats::LUCIDITY,	30, 20, 2,	3, 	3, NEIGH|FOCUS|LEARN},
 {IDS_FIRESTORM,				Stats::LUCIDITY,	50, 25, 0,	7, 	3, FOCUS|LEARN},
-{IDS_RAZORWIND,				Stats::LUCIDITY,	70, 40, 0,	9, 	4, FOCUS|LEARN},
+{IDS_RAZORWIND,				Stats::LUCIDITY,	70, 40, 6,	9, 	4, FOCUS|LEARN},
 {IDS_RECALL_ART_NAME,		Stats::DREAMSOUL,	25, 1,  25, 1, 	1, SANCT|LEARN},
 {IDS_PUSH, 					Stats::DREAMSOUL,	0,  0,  0,	1, 	1, NEIGH|LEARN},
 {IDS_SOUL_EVOKE, 			Stats::DREAMSOUL,	15, 1,  23, 1, 	1, SANCT|LEARN},
@@ -111,10 +111,10 @@ art_t art_info[NUM_ARTS] = // 					Evoke
 {IDS_ASCEND_RULER,			Stats::NO_STAT,		0,  0,  0,	10,	-1, SANCT|NEED_ITEM},
 {IDS_INSTA_COLLAPSE,		Stats::NO_STAT,		0,  0,  0,	1, 	-1, SANCT|NEIGH},		// gm only
 {IDS_GRANT_XP_ART_NAME,		Stats::NO_STAT,		0,  0,  0,	1, 	-1, SANCT},				// gm only
-{IDS_TERMINATE,				Stats::NO_STAT,		0,  0,  0,	0, 	-1, SANCT},		
+{IDS_TERMINATE,				Stats::NO_STAT,		0,  0,  0,	0, 	-1, SANCT},
 {IDS_SPHERE,				Stats::NO_STAT,		20, 0,  0,	1, 	-1, SANCT|NEIGH},
 {IDS_SUPPORT_DEMOTION,		Stats::NO_STAT,		0,  0,  0,	3,	-1, SANCT|NEIGH|MAKE_ITEM},
-{IDS_DEMOTE,				Stats::NO_STAT,		0,  0,  0,	3,	-1, SANCT|NEIGH|NEED_ITEM},
+{IDS_DEMOTE,				Stats::NO_STAT,		0,  0,  0,	3,	-1, SANCT},
 {IDS_INVISIBILITY,			Stats::INSIGHT,		40, 20, 6,	3, 	3, SANCT|FOCUS|LEARN},
 {IDS_GIVE, 					Stats::NO_STAT,		0,  0,  0,	0, 	-1, SANCT|NEIGH|NEED_ITEM|LEARN},
 {IDS_GATESMASHER,			Stats::WILLPOWER,	0,  5,  23, 1, 	-1, SANCT|MAKE_ITEM|FOCUS},
@@ -125,17 +125,17 @@ art_t art_info[NUM_ARTS] = // 					Evoke
 {IDS_FLAMESEAR,				Stats::RESILIENCE,	1,  2,  0,	1, 	2, FOCUS|LEARN},
 {IDS_FLAMERUIN,				Stats::LUCIDITY,	1,  2,  0,	1, 	2, FOCUS|LEARN},
 {IDS_INSCRIBE,				Stats::DREAMSOUL,	20, 2,  0,	1, 	1, SANCT|MAKE_ITEM|LEARN},
-{IDS_DT,					Stats::DREAMSOUL,	35, 5,	0,	2,	1, SANCT|NEED_ITEM|LEARN}, 
+{IDS_DT,					Stats::DREAMSOUL,	35, 5,	0,	2,	1, SANCT|NEED_ITEM|LEARN},
 {IDS_MB,					Stats::DREAMSOUL,	30, 5, 18,	5,	2, SANCT|LEARN},
 {IDS_SHOW,					Stats::NO_STAT, 	0,	0,	0,	0,	-1, SANCT|NEIGH|NEED_ITEM|LEARN},
 {IDS_AWAKEN,				Stats::NO_STAT, 	0,	0,	0,	0,	-1, SANCT|NEIGH},		// gm only
 {IDS_UNTRAIN_ART_NAME, 		Stats::NO_STAT, 	0,	0,	0,	2,	-1, SANCT|NEIGH},		// gm only
 {IDS_GRANT_RP_XP, 			Stats::NO_STAT, 	0,	0,	0,	0,	-1, SANCT|NEIGH},
-{IDS_DREAMQUAKE,			Stats::WILLPOWER,	60, 40, 4,	7,	3, FOCUS|LEARN}, 
+{IDS_DREAMQUAKE,			Stats::WILLPOWER,	60, 40, 4,	7,	3, FOCUS|LEARN},
 {IDS_HYPNOTIC_WEAVE_ART_NAME,		Stats::LUCIDITY,	60, 40, 4,	7,	4, FOCUS|LEARN},
 {IDS_VAMPRIC_DRAW,					Stats::RESILIENCE,	60, 5,	0,	5,	3, FOCUS|LEARN|NEIGH|NEED_ITEM},
 {IDS_TERROR_ART_NAME,				Stats::LUCIDITY,	60, 40, 4,	1,	3, FOCUS|LEARN},
-{IDS_HEAL_AURA,						Stats::RESILIENCE,	60, 40, 0,	9, 	-1, FOCUS|NEIGH|SANCT},
+{IDS_HEAL_AURA,						Stats::RESILIENCE,	60, 40, 0,	7, 	-1, FOCUS|NEIGH|SANCT|LEARN},
 {IDS_TELEPATHY,						Stats::NO_STAT,		75, 0,  0,	0, 	-1, SANCT|NEIGH},	// roger wilco voice
 {IDS_DREAMSMITH_MARK_ART_NAME, 		Stats::NO_STAT,		50, 0,  0,	1, 	-1, SANCT},
 {IDS_SUPPORT_TRAIN,					Stats::NO_STAT,		10, 0,  0,	10,	-1, SANCT|NEIGH|MAKE_ITEM},
@@ -144,22 +144,22 @@ art_t art_info[NUM_ARTS] = // 					Evoke
 {IDS_SOUL_SHIELD,					Stats::DREAMSOUL,	40, 20, 15, 5,  2, SANCT|LEARN},
 {IDS_SUMMON_ART_NAME,				Stats::NO_STAT,		0,  0,  0,  0,  -1, SANCT},
 {IDS_SUSPEND,						Stats::NO_STAT,		0,  0,  0,	0, 	-1, SANCT},
-{IDS_REFLECT_ART_NAME,				Stats::WILLPOWER,   65, 40, 9,  3,	-1, SANCT|FOCUS},
+{IDS_REFLECT_ART_NAME,				Stats::WILLPOWER,   65, 40, 9,  3,	-1, SANCT|FOCUS|LEARN},
 {IDS_SACRIFICE,						Stats::RESILIENCE,	10, 5,  0,	1, 	-1, SANCT|NEED_ITEM},
 {IDS_CLEANSE_MARE,					Stats::RESILIENCE,	50, 5,  0,	1, 	1, SANCT|NEED_ITEM|MAKE_ITEM|FOCUS|LEARN},
 {IDS_CREATE_ID_TOKEN,				Stats::DREAMSOUL,	0,  20, 0,	1, 	-1, SANCT|NEED_ITEM|MAKE_ITEM},
 {IDS_SENSE,							Stats::DREAMSOUL,	0,  0,  0,	1,  -1, SANCT|LEARN},
 {IDS_EXPEL_ART_NAME,				Stats::DREAMSOUL,	20, 0,  0,	1,  -1, SANCT|NEED_ITEM|NEIGH},
 {IDS_NEWLY_AWAKENED,				Stats::INSIGHT,	    0,  1,  0,	1, 	-1, SANCT|LEARN},
-{IDS_COMBINE,						Stats::INSIGHT,	    60, 40, 0,	2, 	-1, SANCT|NEED_ITEM|MAKE_ITEM|FOCUS},
+{IDS_COMBINE,						Stats::INSIGHT,	    60, 40, 0,	2, 	-1, SANCT|NEED_ITEM|MAKE_ITEM|FOCUS|LEARN},
 {IDS_POWER_TOKEN,					Stats::DREAMSOUL,	10,  0, 0,	10, -1, SANCT|NEED_ITEM|MAKE_ITEM},
 {IDS_SHOW_GRATITUDE,				Stats::NO_STAT,		0,   0, 0,	10, -1, SANCT|NEED_ITEM|NEIGH},
-{IDS_QUEST,							Stats::NO_STAT,		0,   0, 0,	10, -1, SANCT|NEIGH|MAKE_ITEM},
+{IDS_QUEST,							Stats::NO_STAT,		0,   0, 0,	3, -1, SANCT|NEIGH|MAKE_ITEM},
 {IDS_BEQUEATH,						Stats::NO_STAT,		0,   0, 0,	10, -1, SANCT|NEED_ITEM|NEIGH},
 {IDS_RADIANT_BLAZE,					Stats::DREAMSOUL,	20, 10, 9,	5,  -1, NEED_ITEM|NEIGH},
 {IDS_POISON_CLOUD,					Stats::DREAMSOUL,	20, 10,15,	5,  -1, NEED_ITEM|NEIGH},
 {IDS_BREAK_COVENANT,				Stats::DREAMSOUL,	20, 10, 9,	5,  -1, NEED_ITEM|NEIGH},
-{IDS_PEACE_AURA_ART_NAME,			Stats::DREAMSOUL,	20, 10,13,	5,  -1, NEED_ITEM|SANCT},
+{IDS_PEACE_AURA_ART_NAME,			Stats::DREAMSOUL,	20, 10, 6,	5,  -1, NEED_ITEM|SANCT},
 {IDS_SABLE_SHIELD,					Stats::DREAMSOUL,	20, 10,16,	5,  -1, NEED_ITEM|SANCT},
 {IDS_ENTRANCEMENT,					Stats::DREAMSOUL,	20, 10,13,	5,  -1, NEED_ITEM|SANCT},
 {IDS_SHADOW_STEP,					Stats::DREAMSOUL,	20, 10,10,	5,  -1, NEED_ITEM|SANCT},
@@ -184,7 +184,7 @@ art_t art_info[NUM_ARTS] = // 					Evoke
 {IDS_BREAK_LOCK, 					Stats::WILLPOWER,	40, 40, 0,	8, 	-1, SANCT|FOCUS},
 {IDS_REPAIR, 						Stats::RESILIENCE,	15, 10, 0,	4, 	-1, SANCT|NEED_ITEM},
 {IDS_REMOVE_CURSE,					Stats::RESILIENCE,	5,  15, 0,	2, 	-1, SANCT},
-{IDS_HOLD_AVATAR,					Stats::LUCIDITY,	30, 20, 1,	3, 	-1, NEIGH|FOCUS},  
+{IDS_HOLD_AVATAR,					Stats::LUCIDITY,	30, 20, 1,	3, 	-1, NEIGH|FOCUS},
 {IDS_SANCTUARY,						Stats::DREAMSOUL,	25, 1,  25, 1, 	-1, SANCT},
 {IDS_SHOVE, 						Stats::DREAMSOUL,	0,  0,  0,	1, 	-1, NEIGH},
 {IDS_INSCRIBE,						Stats::DREAMSOUL,	20, 2,  0,	1, 	-1, SANCT|MAKE_ITEM},
@@ -197,6 +197,8 @@ art_t art_info[NUM_ARTS] = // 					Evoke
 {IDS_MISDIRECTION,         Stats::DREAMSOUL,    60,  30, 0, 5,  -1, NEIGH},
 {IDS_CHAOTIC_VORTEX,       Stats::DREAMSOUL,    70,  40, 4, 5,  -1, NEIGH|NEED_ITEM},
 {IDS_CHAOS_WELL,				Stats::DREAMSOUL, 30, 5, 0, 5, -1, SANCT|MAKE_ITEM|LEARN },
+{IDS_RALLY,							Stats::WILLPOWER,	60, 30, 0,  5,   -1, SANCT|NEIGH|FOCUS},
+{IDS_CHANNEL,           Stats::DREAMSOUL,   40, 35, 25, 3,  -1, SANCT|NEIGH|LEARN}
 };
 
 
@@ -217,7 +219,7 @@ bool GsPlayer::FocusOnly(int art)
 {
 	return art_info[art].restricted();
 }
-  
+
 bool GsPlayer::Learnable(int art)
 {
 	return art_info[art].display_learnable();
@@ -279,9 +281,9 @@ int GsPlayer::Login(lyra_id_t playerid, int pmare_type)
   if (pmare_type != Avatars::PMARE_RESUME) {
     db_.SetPMareBilling(pmare_type);
   }
-    
+
   pmare_type_ = pmare_type;
-  
+
   // load the inventory from the item database
   db_.Inventory().RemoveAll();
   rc = main_->ItemDBC()->GetPlayerInventory(db_.PlayerID(), db_.Inventory());
@@ -323,7 +325,7 @@ int GsPlayer::Login(lyra_id_t playerid, int pmare_type)
 
 
   // log player in
-  rc = main_->PlayerDBC()->Login(playerid, pmare_type, db_.PMareBilling(), 
+  rc = main_->PlayerDBC()->Login(playerid, pmare_type, db_.PMareBilling(),
 	  main_->HostIP(), main_->ServerPort());
   sc = main_->PlayerDBC()->LastSQLCode();
   lt = main_->PlayerDBC()->LastCallTime();
@@ -340,7 +342,7 @@ int GsPlayer::Login(lyra_id_t playerid, int pmare_type)
 
   // set login time
   time(&login_time_);
-  
+
   return 0;
 }
 
@@ -489,7 +491,7 @@ int GsPlayer::IdleTime()
 
   LmLocker mon(lock_); // lock object during method duration
   // if in level, timeout based on udp updates and tcp messages
-  if (!conn_) { 
+  if (!conn_) {
     // null connection could mean the player is in login, OR it could
     // mean they're ghosted. if we make an idle time check and the
     // connection is null, set idle_null_connection_ to true if it is false,
@@ -505,7 +507,7 @@ int GsPlayer::IdleTime()
 
     main_->Log()->Debug(_T("%s: player %u has idle null - ghosted?"), method, db_.PlayerID());
     return (GsNetworkInput::PLAYER_TIMEOUT*10);
-    } 
+    }
 
   if (in_level_) {
     LmLocker umon(u_lock_); // lock update time
@@ -518,7 +520,7 @@ int GsPlayer::IdleTime()
   return conn_->IdleIn();
 }
 
-void GsPlayer::SetUpdateAddress(unsigned long clientip, int servport) 
+void GsPlayer::SetUpdateAddress(unsigned long clientip, int servport)
 {
   DECLARE_TheLineNum;
   LmLocker mon(lock_); // lock object for method duration
@@ -547,7 +549,7 @@ int GsPlayer::CheckAndReceiveUpdate(LmPeerUpdate& update)
 
   if (num_updates_%100 == 0) { // every 100th updates - check for timing hacks
 	  if (last_mod_100_update_ > 0) {
-		  // if we got 100 updates in under 10 seconds, 
+		  // if we got 100 updates in under 10 seconds,
 		  // there's obviously a hack - it should take 20 seconds!
 		  if ((last_update_ - last_mod_100_update_) < 10) {
 			num_too_fast_updates_++;
@@ -562,7 +564,7 @@ int GsPlayer::CheckAndReceiveUpdate(LmPeerUpdate& update)
 			//		GsUtil::FakeLogout(main_, this);
 		  }
 	  }
-	  
+
 	  last_mod_100_update_ = time(NULL);
   }
 
@@ -665,6 +667,18 @@ void GsPlayer::SaveGoalReturnInfo()
 }
 
 ////
+// SaveSummonInfo & SaveRallyInfo
+////
+
+void GsPlayer::SaveSummonInfo(int s_room, int s_level)
+{
+	LmLocker mon(lock_); // lock object during method duration
+	s_roomid_ = s_room;
+	s_levelid_ = s_level;
+	SECLOG(-1, _T("player %u: setting s_roomid %u s_levelid %u"), PlayerID(), s_roomid_, s_levelid_);
+}
+
+////
 // LevelID - return player's current level id
 ////
 
@@ -734,6 +748,26 @@ lyra_id_t GsPlayer::GoalReturnRoomID() const
   return g_roomid_;
 }
 
+////
+// SummonLevelID & RallyLevelID
+////
+
+lyra_id_t GsPlayer::SummonLevelID() const
+{
+	LmLocker mon(lock_); // lock object during method duration
+	return s_levelid_;
+}
+
+////
+// SummonRoomID & RallyRoomID
+////
+
+lyra_id_t GsPlayer::SummonRoomID() const
+{
+	LmLocker mon(lock_); // lock object during method duration
+	return s_roomid_;
+}
+
 
 struct teleport_spot {
 	lyra_id_t level_id;
@@ -741,7 +775,7 @@ struct teleport_spot {
 };
 
 
-teleport_spot always_legal_teleports[] = { 
+teleport_spot always_legal_teleports[] = {
 	{ 43, 8 }, // anyone can goto the unknown - for summon
 	{ 14, 12}, // anyone can go to gatekeeper focus guild
 	{ 3,  29}, // anyone can go to dreamseer focus guild
@@ -763,7 +797,7 @@ bool GsPlayer::CanGotoLevel(lyra_id_t levelid, lyra_id_t roomid) const
 {
   LmLocker mon(lock_); // lock object during method duration
   // admins/monsters/player mares can go anywhere
-  if ((db_.AccountType() == LmPlayerDB::ACCT_ADMIN) || 
+  if ((db_.AccountType() == LmPlayerDB::ACCT_ADMIN) ||
       (db_.AccountType() == LmPlayerDB::ACCT_PMARE) ||
       (db_.AccountType() == LmPlayerDB::ACCT_MONSTER)) {
     return true;
@@ -771,7 +805,7 @@ bool GsPlayer::CanGotoLevel(lyra_id_t levelid, lyra_id_t roomid) const
 
 #ifdef CHINESE // no restrictions on teleporting due to restart at last location
   return true;
-#endif 
+#endif
 
   // some teleport spots are always allowed, for various reasons
   for (int i=0; i< NUM_ALWAYS_LEGAL_TELEPORTS; i++) {
@@ -806,7 +840,7 @@ bool GsPlayer::CanGotoRoom(lyra_id_t roomid) const
     return false;
   }
   // admins/monsters can go anywhere
-  if ((db_.AccountType() == LmPlayerDB::ACCT_ADMIN) || 
+  if ((db_.AccountType() == LmPlayerDB::ACCT_ADMIN) ||
       (db_.AccountType() == LmPlayerDB::ACCT_PMARE) ||
       (db_.AccountType() == LmPlayerDB::ACCT_MONSTER)) {
     return true;
@@ -824,10 +858,12 @@ bool GsPlayer::CanGotoRoom(lyra_id_t roomid) const
   if (roomid == roomid_) {
     return true;
   }
-  // is room a return/recall/goalpost point?
-  if ((roomid == r_roomid_) || (roomid == rc_roomid_) || (roomid == g_roomid_)) {
+
+  // is room a return/recall/goalpost/rally point?
+  if ((roomid == r_roomid_) || (roomid == rc_roomid_) || (roomid == g_roomid_) || roomid == s_roomid_) {
     return true;
   }
+
   // check for portal to target room
   if (!ldbc_->RoomDB(roomid_).HasPortal(levelid_, roomid)) {
     return false;
@@ -1007,6 +1043,9 @@ void GsPlayer::clear_information()
   g_levelid_ = 0;
   g_roomid_ = 0;
 
+  s_levelid_ = 0;
+  s_roomid_ = 0;
+
   if (d_items_.size() > 0) {
     d_items_.erase(d_items_.begin(), d_items_.end());
   }
@@ -1091,7 +1130,7 @@ static const int dreamblade_damage[10] = {
   18,
   25,
   44,
-  46, 
+  46,
   60,
   39,
   38
@@ -1107,7 +1146,7 @@ bool GsPlayer::check_update(LmPeerUpdate& update)
   int damage = update.WeaponDamage();
   int effect = update.WeaponEffect();
 
-#ifdef Ul3D 
+#ifdef Ul3D
   return true;
 #else
 
@@ -1120,7 +1159,7 @@ bool GsPlayer::check_update(LmPeerUpdate& update)
       return false;
     }
 
-	return true; 
+	return true;
 
 	// this code is deprecated because the DREAMBLADE_MISSILE bitmap
 	// is also used for forged and gen'd blades
@@ -1188,7 +1227,7 @@ bool GsPlayer::check_update(LmPeerUpdate& update)
   default:
     break;
   }
-  
+
   // check for push
   if (bitmap == LyraBitmap::PUSH_MISSILE) {
     if ((velocity != MELEE_VELOCITY) || (damage != 0) || (effect != LyraEffect::NONE)) {
@@ -1222,7 +1261,7 @@ bool GsPlayer::check_update(LmPeerUpdate& update)
 			pp_evoking_ = Arts::NONE;
 			pp_skill_ = 0;
 		}
-		
+
 
     // check if damage matches
     if (damage == (dreamblade_damage[missile_skill / 10])) {
@@ -1417,7 +1456,7 @@ int GsPlayer::save_to_db(bool force)
     main_->Log()->Error(_T("%s: could not store inventory; rc=%d, sqlcode=%d"), method, rc, sc);
     GsUtil::HandleItemError(main_, method, rc, sc);
     retval = -1;
-  } 
+  }
   // unlink state file
   TCHAR pfile[FILENAME_MAX];
   main_->GlobalDB()->GetPlayerFile(pfile, db_.PlayerID());
@@ -1432,7 +1471,7 @@ int GsPlayer::save_to_db(bool force)
 //    this needs to be in this file so it can access the arts table
 ////
 
-bool GsPlayer::CanSelfTrain(int art, TCHAR* names_buffer) 
+bool GsPlayer::CanSelfTrain(int art, TCHAR* names_buffer)
 {
   DEFMETHOD(GsPlayer, CanSelfTrain);
   LmLocker mon(lock_); // lock object during method duration
@@ -1451,7 +1490,7 @@ bool GsPlayer::CanSelfTrain(int art, TCHAR* names_buffer)
     return false;
   }
 
-  // can't self train minor arts above 20 
+  // can't self train minor arts above 20
   if ((art_info[art].stat != db_.Stats().FocusStat()) &&
       (art_info[art].stat != Stats::DREAMSOUL) &&
       (art_info[art].stat != Stats::NO_STAT) &&

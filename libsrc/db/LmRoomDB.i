@@ -54,5 +54,9 @@ INLINE bool LmRoomDB::NoReapItems() const
   return ((bool)no_reap_items_);
 }
 
+INLINE const TCHAR* LmRoomDB::RoomDescription() const
+{
+  return description_;
+} 
 
 
