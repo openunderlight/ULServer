@@ -57,6 +57,8 @@ struct RMsg {
 
 	ROOMLOGINACK,		   // SC    sent to client on each room login; required to prevent use 
 						   //		of aggressive arts, etc. before neighbors arrive
+    	GETROOMDESCRIPTION,    // CS    request room description
+	ROOMDESCRIPTION,       // SC    receive room description
 
     // 24 total
 
