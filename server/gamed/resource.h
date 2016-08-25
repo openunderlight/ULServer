@@ -2865,12 +2865,20 @@
 #define IDS_SELF_DEMOTE                 4314
 #define IDS_MALE_REVENANT               4315
 #define IDS_FEMALE_REVENANT             4316
+#define IDS_LOGIN_COOLOFF               4317
+#define IDS_LOGIN_PMARE_LOCK            4318
+#define IDS_RECEIVE_CHANNEL             4319
+#define IDS_RECEIVE_CHANNELKILL         4320
+#define IDS_CHANNEL_NOPARTY             4321
+#define IDS_CHANNEL_EXPIRED             4322
+#define IDS_CHANNEL_CREATE              4323
+#define IDS_CHANNEL                     4324
 #define IDC_NUKE_PARTICLES              4802
 #define IDC_PARTICLE_RELOAD             4803
 #define IDC_AVATAR_COMBO                16666
 
 // Next default values for new objects
-// 
+//
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1

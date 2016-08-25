@@ -1,6 +1,6 @@
 // RMsg_PlayerMsg.h  -*- C++ -*-
 // $Id: RMsg_PlayerMsg.h,v 1.29 1998-05-11 10:56:01-07 jason Exp jason $
-// Copyright 1996-1997 Lyra LLC, All rights reserved. 
+// Copyright 1996-1997 Lyra LLC, All rights reserved.
 //
 // player<->player message (for teaching, glamours, etc)
 
@@ -36,12 +36,12 @@ public:
     IDENTIFY_CURSE,      // skill, not used [05]
     VISION,              // skill, not used
     BLAST,               // skill, not used
-    RESTORE,             // skill, not used     
+    RESTORE,             // skill, not used
     PURIFY,              // skill, not used
     DRAIN_SELF,          // stat, amount [10]
     ABJURE,              // skill, not used
     POISON,              // skill, not used
-    ANTIDOTE,            // skill, not used     
+    ANTIDOTE,            // skill, not used
     CURSE,               // skill, not used
     ENSLAVE,             // skill, not used [15]
     SCARE,               // skill, not used
@@ -97,17 +97,17 @@ public:
 	SHADOW_STEP,		// skill, unused
 	DAZZLE,				// skill, unused
 	TEHTHUS_OBLIVION,   // unused, unused
-	TEHTHUS_OBLIVION_ACK, // unused, unused 
-	TRAIN_ACK,			// success, unused [70]		
-	CHAOS_PURGE,		// skill, unused 
+	TEHTHUS_OBLIVION_ACK, // unused, unused
+	TRAIN_ACK,			// success, unused [70]
+	CHAOS_PURGE,		// skill, unused
 	CUP_SUMMONS,		// skill, unused
 	HOUSE_MEMBERS,		// guild ID, unused
-	SUMMON_PRIME,		// guild ID, success 
+	SUMMON_PRIME,		// guild ID, success
 	GRANT_PPOINT,		// unused, unused
 
 	// Nether Prophesy clone arts here
-	SCAN,				// skill, not used     
-    HEAL,               // skill, not used     
+	SCAN,				// skill, not used
+    HEAL,               // skill, not used
     SANCTIFY,           // skill, not used
 	REMOVE_CURSE,		// skill, not used
 	HOLD_AVATAR,		// skill, not used [80]
@@ -117,14 +117,15 @@ public:
   TEMPEST,      // skill, angle
   KINESIS,        // skill, angle
   MISDIRECTION,   // skill, unused
-  CHAOTIC_VORTEX, // skill, unused
-  RALLY,			// unused, unused
-  
+  CHAOTIC_VORTEX, // skill, unused [85]
+  RALLY,				// unused, unused
+  CHANNEL,
+
     // GM-only messages
     FINGER_OF_DEATH = 90,// not used, not used
     GRANT_XP,            // units of 1000, units of 100
     TERMINATE,           // not used, not used
-    GRANT_XP_NEGATIVE,   // units of 1000, units of 100 
+    GRANT_XP_NEGATIVE,   // units of 1000, units of 100
     UNTRAIN,			 // art_id, not used
     BOOT,				// not used, not used
 	SUMMON,				// not used, not used
@@ -132,7 +133,8 @@ public:
 
     // xp related messages
     YOUGOTME = 100,      // (victim's orbit || 100 + nightmare index), dreamsoul at dissolution
-    PARTYKILL,           // (victim's orbit || 100 + nightmare index), # of party members (+ 100 if killer)
+    PARTYKILL,           // (victim's orbit || 100 + nightmare index), # of party members || 9 if channelling (+ 100 if killer)
+    CHANNELKILL,         // (victim's orbit || 100 + nightmare index), # of party members (+ 100 if killer, +plat_level*10)
 
     // other triggers
 	// sound triggers deprecated - put into real time packets instead

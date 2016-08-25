@@ -191,13 +191,14 @@ art_t art_info[NUM_ARTS] = // 		  			    Evoke
 {IDS_FORGE_MASTER,		 			Stats::NO_STAT,		50, 0,  0,	1, 	-1, SANCT},
 {IDS_MERGE_TALISMAN,				Stats::INSIGHT,	    60, 40, 0,	2, 	-1, SANCT|NEED_ITEM|MAKE_ITEM|FOCUS},
 {IDS_NP_SYMBOL_ART_NAME, 			Stats::NO_STAT,		10,  0, 0,	2, 	-1, SANCT},
-{IDS_LOCATE_MARES,					Stats::INSIGHT,	    0,  1,  0,	1, 	-1, SANCT|LEARN},
-{IDS_TEMPEST,				        Stats::LUCIDITY,	60, 40, 0,	7, 	-1, FOCUS|LEARN},
-{IDS_KINESIS, 						Stats::WILLPOWER,	30, 5,  0,	1, 	-1, FOCUS|LEARN|NEIGH},
-{IDS_MISDIRECTION,					Stats::DREAMSOUL,   60, 30, 0,  5,  -1, LEARN|NEIGH},
-{IDS_CHAOTIC_VORTEX,				Stats::DREAMSOUL,   70, 40, 4,  5,  -1, NEIGH|NEED_ITEM},
-{IDS_CHAOS_WELL,					Stats::DREAMSOUL,   30, 5,  0,  5,  -1, SANCT|MAKE_ITEM|LEARN},
-{IDS_RALLY,							Stats::WILLPOWER,	60, 30, 0,  5,   4, SANCT|NEIGH|FOCUS},
+{IDS_LOCATE_MARES,					Stats::INSIGHT,	    0,  1,  0,	1, 	-1, SANCT},
+{IDS_TEMPEST,				Stats::LUCIDITY,	60, 40, 0,	7, 	-1, FOCUS},
+{IDS_KINESIS, 			       Stats::WILLPOWER,	  30,  5,  0,	1, 	-1, FOCUS|NEIGH},
+{IDS_MISDIRECTION,         Stats::DREAMSOUL,    60,  30, 0, 5,  -1, NEIGH},
+{IDS_CHAOTIC_VORTEX,       Stats::DREAMSOUL,    70,  40, 4, 5,  -1, NEIGH|NEED_ITEM},
+{IDS_CHAOS_WELL,				Stats::DREAMSOUL, 30, 5, 0, 5, -1, SANCT|MAKE_ITEM|LEARN },
+{IDS_RALLY,							Stats::WILLPOWER,	60, 30, 0,  5,   -1, SANCT|NEIGH|FOCUS},
+{IDS_CHANNEL,           Stats::DREAMSOUL,   40, 35, 25, 3,  -1, SANCT|NEIGH|LEARN}
 };
 
 
@@ -218,7 +219,7 @@ bool GsPlayer::FocusOnly(int art)
 {
 	return art_info[art].restricted();
 }
-  
+
 bool GsPlayer::Learnable(int art)
 {
 	return art_info[art].display_learnable();
@@ -280,9 +281,9 @@ int GsPlayer::Login(lyra_id_t playerid, int pmare_type)
   if (pmare_type != Avatars::PMARE_RESUME) {
     db_.SetPMareBilling(pmare_type);
   }
-    
+
   pmare_type_ = pmare_type;
-  
+
   // load the inventory from the item database
   db_.Inventory().RemoveAll();
   rc = main_->ItemDBC()->GetPlayerInventory(db_.PlayerID(), db_.Inventory());
@@ -324,7 +325,7 @@ int GsPlayer::Login(lyra_id_t playerid, int pmare_type)
 
 
   // log player in
-  rc = main_->PlayerDBC()->Login(playerid, pmare_type, db_.PMareBilling(), 
+  rc = main_->PlayerDBC()->Login(playerid, pmare_type, db_.PMareBilling(),
 	  main_->HostIP(), main_->ServerPort());
   sc = main_->PlayerDBC()->LastSQLCode();
   lt = main_->PlayerDBC()->LastCallTime();
@@ -341,7 +342,7 @@ int GsPlayer::Login(lyra_id_t playerid, int pmare_type)
 
   // set login time
   time(&login_time_);
-  
+
   return 0;
 }
 
@@ -490,7 +491,7 @@ int GsPlayer::IdleTime()
 
   LmLocker mon(lock_); // lock object during method duration
   // if in level, timeout based on udp updates and tcp messages
-  if (!conn_) { 
+  if (!conn_) {
     // null connection could mean the player is in login, OR it could
     // mean they're ghosted. if we make an idle time check and the
     // connection is null, set idle_null_connection_ to true if it is false,
@@ -506,7 +507,7 @@ int GsPlayer::IdleTime()
 
     main_->Log()->Debug(_T("%s: player %u has idle null - ghosted?"), method, db_.PlayerID());
     return (GsNetworkInput::PLAYER_TIMEOUT*10);
-    } 
+    }
 
   if (in_level_) {
     LmLocker umon(u_lock_); // lock update time
@@ -519,7 +520,7 @@ int GsPlayer::IdleTime()
   return conn_->IdleIn();
 }
 
-void GsPlayer::SetUpdateAddress(unsigned long clientip, int servport) 
+void GsPlayer::SetUpdateAddress(unsigned long clientip, int servport)
 {
   DECLARE_TheLineNum;
   LmLocker mon(lock_); // lock object for method duration
@@ -548,7 +549,7 @@ int GsPlayer::CheckAndReceiveUpdate(LmPeerUpdate& update)
 
   if (num_updates_%100 == 0) { // every 100th updates - check for timing hacks
 	  if (last_mod_100_update_ > 0) {
-		  // if we got 100 updates in under 10 seconds, 
+		  // if we got 100 updates in under 10 seconds,
 		  // there's obviously a hack - it should take 20 seconds!
 		  if ((last_update_ - last_mod_100_update_) < 10) {
 			num_too_fast_updates_++;
@@ -563,7 +564,7 @@ int GsPlayer::CheckAndReceiveUpdate(LmPeerUpdate& update)
 			//		GsUtil::FakeLogout(main_, this);
 		  }
 	  }
-	  
+
 	  last_mod_100_update_ = time(NULL);
   }
 
@@ -774,7 +775,7 @@ struct teleport_spot {
 };
 
 
-teleport_spot always_legal_teleports[] = { 
+teleport_spot always_legal_teleports[] = {
 	{ 43, 8 }, // anyone can goto the unknown - for summon
 	{ 14, 12}, // anyone can go to gatekeeper focus guild
 	{ 3,  29}, // anyone can go to dreamseer focus guild
@@ -796,7 +797,7 @@ bool GsPlayer::CanGotoLevel(lyra_id_t levelid, lyra_id_t roomid) const
 {
   LmLocker mon(lock_); // lock object during method duration
   // admins/monsters/player mares can go anywhere
-  if ((db_.AccountType() == LmPlayerDB::ACCT_ADMIN) || 
+  if ((db_.AccountType() == LmPlayerDB::ACCT_ADMIN) ||
       (db_.AccountType() == LmPlayerDB::ACCT_PMARE) ||
       (db_.AccountType() == LmPlayerDB::ACCT_MONSTER)) {
     return true;
@@ -804,7 +805,7 @@ bool GsPlayer::CanGotoLevel(lyra_id_t levelid, lyra_id_t roomid) const
 
 #ifdef CHINESE // no restrictions on teleporting due to restart at last location
   return true;
-#endif 
+#endif
 
   // some teleport spots are always allowed, for various reasons
   for (int i=0; i< NUM_ALWAYS_LEGAL_TELEPORTS; i++) {
@@ -839,7 +840,7 @@ bool GsPlayer::CanGotoRoom(lyra_id_t roomid) const
     return false;
   }
   // admins/monsters can go anywhere
-  if ((db_.AccountType() == LmPlayerDB::ACCT_ADMIN) || 
+  if ((db_.AccountType() == LmPlayerDB::ACCT_ADMIN) ||
       (db_.AccountType() == LmPlayerDB::ACCT_PMARE) ||
       (db_.AccountType() == LmPlayerDB::ACCT_MONSTER)) {
     return true;
@@ -1129,7 +1130,7 @@ static const int dreamblade_damage[10] = {
   18,
   25,
   44,
-  46, 
+  46,
   60,
   39,
   38
@@ -1145,7 +1146,7 @@ bool GsPlayer::check_update(LmPeerUpdate& update)
   int damage = update.WeaponDamage();
   int effect = update.WeaponEffect();
 
-#ifdef Ul3D 
+#ifdef Ul3D
   return true;
 #else
 
@@ -1158,7 +1159,7 @@ bool GsPlayer::check_update(LmPeerUpdate& update)
       return false;
     }
 
-	return true; 
+	return true;
 
 	// this code is deprecated because the DREAMBLADE_MISSILE bitmap
 	// is also used for forged and gen'd blades
@@ -1226,7 +1227,7 @@ bool GsPlayer::check_update(LmPeerUpdate& update)
   default:
     break;
   }
-  
+
   // check for push
   if (bitmap == LyraBitmap::PUSH_MISSILE) {
     if ((velocity != MELEE_VELOCITY) || (damage != 0) || (effect != LyraEffect::NONE)) {
@@ -1260,7 +1261,7 @@ bool GsPlayer::check_update(LmPeerUpdate& update)
 			pp_evoking_ = Arts::NONE;
 			pp_skill_ = 0;
 		}
-		
+
 
     // check if damage matches
     if (damage == (dreamblade_damage[missile_skill / 10])) {
@@ -1455,7 +1456,7 @@ int GsPlayer::save_to_db(bool force)
     main_->Log()->Error(_T("%s: could not store inventory; rc=%d, sqlcode=%d"), method, rc, sc);
     GsUtil::HandleItemError(main_, method, rc, sc);
     retval = -1;
-  } 
+  }
   // unlink state file
   TCHAR pfile[FILENAME_MAX];
   main_->GlobalDB()->GetPlayerFile(pfile, db_.PlayerID());
@@ -1470,7 +1471,7 @@ int GsPlayer::save_to_db(bool force)
 //    this needs to be in this file so it can access the arts table
 ////
 
-bool GsPlayer::CanSelfTrain(int art, TCHAR* names_buffer) 
+bool GsPlayer::CanSelfTrain(int art, TCHAR* names_buffer)
 {
   DEFMETHOD(GsPlayer, CanSelfTrain);
   LmLocker mon(lock_); // lock object during method duration
@@ -1489,7 +1490,7 @@ bool GsPlayer::CanSelfTrain(int art, TCHAR* names_buffer)
     return false;
   }
 
-  // can't self train minor arts above 20 
+  // can't self train minor arts above 20
   if ((art_info[art].stat != db_.Stats().FocusStat()) &&
       (art_info[art].stat != Stats::DREAMSOUL) &&
       (art_info[art].stat != Stats::NO_STAT) &&

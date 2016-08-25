@@ -555,7 +555,28 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
     targets.push_back(source); // add source player to list of targets
   }
   break;
-
+  
+  // got a channel request
+  case RMsg_PlayerMsg::CHANNEL: {
+    LmParty party = source->Party();
+    bool isCancel = party.PartySize() > 0 && source->ChannelTarget() != 0 &&
+        party.HasPlayer(source->ChannelTarget()) && !target;
+        
+    if(!isCancel && !party.HasPlayer(targetid) || targetid == source_id || party.PartySize() == 0 || !target)
+    {
+        send_out = false;
+        source->SetChannelLevel(0);
+        source->SetChannelTarget(0);
+    }
+    else
+    {
+        int s1 = isCancel ? 0 : msg.State1();
+        targetid = isCancel ? source->ChannelTarget() : targetid;
+        source->SetChannelLevel(s1);
+        source->SetChannelTarget(isCancel ? 0 : targetid);
+    }
+  }
+  break;
   // handle player dissolution
   case RMsg_PlayerMsg::YOUGOTME: {
     if (room) {
@@ -572,20 +593,42 @@ void LsRoomThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LsPlayer* source)
       // if target (killer) is in a party, then don't send YOUGOTME, send PARTYKILL to party members
       if (target->Party().PartySize() > 0) {
         send_out = false; // don't send original message to receiver, will do here
-	msg.Init(msg.SenderID(), 0, RMsg_PlayerMsg::PARTYKILL, msg.State1(), 0);
+        
+    lyra_id_t originalSender = msg.SenderID();
+    int originalOrbit = msg.State1();
+    
 	LmParty party = target->Party();
 	for (int i = 0; i < party.PartySize(); ++i) {
+	  msg.Init(originalSender, 0, RMsg_PlayerMsg::PARTYKILL, originalOrbit, 0);
 	  lyra_id_t memberid = party.PlayerID(i);
 	  LsPlayer* member = main_->PlayerSet()->GetPlayer(memberid);
 	  if (member) {
 	    msg.SetReceiverID(memberid);
-	    if (memberid == targetid) {
-	      msg.SetState2(100 + party.PartySize()); // killer share; indicate by 100 + members in state2
+	    int state2 = party.PartySize();
+	    if(member->IsChannelling() && member->Party().HasPlayer(member->ChannelTarget()))
+	    {
+	        state2 = 9;
+	        state2 += ( member->ChannelLevel() / 10 ) * 10;
 	    }
-	    else {
-	      msg.SetState2(party.PartySize()); // member share
-	    }
+	    
+	    if (memberid == targetid)
+	      state2 += 100;
+	    
+	    msg.SetState2(state2); // member share
 	    LsUtil::Send_SMsg_Proxy(main_, member, msg);
+	    if(state2 % 10 == 9)
+	    {
+	        // if we're channelling take this message and send a ChannelKill to the channellee.
+	        msg.SetMsgType(RMsg_PlayerMsg::CHANNELKILL);
+	        state2 -= 9;
+	        state2 += party.PartySize();
+	        msg.SetReceiverID(member->ChannelTarget());
+	        LsPlayer* channellee = main_->PlayerSet()->GetPlayer(member->ChannelTarget());
+	        msg.SetSenderID(memberid);
+	        msg.SetState2(state2);
+	        if(channellee)
+	            LsUtil::Send_SMsg_Proxy(main_, channellee, msg);    
+        }	        
 	  }
 	} // end for
       } // end party

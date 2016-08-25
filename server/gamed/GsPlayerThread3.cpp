@@ -343,7 +343,7 @@ void GsPlayerThread::handle_SMsg_GS_Login(LmSrvMesgBuf* msgbuf, LmConnection* co
       }
     }
   }
-  
+
 }
 
 ////
@@ -501,14 +501,14 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   case RMsg_PlayerMsg::VISION:              // skill, not used
   case RMsg_PlayerMsg::BLAST:               // skill, not used
   case RMsg_PlayerMsg::BLAST_ACK:           // not used, not used
-  case RMsg_PlayerMsg::RESTORE:             // skill, not used     
+  case RMsg_PlayerMsg::RESTORE:             // skill, not used
   case RMsg_PlayerMsg::PURIFY:              // skill, not used
   case RMsg_PlayerMsg::DRAIN_SELF:          // stat, amount
   case RMsg_PlayerMsg::ABJURE:              // skill, not used
   case RMsg_PlayerMsg::POISON:              // skill, not used
-  case RMsg_PlayerMsg::ANTIDOTE:            // skill, not used     
+  case RMsg_PlayerMsg::ANTIDOTE:            // skill, not used
   case RMsg_PlayerMsg::CURSE:               // skill, not used
-  case RMsg_PlayerMsg::ENSLAVE:             // skill, not used         
+  case RMsg_PlayerMsg::ENSLAVE:             // skill, not used
   case RMsg_PlayerMsg::SCARE:               // skill, not used
   case RMsg_PlayerMsg::STAGGER:             // skill, not used
   case RMsg_PlayerMsg::DEAFEN:              // skill, not used
@@ -522,16 +522,16 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   case RMsg_PlayerMsg::VAMPIRIC_DRAW_ACK:   // amount, not used
   case RMsg_PlayerMsg::HYPNOTIC_WEAVE:      // skill, not used
   case RMsg_PlayerMsg::EARTHQUAKE:          // skill, not used
-  case RMsg_PlayerMsg::TERROR:              // skill, not used     
-  case RMsg_PlayerMsg::HEALING_AURA:        // skill, not used     
+  case RMsg_PlayerMsg::TERROR:              // skill, not used
+  case RMsg_PlayerMsg::HEALING_AURA:        // skill, not used
   case RMsg_PlayerMsg::TRAP_NIGHTMARE:      // skill, not used
   //case RMsg_PlayerMsg::TRIGGER_SOUND:       // sound id, not used
   case RMsg_PlayerMsg::NEWBIE_ENTERED:      // not used, not used
   case RMsg_PlayerMsg::ROGER_WILCO:         // special, special
   case RMsg_PlayerMsg::TRAIN_SELF:          // art, success
   case RMsg_PlayerMsg::SPHERE_REPLY:        // art, success
-  case RMsg_PlayerMsg::SOUL_SHIELD:         // skill, not used     
-  case RMsg_PlayerMsg::SUMMON:              // not used, not used     
+  case RMsg_PlayerMsg::SOUL_SHIELD:         // skill, not used
+  case RMsg_PlayerMsg::SUMMON:              // not used, not used
   case RMsg_PlayerMsg::REFLECT_ART:         // art_id, not used
   case RMsg_PlayerMsg::EXPEL:				// not used, not used
   case RMsg_PlayerMsg::RADIANT_BLAZE:		// skill, not used
@@ -542,26 +542,27 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   case RMsg_PlayerMsg::ENTRANCEMENT:		// skill, not used
   case RMsg_PlayerMsg::SHADOW_STEP:			// skill, not used
   case RMsg_PlayerMsg::DAZZLE:				// skill, not used
-  case RMsg_PlayerMsg::TEHTHUS_OBLIVION_ACK:// unused, unused 
+  case RMsg_PlayerMsg::TEHTHUS_OBLIVION_ACK:// unused, unused
   case RMsg_PlayerMsg::TRAIN_ACK:			// skill, not used
-  case RMsg_PlayerMsg::CHAOS_PURGE:			// skill, not used 
-  case RMsg_PlayerMsg::CUP_SUMMONS:			// skill, not used 
-  case RMsg_PlayerMsg::SCAN:				// skill, not used 
-  case RMsg_PlayerMsg::HEAL:				// skill, not used 
-  case RMsg_PlayerMsg::SANCTIFY:			// skill, not used 
-  case RMsg_PlayerMsg::REMOVE_CURSE:		// skill, not used 
-  case RMsg_PlayerMsg::HOLD_AVATAR:			// skill, not used 
+  case RMsg_PlayerMsg::CHAOS_PURGE:			// skill, not used
+  case RMsg_PlayerMsg::CUP_SUMMONS:			// skill, not used
+  case RMsg_PlayerMsg::SCAN:				// skill, not used
+  case RMsg_PlayerMsg::HEAL:				// skill, not used
+  case RMsg_PlayerMsg::SANCTIFY:			// skill, not used
+  case RMsg_PlayerMsg::REMOVE_CURSE:		// skill, not used
+  case RMsg_PlayerMsg::HOLD_AVATAR:			// skill, not used
   case RMsg_PlayerMsg::TEMPEST:         // skill, angle
   case RMsg_PlayerMsg::KINESIS:         // skill, angle
   case RMsg_PlayerMsg::MISDIRECTION:    // skill, unused
   case RMsg_PlayerMsg::CHAOTIC_VORTEX: // skill, unused
+  case RMsg_PlayerMsg::RALLY:				// unused, unused
+  case RMsg_PlayerMsg::CHANNEL:
     // do nothing
     break;
 
   //
   // special handling
   //
-
   case RMsg_PlayerMsg::GRANT_PPOINT: {         // not used, not used
 	  int newpp = player_->DB().Stats().PP()+1;
 	  player_->SetPPoints(newpp);
@@ -669,7 +670,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
 		msg.SetState2(skill);
 		// if we've just gotten ordained, we get a quest XP pool
 		if ((art == Arts::TRAIN) && (old_skill == 0)) {
-	      player_->SetQuestPoolXP(Lyra::QUEST_XP_POOL);		
+	      player_->SetQuestPoolXP(Lyra::QUEST_XP_POOL);
 		}
       }
       else {
@@ -805,7 +806,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
     }
 
     adjust_offline_xp(xp_adj, _T("anon rp grant from GM"), msg.SenderID(), true);
-	SECLOG(-3, _T("%s: player %u: change of %d in offline xp due to RP XP grant from GM %u"), method, 
+	SECLOG(-3, _T("%s: player %u: change of %d in offline xp due to RP XP grant from GM %u"), method,
 	 player_->DB().PlayerID(), xp_adj, msg.SenderID());
 
     send_to_player = false; // don't send to client
@@ -954,9 +955,14 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   }
   break;
   // player was in a party, party member killed something
-  case RMsg_PlayerMsg::PARTYKILL: {          // victim's orbit/nightmare index, # of party members
+  case RMsg_PlayerMsg::CHANNELKILL:
+  case RMsg_PlayerMsg::PARTYKILL:           // victim's orbit/nightmare index, # of party members
+  {
+    bool channelkill = msg.MsgType() == RMsg_PlayerMsg::CHANNELKILL;
     int orbit = msg.State1();
     int party_size = msg.State2();
+    SECLOG(-7, _T("%s: channelkill/partykill, orbit=%u, party_size=%u, sender=%u, receiver=%u"),
+        method, orbit, party_size, msg.SenderID(), msg.ReceiverID());
     // determine total # of shares, and number of shares we get
     int all_shares = party_size + 1;
     int my_shares = 1;
@@ -964,6 +970,14 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       all_shares -= 100;
       my_shares = 2;
     }
+    double multiplier = 1.0;
+    if(channelkill)
+    {
+        SECLOG(-7, _T("%s: received channelkill, all_shares is: %u"), method, all_shares);
+        multiplier = 0.5 + (0.05 * (all_shares / 10));
+        all_shares %= 10;
+    }
+
     // determine how much XP to gain
     int xp_adj = 0;
     bool agent_killed = true;
@@ -982,12 +996,17 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
     }
 
     // TLOG_Debug(_T("%s: party kill: xp=%d shares=%d/%d"), method, xp_adj, my_shares, all_shares);
-    xp_adj = my_shares * (xp_adj / all_shares); // divide up among party members
-    if (agent_killed) {
-      adjust_xp(xp_adj, _T("partykill of agent"), msg.SenderID(), true);
-    }
-    else {
-      adjust_xp(xp_adj, _T("partykill of player"), msg.SenderID(), true);
+    xp_adj = party_size % 10 == 9 ? 0 : my_shares * (xp_adj / all_shares); // divide up among party members
+    SECLOG(-7, _T("%s: channelkill/partykill, xp_adj=%u"), method, xp_adj);
+    if(xp_adj != 0)
+    {
+        xp_adj = (int) ((double)xp_adj * multiplier);
+        if (agent_killed) {
+            adjust_xp(xp_adj, _T("partykill of agent"), msg.SenderID(), true);
+        }
+        else {
+            adjust_xp(xp_adj, _T("partykill of player"), msg.SenderID(), true);
+        }
     }
   }
   break;
@@ -1005,7 +1024,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   case RMsg_PlayerMsg::YOUGOTME: {           // victim's orbit/nightmare index, DS at dissolution
 
     int orbit = msg.State1();
-    int ds = msg.State2(); 
+    int ds = msg.State2();
     // nothing happens when admins get kills
     if (player_->DB().AccountType() == LmPlayerDB::ACCT_ADMIN)
       break;
@@ -1019,7 +1038,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
     int xp_adj = 0;
     if (orbit < 100) { // player, state1 = orbit
       int sphere_diff = player_->DB().Stats().Sphere() - (orbit / 10);
-      // if player killed someone 2+ spheres below them, 
+      // if player killed someone 2+ spheres below them,
       // and that dreamer is below 3rd sphere, they get nothing,
       // EVERYONE gets XP for kills on 3rd sphere + dreamers;
       // killing someone whose orbit is greater is just fine
@@ -1038,7 +1057,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       xp_adj = GsUtil::NightmareXP(orbit - 150)*4;
       // player mares get only 25% XP for pmare kills
       if (player_->DB().AccountType() == LmPlayerDB::ACCT_PMARE) {
-    	xp_adj = (int)(xp_adj/4); 
+    	xp_adj = (int)(xp_adj/4);
       }
       adjust_xp(xp_adj, _T("dissolving player mare"), msg.SenderID(), true);
       //}
@@ -1078,7 +1097,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   	        TLOG_Warning(_T("%s: could not get player %u location"), method, msg.SenderID());
 		return;
 	  }
-	  else 
+	  else
 	  {
 		  SECLOG(-8, _T("%s: player %u attempting to Rally player %u to %i; %i; %u"), method, msg.SenderID(), msg.ReceiverID(), msg.State1(), msg.State2(), levelid);
 		  player_->SaveSummonInfo(roomid, levelid);
