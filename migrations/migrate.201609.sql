@@ -2,6 +2,7 @@ USE ul_player;
 --
 -- Table structure for table `pmare_lock`
 --
+ALTER TABLE player ADD COLUMN last_login DATETIME NULL DEFAULT '1970-01-01 00:00:00';
 ALTER TABLE player ADD COLUMN last_logout DATETIME NULL DEFAULT '1970-01-01 00:00:00';
 
 DROP TABLE IF EXISTS `pmare_lock`;
