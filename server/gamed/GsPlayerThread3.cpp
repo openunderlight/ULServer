@@ -531,7 +531,6 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   case RMsg_PlayerMsg::TRAIN_SELF:          // art, success
   case RMsg_PlayerMsg::SPHERE_REPLY:        // art, success
   case RMsg_PlayerMsg::SOUL_SHIELD:         // skill, not used
-  case RMsg_PlayerMsg::SUMMON:              // not used, not used
   case RMsg_PlayerMsg::REFLECT_ART:         // art_id, not used
   case RMsg_PlayerMsg::EXPEL:				// not used, not used
   case RMsg_PlayerMsg::RADIANT_BLAZE:		// skill, not used
@@ -1099,10 +1098,18 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
 	  else
 	  {
 		  SECLOG(-8, _T("%s: player %u attempting to Rally player %u to %i; %i; %u"), method, msg.SenderID(), msg.ReceiverID(), msg.State1(), msg.State2(), levelid);
-		  player_->SaveSummonInfo(roomid, levelid);
+		  player_->SaveSummonInfo(false);
 	  }
   }
   break;
+
+  case RMsg_PlayerMsg::SUMMON: {             // x-coord, y-coord, level-id
+			  
+		SECLOG(-8, _T("%s: player %u attempting to Summon player %u to %i; %i; %u; %i"), method, msg.SenderID(), msg.ReceiverID(), msg.State1(), msg.State2(), msg.State3());
+		player_->SaveSummonInfo(true);
+	 
+	}
+	break;
 
   //
   // player should never receive
