@@ -1098,7 +1098,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
 	  else
 	  {
 		  SECLOG(-8, _T("%s: player %u attempting to Rally player %u to %i; %i; %u"), method, msg.SenderID(), msg.ReceiverID(), msg.State1(), msg.State2(), levelid);
-		  player_->SaveSummonInfo(false);
+		  player_->SaveSummonInfo(true);
 	  }
   }
   break;
