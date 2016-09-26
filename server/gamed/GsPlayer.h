@@ -93,9 +93,6 @@ public:
   lyra_id_t GoalReturnLevelID() const;
   lyra_id_t GoalReturnRoomID() const;
 
-  lyra_id_t SummonLevelID() const;
-  lyra_id_t SummonRoomID() const;
-
   const LmPeerUpdate& PlayerUpdate() const;
   time_t LastUpdateTime() const;
   int NumUpdates() const;
@@ -182,7 +179,7 @@ public:
   void SaveReturnInfo();
   void SaveRecallInfo();
   void SaveGoalReturnInfo();
-  void SaveSummonInfo(int s_room, int s_level);
+  void SaveSummonInfo(bool initial);
 
   bool CanAddItem(const LmItemHdr& itemhdr) const;
   bool CanCreateItem(const LmItem& item) const;
@@ -302,9 +299,8 @@ private:
 
   lyra_id_t g_levelid_;        // ID of level player left to read goals
   lyra_id_t g_roomid_;         // ID of room player left to read goals
-
-  lyra_id_t s_levelid_;        // ID of level player being summoned to
-  lyra_id_t s_roomid_;         // ID of room player being summoned to
+  
+  bool is_being_summoned_;
 
   std::list<LmItem> d_items_;       // items being dropped
   std::list<LmItemHdr> p_items_;    // items being picked up

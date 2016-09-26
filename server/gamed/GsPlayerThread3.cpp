@@ -460,6 +460,9 @@ void GsPlayerThread::handle_SMsg_Proxy(LmSrvMesgBuf* msgbuf, LmConnection* conn)
   case RMsg::PLAYERMSG:
     handle_SMsg_Proxy_RMsg_PlayerMsg(mbuf);
     break;
+  case RMsg::ROOMLOGINACK:
+	// fall through to default
+	player_->SaveSummonInfo(false);
   default:
     // no specific handling, forward along to player
     main_->OutputDispatch()->SendMessage(mbuf, player_->Connection());
@@ -531,7 +534,6 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   case RMsg_PlayerMsg::TRAIN_SELF:          // art, success
   case RMsg_PlayerMsg::SPHERE_REPLY:        // art, success
   case RMsg_PlayerMsg::SOUL_SHIELD:         // skill, not used
-  case RMsg_PlayerMsg::SUMMON:              // not used, not used
   case RMsg_PlayerMsg::REFLECT_ART:         // art_id, not used
   case RMsg_PlayerMsg::EXPEL:				// not used, not used
   case RMsg_PlayerMsg::RADIANT_BLAZE:		// skill, not used
@@ -1088,21 +1090,19 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
 	  lyra_id_t levelid = 0;
 	  lyra_id_t roomid = 0;
 	  int acct_type = 0;
-	  // make db transaction
-  	  int rc = main_->PlayerDBC()->GetLocation(msg.SenderID(), levelid, roomid, acct_type);
-  	  int sc = main_->PlayerDBC()->LastSQLCode();
+	  SECLOG(-8, _T("%s: player %u attempting to Rally player %u to %i; %i - %u saving SummonInfo to true!"), method, msg.SenderID(), msg.ReceiverID(), msg.State1(), msg.State2(), player_->PlayerID());
+	  player_->SaveSummonInfo(true);
 
-          if (rc < 0) {
-  	        TLOG_Warning(_T("%s: could not get player %u location"), method, msg.SenderID());
-		return;
-	  }
-	  else
-	  {
-		  SECLOG(-8, _T("%s: player %u attempting to Rally player %u to %i; %i; %u"), method, msg.SenderID(), msg.ReceiverID(), msg.State1(), msg.State2(), levelid);
-		  player_->SaveSummonInfo(roomid, levelid);
-	  }
   }
   break;
+
+  case RMsg_PlayerMsg::SUMMON: {             // x-coord, y-coord, level-id
+			  
+		SECLOG(-8, _T("%s: player %u attempting to Summon player %u to %i; %i; %u; %i"), method, msg.SenderID(), msg.ReceiverID(), msg.State1(), msg.State2(), msg.State3());
+		player_->SaveSummonInfo(true);
+	 
+	}
+	break;
 
   //
   // player should never receive

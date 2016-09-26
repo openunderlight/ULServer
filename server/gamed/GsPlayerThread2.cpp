@@ -430,6 +430,12 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
  case RMsg_PlayerMsg::UNTRAIN:             // art id, not used
   case RMsg_PlayerMsg::BOOT:                // not used, not used
   case RMsg_PlayerMsg::SUMMON:                // not used, not used
+	  if (msg.SenderID() == msg.ReceiverID()) { 
+		  // This is a SUMMON ACK, so just clear summon info
+		  player_->SaveSummonInfo(false);
+		  send_to_level = false;
+		  break;
+	  }
   case RMsg_PlayerMsg::SUSPEND:                // not used, not used
   case RMsg_PlayerMsg::TERMINATE: {         // not used, not used
     if (player_->DB().AccountType() != LmPlayerDB::ACCT_ADMIN) {
@@ -959,7 +965,6 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   // player attemptign to Rally someone
   case RMsg_PlayerMsg::RALLY: {
 	  if (msg.SenderID() == msg.ReceiverID()) { // This is a RALLY ACK, so just clear rally info
-		  player_->SaveSummonInfo(0, 0);
 		  send_to_level = false;
 		  break;
 	  }

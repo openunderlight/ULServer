@@ -670,12 +670,11 @@ void GsPlayer::SaveGoalReturnInfo()
 // SaveSummonInfo & SaveRallyInfo
 ////
 
-void GsPlayer::SaveSummonInfo(int s_room, int s_level)
+void GsPlayer::SaveSummonInfo(bool initial)
 {
 	LmLocker mon(lock_); // lock object during method duration
-	s_roomid_ = s_room;
-	s_levelid_ = s_level;
-	SECLOG(-1, _T("player %u: setting s_roomid %u s_levelid %u"), PlayerID(), s_roomid_, s_levelid_);
+
+	is_being_summoned_ = initial;
 }
 
 ////
@@ -747,27 +746,6 @@ lyra_id_t GsPlayer::GoalReturnRoomID() const
   LmLocker mon(lock_); // lock object during method duration
   return g_roomid_;
 }
-
-////
-// SummonLevelID & RallyLevelID
-////
-
-lyra_id_t GsPlayer::SummonLevelID() const
-{
-	LmLocker mon(lock_); // lock object during method duration
-	return s_levelid_;
-}
-
-////
-// SummonRoomID & RallyRoomID
-////
-
-lyra_id_t GsPlayer::SummonRoomID() const
-{
-	LmLocker mon(lock_); // lock object during method duration
-	return s_roomid_;
-}
-
 
 struct teleport_spot {
 	lyra_id_t level_id;
@@ -859,9 +837,14 @@ bool GsPlayer::CanGotoRoom(lyra_id_t roomid) const
     return true;
   }
 
-  // is room a return/recall/goalpost/rally point?
-  if ((roomid == r_roomid_) || (roomid == rc_roomid_) || (roomid == g_roomid_) || roomid == s_roomid_) {
+  // is room a return/recall/goalpost?
+  if ((roomid == r_roomid_) || (roomid == rc_roomid_) || (roomid == g_roomid_)) {
     return true;
+  }
+
+  // are we being summoned or rallied?
+  if (is_being_summoned_) {
+	  return true;
   }
 
   // check for portal to target room
@@ -1028,6 +1011,7 @@ void GsPlayer::clear_information()
   been_hit_ = false;
   ds_decreased_ = false;
   hidden_ = false;
+  is_being_summoned_ = false;
 
   in_level_ = false;
   ldbc_ = 0;
@@ -1042,9 +1026,6 @@ void GsPlayer::clear_information()
 
   g_levelid_ = 0;
   g_roomid_ = 0;
-
-  s_levelid_ = 0;
-  s_roomid_ = 0;
 
   if (d_items_.size() > 0) {
     d_items_.erase(d_items_.begin(), d_items_.end());
