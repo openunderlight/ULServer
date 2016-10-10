@@ -240,7 +240,7 @@ void LsLevelThread::handle_SMsg_LevelLogin(LmSrvMesgBuf* msgbuf, LmConnection* c
   player->SetHidden((bool)msg.Hidden());
   // if a normal player, add
   if ((msg.AccountType() == LmPlayerDB::ACCT_PLAYER) ||
-	  (msg.AccountType() == LmPlayerDB::ACCT_ADMIN) ||
+	  (msg.AccountType() == LmPlayerDB::ACCT_ADMIN && !msg.Avatar().Hidden()) ||
 	  (msg.AccountType() == LmPlayerDB::ACCT_PMARE))
 	main_->ItemDBC()->ChangeNumDreamers(main_->LevelNum(), 1);
 

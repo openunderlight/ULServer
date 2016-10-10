@@ -487,6 +487,8 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   }
   // depending on message type, do various things
   bool send_to_player = true; // default: forward message to player
+  bool gm = (player_->DB().AccountType() == LmPlayerDB::ACCT_ADMIN);
+
   switch (msg.MsgType()) {
 
   //
@@ -1088,7 +1090,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
 	  lyra_id_t roomid = 0;
 	  int acct_type = 0;
 	  // make db transaction
-  	  int rc = main_->PlayerDBC()->GetLocation(msg.SenderID(), levelid, roomid, acct_type);
+  	  int rc = main_->PlayerDBC()->GetLocation(msg.SenderID(), levelid, roomid, acct_type, gm);
   	  int sc = main_->PlayerDBC()->LastSQLCode();
 
           if (rc < 0) {

@@ -1017,7 +1017,7 @@ int LmPlayerDBC::GetLoginStatus(lyra_id_t player_id)
 // GetLocation
 ////
 
-int LmPlayerDBC::GetLocation(lyra_id_t player_id, lyra_id_t& level_id, lyra_id_t& room_id, int& acct_type) {
+int LmPlayerDBC::GetLocation(lyra_id_t player_id, lyra_id_t& level_id, lyra_id_t& room_id, int& acct_type, bool isGM) {
   DEFMETHOD(LmPlayerDBC, GetLocation);
   LmLocker mon(lock_); // lock object for method duration
   //LmFuncTimer( timernum_calls_, num_ms_, last_ms_); // time function
@@ -1026,9 +1026,9 @@ int LmPlayerDBC::GetLocation(lyra_id_t player_id, lyra_id_t& level_id, lyra_id_t
   TCHAR query[256];
   MYSQL_RES *res;
   MYSQL_ROW row;
-
- _stprintf(query, _T("SELECT room_id, level_id, acct_type FROM player WHERE player_id = %u"), player_id);
-
+  _stprintf(query, _T("SELECT room_id, level_id, acct_type, real_name FROM player WHERE player_id = %u"), player_id);
+  TCHAR realName[128];
+  int ret = 0;
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
   ////timer.Stop();
@@ -1053,12 +1053,19 @@ int LmPlayerDBC::GetLocation(lyra_id_t player_id, lyra_id_t& level_id, lyra_id_t
   if (row[1])
     level_id = ATOI(row[1]);
   acct_type = ATOI(row[2]);
-
+  _tcscpy(realName, row[3]);
+  
+  if(!isGM && acct_type == LmPlayerDB::ACCT_ADMIN && ((NULL != _tcsstr(realname_, _T("INVIS"))) || 
+		(NULL != _tcsstr(realname_, _T("invis"))) ||
+		(NULL != _tcsstr(realname_, _T("Invis")))))
+  {
+    ret = MYSQL_ERROR
+  }
   //_tprintf(_T("acct type: %d\n"), acct_type);
 
   mysql_free_result(res);
 
-  return 0;
+  return ret;
 }
 
 ////
