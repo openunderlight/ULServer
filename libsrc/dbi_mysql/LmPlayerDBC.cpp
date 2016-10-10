@@ -1055,11 +1055,11 @@ int LmPlayerDBC::GetLocation(lyra_id_t player_id, lyra_id_t& level_id, lyra_id_t
   acct_type = ATOI(row[2]);
   _tcscpy(realName, row[3]);
   
-  if(!isGM && acct_type == LmPlayerDB::ACCT_ADMIN && ((NULL != _tcsstr(realname_, _T("INVIS"))) || 
-		(NULL != _tcsstr(realname_, _T("invis"))) ||
-		(NULL != _tcsstr(realname_, _T("Invis")))))
+  if(!isGM && acct_type == LmPlayerDB::ACCT_ADMIN && ((NULL != _tcsstr(realName, _T("INVIS"))) || 
+		(NULL != _tcsstr(realName, _T("invis"))) ||
+		(NULL != _tcsstr(realName, _T("Invis")))))
   {
-    ret = MYSQL_ERROR
+    ret = MYSQL_ERROR;
   }
   //_tprintf(_T("acct type: %d\n"), acct_type);
 
