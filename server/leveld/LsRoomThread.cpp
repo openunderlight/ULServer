@@ -518,7 +518,9 @@ void LsRoomThread::handle_SMsg_LocateAvatar(LmSrvMesgBuf* msgbuf, LmConnection* 
   if (player && (player->AccountType() != LmPlayerDB::ACCT_MONSTER)) { // monsters are not locatable
     roomid = player->RoomID();
     // hidden?
-    if ((player->IsHidden()) || (player->Avatar().Hidden())) {
+    if(player->Avatar().Hidden())
+	roomid = Lyra::ID_UNKNOWN;
+    if (player->IsHidden()) {
       roomid += Lyra::HIDDEN_DELTA;
     }
   }
