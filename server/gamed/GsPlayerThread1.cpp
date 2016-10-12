@@ -1084,7 +1084,7 @@ void GsPlayerThread::handle_GMsg_DestroyRoomItem(LmSrvMesgBuf* msgbuf, LmConnect
   // process
   LmItemHdr hdr = msg.ItemHeader();
   // check if item can actually be destroyed
-  if (msg.ItemHeader().FlagSet(LyraItem::FLAG_NOREAP)) {
+  if (msg.ItemHeader().FlagSet(LyraItem::FLAG_NOREAP) && player_->DB().AccountType() != LmPlayerDB::ACCT_ADMIN) {
     SECLOG(6, "%s: player %u: trying to destroy non-reapable room item %d", method, player_->PlayerID(), hdr.Serial());
     return;
   }
