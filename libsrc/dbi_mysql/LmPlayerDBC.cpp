@@ -1054,11 +1054,13 @@ int LmPlayerDBC::GetLocation(lyra_id_t player_id, lyra_id_t& level_id, lyra_id_t
     level_id = ATOI(row[1]);
   acct_type = ATOI(row[2]);
   _tcscpy(realName, row[3]);
-  
+ 
+
   if(!isGM && acct_type == LmPlayerDB::ACCT_ADMIN && ((NULL != _tcsstr(realName, _T("INVIS"))) || 
 		(NULL != _tcsstr(realName, _T("invis"))) ||
-		(NULL != _tcsstr(realName, _T("Invis")))))
+		(NULL != _tcsstr(realName, _T("Invis")))) && level_id >= Lyra::HIDDEN_DELTA )
   {
+    LOG_Debug(_T("%s: player %d is an INVIS GM, return ERROR (l:%d;r:%d)"), method, player_id, level_id, room_id);
     ret = MYSQL_ERROR;
   }
   //_tprintf(_T("acct type: %d\n"), acct_type);
