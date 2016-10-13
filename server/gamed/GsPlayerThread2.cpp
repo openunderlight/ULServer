@@ -420,14 +420,17 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 	  break;
 	}
 
+  case RMsg_PlayerMsg::UNTRAIN:             // art id, not used
+	  if (msg.SenderID() == msg.ReceiverID()) {
+		  // Player is untraining themself, likely due to guild promotion/demotion
+		  break;
+	  }
   //
   // GM-Only Messages
   //
-
   case RMsg_PlayerMsg::FINGER_OF_DEATH:     // not used, not used
   case RMsg_PlayerMsg::GRANT_XP:            // units of 1000, units of 100
   case RMsg_PlayerMsg::GRANT_XP_NEGATIVE:   // units of 1000, units of 100
- case RMsg_PlayerMsg::UNTRAIN:             // art id, not used
   case RMsg_PlayerMsg::BOOT:                // not used, not used
   case RMsg_PlayerMsg::SUMMON:                // not used, not used
 	  if (msg.SenderID() == msg.ReceiverID()) { 
