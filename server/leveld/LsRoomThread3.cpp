@@ -87,6 +87,7 @@ void LsRoomThread::handle_RMsg_ChangeAvatar(LmSrvMesgBuf* msgbuf, LsPlayer* sour
   // process
   //  TLOG_Debug(_T("%s: player %u changed avatar"), method, source->PlayerID());
   // change player's avatar
+  int wasHidden = source->Avatar().Hidden();
   source->SetAvatar(msg.Avatar());
   // get player's room
   LsRoomState* room = main_->LevelState()->RoomState(source->RoomID());
@@ -95,6 +96,13 @@ void LsRoomThread::handle_RMsg_ChangeAvatar(LmSrvMesgBuf* msgbuf, LsPlayer* sour
     // TODO: send error?
     return;
   }
+
+  // If I wasn't GM INVIS and now I am, or if I was and now I'm not, modify the sense count.
+  if(wasHidden && !msg.Avatar().Hidden())
+    main_->ItemDBC()->ChangeNumDreamers(main_->LevelNum(), 1);
+  else if(!wasHidden && msg.Avatar().Hidden())
+    main_->ItemDBC()->ChangeNumDreamers(main_->LevelNum(), -1);
+
   // get all players in room except source player
   LsPlayerList target_list;
   compute_PlayerList(room, target_list, source->PlayerID());
@@ -199,7 +207,7 @@ void LsRoomThread::handle_RMsg_Logout(LmSrvMesgBuf* msgbuf, LsPlayer* source)
   // process
   //TLOG_Debug(_T("%s: player %u logging out, status %c"), method, source_id, msg.Status());
   if ((source->AccountType() == LmPlayerDB::ACCT_PLAYER) ||
-	  (source->AccountType() == LmPlayerDB::ACCT_ADMIN) ||
+	  (source->AccountType() == LmPlayerDB::ACCT_ADMIN && !source->Avatar().Hidden()) ||
 	  (source->AccountType() == LmPlayerDB::ACCT_PMARE))
 	main_->ItemDBC()->ChangeNumDreamers(main_->LevelNum(), -1);
 

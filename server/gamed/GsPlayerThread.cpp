@@ -504,13 +504,15 @@ void GsPlayerThread::perform_locateavatar(lyra_id_t playerid, const TCHAR* playe
   lyra_id_t roomid = 0;
   int acct_type = 0;
   // make db transaction
-  int rc = main_->PlayerDBC()->GetLocation(playerid, levelid, roomid, acct_type);
+  // TLOG_Warning(_T("calling locateavatar for %d"), playerid);
+  int rc = main_->PlayerDBC()->GetLocation(playerid, levelid, roomid, acct_type, gm);
   int sc = main_->PlayerDBC()->LastSQLCode();
   // int lt = main_->PlayerDBC()->LastCallTime();
   // main_->Log()->Debug(_T("%s: LmPlayerDBC::GetLocation took %d ms"), method, lt);
   if (rc < 0) {
     TLOG_Warning(_T("%s: could not get player %u location"), method, playerid);
     status = GMsg_LocateAvatarAck::LOCATE_NOTLOGGEDIN; // best fit for this
+    levelid = roomid = Lyra::ID_UNKNOWN;    
     //GsUtil::HandlePlayerError(main_, method, rc, sc);
   }
   else if ((levelid == Lyra::ID_UNKNOWN) || (roomid == Lyra::ID_UNKNOWN)) {
@@ -569,7 +571,7 @@ void GsPlayerThread::perform_locateavatar_group(const GMsg_LocateAvatar& msg)
     else {
       int acct_type = 0;
       // make db transaction
-      int rc = main_->PlayerDBC()->GetLocation(playerid, levelid, roomid, acct_type);
+      int rc = main_->PlayerDBC()->GetLocation(playerid, levelid, roomid, acct_type, gm);
       int sc = main_->PlayerDBC()->LastSQLCode();
       if (rc < 0) {
 	TLOG_Warning(_T("%s: could not get player %u location"), method, playerid);
