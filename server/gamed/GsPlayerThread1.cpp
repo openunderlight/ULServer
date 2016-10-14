@@ -429,6 +429,7 @@ void GsPlayerThread::handle_GMsg_LocateAvatar(LmSrvMesgBuf* msgbuf, LmConnection
   ACCEPT_MSG(GMsg_LocateAvatar, true); // send error
   // TODO: check that player has LOCATEAVATAR art? (everyone has it, though)
   // if there is more than one player to look up, only use the database (no level server)
+  // main_->Log()->Log("%s: Received LocateAvatar message!", method);
   if (msg.NumPlayers() > 1) {
     perform_locateavatar_group(msg);
     return;
@@ -439,8 +440,9 @@ void GsPlayerThread::handle_GMsg_LocateAvatar(LmSrvMesgBuf* msgbuf, LmConnection
     send_GMsg_LocateAvatarAck(conn, _T("(unknown)"), GMsg_LocateAvatarAck::LOCATE_PLAYERNOTFOUND, 0, 0);
     return;
   }
-  // look up playerid; if not found, return status
+  // look up playerid; if not found, return status  
   lyra_id_t targetid = main_->PlayerNameMap()->PlayerID(playername);
+  // main_->Log()->Log("%s: Locate player %s returned ID %d", method, playername, targetid);
   if (targetid == Lyra::ID_UNKNOWN) {
     send_GMsg_LocateAvatarAck(conn, playername, GMsg_LocateAvatarAck::LOCATE_PLAYERNOTFOUND, 0, 0);
     return;
@@ -450,6 +452,7 @@ void GsPlayerThread::handle_GMsg_LocateAvatar(LmSrvMesgBuf* msgbuf, LmConnection
     perform_locateavatar(targetid, playername);
     return;
   }
+  // main_->Log()->Log("%s: Sending Locate request for %d to level server", method, targetid);
   // send request to level server for player info; result dealt with in handle_SMsg_LocateAvatar
   send_SMsg_LocateAvatar(player_->LevelConnection(), targetid);
 }

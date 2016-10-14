@@ -101,10 +101,12 @@ void GsPlayerThread::handle_SMsg_LocateAvatar(LmSrvMesgBuf* msgbuf, LmConnection
   }
   // check if player was found in level
    if (msg.RoomID() == Lyra::ID_UNKNOWN) { // not found
+    main_->Log()->Log("%s: unable to find player %u in level so calling perform_locateavatar", method, msg.PlayerID());
     perform_locateavatar(msg.PlayerID(), pname);
     return;
      }
   bool gm = (player_->DB().AccountType() == LmPlayerDB::ACCT_ADMIN);
+  bool hiddenGM = false;
   // return status
   int status = GMsg_LocateAvatarAck::LOCATE_FOUND;
   lyra_id_t levelid = conn->ID();
@@ -115,13 +117,21 @@ void GsPlayerThread::handle_SMsg_LocateAvatar(LmSrvMesgBuf* msgbuf, LmConnection
     hidden = true;
     roomid -= Lyra::HIDDEN_DELTA;
   }
+  
+  // if player still hidden - must be a GM in INVIS mode  
+  if(roomid > Lyra::HIDDEN_DELTA)
+    hiddenGM = true;
 
   // if hidden, reset location, unless player is GM
   if (hidden) {
     if (gm)
+    {
 	status = GMsg_LocateAvatarAck::LOCATE_FOUND_HIDDEN;
+   	if(hiddenGM)
+	    roomid -= Lyra::HIDDEN_DELTA;               
+    }
     else {
-	 status = GMsg_LocateAvatarAck::LOCATE_HIDDEN;
+	 status = hiddenGM ? GMsg_LocateAvatarAck::LOCATE_NOTLOGGEDIN : GMsg_LocateAvatarAck::LOCATE_HIDDEN;
 	 levelid = roomid = Lyra::ID_UNKNOWN;
     }
   }
