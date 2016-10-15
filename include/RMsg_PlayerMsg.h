@@ -119,6 +119,7 @@ public:
   MISDIRECTION,   // skill, unused
   CHAOTIC_VORTEX, // skill, unused
   RALLY,			// unused, unused
+  CHANNEL,
   
     // GM-only messages
     FINGER_OF_DEATH = 90,// not used, not used
@@ -133,7 +134,8 @@ public:
     // xp related messages
     YOUGOTME = 100,      // (victim's orbit || 100 + nightmare index), dreamsoul at dissolution
     PARTYKILL,           // (victim's orbit || 100 + nightmare index), # of party members (+ 100 if killer)
-
+    CHANNELKILL,         // (victim's orbit || 100 + nightmare index), # of party members (+ 100 if killer, +plat_level*10)
+    
     // other triggers
 	// sound triggers deprecated - put into real time packets instead
     //TRIGGER_SOUND = 200, // sound id, not used
@@ -146,7 +148,7 @@ public:
   RMsg_PlayerMsg();
   ~RMsg_PlayerMsg();
 
-  void Init(lyra_id_t send_id, lyra_id_t recv_id, int mtype, int state1 = 0, int state2 = 0);
+  void Init(lyra_id_t send_id, lyra_id_t recv_id, int mtype, int state1 = 0, int state2 = 0, int state3 = 0);
 
   // standard public methods
   void Dump(FILE* f, int indent = 0) const;
@@ -157,6 +159,7 @@ public:
   int MsgType() const;
   int State1() const;
   int State2() const;
+  int State3() const;
 
   static int ArtType(int msgtype);
 
@@ -166,6 +169,7 @@ public:
   void SetMsgType(int message_type);
   void SetState1(int byte1);
   void SetState2(int byte2);
+  void SetState3(int byte3);
 
 private:
 

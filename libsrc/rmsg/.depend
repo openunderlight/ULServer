@@ -22,6 +22,10 @@ RMsg_GetAvatarDescription.o: RMsg_GetAvatarDescription.cpp \
  RMsg_GetAvatarDescription.h ../include/LyraDefs.h ../include/tchar.h \
  ../include/LmNew.h ../include/LmMesg.h ../include/LyraDefs.h RMsg.h \
  RMsg_GetAvatarDescription.i
+RMsg_GetRoomDescription.o: RMsg_GetRoomDescription.cpp \
+ RMsg_GetRoomDescription.h ../include/LyraDefs.h ../include/tchar.h \
+ ../include/LmNew.h ../include/LmMesg.h ../include/LyraDefs.h RMsg.h \
+ RMsg_GetRoomDescription.i
 RMsg_GotoRoom.o: RMsg_GotoRoom.cpp RMsg_GotoRoom.h ../include/LyraDefs.h \
  ../include/tchar.h ../include/LmNew.h ../include/LmMesg.h \
  ../include/LyraDefs.h ../include/LmPeerUpdate.h ../include/LmBit32.h \
@@ -83,6 +87,9 @@ RMsg_RcvAvatarDescription.o: RMsg_RcvAvatarDescription.cpp \
  RMsg_RcvAvatarDescription.h ../include/LyraDefs.h ../include/tchar.h \
  ../include/LmNew.h ../include/LmMesg.h ../include/LyraDefs.h RMsg.h \
  RMsg_RcvAvatarDescription.i
+RMsg_RoomDescription.o: RMsg_RoomDescription.cpp RMsg_RoomDescription.h \
+ ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
+ ../include/LmMesg.h ../include/LyraDefs.h RMsg.h RMsg_RoomDescription.i
 RMsg_RoomLoginAck.o: RMsg_RoomLoginAck.cpp ../include/LmSockAddrInet.h \
  ../include/LyraDefs.h ../include/tchar.h ../include/LmNew.h \
  ../include/LmSockAddr.h RMsg_RoomLoginAck.h ../include/LyraDefs.h \
