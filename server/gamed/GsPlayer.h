@@ -124,6 +124,7 @@ public:
   bool CanBeInitiated(int guild) const;
   bool CanKnight(int guild) const;
   bool CanBeKnighted(int guild) const;
+	bool HasMinRank(int rank) const; 
   bool CanDemote(int guild, int num_tokens, lyra_id_t playerid) const;
   bool CanBeDemoted(int guild, int num_tokens) const;
   bool CanAscend(int guild) const;

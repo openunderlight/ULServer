@@ -973,15 +973,9 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 	  }
 
 	  // check that player can use Rally, skill level doesn't matter
-	  if (!(player_->CanUseArt(Arts::RALLY, 1))) {
-		  if (player_->PPEvoking() == Arts::RALLY) { // we spent pp's to evoke Rally
-			  player_->SetPPEvoking(Arts::NONE);
-			  player_->SetPPSkill(0);
-			  break;
-		  }
-
+	  if (!player_->CanUseArt(Arts::RALLY, 1) || !player_->HasMinRank(Guild::KNIGHT)) {
 		  int p_skill = player_->DB().Arts().Skill(Arts::RALLY);
-		  SECLOG(4, _T("%s: player %u: attempt to use Rally art, own skill is %d"), method,
+		  SECLOG(4, _T("%s: player %u: illegal attempt to use Rally art, own skill is %d or doesn't posess necessary guild rank"), method,
 			      player_->PlayerID(), p_skill);
 		      send_to_level = false;
 	  }
