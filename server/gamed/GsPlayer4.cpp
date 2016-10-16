@@ -556,6 +556,7 @@ bool GsPlayer::CanBeTrained(int art, int skill) const
 	case Arts::SUPPORT_DEMOTION:
 	case Arts::SUPPORT_ASCENSION:
 	case Arts::CUP_SUMMONS:
+	case Arts::RALLY:
       if (!db_.Stats().IsKnight() && !db_.Stats().IsRuler()) {
 	return false;
       }
