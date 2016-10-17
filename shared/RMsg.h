@@ -52,11 +52,9 @@ struct RMsg {
     CHANGEAVATAR,          // CS/SC player changed avatar
     GETAVATARDESCRIPTION,  // CS    request avatar description
     RCVAVATARDESCRIPTION,  // SC    avatar description info
-    NEWLYAWAKENED,		   // SC    alert teachers/guardians/rulers to newlies
+	NEWLYAWAKENED,		   // SC    alert teachers/guardians/rulers to newlies
 	CUPSUMMONS,			   // SC    alert when players enter the Cup Arena
-
-	ROOMLOGINACK,		   // SC    sent to client on each room login; required to prevent use 
-						   //		of aggressive arts, etc. before neighbors arrive
+	ROOMLOGINACK,		   // SC    sent to client on each room login
 	GETROOMDESCRIPTION,    // CS    request room description
 	ROOMDESCRIPTION,       // SC    receive room description
 

@@ -66,6 +66,7 @@ GsForwardThread.o: GsForwardThread.cpp GsForwardThread.h \
  /home/brent/lyra/src/include/RmRemotePlayer.h \
  /home/brent/lyra/src/include/RMsg_Error.h \
  /home/brent/lyra/src/include/RMsg_GetAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_GetRoomDescription.h \
  /home/brent/lyra/src/include/RMsg_GotoRoom.h \
  /home/brent/lyra/src/include/RMsg_ItemDrop.h \
  /home/brent/lyra/src/include/RMsg_ItemHdrDrop.h \
@@ -82,6 +83,7 @@ GsForwardThread.o: GsForwardThread.cpp GsForwardThread.h \
  /home/brent/lyra/src/include/RMsg_PlayerMsg.h \
  /home/brent/lyra/src/include/RMsg_PlayerUpdate.h \
  /home/brent/lyra/src/include/RMsg_RcvAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_RoomDescription.h \
  /home/brent/lyra/src/include/RMsg_Speech.h \
  /home/brent/lyra/src/include/RMsg_Update.h \
  /home/brent/lyra/src/include/LmSrvMesgBuf.h \
@@ -1536,6 +1538,7 @@ GsPlayerThread1.o: GsPlayerThread1.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/RmRemotePlayer.h \
  /home/brent/lyra/src/include/RMsg_Error.h \
  /home/brent/lyra/src/include/RMsg_GetAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_GetRoomDescription.h \
  /home/brent/lyra/src/include/RMsg_GotoRoom.h \
  /home/brent/lyra/src/include/RMsg_ItemDrop.h \
  /home/brent/lyra/src/include/RMsg_ItemHdrDrop.h \
@@ -1552,6 +1555,7 @@ GsPlayerThread1.o: GsPlayerThread1.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/RMsg_PlayerMsg.h \
  /home/brent/lyra/src/include/RMsg_PlayerUpdate.h \
  /home/brent/lyra/src/include/RMsg_RcvAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_RoomDescription.h \
  /home/brent/lyra/src/include/RMsg_Speech.h \
  /home/brent/lyra/src/include/RMsg_Update.h GsLevelSet.h GsMacros.h \
  /home/brent/lyra/src/include/LyraMessage.h \
@@ -1722,6 +1726,7 @@ GsPlayerThread2.o: GsPlayerThread2.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/RmRemotePlayer.h \
  /home/brent/lyra/src/include/RMsg_Error.h \
  /home/brent/lyra/src/include/RMsg_GetAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_GetRoomDescription.h \
  /home/brent/lyra/src/include/RMsg_GotoRoom.h \
  /home/brent/lyra/src/include/RMsg_ItemDrop.h \
  /home/brent/lyra/src/include/RMsg_ItemHdrDrop.h \
@@ -1738,6 +1743,7 @@ GsPlayerThread2.o: GsPlayerThread2.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/RMsg_PlayerMsg.h \
  /home/brent/lyra/src/include/RMsg_PlayerUpdate.h \
  /home/brent/lyra/src/include/RMsg_RcvAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_RoomDescription.h \
  /home/brent/lyra/src/include/RMsg_Speech.h \
  /home/brent/lyra/src/include/RMsg_Update.h GsLevelSet.h GsMacros.h \
  /home/brent/lyra/src/include/LyraMessage.h \
@@ -1910,6 +1916,7 @@ GsPlayerThread3.o: GsPlayerThread3.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/RmRemotePlayer.h \
  /home/brent/lyra/src/include/RMsg_Error.h \
  /home/brent/lyra/src/include/RMsg_GetAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_GetRoomDescription.h \
  /home/brent/lyra/src/include/RMsg_GotoRoom.h \
  /home/brent/lyra/src/include/RMsg_ItemDrop.h \
  /home/brent/lyra/src/include/RMsg_ItemHdrDrop.h \
@@ -1926,6 +1933,7 @@ GsPlayerThread3.o: GsPlayerThread3.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/RMsg_PlayerMsg.h \
  /home/brent/lyra/src/include/RMsg_PlayerUpdate.h \
  /home/brent/lyra/src/include/RMsg_RcvAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_RoomDescription.h \
  /home/brent/lyra/src/include/RMsg_Speech.h \
  /home/brent/lyra/src/include/RMsg_Update.h GsLevelSet.h GsMacros.h \
  /home/brent/lyra/src/include/LyraMessage.h \
@@ -2094,6 +2102,7 @@ GsPlayerThread4.o: GsPlayerThread4.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/RmRemotePlayer.h \
  /home/brent/lyra/src/include/RMsg_Error.h \
  /home/brent/lyra/src/include/RMsg_GetAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_GetRoomDescription.h \
  /home/brent/lyra/src/include/RMsg_GotoRoom.h \
  /home/brent/lyra/src/include/RMsg_ItemDrop.h \
  /home/brent/lyra/src/include/RMsg_ItemHdrDrop.h \
@@ -2110,6 +2119,7 @@ GsPlayerThread4.o: GsPlayerThread4.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/RMsg_PlayerMsg.h \
  /home/brent/lyra/src/include/RMsg_PlayerUpdate.h \
  /home/brent/lyra/src/include/RMsg_RcvAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_RoomDescription.h \
  /home/brent/lyra/src/include/RMsg_Speech.h \
  /home/brent/lyra/src/include/RMsg_Update.h GsLevelSet.h GsMacros.h \
  /home/brent/lyra/src/include/LyraMessage.h \
@@ -2275,6 +2285,7 @@ GsPlayerThread.o: GsPlayerThread.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/RmRemotePlayer.h \
  /home/brent/lyra/src/include/RMsg_Error.h \
  /home/brent/lyra/src/include/RMsg_GetAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_GetRoomDescription.h \
  /home/brent/lyra/src/include/RMsg_GotoRoom.h \
  /home/brent/lyra/src/include/RMsg_ItemDrop.h \
  /home/brent/lyra/src/include/RMsg_ItemHdrDrop.h \
@@ -2291,6 +2302,7 @@ GsPlayerThread.o: GsPlayerThread.cpp GsPlayerThread.h \
  /home/brent/lyra/src/include/RMsg_PlayerMsg.h \
  /home/brent/lyra/src/include/RMsg_PlayerUpdate.h \
  /home/brent/lyra/src/include/RMsg_RcvAvatarDescription.h \
+ /home/brent/lyra/src/include/RMsg_RoomDescription.h \
  /home/brent/lyra/src/include/RMsg_Speech.h \
  /home/brent/lyra/src/include/RMsg_Update.h GsLevelSet.h GsMacros.h \
  /home/brent/lyra/src/include/LyraMessage.h \

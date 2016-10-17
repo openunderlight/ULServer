@@ -242,6 +242,17 @@ int GsPlayer::TokensToDemote(int guild) const
   return LmStats::TokensToDemote(db_.Stats().GuildRank(guild));
 }
 
+bool GsPlayer::HasMinRank(int rank) const
+{
+	LmLocker mon(lock_);
+	for(int i = 0; i < NUM_GUILDS; i++)
+	{
+		if(db_.Stats().GuildRank(i) >= rank)
+			return true;
+	}	 
+	
+	return false;
+}
 
 void GsPlayer::remove_art(int art_id, GMsg_ChangeStat& changemsg)
 {
@@ -331,25 +342,26 @@ int GsPlayer::Demote(int guild_num, int& tokens_used, GMsg_ChangeStat& changemsg
   }
 
   if (!has_rank) { // no longer has any rank; remove house arts
-    remove_art(62, changemsg);	// Demote
-    remove_art(100, changemsg); // Create Power Token
-    remove_art(103, changemsg); // Bequeath
-	remove_art(118, changemsg); // House Members
+    remove_art(Arts::DEMOTE, changemsg);	// Demote
+    remove_art(Arts::POWER_TOKEN, changemsg); // Create Power Token
+    remove_art(Arts::EMPATHY, changemsg); // Bequeath
+		remove_art(Arts::HOUSE_MEMBERS, changemsg); // House Members
   }
 
   if (!has_knight) {
-    remove_art(53, changemsg); // initiate
-	remove_art(55, changemsg); // support_ascend
-    remove_art(56, changemsg); // ascend
-	remove_art(61, changemsg); // support_demo
-	remove_art(117, changemsg); // cup_summons
+    remove_art(Arts::INITIATE, changemsg); // initiate
+		remove_art(Arts::SUPPORT_ASCENSION, changemsg); // support_ascend
+    remove_art(Arts::ASCEND, changemsg); // ascend
+		remove_art(Arts::SUPPORT_DEMOTION, changemsg); // support_demo
+		remove_art(Arts::CUP_SUMMONS, changemsg); // cup_summons
+  	remove_art(Arts::RALLY, changemsg); // Rally... seriously why the FUCK did you not use constants?
   }
 
   if (!has_ruler) {
-    remove_art(54, changemsg); // knight
-    remove_art(97, changemsg); // expel
-    remove_art(95, changemsg); // create id token
-	remove_art(121, changemsg); // summon_prime
+    remove_art(Arts::KNIGHT, changemsg); // knight
+    remove_art(Arts::EXPEL, changemsg); // expel
+    remove_art(Arts::CREATE_ID_TOKEN, changemsg); // create id token
+		remove_art(Arts::SUMMON_PRIME, changemsg); // summon_prime
   }
 
 //  main_->PlayerDBC()->SavePlayer(db_, false);
