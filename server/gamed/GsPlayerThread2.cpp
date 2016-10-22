@@ -686,6 +686,9 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 
       int max_tokens_sphere = player_->SphereTokens(msg.ReceiverID());
       int max_sphere = MIN(max_tokens_sphere, max_skill_sphere);
+
+      // GMs can sphere to 9th
+      if (player_->DB().AccountType() == LmPlayerDB::ACCT_ADMIN) max_sphere = 9;
       //SECLOG(-3, _T("%s: player %u: max skill = %d, tokens = %d, max = %d"), method, max_tokens_sphere, max_skill_sphere, max_sphere);
       msg.SetState1(1);
       msg.SetState2(max_sphere);
