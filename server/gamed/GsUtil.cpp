@@ -14,7 +14,7 @@
 #include <signal.h>
 
 #include <list>
-#include <algo.h>
+#include <parallel/algo.h>
 
 #include "GsUtil.h"
 #include "GsMain.h"
