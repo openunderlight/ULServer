@@ -4,5 +4,6 @@ DB = library('DB',
 		'LmItemGenDB.cpp',
 		'LmPlayerDB.cpp',
 		'LmPlayerNameMap.cpp',
+		'LmRoomDB.cpp',
                 include_directories: incdir,
                 cpp_args: libmysqlflags)
