@@ -1,0 +1,10 @@
+NET = library(	'Net',
+		'LmConnection.cpp',
+		'LmSockAddr.cpp',
+		'LmSockAddrUnix.cpp',
+		'LmSockType.cpp',
+		'LmConnectionSet.cpp',
+		'LmSockAddrInet.cpp',
+		'LmSocket.cpp',
+                include_directories: incdir,
+                cpp_args: libmysqlflags)

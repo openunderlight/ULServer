@@ -1,1 +1,0 @@
-../rmsg/RMsg_GetAvatarDescription.i

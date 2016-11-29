@@ -1,1 +1,0 @@
-../smsg/SMsg_ItemDrop.i
