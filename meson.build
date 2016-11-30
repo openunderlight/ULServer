@@ -1,5 +1,6 @@
 project('Underlight Server', 'cpp', default_options: ['default_library=static'])
-add_project_arguments(	'-std=gnu++0x',
+add_project_arguments(	'-std=c++0x',
+			'-fpermissive',
 			'-DUSE_INLINE',
 			'-DUSE_DEBUG',
 			'-D_REENTRANT',

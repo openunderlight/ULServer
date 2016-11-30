@@ -237,7 +237,7 @@ typedef unsigned int realmid_t;  // backwards compatibility
 typedef int pid_t;
 #define UL_SERVER_REGISTRY_KEY "Software\\Lyra\\Server"
 #define SERVER_SHUTDOWN_STRING "SHUTDOWN UNDERLIGHT SERVERS"
-#include "pthread.h"
+#include <pthread.h>
 #include "Windows.h"
 #endif
 #endif
