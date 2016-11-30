@@ -24,6 +24,7 @@ GAMED = executable('gamed',
 		'GsSignalThread.cpp',
 		'GsUtil.cpp',
 		'Main.cpp',
+		install: true,
 		link_with: LYRA,
                 include_directories: incdir,
                 cpp_args: libmysqlflags)

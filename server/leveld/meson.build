@@ -22,6 +22,7 @@ LEVELD = executable('leveld',
 		'LsSignalThread.cpp',
 		'LsUtil.cpp',
 		'Main.cpp',
+		install: true,
 		link_with: LYRA,
                 include_directories: incdir,
                 cpp_args: libmysqlflags)
