@@ -7,11 +7,9 @@ add_project_arguments(	'-std=c++0x',
 			language: 'cpp')
 add_project_link_arguments('libLyra.a', language: 'cpp')
 add_project_link_arguments('-rdynamic', '-L/usr/lib64/mysql', '-lmysqlclient', '-lz', '-lcrypt', '-lnsl', '-lm', '-lssl', '-lcrypto', '-lpth', '-lgdbm', language: 'cpp')
-incdir = include_directories('include')
-rc = run_command('mysql_config', '--include')
-libmysqlflags = rc.stdout().strip()
-mysqlincdir = run_command('mysql_config','--variable=pkgincludedir').stdout().strip()
-incdir = include_directories('include', mysqlincdir)
+incdir = include_directories('include', '/usr/include/mysql')
+
+libmysqlflags = run_command('mysql_config', '--include').stdout().strip()
 
 subdir('libsrc/db')
 subdir('libsrc/dbi_gdbm')
