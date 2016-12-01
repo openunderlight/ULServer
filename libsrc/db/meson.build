@@ -1,9 +1,8 @@
-DB = library('DB', 
+DB_FILES = files(
 		'LmGlobalDB.cpp',
 		'LmGoalInfo.cpp',
 		'LmItemGenDB.cpp',
 		'LmPlayerDB.cpp',
 		'LmPlayerNameMap.cpp',
-		'LmRoomDB.cpp',
-                include_directories: incdir,
-                cpp_args: libmysqlflags)
+		'LmRoomDB.cpp'
+)

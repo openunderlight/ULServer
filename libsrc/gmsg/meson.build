@@ -1,4 +1,4 @@
-GMSG = library(	'GMsg',
+GMSG_FILES = files( 
 		'GMsg_AgentLogin.cpp',
 		'GMsg_ChangeAvatar.cpp',
 		'GMsg_ChangeStat.cpp',
@@ -54,6 +54,5 @@ GMSG = library(	'GMsg',
 		'GMsg_UpdateItem.cpp',
 		'GMsg_UpdateStats.cpp',
 		'GMsg_UsePPoint.cpp',
-		'GMsg_ViewItem.cpp',
-                include_directories: incdir,
-                cpp_args: libmysqlflags)
+		'GMsg_ViewItem.cpp'
+)

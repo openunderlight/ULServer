@@ -1,4 +1,4 @@
-UTIL = library(	'Util',
+UTIL_FILES = files( 
 		'LmAssert.cpp',
 		'LmFuncTimer.cpp',
 		'LmIdSet.cpp',
@@ -9,6 +9,5 @@ UTIL = library(	'Util',
 		'LmNew.cpp',
 		'LmRand.cpp',
 		'LmTimer.cpp',
-		'LmUtil.cpp',
-                include_directories: incdir,
-                cpp_args: libmysqlflags)
+		'LmUtil.cpp'
+)

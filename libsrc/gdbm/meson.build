@@ -1,6 +1,5 @@
-GDBM = library(	'GDBM',
+GDBM_FILES = files(
 		'Gdbm.cpp',
 		'LmDatabase.cpp',
-		'LmDatabaseKey.cpp',
-                include_directories: incdir,
-                cpp_args: libmysqlflags)
+		'LmDatabaseKey.cpp'
+)

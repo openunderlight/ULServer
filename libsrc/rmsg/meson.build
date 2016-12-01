@@ -1,4 +1,4 @@
-RMSG = library(	'RMsg',
+RMSG_FILES = files( 
 		'RmRemotePlayer.cpp',
 		'RMsg_ChangeAvatar.cpp',
 		'RMsg_CupSummons.cpp',
@@ -24,6 +24,5 @@ RMSG = library(	'RMsg',
 		'RMsg_RoomDescription.cpp',
 		'RMsg_RoomLoginAck.cpp',
 		'RMsg_Speech.cpp',
-		'RMsg_Update.cpp',
-                include_directories: incdir,
-                cpp_args: libmysqlflags)
+		'RMsg_Update.cpp'
+)

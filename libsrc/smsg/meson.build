@@ -1,4 +1,4 @@
-SMSG = library(	'SMsg',
+SMSG_FILES = files( 
 		'SMsg_ConnStatus.cpp',
 		'SMsg_DBQueryAck.cpp',
 		'SMsg_DBQuery.cpp',
@@ -34,6 +34,5 @@ SMSG = library(	'SMsg',
 		'SMsg_ServerStatus.cpp',
 		'SMsg_SetAvatarDescription.cpp',
 		'SMsg_ShowItem.cpp',
-		'SMsg_TakeItemAck.cpp',
-                include_directories: incdir,
-                cpp_args: libmysqlflags)
+		'SMsg_TakeItemAck.cpp'
+)

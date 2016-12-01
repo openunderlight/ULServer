@@ -1,4 +1,4 @@
-SHARED = library('Shared',
+SHARED_FILES = files( 
 		'LmArts.cpp',
 		'LmAvatar.cpp',
 		'LmBit32.cpp',
@@ -13,6 +13,5 @@ SHARED = library('Shared',
 		'LmStats.cpp',
 		'LnMD5.cpp',
 		'LyraMessage.cpp',
-		'md5.cpp',
-                include_directories: incdir,
-                cpp_args: libmysqlflags)
+		'md5.cpp'
+)

@@ -1,9 +1,8 @@
-DBI_MYSQL = library('DBI_MYSQL', 
+DBI_MYSQL_FILES = files( 
 	        'LmBillingDBC.cpp',
                 'LmGuildDBC.cpp',
                 'LmItemDBC.cpp',
                 'LmLevelDBC.cpp',
                 'LmPlayerDBC.cpp',
-                'LmServerDBC.cpp',
-                include_directories: incdir,
-                cpp_args: libmysqlflags)
+                'LmServerDBC.cpp'
+)

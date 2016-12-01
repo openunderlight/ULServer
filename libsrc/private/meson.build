@@ -1,6 +1,5 @@
-PRIVATE = library('Private',
+PRIVATE_FILES = files( 
 		'LmConnectionSetImp.cpp',
 		'LmMesgBufPoolImp.cpp',
-		'LmThreadMQ.cpp',
-                include_directories: incdir,
-                cpp_args: libmysqlflags)
+		'LmThreadMQ.cpp'
+)

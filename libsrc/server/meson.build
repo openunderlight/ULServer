@@ -1,4 +1,4 @@
-SERVER = library('Server',
+SERVER_FILES = files( 
 		'LmDispatch.cpp',
 		'LmInventory.cpp',
 		'LmItemGenColors.cpp',
@@ -12,6 +12,5 @@ SERVER = library('Server',
 		'LmSignalThread.cpp',
 		'LmSrvMesgBuf.cpp',
 		'LmThread.cpp',
-		'LmThreadPool.cpp',
-                include_directories: incdir,
-                cpp_args: libmysqlflags)
+		'LmThreadPool.cpp'
+)
