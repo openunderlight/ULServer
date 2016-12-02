@@ -268,7 +268,7 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
     { ITEM_UNUSED, 1, TRANSLATION_NONE, false, 0, 0},
     { ITEM_TARGETHI, 2, TRANSLATION_NONE, true, 0, USHRT_MAX},
     { ITEM_TARGETLO, 2, TRANSLATION_NONE, true, 0, USHRT_MAX},
-    { ITEM_CREATORLO, 2, TRANSLATION_NONE, true, 0, UINT_MAX}},
+    { ITEM_CREATORLO, 2, TRANSLATION_NONE, true, 0, USHRT_MAX}},
 	},
 
    // GRATITUDE_FUNCTION
