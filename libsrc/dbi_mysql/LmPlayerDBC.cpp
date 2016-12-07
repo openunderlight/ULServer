@@ -1274,9 +1274,9 @@ int LmPlayerDBC::LoadPlayer(lyra_id_t player_id, LmPlayerDB& player_record, int 
 	//LOG_Debug(_T("%s: Player has art %d at rank %d"), method, player_id, art, skill);
 	if ((art == Arts::GATEKEEPER) &&
 	    (player_record.AccountType() != LmPlayerDB::ACCT_MONSTER))
-	{ // GK's get +1 damage/plateua, max 8
+	{ // GK's get +1 damage/plateua, max 9
 		int extra_damage = skill/10;
-		if (extra_damage > 7) extra_damage = 7;
+		if (extra_damage > 9) extra_damage = 9;
 		player_record.Avatar().SetExtraDamage(extra_damage);
         //LOG_Debug(_T("%s: Player %d has GK rank %d, extra damage %d/%d"), method, player_id, skill, extra_damage, player_record.Avatar().ExtraDamage());
 	}
