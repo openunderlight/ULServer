@@ -1482,9 +1482,17 @@ bool GsPlayer::CanSelfTrain(int art, TCHAR* names_buffer)
   if ((db_.Arts().Skill(art)+1) > db_.Stats().Orbit())
     return false;
 
-  int num_required_tokens = (int)((db_.Arts().Skill(art)+1)/10);
-  if (num_required_tokens < 3)
-    num_required_tokens = 3;
+  int num_required_tokens;
+  int skill_sphere = (int)((db_.Arts().Skill(art) + 1) / 10);
+
+  if (skill_sphere <= 1)
+	  num_required_tokens = 2;
+  else if (skill_sphere <= 3)
+	  num_required_tokens = 3;
+  else if (skill_sphere <= 6)
+	  num_required_tokens = 4;
+  else
+	  num_required_tokens = 5;
 
   // must have TRAIN_SELF skill
   if (db_.Arts().Skill(Arts::TRAIN_SELF) < 1) {
