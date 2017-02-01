@@ -91,7 +91,7 @@ art_t art_info[NUM_ARTS] = // 		  			    Evoke
 {IDS_DREAMBLADE, 			Stats::INSIGHT,		0,  5,  23, 1, 	-1, SANCT|MAKE_ITEM|FOCUS},
 {IDS_TRAIL,					Stats::LUCIDITY,	0,  2,  25, 1, 	-1, SANCT|LEARN},
 {IDS_SCARE,					Stats::LUCIDITY,	10, 5,  4,	2, 	2, NEIGH|LEARN},
-{IDS_STAGGER, 				Stats::LUCIDITY,	40, 10, 3,	2, 	3, NEIGH|FOCUS|LEARN},
+{IDS_STAGGER, 				Stats::LUCIDITY,	20, 10, 3,	2, 	3, NEIGH|FOCUS|LEARN},
 {IDS_DEAFEN,				Stats::LUCIDITY,	5,  15, 4,	2, 	2, NEIGH|LEARN},
 {IDS_BLIND,					Stats::LUCIDITY,	45, 15, 3,	3, 	3, NEIGH|FOCUS|LEARN},
 {IDS_DARKNESS_ART_NAME,		Stats::LUCIDITY,	50, 25, 4,	5, 	3, NEIGH|FOCUS|LEARN},
@@ -1482,9 +1482,17 @@ bool GsPlayer::CanSelfTrain(int art, TCHAR* names_buffer)
   if ((db_.Arts().Skill(art)+1) > db_.Stats().Orbit())
     return false;
 
-  int num_required_tokens = (int)((db_.Arts().Skill(art)+1)/10);
-  if (num_required_tokens < 3)
-    num_required_tokens = 3;
+  int num_required_tokens;
+  int skill_sphere = (int)((db_.Arts().Skill(art) + 1) / 10);
+
+  if (skill_sphere <= 1)
+	  num_required_tokens = 2;
+  else if (skill_sphere <= 3)
+	  num_required_tokens = 3;
+  else if (skill_sphere <= 6)
+	  num_required_tokens = 4;
+  else
+	  num_required_tokens = 5;
 
   // must have TRAIN_SELF skill
   if (db_.Arts().Skill(Arts::TRAIN_SELF) < 1) {

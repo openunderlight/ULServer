@@ -203,17 +203,24 @@ void GsPlayerThread::handle_GMsg_UsePPoint(LmSrvMesgBuf* msgbuf, LmConnection* c
   switch (msg.How()) {
   case GMsg_UsePPoint::GAIN_XP: { // sphere
 	  cost = msg.Var1();
-	  int curr_xp = player_->DB().Stats().XP();
-	  int xp_gain = cost * LmStats::XPPPCost(curr_xp);
 
+	  // not enough pps to do this action
 	  if (cost > pps) {
-			send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::USE_NOT_ENOUGH);
-			return;
+		  send_GMsg_PPointAck(conn, GMsg_PPointAck::USE_ACK, GMsg_PPointAck::USE_NOT_ENOUGH);
+		  return;
 	  }
+
+	  int curr_xp = player_->DB().Stats().XP();
+	  int xp_gain = 0;
+	  // do iterative gains so XP isn't lost over the course of the redemption
+	  for (int i = 0; i < cost; i++)
+	  {
+		  xp_gain += LmStats::XPPPCost(curr_xp+xp_gain);
+	  }
+
 	  TCHAR why[256];
 	  _stprintf(why, _T("Player %d gained %d XP via %d Personality Point(s)"), player_->DB().PlayerID(), xp_gain, cost);
 	  adjust_xp(xp_gain, why, player_->DB().PlayerID(), true);
-	  // dummy edit! -MDA
 	}
 	break;
 #if 0
