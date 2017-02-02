@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <list>
+#include <cstdlib>
 
 #include "LsRoomThread.h"
 #include "LmParty.h"
