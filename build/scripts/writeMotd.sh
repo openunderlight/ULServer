@@ -1,5 +1,7 @@
 #!/bin/bash
 
+MOTDFILE='/opt/lyra/ul/prod/var/text/motd.txt'
+
 BRANCH=$1
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
 HOSTNAME=`hostname`
@@ -9,6 +11,6 @@ then
   BRANCH="UNKNOWN" 
 fi
 
-echo "Server: $HOSTNAME"
-echo "Branch: $BRANCH"
-echo "Date: $DATE"
+echo "Server: $HOSTNAME" > "$MOTDFILE"
+echo "Branch: $BRANCH" >> "$MOTDFILE"
+echo "Date: $DATE" >> "$MOTDFILE"
