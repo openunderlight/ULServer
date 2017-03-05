@@ -1,1 +1,0 @@
-../rmsg/RMsg_LeaveRoom.i

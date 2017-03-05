@@ -62,7 +62,7 @@ struct ByteOrder {
 // global constants that don't belong anywhere else
 struct Lyra {
   enum {
-    GAME_VERSION = 31118,      // build / protocol version number (MUST be 5 digits)
+    GAME_VERSION = 31259,      // build / protocol version number (MUST be 5 digits)
     GAME_SUBVERSION = GAME_VERSION,
 
     ID_UNKNOWN = 0,         // invalid id
@@ -237,7 +237,7 @@ typedef unsigned int realmid_t;  // backwards compatibility
 typedef int pid_t;
 #define UL_SERVER_REGISTRY_KEY "Software\\Lyra\\Server"
 #define SERVER_SHUTDOWN_STRING "SHUTDOWN UNDERLIGHT SERVERS"
-#include "pthread.h"
+#include <pthread.h>
 #include "Windows.h"
 #endif
 #endif

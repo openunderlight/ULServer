@@ -1,1 +1,0 @@
-../smsg/SMsg.h

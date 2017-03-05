@@ -8,7 +8,7 @@
 #include <string.h>
 
 #include <vector>
-#include <algo.h>
+#include <parallel/algo.h>
 
 #include "LsCodexText.h"
 #include "LmLocker.h"

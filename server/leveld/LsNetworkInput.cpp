@@ -10,6 +10,7 @@
 
 #include <errno.h>
 #include <string.h>
+#include <cstdlib>
 
 #include "LsNetworkInput.h"
 #include "LmLevelDBC.h"

@@ -1,1 +1,0 @@
-../gmsg/GMsg_SummonAvatar.i
