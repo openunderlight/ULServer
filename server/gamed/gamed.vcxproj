@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F21A5C24-C144-4F9B-B131-3FBA3C97803C}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="GsForwardThread.cpp" />
+    <ClCompile Include="GsGameThread.cpp" />
+    <ClCompile Include="GsInputDispatch.cpp" />
+    <ClCompile Include="GsLevelSet.cpp" />
+    <ClCompile Include="GsMain.cpp" />
+    <ClCompile Include="GsMessageReader.cpp" />
+    <ClCompile Include="GsNetworkInput.cpp" />
+    <ClCompile Include="GsNetworkOutput.cpp" />
+    <ClCompile Include="GsOutputDispatch.cpp" />
+    <ClCompile Include="GsPlayer.cpp" />
+    <ClCompile Include="GsPlayer1.cpp" />
+    <ClCompile Include="GsPlayer2.cpp" />
+    <ClCompile Include="GsPlayer3.cpp" />
+    <ClCompile Include="GsPlayer4.cpp" />
+    <ClCompile Include="GsPlayerSet.cpp" />
+    <ClCompile Include="GsPlayerThread.cpp" />
+    <ClCompile Include="GsPlayerThread1.cpp" />
+    <ClCompile Include="GsPlayerThread2.cpp" />
+    <ClCompile Include="GsPlayerThread3.cpp" />
+    <ClCompile Include="GsPlayerThread4.cpp" />
+    <ClCompile Include="GsPlayerThreadSet.cpp" />
+    <ClCompile Include="GsPositionThread.cpp" />
+    <ClCompile Include="GsSignalThread.cpp" />
+    <ClCompile Include="GsUtil.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GsForwardThread.h" />
+    <ClInclude Include="GsGameThread.h" />
+    <ClInclude Include="GsInputDispatch.h" />
+    <ClInclude Include="GsLevelSet.h" />
+    <ClInclude Include="GsMacros.h" />
+    <ClInclude Include="GsMain.h" />
+    <ClInclude Include="GsMessageReader.h" />
+    <ClInclude Include="GsNetworkInput.h" />
+    <ClInclude Include="GsNetworkOutput.h" />
+    <ClInclude Include="GsOutputDispatch.h" />
+    <ClInclude Include="GsPlayer.h" />
+    <ClInclude Include="GsPlayerList.h" />
+    <ClInclude Include="GsPlayerSet.h" />
+    <ClInclude Include="GsPlayerThread.h" />
+    <ClInclude Include="GsPlayerThreadSet.h" />
+    <ClInclude Include="GsPositionThread.h" />
+    <ClInclude Include="GsSignalThread.h" />
+    <ClInclude Include="GsUtil.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

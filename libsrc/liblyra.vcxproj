@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CC05C14E-25B3-4A24-BB38-622B5979A7ED}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="dbi_gdbm\LmPlayerDBF.cpp" />
+    <ClCompile Include="dbi_mysql\LmBillingDBC.cpp" />
+    <ClCompile Include="dbi_mysql\LmGuildDBC.cpp" />
+    <ClCompile Include="dbi_mysql\LmItemDBC.cpp" />
+    <ClCompile Include="dbi_mysql\LmLevelDBC.cpp" />
+    <ClCompile Include="dbi_mysql\LmPlayerDBC.cpp" />
+    <ClCompile Include="dbi_mysql\LmServerDBC.cpp" />
+    <ClCompile Include="db\LmGlobalDB.cpp" />
+    <ClCompile Include="db\LmGoalInfo.cpp" />
+    <ClCompile Include="db\LmItemGenDB.cpp" />
+    <ClCompile Include="db\LmPlayerDB.cpp" />
+    <ClCompile Include="db\LmPlayerNameMap.cpp" />
+    <ClCompile Include="db\LmRoomDB.cpp" />
+    <ClCompile Include="gdbm\Gdbm.cpp" />
+    <ClCompile Include="gdbm\LmDatabase.cpp" />
+    <ClCompile Include="gdbm\LmDatabaseKey.cpp" />
+    <ClCompile Include="gmsg\GMsg_AgentLogin.cpp" />
+    <ClCompile Include="gmsg\GMsg_ChangeAvatar.cpp" />
+    <ClCompile Include="gmsg\GMsg_ChangeStat.cpp" />
+    <ClCompile Include="gmsg\GMsg_CreateItem.cpp" />
+    <ClCompile Include="gmsg\GMsg_DestroyItem.cpp" />
+    <ClCompile Include="gmsg\GMsg_DestroyRoomItem.cpp" />
+    <ClCompile Include="gmsg\GMsg_Error.cpp" />
+    <ClCompile Include="gmsg\GMsg_GetGoalHdrs.cpp" />
+    <ClCompile Include="gmsg\GMsg_GetItem.cpp" />
+    <ClCompile Include="gmsg\GMsg_GetItemDescription.cpp" />
+    <ClCompile Include="gmsg\GMsg_GetLevelPlayers.cpp" />
+    <ClCompile Include="gmsg\GMsg_GetPlayerName.cpp" />
+    <ClCompile Include="gmsg\GMsg_GetReportHdrs.cpp" />
+    <ClCompile Include="gmsg\GMsg_GiveItem.cpp" />
+    <ClCompile Include="gmsg\GMsg_GiveItemAck.cpp" />
+    <ClCompile Include="gmsg\GMsg_Goal.cpp" />
+    <ClCompile Include="gmsg\GMsg_GotoLevel.cpp" />
+    <ClCompile Include="gmsg\GMsg_GrantPPoint.cpp" />
+    <ClCompile Include="gmsg\GMsg_ItemDescription.cpp" />
+    <ClCompile Include="gmsg\GMsg_ItemDrop.cpp" />
+    <ClCompile Include="gmsg\GMsg_ItemPickup.cpp" />
+    <ClCompile Include="gmsg\GMsg_LevelPlayers.cpp" />
+    <ClCompile Include="gmsg\GMsg_LocateAvatar.cpp" />
+    <ClCompile Include="gmsg\GMsg_LocateAvatarAck.cpp" />
+    <ClCompile Include="gmsg\GMsg_LocateMaresAck.cpp" />
+    <ClCompile Include="gmsg\GMsg_LocateNewliesAck.cpp" />
+    <ClCompile Include="gmsg\GMsg_Login.cpp" />
+    <ClCompile Include="gmsg\GMsg_LoginAck.cpp" />
+    <ClCompile Include="gmsg\GMsg_Logout.cpp" />
+    <ClCompile Include="gmsg\GMsg_Ping.cpp" />
+    <ClCompile Include="gmsg\GMsg_PostGoal.cpp" />
+    <ClCompile Include="gmsg\GMsg_PostReport.cpp" />
+    <ClCompile Include="gmsg\GMsg_PPointAck.cpp" />
+    <ClCompile Include="gmsg\GMsg_PreLogin.cpp" />
+    <ClCompile Include="gmsg\GMsg_PreLoginAck.cpp" />
+    <ClCompile Include="gmsg\GMsg_PutItem.cpp" />
+    <ClCompile Include="gmsg\GMsg_RcvGoalbookHdr.cpp" />
+    <ClCompile Include="gmsg\GMsg_RcvGoalDetails.cpp" />
+    <ClCompile Include="gmsg\GMsg_RcvGoalHdr.cpp" />
+    <ClCompile Include="gmsg\GMsg_RcvGoalText.cpp" />
+    <ClCompile Include="gmsg\GMsg_RcvPlayerName.cpp" />
+    <ClCompile Include="gmsg\GMsg_RcvReportGoals.cpp" />
+    <ClCompile Include="gmsg\GMsg_RcvReportHdr.cpp" />
+    <ClCompile Include="gmsg\GMsg_RcvReportText.cpp" />
+    <ClCompile Include="gmsg\GMsg_SenseDreamersAck.cpp" />
+    <ClCompile Include="gmsg\GMsg_ServerDown.cpp" />
+    <ClCompile Include="gmsg\GMsg_SetAvatarDescription.cpp" />
+    <ClCompile Include="gmsg\GMsg_ShowItem.cpp" />
+    <ClCompile Include="gmsg\GMsg_SummonAvatar.cpp" />
+    <ClCompile Include="gmsg\GMsg_SummonAvatarAck.cpp" />
+    <ClCompile Include="gmsg\GMsg_TakeItem.cpp" />
+    <ClCompile Include="gmsg\GMsg_TakeItemAck.cpp" />
+    <ClCompile Include="gmsg\GMsg_UpdateItem.cpp" />
+    <ClCompile Include="gmsg\GMsg_UpdateStats.cpp" />
+    <ClCompile Include="gmsg\GMsg_UsePPoint.cpp" />
+    <ClCompile Include="gmsg\GMsg_ViewItem.cpp" />
+    <ClCompile Include="net\LmConnection.cpp" />
+    <ClCompile Include="net\LmConnectionSet.cpp" />
+    <ClCompile Include="net\LmSockAddr.cpp" />
+    <ClCompile Include="net\LmSockAddrInet.cpp" />
+    <ClCompile Include="net\LmSockAddrUnix.cpp" />
+    <ClCompile Include="net\LmSocket.cpp" />
+    <ClCompile Include="net\LmSockType.cpp" />
+    <ClCompile Include="private\LmConnectionSetImp.cpp" />
+    <ClCompile Include="private\LmMesgBufPoolImp.cpp" />
+    <ClCompile Include="private\LmThreadMQ.cpp" />
+    <ClCompile Include="pth\PTh.cpp" />
+    <ClCompile Include="pth\PThAttr.cpp" />
+    <ClCompile Include="pth\PThCond.cpp" />
+    <ClCompile Include="pth\PThMutex.cpp" />
+    <ClCompile Include="rmsg\RmRemotePlayer.cpp" />
+    <ClCompile Include="rmsg\RMsg_ChangeAvatar.cpp" />
+    <ClCompile Include="rmsg\RMsg_CupSummons.cpp" />
+    <ClCompile Include="rmsg\RMsg_EnterRoom.cpp" />
+    <ClCompile Include="rmsg\RMsg_Error.cpp" />
+    <ClCompile Include="rmsg\RMsg_GetAvatarDescription.cpp" />
+    <ClCompile Include="rmsg\RMsg_GetRoomDescription.cpp" />
+    <ClCompile Include="rmsg\RMsg_GotoRoom.cpp" />
+    <ClCompile Include="rmsg\RMsg_ItemDrop.cpp" />
+    <ClCompile Include="rmsg\RMsg_ItemHdrDrop.cpp" />
+    <ClCompile Include="rmsg\RMsg_ItemPickup.cpp" />
+    <ClCompile Include="rmsg\RMsg_JoinedParty.cpp" />
+    <ClCompile Include="rmsg\RMsg_LeaveRoom.cpp" />
+    <ClCompile Include="rmsg\RMsg_LoginAck.cpp" />
+    <ClCompile Include="rmsg\RMsg_Logout.cpp" />
+    <ClCompile Include="rmsg\RMsg_NewlyAwakened.cpp" />
+    <ClCompile Include="rmsg\RMsg_Party.cpp" />
+    <ClCompile Include="rmsg\RMsg_PartyInfo.cpp" />
+    <ClCompile Include="rmsg\RMsg_Ping.cpp" />
+    <ClCompile Include="rmsg\RMsg_PlayerMsg.cpp" />
+    <ClCompile Include="rmsg\RMsg_PlayerUpdate.cpp" />
+    <ClCompile Include="rmsg\RMsg_RcvAvatarDescription.cpp" />
+    <ClCompile Include="rmsg\RMsg_RoomDescription.cpp" />
+    <ClCompile Include="rmsg\RMsg_RoomLoginAck.cpp" />
+    <ClCompile Include="rmsg\RMsg_Speech.cpp" />
+    <ClCompile Include="rmsg\RMsg_Update.cpp" />
+    <ClCompile Include="server\LmDispatch.cpp" />
+    <ClCompile Include="server\LmInventory.cpp" />
+    <ClCompile Include="server\LmItemGen.cpp" />
+    <ClCompile Include="server\LmItemGenColors.cpp" />
+    <ClCompile Include="server\LmMesgBufPool.cpp" />
+    <ClCompile Include="server\LmMessageReader.cpp" />
+    <ClCompile Include="server\LmNetworkInput.cpp" />
+    <ClCompile Include="server\LmNetworkOutput.cpp" />
+    <ClCompile Include="server\LmParty.cpp" />
+    <ClCompile Include="server\LmRoomItem.cpp" />
+    <ClCompile Include="server\LmSignalThread.cpp" />
+    <ClCompile Include="server\LmSrvMesgBuf.cpp" />
+    <ClCompile Include="server\LmThread.cpp" />
+    <ClCompile Include="server\LmThreadPool.cpp" />
+    <ClCompile Include="shared\LmArts.cpp" />
+    <ClCompile Include="shared\LmAvatar.cpp" />
+    <ClCompile Include="shared\LmBit32.cpp" />
+    <ClCompile Include="shared\LmItem.cpp" />
+    <ClCompile Include="shared\LmItemDefs.cpp" />
+    <ClCompile Include="shared\LmItemHdr.cpp" />
+    <ClCompile Include="shared\LmMesg.cpp" />
+    <ClCompile Include="shared\LmMesgBuf.cpp" />
+    <ClCompile Include="shared\LmMesgHdr.cpp" />
+    <ClCompile Include="shared\lmparty.cpp" />
+    <ClCompile Include="shared\LmPeerUpdate.cpp" />
+    <ClCompile Include="shared\LmPosition.cpp" />
+    <ClCompile Include="shared\LmStats.cpp" />
+    <ClCompile Include="shared\LnMD5.cpp" />
+    <ClCompile Include="shared\LyraMessage.cpp" />
+    <ClCompile Include="shared\md5.cpp" />
+    <ClCompile Include="smsg\SMsg_ConnStatus.cpp" />
+    <ClCompile Include="smsg\SMsg_DBQuery.cpp" />
+    <ClCompile Include="smsg\SMsg_DBQueryAck.cpp" />
+    <ClCompile Include="smsg\SMsg_DestroyRoomItem.cpp" />
+    <ClCompile Include="smsg\SMsg_DS_Action.cpp" />
+    <ClCompile Include="smsg\SMsg_DumpState.cpp" />
+    <ClCompile Include="smsg\SMsg_Error.cpp" />
+    <ClCompile Include="smsg\SMsg_GetItem.cpp" />
+    <ClCompile Include="smsg\SMsg_GetLevelPlayers.cpp" />
+    <ClCompile Include="smsg\SMsg_GetServerStatus.cpp" />
+    <ClCompile Include="smsg\SMsg_GiveItem.cpp" />
+    <ClCompile Include="smsg\SMsg_GiveItemAck.cpp" />
+    <ClCompile Include="smsg\SMsg_GS_Action.cpp" />
+    <ClCompile Include="smsg\SMsg_GS_Login.cpp" />
+    <ClCompile Include="smsg\SMsg_GS_Logout.cpp" />
+    <ClCompile Include="smsg\SMsg_ItemDrop.cpp" />
+    <ClCompile Include="smsg\SMsg_ItemPickup.cpp" />
+    <ClCompile Include="smsg\SMsg_LevelLogin.cpp" />
+    <ClCompile Include="smsg\SMsg_LocateAvatar.cpp" />
+    <ClCompile Include="smsg\SMsg_Login.cpp" />
+    <ClCompile Include="smsg\SMsg_Logout.cpp" />
+    <ClCompile Include="smsg\SMsg_LS_Action.cpp" />
+    <ClCompile Include="smsg\SMsg_LS_Login.cpp" />
+    <ClCompile Include="smsg\SMsg_PartyLeader.cpp" />
+    <ClCompile Include="smsg\SMsg_Ping.cpp" />
+    <ClCompile Include="smsg\SMsg_PlayerStatus.cpp" />
+    <ClCompile Include="smsg\SMsg_Proxy.cpp" />
+    <ClCompile Include="smsg\SMsg_PutItem.cpp" />
+    <ClCompile Include="smsg\SMsg_RecvMesg.cpp" />
+    <ClCompile Include="smsg\SMsg_ResetPort.cpp" />
+    <ClCompile Include="smsg\SMsg_RotateLogs.cpp" />
+    <ClCompile Include="smsg\SMsg_SendMesg.cpp" />
+    <ClCompile Include="smsg\SMsg_ServerStatus.cpp" />
+    <ClCompile Include="smsg\SMsg_SetAvatarDescription.cpp" />
+    <ClCompile Include="smsg\SMsg_ShowItem.cpp" />
+    <ClCompile Include="smsg\SMsg_TakeItemAck.cpp" />
+    <ClCompile Include="util\LmAssert.cpp" />
+    <ClCompile Include="util\LmFuncTimer.cpp" />
+    <ClCompile Include="util\LmIdSet.cpp" />
+    <ClCompile Include="util\LmLocker.cpp" />
+    <ClCompile Include="util\LmLog.cpp" />
+    <ClCompile Include="util\LmLogFile.cpp" />
+    <ClCompile Include="util\LmLogSyslog.cpp" />
+    <ClCompile Include="util\LmNew.cpp" />
+    <ClCompile Include="util\LmRand.cpp" />
+    <ClCompile Include="util\LmTimer.cpp" />
+    <ClCompile Include="util\LmUtil.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dbi_gdbm\LmPlayerDBF.h" />
+    <ClInclude Include="dbi_mysql\LmBillingDBC.h" />
+    <ClInclude Include="dbi_mysql\LmGuildDBC.h" />
+    <ClInclude Include="dbi_mysql\LmItemDBC.h" />
+    <ClInclude Include="dbi_mysql\LmLevelDBC.h" />
+    <ClInclude Include="dbi_mysql\LmPlayerDBC.h" />
+    <ClInclude Include="dbi_mysql\LmServerDBC.h" />
+    <ClInclude Include="db\LmGlobalDB.h" />
+    <ClInclude Include="db\LmGoalInfo.h" />
+    <ClInclude Include="db\LmItemGenDB.h" />
+    <ClInclude Include="db\LmPlayerDB.h" />
+    <ClInclude Include="db\LmPlayerNameMap.h" />
+    <ClInclude Include="db\LmRoomDB.h" />
+    <ClInclude Include="gdbm\Gdbm.h" />
+    <ClInclude Include="gdbm\LmDatabase.h" />
+    <ClInclude Include="gdbm\LmDatabaseKey.h" />
+    <ClInclude Include="gmsg\GMsg.h" />
+    <ClInclude Include="gmsg\GMsg_AgentLogin.h" />
+    <ClInclude Include="gmsg\GMsg_All.h" />
+    <ClInclude Include="gmsg\GMsg_ChangeAvatar.h" />
+    <ClInclude Include="gmsg\GMsg_ChangeStat.h" />
+    <ClInclude Include="gmsg\GMsg_CreateItem.h" />
+    <ClInclude Include="gmsg\GMsg_DestroyItem.h" />
+    <ClInclude Include="gmsg\GMsg_DestroyRoomItem.h" />
+    <ClInclude Include="gmsg\GMsg_Error.h" />
+    <ClInclude Include="gmsg\GMsg_GetGoalHdrs.h" />
+    <ClInclude Include="gmsg\GMsg_GetItem.h" />
+    <ClInclude Include="gmsg\GMsg_GetItemDescription.h" />
+    <ClInclude Include="gmsg\GMsg_GetLevelPlayers.h" />
+    <ClInclude Include="gmsg\GMsg_GetPlayerName.h" />
+    <ClInclude Include="gmsg\GMsg_GetReportHdrs.h" />
+    <ClInclude Include="gmsg\GMsg_GiveItem.h" />
+    <ClInclude Include="gmsg\GMsg_GiveItemAck.h" />
+    <ClInclude Include="gmsg\GMsg_Goal.h" />
+    <ClInclude Include="gmsg\GMsg_GotoLevel.h" />
+    <ClInclude Include="gmsg\GMsg_GrantPPoint.h" />
+    <ClInclude Include="gmsg\GMsg_ItemDescription.h" />
+    <ClInclude Include="gmsg\GMsg_ItemDrop.h" />
+    <ClInclude Include="gmsg\GMsg_ItemPickup.h" />
+    <ClInclude Include="gmsg\GMsg_LevelPlayers.h" />
+    <ClInclude Include="gmsg\GMsg_LocateAvatar.h" />
+    <ClInclude Include="gmsg\GMsg_LocateAvatarAck.h" />
+    <ClInclude Include="gmsg\GMsg_LocateMaresAck.h" />
+    <ClInclude Include="gmsg\GMsg_LocateNewliesAck.h" />
+    <ClInclude Include="gmsg\GMsg_Login.h" />
+    <ClInclude Include="gmsg\GMsg_LoginAck.h" />
+    <ClInclude Include="gmsg\GMsg_Logout.h" />
+    <ClInclude Include="gmsg\GMsg_Ping.h" />
+    <ClInclude Include="gmsg\GMsg_PostGoal.h" />
+    <ClInclude Include="gmsg\GMsg_PostReport.h" />
+    <ClInclude Include="gmsg\GMsg_PPointAck.h" />
+    <ClInclude Include="gmsg\GMsg_PreLogin.h" />
+    <ClInclude Include="gmsg\GMsg_PreLoginAck.h" />
+    <ClInclude Include="gmsg\GMsg_PutItem.h" />
+    <ClInclude Include="gmsg\GMsg_RcvGoalbookHdr.h" />
+    <ClInclude Include="gmsg\GMsg_RcvGoalDetails.h" />
+    <ClInclude Include="gmsg\GMsg_RcvGoalHdr.h" />
+    <ClInclude Include="gmsg\GMsg_RcvGoalText.h" />
+    <ClInclude Include="gmsg\GMsg_RcvPlayerName.h" />
+    <ClInclude Include="gmsg\GMsg_RcvReportGoals.h" />
+    <ClInclude Include="gmsg\GMsg_RcvReportHdr.h" />
+    <ClInclude Include="gmsg\GMsg_RcvReportText.h" />
+    <ClInclude Include="gmsg\GMsg_SenseDreamersAck.h" />
+    <ClInclude Include="gmsg\GMsg_ServerDown.h" />
+    <ClInclude Include="gmsg\GMsg_SetAvatarDescription.h" />
+    <ClInclude Include="gmsg\GMsg_ShowItem.h" />
+    <ClInclude Include="gmsg\GMsg_SummonAvatar.h" />
+    <ClInclude Include="gmsg\GMsg_SummonAvatarAck.h" />
+    <ClInclude Include="gmsg\GMsg_TakeItem.h" />
+    <ClInclude Include="gmsg\GMsg_TakeItemAck.h" />
+    <ClInclude Include="gmsg\GMsg_UpdateItem.h" />
+    <ClInclude Include="gmsg\GMsg_UpdateStats.h" />
+    <ClInclude Include="gmsg\GMsg_UsePPoint.h" />
+    <ClInclude Include="gmsg\GMsg_ViewItem.h" />
+    <ClInclude Include="net\LmConnection.h" />
+    <ClInclude Include="net\LmConnectionList.h" />
+    <ClInclude Include="net\LmConnectionSet.h" />
+    <ClInclude Include="net\LmSockAddr.h" />
+    <ClInclude Include="net\LmSockAddrInet.h" />
+    <ClInclude Include="net\LmSockAddrUnix.h" />
+    <ClInclude Include="net\LmSocket.h" />
+    <ClInclude Include="net\LmSockType.h" />
+    <ClInclude Include="pth\PTh.h" />
+    <ClInclude Include="pth\PThAttr.h" />
+    <ClInclude Include="pth\PThCond.h" />
+    <ClInclude Include="pth\PThMutex.h" />
+    <ClInclude Include="rmsg\RmRemotePlayer.h" />
+    <ClInclude Include="rmsg\RMsg.h" />
+    <ClInclude Include="rmsg\RMsg_All.h" />
+    <ClInclude Include="rmsg\RMsg_ChangeAvatar.h" />
+    <ClInclude Include="rmsg\RMsg_CupSummons.h" />
+    <ClInclude Include="rmsg\RMsg_EnterRoom.h" />
+    <ClInclude Include="rmsg\RMsg_Error.h" />
+    <ClInclude Include="rmsg\RMsg_GetAvatarDescription.h" />
+    <ClInclude Include="rmsg\RMsg_GetRoomDescription.h" />
+    <ClInclude Include="rmsg\RMsg_GotoRoom.h" />
+    <ClInclude Include="rmsg\RMsg_ItemDrop.h" />
+    <ClInclude Include="rmsg\RMsg_ItemHdrDrop.h" />
+    <ClInclude Include="rmsg\RMsg_ItemPickup.h" />
+    <ClInclude Include="rmsg\RMsg_JoinedParty.h" />
+    <ClInclude Include="rmsg\RMsg_LeaveRoom.h" />
+    <ClInclude Include="rmsg\RMsg_LoginAck.h" />
+    <ClInclude Include="rmsg\RMsg_Logout.h" />
+    <ClInclude Include="rmsg\RMsg_NewlyAwakened.h" />
+    <ClInclude Include="rmsg\RMsg_Party.h" />
+    <ClInclude Include="rmsg\RMsg_PartyInfo.h" />
+    <ClInclude Include="rmsg\RMsg_Ping.h" />
+    <ClInclude Include="rmsg\RMsg_PlayerMsg.h" />
+    <ClInclude Include="rmsg\RMsg_PlayerUpdate.h" />
+    <ClInclude Include="rmsg\RMsg_RcvAvatarDescription.h" />
+    <ClInclude Include="rmsg\RMsg_RoomDescription.h" />
+    <ClInclude Include="rmsg\RMsg_RoomLoginAck.h" />
+    <ClInclude Include="rmsg\RMsg_Speech.h" />
+    <ClInclude Include="rmsg\RMsg_Update.h" />
+    <ClInclude Include="server\LmDispatch.h" />
+    <ClInclude Include="server\LmInventory.h" />
+    <ClInclude Include="server\LmItemGen.h" />
+    <ClInclude Include="server\LmItemGenNames.h" />
+    <ClInclude Include="server\LmItemGenTables.h" />
+    <ClInclude Include="server\LmMesgBufPool.h" />
+    <ClInclude Include="server\LmMessageReader.h" />
+    <ClInclude Include="server\LmNetworkInput.h" />
+    <ClInclude Include="server\LmNetworkOutput.h" />
+    <ClInclude Include="server\LmParty.h" />
+    <ClInclude Include="server\LmRoomItem.h" />
+    <ClInclude Include="server\LmRoomItemList.h" />
+    <ClInclude Include="server\LmSignalThread.h" />
+    <ClInclude Include="server\LmSrvMesgBuf.h" />
+    <ClInclude Include="server\LmThread.h" />
+    <ClInclude Include="server\LmThreadPool.h" />
+    <ClInclude Include="shared\LmArts.h" />
+    <ClInclude Include="shared\LmAvatar.h" />
+    <ClInclude Include="shared\LmBit32.h" />
+    <ClInclude Include="shared\LmGame.h" />
+    <ClInclude Include="shared\LmItem.h" />
+    <ClInclude Include="shared\LmItemDefs.h" />
+    <ClInclude Include="shared\LmItemHdr.h" />
+    <ClInclude Include="shared\LmItemNames.h" />
+    <ClInclude Include="shared\LmMesg.h" />
+    <ClInclude Include="shared\LmMesgBuf.h" />
+    <ClInclude Include="shared\LmMesgHdr.h" />
+    <ClInclude Include="shared\LmMessage.h" />
+    <ClInclude Include="shared\lmparty.h" />
+    <ClInclude Include="shared\LmPeerUpdate.h" />
+    <ClInclude Include="shared\LmPosition.h" />
+    <ClInclude Include="shared\LmStats.h" />
+    <ClInclude Include="shared\LmXPTable.h" />
+    <ClInclude Include="shared\LnMD5.h" />
+    <ClInclude Include="shared\LyraDefs.h" />
+    <ClInclude Include="shared\LyraMessage.h" />
+    <ClInclude Include="shared\md5.h" />
+    <ClInclude Include="shared\md5global.h" />
+    <ClInclude Include="shared\SharedConstants.h" />
+    <ClInclude Include="shared\tchar.h" />
+    <ClInclude Include="shared\unix.h" />
+    <ClInclude Include="smsg\SMsg.h" />
+    <ClInclude Include="smsg\SMsg_All.h" />
+    <ClInclude Include="smsg\SMsg_ConnStatus.h" />
+    <ClInclude Include="smsg\SMsg_DBQuery.h" />
+    <ClInclude Include="smsg\SMsg_DBQueryAck.h" />
+    <ClInclude Include="smsg\SMsg_DestroyRoomItem.h" />
+    <ClInclude Include="smsg\SMsg_DS_Action.h" />
+    <ClInclude Include="smsg\SMsg_DumpState.h" />
+    <ClInclude Include="smsg\SMsg_Error.h" />
+    <ClInclude Include="smsg\SMsg_GetItem.h" />
+    <ClInclude Include="smsg\SMsg_GetLevelPlayers.h" />
+    <ClInclude Include="smsg\SMsg_GetServerStatus.h" />
+    <ClInclude Include="smsg\SMsg_GiveItem.h" />
+    <ClInclude Include="smsg\SMsg_GiveItemAck.h" />
+    <ClInclude Include="smsg\SMsg_GS_Action.h" />
+    <ClInclude Include="smsg\SMsg_GS_Login.h" />
+    <ClInclude Include="smsg\SMsg_GS_Logout.h" />
+    <ClInclude Include="smsg\SMsg_ItemDrop.h" />
+    <ClInclude Include="smsg\SMsg_ItemPickup.h" />
+    <ClInclude Include="smsg\SMsg_LevelLogin.h" />
+    <ClInclude Include="smsg\SMsg_LocateAvatar.h" />
+    <ClInclude Include="smsg\SMsg_Login.h" />
+    <ClInclude Include="smsg\SMsg_Logout.h" />
+    <ClInclude Include="smsg\SMsg_LS_Action.h" />
+    <ClInclude Include="smsg\SMsg_LS_Login.h" />
+    <ClInclude Include="smsg\SMsg_PartyLeader.h" />
+    <ClInclude Include="smsg\SMsg_Ping.h" />
+    <ClInclude Include="smsg\SMsg_PlayerStatus.h" />
+    <ClInclude Include="smsg\SMsg_Proxy.h" />
+    <ClInclude Include="smsg\SMsg_PutItem.h" />
+    <ClInclude Include="smsg\SMsg_RecvMesg.h" />
+    <ClInclude Include="smsg\SMsg_ResetPort.h" />
+    <ClInclude Include="smsg\SMsg_RotateLogs.h" />
+    <ClInclude Include="smsg\SMsg_SendMesg.h" />
+    <ClInclude Include="smsg\SMsg_ServerStatus.h" />
+    <ClInclude Include="smsg\SMsg_SetAvatarDescription.h" />
+    <ClInclude Include="smsg\SMsg_ShowItem.h" />
+    <ClInclude Include="smsg\SMsg_TakeItemAck.h" />
+    <ClInclude Include="util\LmAssert.h" />
+    <ClInclude Include="util\LmDebug.h" />
+    <ClInclude Include="util\LmFuncTimer.h" />
+    <ClInclude Include="util\LmIdSet.h" />
+    <ClInclude Include="util\LmLocker.h" />
+    <ClInclude Include="util\LmLog.h" />
+    <ClInclude Include="util\LmLogFile.h" />
+    <ClInclude Include="util\LmLogNull.h" />
+    <ClInclude Include="util\LmLogSyslog.h" />
+    <ClInclude Include="util\LmNew.h" />
+    <ClInclude Include="util\LmRand.h" />
+    <ClInclude Include="util\LmTimer.h" />
+    <ClInclude Include="util\LmUtil.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
