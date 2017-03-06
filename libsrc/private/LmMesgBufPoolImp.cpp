@@ -11,7 +11,7 @@
 #include <stdio.h>
 
 #include <list>
-#include <algo.h>
+#include <parallel/algo.h>
 #include <time.h>
 
 #include "LmMesgBufPoolImp.h"

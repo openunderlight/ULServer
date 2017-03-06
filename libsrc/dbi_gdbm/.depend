@@ -1,7 +1,0 @@
-LmPlayerDBF.o: LmPlayerDBF.cpp LmPlayerDBF.h ../include/LyraDefs.h \
- ../include/tchar.h ../include/LmNew.h ../include/LmPlayerDB.h \
- ../include/LyraDefs.h ../include/LmStats.h ../include/SharedConstants.h \
- ../include/LmInventory.h ../include/LmItem.h ../include/LmItemHdr.h \
- ../include/LmBit32.h ../include/LmItemDefs.h ../include/LmAvatar.h \
- ../include/LmArts.h ../include/LmIdSet.h ../include/LmDatabase.h \
- ../include/Gdbm.h ../include/LmDatabaseKey.h LmPlayerDBF.i
