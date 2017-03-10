@@ -210,7 +210,7 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
     NO_FIELD},
   },
 
-  // SCROLL_FUNCTION
+  // SCROLL_FUNCTION 
   { ITEM_CODEX, 10, 4, true, false, false, true, false, false, false, {
     { ITEM_ARTID, 1, TRANSLATION_ART, false, 0, UCHAR_MAX},
     { ITEM_TARGETHI, 2, TRANSLATION_NONE, false, 0, USHRT_MAX},
