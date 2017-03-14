@@ -472,7 +472,7 @@ bool FASTCALL LyraItem::FunctionCreateByGM(int function)
 bool FASTCALL LyraItem::FunctionAlwaysSendState(int function)
 {
   if (!function_ok(function)) {
-    return false;
+    return true;
   }
   return item_functions[function].always_send_state;
 }
