@@ -34,7 +34,7 @@ const LyraItem::item_format_entry_t LyraItem::item_formats[] = {
   // single use items
   {  0,     {  2, 0, 0 } },  // 2
   {  1,     {  3, 0, 0 } },  // 3
-  {  2,     {  4, 0, 0 } },  // 4 
+  {  2,     {  4, 0, 0 } },  // 4  
   {  3,     {  5, 0, 0 } },  // 5
   {  4,     {  6, 0, 0 } },  // 6
   {  5,     {  7, 0, 0 } },  // 7
