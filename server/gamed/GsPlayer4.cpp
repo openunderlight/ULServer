@@ -468,8 +468,7 @@ bool GsPlayer::CanTrain(int art, int skill) const
   // cannot train the train skills 
   if ((art == Arts::TRAIN) || (art == Arts::LEVELTRAIN) ||
       (art == Arts::TRAIN_SELF) || (art == Arts::DREAMSMITH_MARK) ||
-	  (art == Arts::GUILDHOUSE) || (art == Arts::WORDSMITH_MARK) ||
-	  (art == Arts::NP_SYMBOL)) {
+	  (art == Arts::NP_SYMBOL) || (art == Arts::WORDSMITH_MARK)) {
     return false;
   }
 #if 0
