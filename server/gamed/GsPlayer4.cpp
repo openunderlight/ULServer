@@ -465,8 +465,9 @@ bool GsPlayer::CanTrain(int art, int skill) const
   if (!db_.Arts().CanSetSkill(art, skill)) {
     return false;
   }
+
   // cannot train the train skills 
-  if ((art == Arts::TRAIN) || (art == Arts::LEVELTRAIN) ||
+  if ((art == Arts::TRAIN && db_.Arts().Skill(Arts::TRAIN_SELF) < 1) || (art == Arts::LEVELTRAIN) ||
       (art == Arts::TRAIN_SELF) || (art == Arts::DREAMSMITH_MARK) ||
 	  (art == Arts::NP_SYMBOL) || (art == Arts::WORDSMITH_MARK)) {
     return false;
@@ -571,8 +572,8 @@ bool GsPlayer::CanBeTrained(int art, int skill) const
     default:
       break;
   }
-  // if we don't know it at all, then we can learn
-  if (my_skill == 0) {
+  // if we don't know it at all, then we can learn only if it's not Train (Regular players can only plateau Train, not initially teach it)
+  if (my_skill == 0 && art != Arts::TRAIN) {
     return true;
   }
   // else, must be below next plateau in that art
