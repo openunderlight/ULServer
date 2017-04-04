@@ -1002,7 +1002,20 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       xp_adj = GsUtil::NightmareXP(orbit - 100);
 	}
     else if (orbit < 200) { // player nightmare, state1 = 150 + nightmare index
-      xp_adj = GsUtil::NightmareXP(orbit - 150)*2;
+		int mare_type = orbit - 150;
+		xp_adj = GsUtil::NightmareXP(mare_type);
+
+		switch (mare_type)
+		{
+			case Avatars::SHAMBLIX:
+				xp_adj *=  5;
+				break;
+			case Avatars::HORRON:
+				xp_adj *= 3;
+				break;
+			default:
+				xp_adj *= 2;
+		}
     }
     else { // dark or posessed mare = 200 + nightmare index
       xp_adj = GsUtil::NightmareXP(orbit - 200)*8;
