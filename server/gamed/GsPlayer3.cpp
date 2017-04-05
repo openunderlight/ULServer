@@ -302,14 +302,12 @@ int GsPlayer::Demote(int guild_num, int& tokens_used, GMsg_ChangeStat& changemsg
 			}
 		case (Guild::ECLIPSE):
 			{
-			remove_art(93, changemsg); // Sacrifice
 			remove_art(107, changemsg); // Peace Aura
 			break;
 			}
 		case (Guild::SHADOW):
 			{
 			remove_art(110, changemsg); // Shadow Step
-			remove_art(113, changemsg); // Corrupt Essence
 			break;
 			}
 		case (Guild::COVENANT):
@@ -344,16 +342,17 @@ int GsPlayer::Demote(int guild_num, int& tokens_used, GMsg_ChangeStat& changemsg
   if (!has_rank) { // no longer has any rank; remove house arts
     remove_art(Arts::DEMOTE, changemsg);	// Demote
     remove_art(Arts::POWER_TOKEN, changemsg); // Create Power Token
-    remove_art(Arts::EMPATHY, changemsg); // Bequeath
-		remove_art(Arts::HOUSE_MEMBERS, changemsg); // House Members
+	remove_art(Arts::HOUSE_MEMBERS, changemsg); // House Members
+	remove_art(Arts::SACRIFICE, changemsg); // Sacrifice
+	remove_art(Arts::CORRUPT_ESSENCE, changemsg); // Corrupt Essence
   }
 
   if (!has_knight) {
     remove_art(Arts::INITIATE, changemsg); // initiate
-		remove_art(Arts::SUPPORT_ASCENSION, changemsg); // support_ascend
+	remove_art(Arts::SUPPORT_ASCENSION, changemsg); // support_ascend
     remove_art(Arts::ASCEND, changemsg); // ascend
-		remove_art(Arts::SUPPORT_DEMOTION, changemsg); // support_demo
-		remove_art(Arts::CUP_SUMMONS, changemsg); // cup_summons
+	remove_art(Arts::SUPPORT_DEMOTION, changemsg); // support_demo
+	remove_art(Arts::CUP_SUMMONS, changemsg); // cup_summons
   	remove_art(Arts::RALLY, changemsg); // Rally... seriously why the FUCK did you not use constants?
   }
 
@@ -361,7 +360,7 @@ int GsPlayer::Demote(int guild_num, int& tokens_used, GMsg_ChangeStat& changemsg
     remove_art(Arts::KNIGHT, changemsg); // knight
     remove_art(Arts::EXPEL, changemsg); // expel
     remove_art(Arts::CREATE_ID_TOKEN, changemsg); // create id token
-		remove_art(Arts::SUMMON_PRIME, changemsg); // summon_prime
+	remove_art(Arts::SUMMON_PRIME, changemsg); // summon_prime
   }
 
 //  main_->PlayerDBC()->SavePlayer(db_, false);
