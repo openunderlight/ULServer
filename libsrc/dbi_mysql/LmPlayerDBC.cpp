@@ -1399,6 +1399,9 @@ int LmPlayerDBC::LoadPlayer(lyra_id_t player_id, LmPlayerDB& player_record, int 
 			case Avatars::SHAMBLIX:
 				player_record.Stats().SetXP(35360);
 				break;
+			case Avatars::HORRON:
+				player_record.Stats().SetXP(163300);
+				break;
 			case Avatars::BOGROM:
 			default: // bogrom
 				dreamsoul = 50;
