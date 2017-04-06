@@ -1200,14 +1200,14 @@ bool GsPlayer::check_update(LmPeerUpdate& update)
     }
     return true;
   case Avatars::SHAMBLIX:
-    if ((velocity != 3) || (damage != SHAMBLIX_DAMAGE) ||
+    if ((velocity != 3) || (velecoty != -5) || (damage != SHAMBLIX_DAMAGE) || (damage != SHAMBLIX_DAMAGE_XTR) ||
 	(effect != LyraEffect::PLAYER_PARALYZED) || (bitmap != LyraBitmap::FIREBALL_MISSILE)) {
       PDEBUG((_T("%s: illegal shamblix weapon; vel=%d dmg=%d fx=%d bmp=%d"), method, velocity, damage, effect, bitmap));
       return false;
     }
     return true;
   case Avatars::HORRON:
-    if ((velocity != -5) || (damage != HORRON_DAMAGE) ||
+    if ((velocity != -5) || (velecoty != -7) || (damage != HORRON_DAMAGE) || (damage != HORRON_DAMAGE_XTR) ||
 	(effect != LyraEffect::PLAYER_BLIND) || (bitmap != LyraBitmap::FIREBALL_MISSILE)) {
       PDEBUG((_T("%s: illegal horron weapon; vel=%d dmg=%d fx=%d bmp=%d"), method, velocity, damage, effect, bitmap));
       return false;
