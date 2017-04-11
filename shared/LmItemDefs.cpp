@@ -34,7 +34,7 @@ const LyraItem::item_format_entry_t LyraItem::item_formats[] = {
   // single use items
   {  0,     {  2, 0, 0 } },  // 2
   {  1,     {  3, 0, 0 } },  // 3
-  {  2,     {  4, 0, 0 } },  // 4  
+  {  2,     {  4, 0, 0 } },  // 4 
   {  3,     {  5, 0, 0 } },  // 5
   {  4,     {  6, 0, 0 } },  // 6
   {  5,     {  7, 0, 0 } },  // 7
@@ -151,8 +151,7 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
   { ITEM_AMULET, 8, 3, true, false, false, false, true, false, true, {
     { ITEM_STR, 1, TRANSLATION_NONE, true, Stats::SKILL_MIN, Stats::SKILL_MAX},
     { ITEM_UNUSED, 2, TRANSLATION_NONE, false, INT_MIN, INT_MAX},
-    // Using -1 instead of UINT_MAX to avoid implicit type conversion to signed int
-    { ITEM_CODE, 4, TRANSLATION_NONE, true, 0, -1},
+    { ITEM_CODE, 4, TRANSLATION_NONE, true, 0, UINT_MAX}, 
     NO_FIELD,
     NO_FIELD,
     NO_FIELD},
@@ -163,8 +162,7 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
     { ITEM_EFFECT, 1, TRANSLATION_EFFECT, true, 0, NUM_TIMED_EFFECTS},
     { ITEM_DAMAGE, 1, TRANSLATION_POS_MODIFIER, true, -NUM_MODIFIERS+1, NUM_MODIFIERS-1},
     { ITEM_TIME, 1, TRANSLATION_NONE, true, 0, INT_MAX},
-    // Using -1 instead of UINT_MAX to avoid implicit type conversion to signed int
-    { ITEM_CASTER, 4, TRANSLATION_NONE, false, 0, -1},
+    { ITEM_CASTER, 4, TRANSLATION_NONE, false, 0, UINT_MAX},
     NO_FIELD,
     NO_FIELD},
   },
@@ -174,8 +172,7 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
     { ITEM_ESSTYPE, 1, TRANSLATION_NIGHTMARE, true, 0, Avatars::MAX_AVATAR_TYPE},
     { ITEM_STR, 1, TRANSLATION_NONE, true, Stats::SKILL_MIN, Stats::SKILL_MAX},
     { ITEM_WPNTYPE, 1, TRANSLATION_NONE, false, 0, 1},
-    // Using -1 instead of UINT_MAX to avoid implicit type conversion to signed int
-    { ITEM_MAKER, 4, TRANSLATION_NONE, false, 0, -1},
+    { ITEM_MAKER, 4, TRANSLATION_NONE, false, 0, UINT_MAX},
     NO_FIELD,
     NO_FIELD},
   },
@@ -210,12 +207,11 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
     NO_FIELD},
   },
 
-  // SCROLL_FUNCTION 
+  // SCROLL_FUNCTION
   { ITEM_CODEX, 10, 4, true, false, false, true, false, false, false, {
     { ITEM_ARTID, 1, TRANSLATION_ART, false, 0, UCHAR_MAX},
     { ITEM_TARGETHI, 2, TRANSLATION_NONE, false, 0, USHRT_MAX},
-    // Using -1 instead of UINT_MAX to avoid implicit type conversion to signed int
-    { ITEM_MAKER, 4, TRANSLATION_NONE, false, 0, -1},
+    { ITEM_MAKER, 4, TRANSLATION_NONE, false, 0, UINT_MAX},
     { ITEM_TARGETLO, 2, TRANSLATION_NONE, false, 0, USHRT_MAX},
     NO_FIELD,
     NO_FIELD},
@@ -268,7 +264,7 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
     { ITEM_UNUSED, 1, TRANSLATION_NONE, false, 0, 0},
     { ITEM_TARGETHI, 2, TRANSLATION_NONE, true, 0, USHRT_MAX},
     { ITEM_TARGETLO, 2, TRANSLATION_NONE, true, 0, USHRT_MAX},
-    { ITEM_CREATORLO, 2, TRANSLATION_NONE, true, 0, USHRT_MAX}},
+    { ITEM_CREATORLO, 2, TRANSLATION_NONE, true, 0, UINT_MAX}},
 	},
 
    // GRATITUDE_FUNCTION
