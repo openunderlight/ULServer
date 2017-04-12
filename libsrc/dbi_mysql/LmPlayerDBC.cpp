@@ -1385,11 +1385,11 @@ int LmPlayerDBC::LoadPlayer(lyra_id_t player_id, LmPlayerDB& player_record, int 
     // start pmares with correct avatar, XP
     if (player_record.AccountType() == LmPlayerDB::ACCT_PMARE) {
 		int pmare_xp = 0;
-		int dreamsoul = 99;
+		int stat = 99;
 		// only set dreamsoul resuming a pmare session
 		if (pmare_type == Avatars::PMARE_RESUME) {
 			if (player_record.Avatar().AvatarType() == Avatars::BOGROM)
-				dreamsoul = 50;
+				stat = 50;
 		} else { // set XP, dreamsoul for new session
 			player_record.Avatar().SetAvatarType(pmare_type);
 			switch (pmare_type) {
@@ -1399,16 +1399,22 @@ int LmPlayerDBC::LoadPlayer(lyra_id_t player_id, LmPlayerDB& player_record, int 
 			case Avatars::SHAMBLIX:
 				player_record.Stats().SetXP(35360);
 				break;
+			case Avatars::HORRON:
+				player_record.Stats().SetXP(163300);
+				break;
 			case Avatars::BOGROM:
 			default: // bogrom
-				dreamsoul = 50;
+				stat = 50;
 				player_record.Stats().SetXP(0);
 				break;
 			}
 		}
 
-		player_record.Stats().SetMaxStat(0, dreamsoul);
-		player_record.Stats().SetCurrentStat(0, dreamsoul);
+		for (int i = 0; i < NUM_PLAYER_STATS; i++)
+		{
+			player_record.Stats().SetMaxStat(i, stat);
+			player_record.Stats().SetCurrentStat(i, stat);
+		}
 	}
 
 		// now, if there is a login alert set, send email

@@ -435,7 +435,7 @@ void GsPlayerThread::adjust_xp(int xp_adj, const TCHAR* why, lyra_id_t why_id, b
 	  new_dreamsoul = 50; 
       } else if (new_orbit < 15)
 	new_avatar_type = Avatars::AGOKNIGHT;
-      else if (new_orbit > 44)
+      else if (new_orbit >= 30)
 	new_avatar_type = Avatars::HORRON;
       else 
 	new_avatar_type = Avatars::SHAMBLIX;
