@@ -1484,9 +1484,9 @@ int LmGuildDBC::ReportHeaders(const GMsg_GetReportHdrs& msg, lyra_id_t requestor
       //     _stprintf(query, _T("SELECT report.report_id, report.goal_id, report.summary, report.flags FROM report, goal WHERE goal.goal_id = report.goal_id AND goal.guild = %u AND goal.rank = %u AND MOD(report.flags,2) = 0 ORDER BY report.report_id"), guild, rank);
     //    else if (hirank == 1) // guardian looking for initiate reports
     if (hirank > 0) // guardian looking for initiate reports
-     _stprintf(query, _T("SELECT report.report_id, report.goal_id, report.summary, report.flags FROM report, goal WHERE report.goal_id = goal.goal_id AND goal.guild = %u AND goal.rank = %u AND MOD(report.flags,2) = 0 AND (goal.creator = %u OR report.recipient = %u) ORDER BY report.report_id"), guild, rank, requestor, requestor);
+     _stprintf(query, _T("SELECT report.report_id, report.goal_id, report.summary, report.flags FROM report, goal WHERE report.goal_id = goal.goal_id AND goal.guild = %u AND goal.rank = %u AND MOD(report.flags,2) = 0 AND (goal.creator = %u OR report.recipient = %u) ORDER BY report.creation_time DESC"), guild, rank, requestor, requestor);
     else // initiate, show only ours 
-     _stprintf(query, _T("SELECT report.report_id, report.goal_id, report.summary, report.flags FROM report, goal WHERE report.goal_id = goal.goal_id AND goal.guild = %u AND goal.rank = %u AND MOD(report.flags,2) = 0 AND report.recipient = %u  ORDER BY report_id"),  guild, rank, requestor);
+     _stprintf(query, _T("SELECT report.report_id, report.goal_id, report.summary, report.flags FROM report, goal WHERE report.goal_id = goal.goal_id AND goal.guild = %u AND goal.rank = %u AND MOD(report.flags,2) = 0 AND report.recipient = %u  ORDER BY creation_time DESC"),  guild, rank, requestor);
 
   } else { // select a single goal
       if (hirank > 0)
