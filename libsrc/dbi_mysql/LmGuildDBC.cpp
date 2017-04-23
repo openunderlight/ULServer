@@ -1490,8 +1490,8 @@ int LmGuildDBC::ReportHeaders(const GMsg_GetReportHdrs& msg, lyra_id_t requestor
 
   } else { // select a single goal
       if (hirank > 0)
-		_stprintf(query, _T("SELECT report_id, goal_id, summary, flags FROM report WHERE goal_id = %u ORDER BY report.creation_time"),  goalid);
-      else _stprintf(query, _T("SELECT report_id, goal_id, summary, flags FROM report WHERE goal_id = %u  AND (report.recipient = %u OR report.creator = %u) ORDER BY report_id"),  goalid, requestor, requestor);
+		_stprintf(query, _T("SELECT report_id, goal_id, summary, flags FROM report WHERE goal_id = %u ORDER BY report.creation_time DESC"),  goalid);
+      else _stprintf(query, _T("SELECT report_id, goal_id, summary, flags FROM report WHERE goal_id = %u  AND (report.recipient = %u OR report.creator = %u) ORDER BY report.creation_time DESC"),  goalid, requestor, requestor);
   }
  
 
