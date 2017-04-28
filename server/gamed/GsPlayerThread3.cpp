@@ -700,6 +700,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
 			break;
 		default:
 			// do nothing
+			break;
 	}
 
     if (player_->CanBeTrained(art, skill)) {
