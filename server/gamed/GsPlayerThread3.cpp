@@ -664,6 +664,40 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
   case RMsg_PlayerMsg::TRAIN: {             // art_id, teacher_skill (+ 100 if gm train)
     int art = msg.State1();
     int skill = msg.State2();
+
+	// Convert the flame/blade from the Quest focus to the Student's focus -- takes the first available art
+	switch (art)
+	{
+		case Arts::SOULREAPER:
+		case Arts::GATESMASHER:
+		case Arts::DREAMBLADE:
+		case Arts::FATESLAYER:
+			if (player_->DB().Arts().Skill(Arts::DREAMBLADE) > 0)
+				art = Arts::DREAMBLADE;
+			else if (player_->DB().Arts().Skill(Arts::SOULREAPER) > 0)
+				art = Arts::SOULREAPER;
+			else if (player_->DB().Arts().Skill(Arts::GATESMASHER) > 0)
+				art = Arts::GATESMASHER;
+			else if (player_->DB().Arts().Skill(Arts::FATESLAYER) > 0)
+				art = Arts::FATESLAYER;
+			break;
+		case Arts::TRANCEFLAME:
+		case Arts::FLAMESEAR:
+		case Arts::FLAMESHAFT:
+		case Arts::FLAMERUIN:
+			if (player_->DB().Arts().Skill(Arts::TRANCEFLAME) > 0)
+				art = Arts::TRANCEFLAME;
+			else if (player_->DB().Arts().Skill(Arts::FLAMESEAR) > 0)
+				art = Arts::FLAMESEAR;
+			else if (player_->DB().Arts().Skill(Arts::FLAMESHAFT) > 0)
+				art = Arts::FLAMESHAFT;
+			else if (player_->DB().Arts().Skill(Arts::FLAMERUIN) > 0)
+				art = Arts::FLAMERUIN;
+			break;
+		default:
+			art = art;
+	}
+
     if (player_->CanBeTrained(art, skill)) {
       int old_skill = player_->DB().Arts().Skill(art);
       if (player_->ChangeSkill(art, skill, true)) {
