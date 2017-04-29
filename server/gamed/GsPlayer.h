@@ -106,6 +106,7 @@ public:
   bool CanDreamStrike(lyra_id_t playerid) const;
   bool CanTrain(int art, int skill) const;
   bool CanBeTrained(int art, int skill) const;
+  int NormalizeArtId(int art) const;
   bool CanCompleteQuest(LmItem& item, GMsg_RcvGoalDetails& msg) const;
   void ItemToQuestItem (LmItem& item, quest_item_t& questitem) const;
   bool CanAcceptGoal(const LmGoalInfo& goalinfo) const;
