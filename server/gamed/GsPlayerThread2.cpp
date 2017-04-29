@@ -579,6 +579,41 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::TRAIN: {             // art_id, teacher_skill (+ 100 if GM train)
     int art = msg.State1();
     int skill = msg.State2();
+
+	// Convert the flame/blade from the Quest focus to the Student's focus -- takes the first available art
+	switch (art)
+	{
+	case Arts::SOULREAPER:
+	case Arts::GATESMASHER:
+	case Arts::DREAMBLADE:
+	case Arts::FATESLAYER:
+		if (player_->DB().Arts().Skill(Arts::DREAMBLADE) > 0)
+			art = Arts::DREAMBLADE;
+		else if (player_->DB().Arts().Skill(Arts::SOULREAPER) > 0)
+			art = Arts::SOULREAPER;
+		else if (player_->DB().Arts().Skill(Arts::GATESMASHER) > 0)
+			art = Arts::GATESMASHER;
+		else if (player_->DB().Arts().Skill(Arts::FATESLAYER) > 0)
+			art = Arts::FATESLAYER;
+		break;
+	case Arts::TRANCEFLAME:
+	case Arts::FLAMESEAR:
+	case Arts::FLAMESHAFT:
+	case Arts::FLAMERUIN:
+		if (player_->DB().Arts().Skill(Arts::TRANCEFLAME) > 0)
+			art = Arts::TRANCEFLAME;
+		else if (player_->DB().Arts().Skill(Arts::FLAMESEAR) > 0)
+			art = Arts::FLAMESEAR;
+		else if (player_->DB().Arts().Skill(Arts::FLAMESHAFT) > 0)
+			art = Arts::FLAMESHAFT;
+		else if (player_->DB().Arts().Skill(Arts::FLAMERUIN) > 0)
+			art = Arts::FLAMERUIN;
+		break;
+	default:
+		// do nothing
+		break;
+	}
+
     if (!player_->CanTrain(art, skill)) {
       SECLOG(4, _T("%s: player %u: attempted illegal train of player %u, art %d, skill %d"), method,
 	     player_->PlayerID(), msg.ReceiverID(), art, skill);
