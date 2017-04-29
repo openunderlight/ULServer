@@ -515,7 +515,7 @@ bool GsPlayer::CanTrain(int art, int skill) const
 int GsPlayer::NormalizeArtId(int art) const
 {
 	// if we have the art then just return that one
-	if (player_->DB().Arts().Skill(art) > 0)
+	if (db_.Arts().Skill(art) > 0)
 	{
 		return art;
 	}
@@ -530,13 +530,13 @@ int GsPlayer::NormalizeArtId(int art) const
 		case Arts::GATESMASHER:
 		case Arts::DREAMBLADE:
 		case Arts::FATESLAYER:
-			if (player_->DB().Arts().Skill(Arts::DREAMBLADE) > 0)
+			if (db_.Arts().Skill(Arts::DREAMBLADE) > 0)
 				art_to_train = Arts::DREAMBLADE;
-			else if (player_->DB().Arts().Skill(Arts::SOULREAPER) > 0)
+			else if (db_.Arts().Skill(Arts::SOULREAPER) > 0)
 				art_to_train = Arts::SOULREAPER;
-			else if (player_->DB().Arts().Skill(Arts::GATESMASHER) > 0)
+			else if (db_.Arts().Skill(Arts::GATESMASHER) > 0)
 				art_to_train = Arts::GATESMASHER;
-			else if (player_->DB().Arts().Skill(Arts::FATESLAYER) > 0)
+			else if (db_.Arts().Skill(Arts::FATESLAYER) > 0)
 				art_to_train = Arts::FATESLAYER;
 			// we don't have a blade, train them in the blade of their focus
 			else 
@@ -556,13 +556,13 @@ int GsPlayer::NormalizeArtId(int art) const
 		case Arts::FLAMESEAR:
 		case Arts::FLAMESHAFT:
 		case Arts::FLAMERUIN:
-			if (player_->DB().Arts().Skill(Arts::TRANCEFLAME) > 0)
+			if (db_.Arts().Skill(Arts::TRANCEFLAME) > 0)
 				art_to_train = Arts::TRANCEFLAME;
-			else if (player_->DB().Arts().Skill(Arts::FLAMESEAR) > 0)
+			else if (db_.Arts().Skill(Arts::FLAMESEAR) > 0)
 				art_to_train = Arts::FLAMESEAR;
-			else if (player_->DB().Arts().Skill(Arts::FLAMESHAFT) > 0)
+			else if (db_.Arts().Skill(Arts::FLAMESHAFT) > 0)
 				art_to_train = Arts::FLAMESHAFT;
-			else if (player_->DB().Arts().Skill(Arts::FLAMERUIN) > 0)
+			else if (db_.Arts().Skill(Arts::FLAMERUIN) > 0)
 				art_to_train = Arts::FLAMERUIN;
 			// we don't have a flame, train them in the flame of their focus
 			else
