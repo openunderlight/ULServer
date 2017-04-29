@@ -595,6 +595,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 			art = Arts::GATESMASHER;
 		else if (player_->DB().Arts().Skill(Arts::FATESLAYER) > 0)
 			art = Arts::FATESLAYER;
+		msg.SetState1(art);
 		break;
 	case Arts::TRANCEFLAME:
 	case Arts::FLAMESEAR:
@@ -608,6 +609,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 			art = Arts::FLAMESHAFT;
 		else if (player_->DB().Arts().Skill(Arts::FLAMERUIN) > 0)
 			art = Arts::FLAMERUIN;
+		msg.SetState1(art);
 		break;
 	default:
 		// do nothing
