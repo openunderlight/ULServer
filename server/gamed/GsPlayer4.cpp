@@ -499,42 +499,6 @@ bool GsPlayer::CanTrain(int art, int skill) const
   if (house_art) {
 	  return true;
   }
-  
-
-
-  // Convert the flame/blade from the Quest focus to the Student's focus -- takes the first available art
-  switch (art)
-  {
-  case Arts::SOULREAPER:
-  case Arts::GATESMASHER:
-  case Arts::DREAMBLADE:
-  case Arts::FATESLAYER:
-	  if (db_.Arts().Skill(Arts::DREAMBLADE) > 0)
-		  art = Arts::DREAMBLADE;
-	  else if (db_.Arts().Skill(Arts::SOULREAPER) > 0)
-		  art = Arts::SOULREAPER;
-	  else if (db_.Arts().Skill(Arts::GATESMASHER) > 0)
-		  art = Arts::GATESMASHER;
-	  else if (db_.Arts().Skill(Arts::FATESLAYER) > 0)
-		  art = Arts::FATESLAYER;
-	  break;
-  case Arts::TRANCEFLAME:
-  case Arts::FLAMESEAR:
-  case Arts::FLAMESHAFT:
-  case Arts::FLAMERUIN:
-	  if (db_.Arts().Skill(Arts::TRANCEFLAME) > 0)
-		  art = Arts::TRANCEFLAME;
-	  else if (db_.Arts().Skill(Arts::FLAMESEAR) > 0)
-		  art = Arts::FLAMESEAR;
-	  else if (db_.Arts().Skill(Arts::FLAMESHAFT) > 0)
-		  art = Arts::FLAMESHAFT;
-	  else if (db_.Arts().Skill(Arts::FLAMERUIN) > 0)
-		  art = Arts::FLAMERUIN;
-	  break;
-  default:
-	  // do nothing
-	  break;
-  }
 
   // must have art at that skill or greater
   if (skill > db_.Arts().Skill(art)) {
