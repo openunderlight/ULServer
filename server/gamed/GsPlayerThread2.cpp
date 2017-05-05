@@ -579,6 +579,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::TRAIN: {             // art_id, teacher_skill (+ 100 if GM train)
     int art = msg.State1();
     int skill = msg.State2();
+
     if (!player_->CanTrain(art, skill)) {
       SECLOG(4, _T("%s: player %u: attempted illegal train of player %u, art %d, skill %d"), method,
 	     player_->PlayerID(), msg.ReceiverID(), art, skill);

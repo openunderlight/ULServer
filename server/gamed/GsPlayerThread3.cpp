@@ -662,8 +662,12 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
 
   // player being trained
   case RMsg_PlayerMsg::TRAIN: {             // art_id, teacher_skill (+ 100 if gm train)
-    int art = msg.State1();
-    int skill = msg.State2();
+	int art = player_->NormalizeArtId(msg.State1());
+    int skill = msg.State2();	
+
+	// We need to set the state back just incase the art id changed during normalization
+	msg.SetState1(art);
+
     if (player_->CanBeTrained(art, skill)) {
       int old_skill = player_->DB().Arts().Skill(art);
       if (player_->ChangeSkill(art, skill, true)) {
