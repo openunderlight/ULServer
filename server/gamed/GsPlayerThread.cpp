@@ -428,11 +428,11 @@ void GsPlayerThread::adjust_xp(int xp_adj, const TCHAR* why, lyra_id_t why_id, b
     bool avatar_changed = false;
     int old_avatar_type = player_->Avatar().AvatarType();
     int new_avatar_type;
-    int new_dreamsoul = 99;
+    int new_stat = 99;
     if (new_orbit != old_orbit) { // evolve/devolve?
       if (new_orbit < 5) {
 	  new_avatar_type = Avatars::BOGROM; 
-	  new_dreamsoul = 50; 
+	  new_stat = 50;
       } else if (new_orbit < 15)
 	new_avatar_type = Avatars::AGOKNIGHT;
       else if (new_orbit >= 30)
@@ -457,9 +457,11 @@ void GsPlayerThread::adjust_xp(int xp_adj, const TCHAR* why, lyra_id_t why_id, b
       if (send_msg) {
 	main_->OutputDispatch()->SendMessage(&camsg, player_->Connection());
       }      
-      // now change stat message for new max dreamsoul
-      msg.SetNumChanges(2); // XP + dreamsoul
-      msg.InitChange(1, GMsg_ChangeStat::SET_STAT_MAX, 0, new_dreamsoul);
+      // now change stat message for new max stats
+      msg.SetNumChanges(6); // XP + stats
+	  for (int i = 0; i < NUM_PLAYER_STATS; i++) {
+		  msg.InitChange(1, GMsg_ChangeStat::SET_STAT_MAX, i, new_stat);
+	  }
     }
   }
 
