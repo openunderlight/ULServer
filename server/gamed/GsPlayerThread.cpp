@@ -458,7 +458,7 @@ void GsPlayerThread::adjust_xp(int xp_adj, const TCHAR* why, lyra_id_t why_id, b
 	main_->OutputDispatch()->SendMessage(&camsg, player_->Connection());
       }      
       // now change stat message for new max stats
-      msg.SetNumChanges(6); // XP + stats
+      msg.SetNumChanges(1 + NUM_PLAYER_STATS); // XP + stats
 	  for (int i = 0; i < NUM_PLAYER_STATS; i++) {
 		  msg.InitChange(i+1, GMsg_ChangeStat::SET_STAT_MAX, i, new_stat);
 	  }
