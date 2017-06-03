@@ -465,11 +465,11 @@ bool GsPlayer::CanTrain(int art, int skill) const
   if (!db_.Arts().CanSetSkill(art, skill)) {
     return false;
   }
+
   // cannot train the train skills 
-  if ((art == Arts::TRAIN) || (art == Arts::LEVELTRAIN) ||
+  if ((art == Arts::TRAIN && db_.Arts().Skill(Arts::TRAIN_SELF) < 1) || (art == Arts::LEVELTRAIN) ||
       (art == Arts::TRAIN_SELF) || (art == Arts::DREAMSMITH_MARK) ||
-	  (art == Arts::GUILDHOUSE) || (art == Arts::WORDSMITH_MARK) ||
-	  (art == Arts::NP_SYMBOL)) {
+	  (art == Arts::NP_SYMBOL) || (art == Arts::WORDSMITH_MARK)) {
     return false;
   }
 #if 0
@@ -499,7 +499,6 @@ bool GsPlayer::CanTrain(int art, int skill) const
   if (house_art) {
 	  return true;
   }
-  
 
   // must have art at that skill or greater
   if (skill > db_.Arts().Skill(art)) {
@@ -511,6 +510,76 @@ bool GsPlayer::CanTrain(int art, int skill) const
   }
   // ok
   return true;
+}
+
+int GsPlayer::NormalizeArtId(int art) const
+{
+	// if we have the art then just return that one
+	if (db_.Arts().Skill(art) > 0)
+	{
+		return art;
+	}
+
+	int art_to_train = art;
+	int player_focus = db_.Stats().FocusStat();
+	
+	// Convert the flame/blade from the Quest focus to the Student's focus -- takes the first available art
+	switch (art)
+	{
+		case Arts::SOULREAPER:
+		case Arts::GATESMASHER:
+		case Arts::DREAMBLADE:
+		case Arts::FATESLAYER:
+			if (db_.Arts().Skill(Arts::DREAMBLADE) > 0)
+				art_to_train = Arts::DREAMBLADE;
+			else if (db_.Arts().Skill(Arts::SOULREAPER) > 0)
+				art_to_train = Arts::SOULREAPER;
+			else if (db_.Arts().Skill(Arts::GATESMASHER) > 0)
+				art_to_train = Arts::GATESMASHER;
+			else if (db_.Arts().Skill(Arts::FATESLAYER) > 0)
+				art_to_train = Arts::FATESLAYER;
+			// we don't have a blade, train them in the blade of their focus
+			else 
+			{
+				if (player_focus == Stats::WILLPOWER)
+					art_to_train = Arts::GATESMASHER;
+				else if (player_focus == Stats::INSIGHT)
+					art_to_train = Arts::DREAMBLADE;
+				else if (player_focus == Stats::RESILIENCE)
+					art_to_train = Arts::SOULREAPER;
+				else if (player_focus == Stats::LUCIDITY)
+					art_to_train = Arts::FATESLAYER;
+			}
+
+			break;
+		case Arts::TRANCEFLAME:
+		case Arts::FLAMESEAR:
+		case Arts::FLAMESHAFT:
+		case Arts::FLAMERUIN:
+			if (db_.Arts().Skill(Arts::TRANCEFLAME) > 0)
+				art_to_train = Arts::TRANCEFLAME;
+			else if (db_.Arts().Skill(Arts::FLAMESEAR) > 0)
+				art_to_train = Arts::FLAMESEAR;
+			else if (db_.Arts().Skill(Arts::FLAMESHAFT) > 0)
+				art_to_train = Arts::FLAMESHAFT;
+			else if (db_.Arts().Skill(Arts::FLAMERUIN) > 0)
+				art_to_train = Arts::FLAMERUIN;
+			// we don't have a flame, train them in the flame of their focus
+			else
+			{
+				if (player_focus == Stats::WILLPOWER)
+					art_to_train = Arts::FLAMESHAFT;
+				else if (player_focus == Stats::INSIGHT)
+					art_to_train = Arts::TRANCEFLAME;
+				else if (player_focus == Stats::RESILIENCE)
+					art_to_train = Arts::FLAMESEAR;
+				else if (player_focus == Stats::LUCIDITY)
+					art_to_train = Arts::FLAMERUIN;
+			}
+			break;
+	}
+
+	return art_to_train;
 }
 
 ////
@@ -572,8 +641,8 @@ bool GsPlayer::CanBeTrained(int art, int skill) const
     default:
       break;
   }
-  // if we don't know it at all, then we can learn
-  if (my_skill == 0) {
+  // if we don't know it at all, then we can learn only if it's not Train (Regular players can only plateau Train, not initially teach it)
+  if (my_skill == 0 && art != Arts::TRAIN) {
     return true;
   }
   // else, must be below next plateau in that art

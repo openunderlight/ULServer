@@ -397,7 +397,15 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
     // check that player can use given art, at the given skill level
     int art = RMsg_PlayerMsg::ArtType(msg.MsgType());
     int skill = msg.State1();
-    if ((player_->DB().AccountType() != LmPlayerDB::ACCT_MONSTER) && !(player_->CanUseArt(art, skill))) {
+	int acctType = player_->DB().AccountType();
+
+	// pmares are allowed retaliatory firestorms
+	if (acctType == LmPlayerDB::ACCT_PMARE && art == Arts::FIRESTORM)
+	{
+		break;
+	}
+
+    if ((acctType != LmPlayerDB::ACCT_MONSTER) && !(player_->CanUseArt(art, skill))) {
 		if (player_->PPEvoking() == art) { // we spent pp's to evoke this art once
 			player_->SetPPEvoking(Arts::NONE);
 			player_->SetPPSkill(0);
@@ -571,6 +579,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::TRAIN: {             // art_id, teacher_skill (+ 100 if GM train)
     int art = msg.State1();
     int skill = msg.State2();
+
     if (!player_->CanTrain(art, skill)) {
       SECLOG(4, _T("%s: player %u: attempted illegal train of player %u, art %d, skill %d"), method,
 	     player_->PlayerID(), msg.ReceiverID(), art, skill);

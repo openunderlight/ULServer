@@ -662,8 +662,12 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
 
   // player being trained
   case RMsg_PlayerMsg::TRAIN: {             // art_id, teacher_skill (+ 100 if gm train)
-    int art = msg.State1();
-    int skill = msg.State2();
+	int art = player_->NormalizeArtId(msg.State1());
+    int skill = msg.State2();	
+
+	// We need to set the state back just incase the art id changed during normalization
+	msg.SetState1(art);
+
     if (player_->CanBeTrained(art, skill)) {
       int old_skill = player_->DB().Arts().Skill(art);
       if (player_->ChangeSkill(art, skill, true)) {
@@ -1002,7 +1006,20 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       xp_adj = GsUtil::NightmareXP(orbit - 100);
 	}
     else if (orbit < 200) { // player nightmare, state1 = 150 + nightmare index
-      xp_adj = GsUtil::NightmareXP(orbit - 150)*4;
+		int mare_type = orbit - 150;
+		xp_adj = GsUtil::NightmareXP(mare_type);
+
+		switch (mare_type)
+		{
+			case Avatars::SHAMBLIX:
+				xp_adj *=  5;
+				break;
+			case Avatars::HORRON:
+				xp_adj *= 3;
+				break;
+			default:
+				xp_adj *= 2;
+		}
     }
     else { // dark or posessed mare = 200 + nightmare index
       xp_adj = GsUtil::NightmareXP(orbit - 200)*8;
@@ -1067,7 +1084,20 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       }
       adjust_xp(xp_adj, _T("dissolving agent"), msg.SenderID(), true);
     } else if (orbit < 200) { // player mare = 150 + nightmare index
-      xp_adj = GsUtil::NightmareXP(orbit - 150)*4;
+		int mare_type = orbit - 150;
+		xp_adj = GsUtil::NightmareXP(mare_type);
+
+		switch (mare_type)
+		{
+		case Avatars::SHAMBLIX:
+			xp_adj *= 5;
+			break;
+		case Avatars::HORRON:
+			xp_adj *= 3;
+			break;
+		default:
+			xp_adj *= 2;
+		}
       // player mares get only 25% XP for pmare kills
       if (player_->DB().AccountType() == LmPlayerDB::ACCT_PMARE) {
     	xp_adj = (int)(xp_adj/4);

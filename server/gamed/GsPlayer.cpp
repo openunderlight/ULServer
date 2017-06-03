@@ -155,7 +155,7 @@ art_t art_info[NUM_ARTS] = // 		  			    Evoke
 {IDS_POWER_TOKEN,					Stats::DREAMSOUL,	10,  0, 0,	10, -1, SANCT|NEED_ITEM|MAKE_ITEM},
 {IDS_SHOW_GRATITUDE,				Stats::NO_STAT,		0,   0, 0,	10, -1, SANCT|NEED_ITEM|NEIGH},
 {IDS_QUEST,							Stats::NO_STAT,		0,   0, 0,	3, -1, SANCT|NEIGH|MAKE_ITEM},
-{IDS_BEQUEATH,						Stats::NO_STAT,		0,   0, 0,	10, -1, SANCT|NEED_ITEM|NEIGH},
+{IDS_BEQUEATH,						Stats::NO_STAT,		30,   0, 0,	10, -1, SANCT|NEED_ITEM|NEIGH|LEARN},
 {IDS_RADIANT_BLAZE,					Stats::DREAMSOUL,	20, 10, 9,	5,  -1, NEED_ITEM|NEIGH},
 {IDS_POISON_CLOUD,					Stats::DREAMSOUL,	20, 10,15,	5,  -1, NEED_ITEM|NEIGH},
 {IDS_BREAK_COVENANT,				Stats::DREAMSOUL,	20, 10, 9,	5,  -1, NEED_ITEM|NEIGH},
@@ -164,7 +164,7 @@ art_t art_info[NUM_ARTS] = // 		  			    Evoke
 {IDS_ENTRANCEMENT,					Stats::DREAMSOUL,	20, 10,13,	5,  -1, NEED_ITEM|SANCT},
 {IDS_SHADOW_STEP,					Stats::DREAMSOUL,	20, 10,10,	5,  -1, NEED_ITEM|SANCT},
 {IDS_DAZZLE,						Stats::DREAMSOUL,	20, 10, 9,	5,  -1, NEED_ITEM|NEIGH},
-{IDS_GUILD_HOUSE,					Stats::NO_STAT	,	50,  0, 0,  13, -1, SANCT},
+{IDS_TRANSLOCATE,					Stats::DREAMSOUL,	30, 20, 0,  10, -1, SANCT|LEARN},
 {IDS_CORRUPT_ESSENCE,				Stats::RESILIENCE,	10,  5, 0,  1,  -1, NEED_ITEM|SANCT|MAKE_ITEM},
 {IDS_TEHTHUS_OBLIVION,				Stats::DREAMSOUL,	10, 10, 0,  5,  -1, NEED_ITEM|SANCT},
 {IDS_CHAOS_PURGE_ART_NAME,			Stats::DREAMSOUL,	 0, 20, 0,  5,  -1, NEIGH},
@@ -363,7 +363,15 @@ void GsPlayer::Logout(bool save)
   int rc, sc = 0, lt;
 
   if (db_.AccountType() == LmPlayerDB::ACCT_PMARE) {
-    rc = main_->BillingDBC()->LogoutPMare(db_.PlayerID(), num_seconds_online, db_.PMareBilling(), db_.BillingID());
+	unsigned int modified_time_online;
+	
+	// count more time if the pmare collapsed
+	if (num_recent_deaths_ > 0)
+		modified_time_online = num_seconds_online + 300 * num_recent_deaths_;
+	else
+		modified_time_online = num_seconds_online;
+
+    rc = main_->BillingDBC()->LogoutPMare(db_.PlayerID(), modified_time_online, db_.PMareBilling(), db_.BillingID());
     if (rc < 1) {
       main_->Log()->Error(_T("%s: could not properly logout pmare %u, %u seconds online; rc=%d"), method, db_.PlayerID(), rc, num_seconds_online);
 	  GsUtil::HandlePlayerError(main_, method, rc, sc, false);
@@ -1192,14 +1200,14 @@ bool GsPlayer::check_update(LmPeerUpdate& update)
     }
     return true;
   case Avatars::SHAMBLIX:
-    if ((velocity != 3) || (damage != SHAMBLIX_DAMAGE) ||
+    if ((velocity != 3) || (velocity != -5) || (damage != SHAMBLIX_DAMAGE) || (damage != SHAMBLIX_DAMAGE_XTR) ||
 	(effect != LyraEffect::PLAYER_PARALYZED) || (bitmap != LyraBitmap::FIREBALL_MISSILE)) {
       PDEBUG((_T("%s: illegal shamblix weapon; vel=%d dmg=%d fx=%d bmp=%d"), method, velocity, damage, effect, bitmap));
       return false;
     }
     return true;
   case Avatars::HORRON:
-    if ((velocity != -5) || (damage != HORRON_DAMAGE) ||
+    if ((velocity != -5) || (velocity != -7) || (damage != HORRON_DAMAGE) || (damage != HORRON_DAMAGE_XTR) ||
 	(effect != LyraEffect::PLAYER_BLIND) || (bitmap != LyraBitmap::FIREBALL_MISSILE)) {
       PDEBUG((_T("%s: illegal horron weapon; vel=%d dmg=%d fx=%d bmp=%d"), method, velocity, damage, effect, bitmap));
       return false;
