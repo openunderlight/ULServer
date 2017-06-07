@@ -48,7 +48,7 @@ static armor_gen_table_entry armor_gen_table[] = {
   // class 4
   { 4,
     75, 99,
-    10, 90
+    10, 75
   },
 
 };
