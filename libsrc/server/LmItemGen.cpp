@@ -211,8 +211,14 @@ void gen_changestat_item_state(int gen_type, int& modifier_index, lyra_item_chan
   CHECK_GENTYPE(gen_type);
   const changestat_gen_table_entry& entry = changestat_gen_table[gen_type];
 
-  // choose stat to change [0-4]
-  state.stat = LmRand::Generate(0, NUM_PLAYER_STATS - 1);
+  // choose stat to change [0-4], giving favoritism to dreamsoul
+  state.stat = Stats::DREAMSOUL;
+  // this is intentionally generating to the full length to give dreamsoul an extra shot to gen
+  int rnd = LmRand::Generate(0, NUM_PLAYER_STATS); 
+
+  if (rnd < NUM_PLAYER_STATS) {	  
+	  state.stat = rnd;
+  }
   // choose modifier index
   modifier_index = LmRand::Generate(0, 15);
   // choose whether positive/negative, and then choose modifier
