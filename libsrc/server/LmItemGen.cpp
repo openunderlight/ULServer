@@ -419,7 +419,7 @@ void gen_token_item(int gen_type, LmItem& item)
 	// create the header
 	hdr.SetFlags(LyraItem::FLAG_SENDSTATE | LyraItem::FLAG_IMMUTABLE);
 	hdr.SetGraphic(LyraBitmap::SOUL_ESSENCE);
-	hdr.SetColor1(0); header.SetColor2(0);
+	hdr.SetColor1(0); hdr.SetColor2(0);
 	hdr.SetStateFormat(LyraItem::FormatType(LyraItem::FunctionSize(LyraItem::SUPPORT_FUNCTION), 0, 0));
 
 	// FIXME This should be more variable with more odds to the low end and top of the range being quite rare
