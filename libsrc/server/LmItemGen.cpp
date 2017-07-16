@@ -48,9 +48,33 @@ static void gen_codex(LmItem& item);
 void LmItemGen::GenerateItem(int gen_type, int item_type, LmItem& item)
 {
   // if item_type is any, randomly choose
-  if (item_type == ITEM_ANY) {
-    item_type = LmRand::Generate(ITEM_CHANGESTAT, ITEM_MISSILE);
-  }
+	if (item_type == ITEM_ANY) {
+
+		int token_chk;
+
+		// generate the odds of creating a token...these are seperate from the general item calculations
+		switch (gen_type) {
+		case 4:
+			// forcing level 4s to spit these out for testing purposes
+			token_chk = 1;//LmRand::Generate(0, 2500);
+			break;
+		case 3:
+			token_chk = LmRand::Generate(0, 5000);
+			break;
+		case 2:
+			token_chk = LmRand::Generate(0, 7500);
+			break;
+		case 1:
+		default:
+			token_chk = LmRand::Generate(0, 10000);
+		}
+
+		if (token_chk == 0)
+			item_type = ITEM_TOKEN;
+		else
+			item_type = LmRand::Generate(ITEM_CHANGESTAT, ITEM_MISSILE);
+	}
+
   // codex generator?
   if (gen_type == CODEX_GENERATOR) {
     item_type = ITEM_CODEX;
@@ -70,6 +94,9 @@ void LmItemGen::GenerateItem(int gen_type, int item_type, LmItem& item)
   case ITEM_MISSILE:
     gen_missile_item(gen_type, item);
     break;
+  case ITEM_TOKEN:
+	  gen_token_item(gen_type, item);
+	  break;
   case ITEM_CODEX:
     gen_codex(item);
     break;
@@ -372,6 +399,35 @@ void gen_missile_item(int gen_type, LmItem& item)
   // TODO: determine what to name them for real
   // TODO: use correct bitmap_id
   // TODO: use correct colors?
+}
+
+void gen_token_item(int gen_type, LmItem& item)
+{
+	LmItemHdr hdr;
+	hdr.Init(0, 0);
+
+	CHECK_GENTYPE(gen_type);
+
+	// create the item state
+	lyra_item_support_t state = { LyraItem::SUPPORT_FUNCTION, 0, 0, 0 };
+	state.type = LyraItem::SUPPORT_FUNCTION;
+	state.set_guild_token(Guild::NO_GUILD, Tokens::POWER_TOKEN);
+	/// ARGH - we need target ID!!!
+	state.set_target_id(0);
+	state.set_creator_id(0);
+
+	// create the header
+	hdr.SetFlags(LyraItem::FLAG_SENDSTATE | LyraItem::FLAG_IMMUTABLE);
+	hdr.SetGraphic(LyraBitmap::SOUL_ESSENCE);
+	hdr.SetColor1(0); header.SetColor2(0);
+	hdr.SetStateFormat(LyraItem::FormatType(LyraItem::FunctionSize(LyraItem::SUPPORT_FUNCTION), 0, 0));
+
+	// FIXME This should be more variable with more odds to the low end and top of the range being quite rare
+	int num_charges = LmRand::Generate(1, gen_type+1);
+
+	item.Init(header, "Energy Token", 0, 0, 0);
+	item.SetCharges(num_charges);
+	item.SetStateField(0, &state, sizeof(state));
 }
 
 ////
