@@ -15,7 +15,6 @@
 #include "SharedConstants.h"
 #include "LmItemGenTables.h"
 #include "LmItemGenNames.h"
-#include "LmThread.h"
 
 #ifndef USE_INLINE
 #include "LmItemGen.i"
@@ -79,28 +78,24 @@ void LmItemGen::GenerateItem(int gen_type, int item_type, LmItem& item)
   if (gen_type == CODEX_GENERATOR) {
     item_type = ITEM_CODEX;
   }
+  
   // switch on item type
   switch (item_type) {
   default:
   case ITEM_CHANGESTAT:
     gen_changestat_item(gen_type, item);
-	TLOG_Debug(_T("%s: created item %s for gen type %d with %d charges"), "Gen ChangeStat", item.Name(), gen_type, item.Charges());
     break;
   case ITEM_ARMOR:
     gen_armor_item(gen_type, item);
-	TLOG_Debug(_T("%s: created item %s for gen type %d with %d charges"), "Gen Armor", item.Name(), gen_type, item.Charges());
     break;
   case ITEM_EFFECTPLAYER:
     gen_effect_player_item(gen_type, item);
-	TLOG_Debug(_T("%s: created item %s for gen type %d with %d charges"), "Gen Effect", item.Name(), gen_type, item.Charges());
     break;
   case ITEM_MISSILE:
     gen_missile_item(gen_type, item);
-	TLOG_Debug(_T("%s: created item %s for gen type %d with %d charges"), "Gen Missile", item.Name(), gen_type, item.Charges());
     break;
   case ITEM_TOKEN:
 	  gen_token_item(gen_type, item);
-	  TLOG_Debug(_T("%s: created item %s for gen type %d with %d charges"), "Gen Token", item.Name(), gen_type, item.Charges());
 	  break;
   case ITEM_CODEX:
     gen_codex(item);
