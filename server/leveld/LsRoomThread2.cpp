@@ -603,6 +603,9 @@ void LsRoomThread::perform_spawn_mare_item(LsPlayer* player, LsRoomState* room, 
   LmItem it; 
   LmItemGen::GenerateItem(item_type, LmItemGen::ITEM_ANY, it);
   it.Header().SetSerial(serial);
+
+  TLOG_Debug(_T("%s: created item %s for gen type %d with %d charges"), "Agent Drop", it.Name(), item_type, it.Charges());
+
   int ttl = 300; 	
   roomitem.Init(it, spawnPoint, ttl);
   
