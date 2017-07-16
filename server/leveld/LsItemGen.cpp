@@ -63,10 +63,6 @@ const LmRoomItem& LsItemGen::Generate(int serial)
   LmItem it; // = db_->Item(itemnum);
   LmItemGen::GenerateItem(db_->GeneratorType(), LmItemGen::ITEM_ANY, it);
   it.Header().SetSerial(serial);
-
-  // log the item creation
-  TLOG_Debug(_T("Generated '%s' for gen type %d with %d charges"), it->Name(), db_->GeneratorType(), it->Lmitem().Charges());
-
   int ttl = db_->ItemTTL() + LmRand::Generate(0, db_->VarTTL());
   item_.Init(it, db_->Position(), ttl);
   // return reference to data member
