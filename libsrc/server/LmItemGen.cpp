@@ -51,13 +51,17 @@ void LmItemGen::GenerateItem(int gen_type, int item_type, LmItem& item)
   // if item_type is any, randomly choose
 	if (item_type == ITEM_ANY) {
 
+		// all gens are temporarily producing tokens
+		gen_token_item(gen_type, item);
+		return;
+
 		int token_chk;
 
 		// generate the odds of creating a token...these are seperate from the general item calculations
 		switch (gen_type) {
 		case 4:
 			// forcing level 4s to spit these out for testing purposes
-			token_chk = 1;//LmRand::Generate(0, 2500);
+			token_chk = LmRand::Generate(0, 2500);
 			break;
 		case 3:
 			token_chk = LmRand::Generate(0, 5000);
