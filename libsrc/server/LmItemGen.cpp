@@ -51,21 +51,24 @@ void LmItemGen::GenerateItem(int gen_type, int item_type, LmItem& item)
   // if item_type is any, randomly choose
 	if (item_type == ITEM_ANY) {
 		int token_chk;
+		// base rate for a token dropping...change here to allow variable testing
+		// current expectation is for this to be 250...adjust accordingly
+		int token_rate = 5;
 
 		// generate the odds of creating a token...these are seperate from the general item calculations
 		switch (gen_type) {
 		case 4:
-			token_chk = LmRand::Generate(0, 250);
+			token_chk = LmRand::Generate(0, token_rate);
 			break;
 		case 3:
-			token_chk = LmRand::Generate(0, 500);
+			token_chk = LmRand::Generate(0, token_rate*2);
 			break;
 		case 2:
-			token_chk = LmRand::Generate(0, 750);
+			token_chk = LmRand::Generate(0, token_rate*3);
 			break;
 		case 1:
 		default:
-			token_chk = LmRand::Generate(0, 1000);
+			token_chk = LmRand::Generate(0, token_rate*4);
 		}
 
 		if (token_chk == 0)
