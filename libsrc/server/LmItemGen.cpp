@@ -34,6 +34,7 @@ static void gen_effect_player_item_state(int gen_type, int& dur_index, int& pos_
 static void gen_effect_player_item(int gen_type, LmItem& item);
 static void gen_missile_item_state(int gen_type, int& damage_index, lyra_item_missile_t& state);
 static void gen_missile_item(int gen_type, LmItem& item);
+static void gen_token_item(int gen_type, LmItem& item);
 static void gen_codex(LmItem& item);
 
 // macros
@@ -401,6 +402,9 @@ void gen_missile_item(int gen_type, LmItem& item)
   // TODO: use correct colors?
 }
 
+////
+// gen_missile_item - generate a single function token item
+////
 void gen_token_item(int gen_type, LmItem& item)
 {
 	LmItemHdr hdr;
