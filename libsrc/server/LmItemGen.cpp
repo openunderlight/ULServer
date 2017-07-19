@@ -431,7 +431,7 @@ void gen_token_item(int gen_type, LmItem& item)
 	// FIXME This should be more variable with more odds to the low end and top of the range being quite rare
 	int num_charges = LmRand::Generate(1, gen_type+1);
 
-	item.Init(hdr, "Energy Token", 0, 0, 0);
+	item.Init(hdr, "Elemental Mass", 0, 0, 0);
 	item.SetCharges(num_charges);
 	item.SetStateField(0, &state, sizeof(state));
 }
