@@ -52,8 +52,7 @@ void LmItemGen::GenerateItem(int gen_type, int item_type, LmItem& item)
 	if (item_type == ITEM_ANY) {
 		int token_chk;
 		// base rate for a token dropping...change here to allow variable testing
-		// current expectation is for this to be 250...adjust accordingly
-		int token_rate = 5;
+		int token_rate = 250;
 
 		// generate the odds of creating a token...these are seperate from the general item calculations
 		switch (gen_type) {
@@ -428,8 +427,24 @@ void gen_token_item(int gen_type, LmItem& item)
 	hdr.SetColor1(0); hdr.SetColor2(0);
 	hdr.SetStateFormat(LyraItem::FormatType(LyraItem::FunctionSize(LyraItem::SUPPORT_FUNCTION), 0, 0));
 
-	// FIXME This should be more variable with more odds to the low end and top of the range being quite rare
-	int num_charges = LmRand::Generate(1, gen_type+1);
+	int rnd = LmRand::Generate(0, 100);
+	int num_charges;
+
+	// Distribute the chance of each token charge, weighting heavily at the bottom
+	if (rnd > 95)
+		num_charges = 5;
+	else if (rnd > 87)
+		num_charges = 4;
+	else if (rnd > 70)
+		num_charges = 3;
+	else if (rnd > 50)
+		num_charges = 2;
+	else
+		num_charges = 1;
+
+	// if we calculating bigger than the gen can produce, throw out either a 1 or 2 charged token
+	if (num_charges > gen_type + 1)
+		num_charges = LmRand::Generate(1,2);
 
 	item.Init(hdr, "Elemental Mass", 0, 0, 0);
 	item.SetCharges(num_charges);
