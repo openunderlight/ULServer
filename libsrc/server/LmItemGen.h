@@ -28,6 +28,7 @@ public:
     ITEM_ARMOR,
     ITEM_EFFECTPLAYER,
     ITEM_MISSILE,
+	ITEM_TOKEN,
     ITEM_CODEX
   };
 
