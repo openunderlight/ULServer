@@ -8,6 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
 
 #include "LyraDefs.h"
 #include "LmGlobalDB.h"
@@ -18,7 +21,7 @@ int _tmain(int argc, TCHAR** argv)
 {
   pth_init();
 
-  if (argc < 2) {
+  if (argc < 3) {
    _tprintf(_T("usage: fix_ghost <gamed ip address> <gamed port> (to unghost a given ip address/port) OR fix_ghost <gamed host ID> 0 (to unghost all players last logged into a gamd on the host ID)\n"));
     exit(-1);
   }
@@ -41,8 +44,7 @@ int _tmain(int argc, TCHAR** argv)
 
   unsigned int port = _ttoi(argv[2]);
 
-  
-  TCHAR root_dir[FILENAME_MAX] = _T("/opt/lyra/ul/prod/");
+  TCHAR root_dir[FILENAME_MAX] = _T(".."); 
   // if port = 0, ensure that Underight isn't running
   if (port == 0) {
     TCHAR pid_file[FILENAME_MAX];
