@@ -35,12 +35,16 @@ server/[a-z]+d/*exec
 *.sln.docstates
 
 # Build results
+build/*ninja*
+build/compile_commands.json
+build/*meson*
+build/server
+build/util
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
 x64/
-build/
 bld/
 [Bb]in/
 [Oo]bj/
