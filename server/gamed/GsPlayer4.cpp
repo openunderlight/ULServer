@@ -642,7 +642,8 @@ bool GsPlayer::CanBeTrained(int art, int skill) const
       break;
   }
   // if we don't know it at all, then we can learn only if it's not Train (Regular players can only plateau Train, not initially teach it)
-  if (my_skill == 0 && art != Arts::TRAIN) {
+  //if (my_skill == 0 && art != Arts::TRAIN) {
+  if (my_skill == 0) {
     return true;
   }
   // else, must be below next plateau in that art
