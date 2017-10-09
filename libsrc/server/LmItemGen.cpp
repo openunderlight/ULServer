@@ -422,7 +422,7 @@ void gen_token_item(int gen_type, LmItem& item)
 	state.set_creator_id(0);
 
 	// create the header
-	hdr.SetFlags(LyraItem::FLAG_SENDSTATE | LyraItem::FLAG_IMMUTABLE);
+	hdr.SetFlags(LyraItem::FLAG_SENDSTATE | LyraItem::FLAG_CHANGE_CHARGES);
 	hdr.SetGraphic(LyraBitmap::SOUL_ESSENCE);
 	hdr.SetColor1(0); hdr.SetColor2(0);
 	hdr.SetStateFormat(LyraItem::FormatType(LyraItem::FunctionSize(LyraItem::SUPPORT_FUNCTION), 0, 0));
