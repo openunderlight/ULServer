@@ -34,6 +34,7 @@ static void gen_effect_player_item_state(int gen_type, int& dur_index, int& pos_
 static void gen_effect_player_item(int gen_type, LmItem& item);
 static void gen_missile_item_state(int gen_type, int& damage_index, lyra_item_missile_t& state);
 static void gen_missile_item(int gen_type, LmItem& item);
+static void gen_token_item(int gen_type, LmItem& item);
 static void gen_codex(LmItem& item);
 
 // macros
@@ -48,13 +49,38 @@ static void gen_codex(LmItem& item);
 void LmItemGen::GenerateItem(int gen_type, int item_type, LmItem& item)
 {
   // if item_type is any, randomly choose
-  if (item_type == ITEM_ANY) {
-    item_type = LmRand::Generate(ITEM_CHANGESTAT, ITEM_MISSILE);
-  }
+	if (item_type == ITEM_ANY) {
+		int token_chk;
+		// base rate for a token dropping...change here to allow variable testing
+		int token_rate = 250;
+
+		// generate the odds of creating a token...these are seperate from the general item calculations
+		switch (gen_type) {
+		case 4:
+			token_chk = LmRand::Generate(0, token_rate);
+			break;
+		case 3:
+			token_chk = LmRand::Generate(0, token_rate*2);
+			break;
+		case 2:
+			token_chk = LmRand::Generate(0, token_rate*3);
+			break;
+		case 1:
+		default:
+			token_chk = LmRand::Generate(0, token_rate*4);
+		}
+
+		if (token_chk == 0)
+			item_type = ITEM_TOKEN;
+		else
+			item_type = LmRand::Generate(ITEM_CHANGESTAT, ITEM_MISSILE);
+	}
+
   // codex generator?
   if (gen_type == CODEX_GENERATOR) {
     item_type = ITEM_CODEX;
   }
+  
   // switch on item type
   switch (item_type) {
   default:
@@ -70,6 +96,9 @@ void LmItemGen::GenerateItem(int gen_type, int item_type, LmItem& item)
   case ITEM_MISSILE:
     gen_missile_item(gen_type, item);
     break;
+  case ITEM_TOKEN:
+	  gen_token_item(gen_type, item);
+	  break;
   case ITEM_CODEX:
     gen_codex(item);
     break;
@@ -372,6 +401,54 @@ void gen_missile_item(int gen_type, LmItem& item)
   // TODO: determine what to name them for real
   // TODO: use correct bitmap_id
   // TODO: use correct colors?
+}
+
+////
+// gen_missile_item - generate a single function token item
+////
+void gen_token_item(int gen_type, LmItem& item)
+{
+	LmItemHdr hdr;
+	hdr.Init(0, 0);
+
+	CHECK_GENTYPE(gen_type);
+
+	// create the item state
+	lyra_item_support_t state = { LyraItem::SUPPORT_FUNCTION, 0, 0, 0 };
+	state.type = LyraItem::SUPPORT_FUNCTION;
+	state.set_guild_token(Guild::NO_GUILD, Tokens::POWER_TOKEN);
+	/// ARGH - we need target ID!!!
+	state.set_target_id(0);
+	state.set_creator_id(0);
+
+	// create the header
+	hdr.SetFlags(LyraItem::FLAG_SENDSTATE | LyraItem::FLAG_CHANGE_CHARGES);
+	hdr.SetGraphic(LyraBitmap::SOUL_ESSENCE);
+	hdr.SetColor1(0); hdr.SetColor2(0);
+	hdr.SetStateFormat(LyraItem::FormatType(LyraItem::FunctionSize(LyraItem::SUPPORT_FUNCTION), 0, 0));
+
+	int rnd = LmRand::Generate(0, 100);
+	int num_charges;
+
+	// Distribute the chance of each token charge, weighting heavily at the bottom
+	if (rnd > 95)
+		num_charges = 5;
+	else if (rnd > 87)
+		num_charges = 4;
+	else if (rnd > 70)
+		num_charges = 3;
+	else if (rnd > 50)
+		num_charges = 2;
+	else
+		num_charges = 1;
+
+	// if we calculating bigger than the gen can produce, throw out either a 1 or 2 charged token
+	if (num_charges > gen_type + 1)
+		num_charges = LmRand::Generate(1,2);
+
+	item.Init(hdr, "Elemental Mass", 0, 0, 0);
+	item.SetCharges(num_charges);
+	item.SetStateField(0, &state, sizeof(state));
 }
 
 ////

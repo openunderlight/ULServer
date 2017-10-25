@@ -184,6 +184,9 @@ bool GsPlayer::CanUpdateItem(const LmItem& item) const
   // if charges increased, check that player has RECHARGE art, and that increase was acceptable,
   // and that item is rechargable
   if (item.Charges() > citem.Charges()) {
+    if (LyraItem::StateFunction(citem.StateField(0)) == LyraItem::LyraItem::SUPPORT_FUNCTION) {
+      return true;
+    }
     if (db_.Arts().Skill(Arts::RECHARGE_TALISMAN) < 1) {
       return false;
     }

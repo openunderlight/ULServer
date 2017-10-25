@@ -554,7 +554,7 @@ void LsRoomThread::perform_create_soulessence(LsPlayer* player, LsRoomState* roo
   ihdr.SetGraphic(LyraBitmap::SOUL_ESSENCE);
 #endif
   item_ttl = 300; 
-  ihdr.SetFlags(LyraItem::FLAG_IMMUTABLE);
+  ihdr.SetFlags(LyraItem::FLAG_IMMUTABLE | LyraItem::FLAG_ALWAYS_DROP | LyraItem::FLAG_NOREAP);
  _stprintf(itemname, _T("%s"), player->PlayerName());
   if (player->Avatar().AvatarType() == Avatars::MALE) {
     essence.mare_type = Avatars::MALE;
@@ -603,6 +603,9 @@ void LsRoomThread::perform_spawn_mare_item(LsPlayer* player, LsRoomState* room, 
   LmItem it; 
   LmItemGen::GenerateItem(item_type, LmItemGen::ITEM_ANY, it);
   it.Header().SetSerial(serial);
+
+  TLOG_Debug(_T("%s: created item %s for gen type %d with %d charges"), "Agent Drop", it.Name(), item_type, it.Charges());
+
   int ttl = 300; 	
   roomitem.Init(it, spawnPoint, ttl);
   
