@@ -9,7 +9,7 @@ read -s ROOTPASS
 echo
 echo "Available IP addresses: " `hostname -I`
 echo -n "Please enter the database IP address:"
-read -s IPADDR
+read IPADDR
 
 # Initialize variables
 #IPADDR=`hostname -I`
@@ -28,15 +28,15 @@ BINDIR=$INSTALLDIR/bin
 DBDIR=$INSTALLDIR/db
 LIBDIR=$INSTALLDIR/lib
 SRCDIR=$INSTALLDIR/src
-VARDIR=$INSTALLDIR/log
+VARDIR=$INSTALLDIR/var
 
 # Required files
 HOSTIDTXT=$SRCDIR/hostid.txt
 PWTXT=$SRCDIR/pw.txt
 
 echo "Creating directories"
-mkdir -v -p $INSTALLDIR $SBINDIR $BINDIR $DBDIR $SRCDIR $VARDIR $LIBDIR \ 
-            $VARDIR/pid $VARDIR/log $VARDIR/text 
+mkdir -v -p $INSTALLDIR $SBINDIR $BINDIR $DBDIR $SRCDIR $VARDIR $LIBDIR
+mkdir -v -p $VARDIR/pid $VARDIR/log $VARDIR/text 
 
 echo "Copying game server binaries"
 cp -v ../server/masterd/masterd $SBINDIR
@@ -66,8 +66,14 @@ echo "ul_level ul_level $DBPASS" >> $PWTXT
 echo "ul_server ul_server $DBPASS" >> $PWTXT
 echo "ul_billing ul_billing $DBPASS" >> $PWTXT
 
+echo "Installing databases"
 for DATABASE in ${DATABASES[@]}
 do
-  mysql -u root -p"$ROOTPASS" -e "CREATE DATABASE IF NOT EXISTS $DATABASE"
+  mysql -u root -p"$ROOTPASS" < $DATABASE.sql
   mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'$IPADDR' IDENTIFIED BY '$DBPASS'"
 done
+
+mysql -u root -p"$ROOTPASS" -e "UPDATE ul_server.server SET host_name = '$IPADDR'"
+
+echo
+echo "Install complete"
