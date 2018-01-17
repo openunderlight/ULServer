@@ -152,7 +152,7 @@ USE `ul_item`;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`koiteam`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `quest_active` AS select `item`.`item_id` AS `item_id`,`item`.`item_name` AS `item_name`,(((`item`.`item_state1` >> 16) & 255) - 1) AS `art_id`,(((((`item`.`item_state1` >> 24) & 255) | ((`item`.`item_state2` & 255) << 8)) << 16) | ((`item`.`item_state3` >> 8) & 65535)) AS `target_id`,(((((`item`.`item_state2` >> 8) & 65535) << 16) | ((`item`.`item_state2` >> 24) & 255)) | ((`item`.`item_state3` & 255) << 8)) AS `creator_id`,`item`.`owner_type` AS `owner_type`,`item`.`owner_id` AS `owner_id`,`item`.`owner_subid` AS `owner_subid`,`item`.`created_time` AS `created_time`,0 AS `isComplete`,NULL AS `completion_datetime`,`item`.`item_descrip` AS `item_descrip` from `item` where ((((`item`.`item_state1` >> 8) & 255) = 11) and ((((((`item`.`item_state1` >> 24) & 255) | ((`item`.`item_state2` & 255) << 8)) << 16) | ((`item`.`item_state3` >> 8) & 65535)) <> 0) and ((((((`item`.`item_state2` >> 8) & 65535) << 16) | ((`item`.`item_state2` >> 24) & 255)) | ((`item`.`item_state3` & 255) << 8)) <> 0)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
