@@ -47,9 +47,10 @@ echo "Copying utility binaries"
 cp -v ../util/!(*@exe) $BINDIR
 
 echo "Copying scripts"
-cp ulctl ulctl_vars.csh $BINDIR
-cp common.pl $LIBDIR
-cp fix_level_items.pl $DBDIR
+cp bin/* $BINDIR
+cp lib/* $LIBDIR
+cp db/* $DBDIR
+cp level/* $SRCDIR
 
 echo "1" > $HOSTIDTXT
 
@@ -69,7 +70,7 @@ echo "ul_billing ul_billing $DBPASS" >> $PWTXT
 echo "Installing databases"
 for DATABASE in ${DATABASES[@]}
 do
-  mysql -u root -p"$ROOTPASS" < $DATABASE.sql
+  mysql -u root -p"$ROOTPASS" < sql/$DATABASE.sql
   mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'$IPADDR' IDENTIFIED BY '$DBPASS'"
 done
 
