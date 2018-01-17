@@ -6,13 +6,10 @@
 
 # get args
 set cmd = $1
-set directory = `dirname $0`;
 
-# echo "ulctl: cmd=${cmd}"
+source $HOME/lyra/bin/ulctl_vars.csh
 
-source $directory/ulctl_vars.csh
-
-set HOSTID = `cat $directory/../src/hostid.txt`;
+set HOSTID = `cat ${UL_HOME}/src/hostid.txt`;
 
 # check command
 switch ($cmd)
@@ -43,8 +40,9 @@ case "start":
   # run script to fix ghosted (still logged in) users
   ${UL_PROD}/bin/fix_ghost ${HOSTID} 0 
   # delete PID files from previous execution
+  echo "rm ${UL_PIDDIR}/*.pid"
   rm ${UL_PIDDIR}/*.pid
-#  echo "rm -f ${UL_PROD}/var/pid/*.pid"
+
 
   # start the master daemon with cwd being the log dir
   pushd ${UL_LOGDIR} >& /dev/null
