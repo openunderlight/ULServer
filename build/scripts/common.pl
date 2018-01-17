@@ -5,7 +5,7 @@
 # look up database passwords from shared password file
 
 $ENV{UL_HOME} = "$ENV{HOME}";
-$ENV{UL_PW_FILE} = $ENV{UL_HOME}."src/pw.txt";
+$ENV{UL_PW_FILE} = $ENV{UL_HOME} . "/lyra/src/pw.txt";
 
 # this is kinda ugly and slow, but its simple and it works
 
