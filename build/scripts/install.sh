@@ -6,8 +6,13 @@ shopt -s extglob
 echo -n "Please enter the database root password:"
 read -s ROOTPASS
 
+echo
+echo "Available IP addresses: " `hostname -I`
+echo -n "Please enter the database IP address:"
+read -s IPADDR
+
 # Initialize variables
-IPADDR=`hostname -I`
+#IPADDR=`hostname -I`
 DBPORT=3306
 DBADMIN="support@underlight.com"
 DBRETURNEMAIL="support@underlight.com"
@@ -40,6 +45,11 @@ cp -v ../server/leveld/leveld   $SBINDIR
 echo "Copying utility binaries"
 cp -v ../util/!(*@exe) $BINDIR
 
+echo "Copying scripts"
+cp ulctl ulctl_vars.csh $BINDIR
+cp common.pl $LIBDIR
+cp fix_level_items.pl $DBDIR
+
 echo "1" > $HOSTIDTXT
 
 echo "DBHOST $IPADDR" > $PWTXT
@@ -58,5 +68,5 @@ echo "ul_billing ul_billing $DBPASS" >> $PWTXT
 for DATABASE in ${DATABASES[@]}
 do
   mysql -u root -p"$ROOTPASS" -e "CREATE DATABASE IF NOT EXISTS $DATABASE"
-  mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'IPADDR' IDENTIFIED BY '$DBPASS'"
+  mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'$IPADDR' IDENTIFIED BY '$DBPASS'"
 done
