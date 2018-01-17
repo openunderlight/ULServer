@@ -43,7 +43,7 @@ case "start":
   # run script to fix ghosted (still logged in) users
   ${UL_PROD}/bin/fix_ghost ${HOSTID} 0 
   # delete PID files from previous execution
-  rm ${UL_PROD}/var/pid/*.pid
+  rm ${UL_PIDDIR}/*.pid
 #  echo "rm -f ${UL_PROD}/var/pid/*.pid"
 
   # start the master daemon with cwd being the log dir
