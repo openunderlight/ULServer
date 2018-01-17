@@ -3,6 +3,44 @@
 # Enables egrep-style extended pattern matching
 shopt -s extglob
 
+# Required directories
+INSTALLDIR=$HOME/lyra
+SBINDIR=$INSTALLDIR/sbin
+BINDIR=$INSTALLDIR/bin
+DBDIR=$INSTALLDIR/db
+LIBDIR=$INSTALLDIR/lib
+SRCDIR=$INSTALLDIR/src
+VARDIR=$INSTALLDIR/var
+
+# Required files
+HOSTIDTXT=$SRCDIR/hostid.txt
+PWTXT=$SRCDIR/pw.txt
+
+install_binaries() {
+	echo "Copying game server binaries"
+	cp -v ../server/masterd/masterd $SBINDIR
+	cp -v ../server/gamed/gamed     $SBINDIR
+	cp -v ../server/leveld/leveld   $SBINDIR
+
+	echo "Copying utility binaries"
+	cp -v ../util/!(*@exe) $BINDIR
+}
+
+install_scripts() {
+	echo "Copying scripts"
+	cp -v bin/* $BINDIR
+	cp -v lib/* $LIBDIR
+	cp -v db/* $DBDIR
+	cp -v level/* $SRCDIR
+}
+
+if [ -e $HOME/lyra ]; then
+  echo "Previous install detected. Only binaries and scripts will be replaced."
+  install_binaries
+  install_scripts
+  exit
+fi
+
 echo -n "Please enter the database root password:"
 read -s ROOTPASS
 
@@ -21,36 +59,12 @@ DBSALT="3A"
 DBPASS=`pwgen 15 1`
 DATABASES=(ul_billing ul_guild ul_item ul_level ul_player ul_server)
 
-# Required directories
-INSTALLDIR=$HOME/lyra
-SBINDIR=$INSTALLDIR/sbin
-BINDIR=$INSTALLDIR/bin
-DBDIR=$INSTALLDIR/db
-LIBDIR=$INSTALLDIR/lib
-SRCDIR=$INSTALLDIR/src
-VARDIR=$INSTALLDIR/var
-
-# Required files
-HOSTIDTXT=$SRCDIR/hostid.txt
-PWTXT=$SRCDIR/pw.txt
-
 echo "Creating directories"
 mkdir -v -p $INSTALLDIR $SBINDIR $BINDIR $DBDIR $SRCDIR $VARDIR $LIBDIR
 mkdir -v -p $VARDIR/pid $VARDIR/log $VARDIR/text 
 
-echo "Copying game server binaries"
-cp -v ../server/masterd/masterd $SBINDIR
-cp -v ../server/gamed/gamed     $SBINDIR
-cp -v ../server/leveld/leveld   $SBINDIR
-
-echo "Copying utility binaries"
-cp -v ../util/!(*@exe) $BINDIR
-
-echo "Copying scripts"
-cp -v bin/* $BINDIR
-cp -v lib/* $LIBDIR
-cp -v db/* $DBDIR
-cp -v level/* $SRCDIR
+install_binaries
+install_scripts
 
 echo "1" > $HOSTIDTXT
 
@@ -78,3 +92,4 @@ mysql -u root -p"$ROOTPASS" -e "UPDATE ul_server.server SET host_name = '$IPADDR
 
 echo
 echo "Install complete"
+
