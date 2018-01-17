@@ -10,20 +10,18 @@ require DBI;
 require "../lib/common.pl";
 
 # check args
-if ($#ARGV != 0) {
+if ($#ARGV < 0) {
     print "usage: put_leveldb.pl infile.dat\n";
     exit;
 }
 
 $infile = $ARGV[0];
 
-my $level_db = "ul_level";
-my $level_user = LookupDBUser($level_db);
-my $level_pw = LookupDBPassword($level_db);
+my $level_user = LookupDBUser("ul_level");
+my $level_pw = LookupDBPassword("ul_level");
 
-my $item_db = "ul_item";
-my $item_user = LookupDBUser($item_db);
-my $item_pw = LookupDBPassword($item_db);
+my $item_user = LookupDBUser("ul_item");
+my $item_pw = LookupDBPassword("ul_item");
 
 if (! -r $infile) {
     print "make_level.pl: error: $infile not readable\n";
@@ -35,7 +33,7 @@ use lib "../src";
 # read level data
 require $infile;
 
-my $dbh = DBI->connect("DBI:mysql:$level_db", $level_user, $level_pw);
+my $dbh = DBI->connect($level_db, $level_user, $level_pw);
 
 if (not $dbh) {
     print "An error has occured while attempting to connect\n";
@@ -175,7 +173,7 @@ $dbh->disconnect;
 # also set up the rows in the locations table in the item db so
 # that sense_dreamers can work
 
-my $i_dbh = DBI->connect("DBI:mysql:$item_db", $item_user, $item_pw);
+my $i_dbh = DBI->connect($item_db, $item_user, $item_pw);
 
 if (not $i_dbh) {
     print "An error has occured while attempting to connect\n";
