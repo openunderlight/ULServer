@@ -7,7 +7,7 @@
 
 use DBI;
 
-require "../lib/common.pl";
+require "$ENV{HOME}/lyra/lib/common.pl";
 
 if (UnderlightRunning() == 1) {
     print "Underlight appears to be currently running - you must shut it down before running this script\n";
