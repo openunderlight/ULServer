@@ -35,7 +35,8 @@ HOSTIDTXT=$SRCDIR/hostid.txt
 PWTXT=$SRCDIR/pw.txt
 
 echo "Creating directories"
-mkdir -v -p $INSTALLDIR $SBINDIR $BINDIR $DBDIR $SRCDIR $VARDIR $LIBDIR
+mkdir -v -p $INSTALLDIR $SBINDIR $BINDIR $DBDIR $SRCDIR $VARDIR $LIBDIR \ 
+            $VARDIR/pid $VARDIR/log $VARDIR/text 
 
 echo "Copying game server binaries"
 cp -v ../server/masterd/masterd $SBINDIR
