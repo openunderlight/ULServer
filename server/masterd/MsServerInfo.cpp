@@ -126,7 +126,7 @@ int MsServerInfo::StartServers(int servtype)
     }
 
     // wait a few seconds before forking the next one off
-    sleep(1);
+    //sleep(1);
   }
   return retval;
 }
