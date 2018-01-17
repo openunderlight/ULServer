@@ -67,14 +67,15 @@ for configuring the server after building.
 
 `vi /etc/my.cnf.d/server.cnf`
 
-Uncomment the line bind-address=0.0.0.0
-Below it add skip-name-resolve
+Uncomment the line bind-address=0.0.0.0 and enable skip-name-resolve
 
-[mariadb]
-...
-bind-address=0.0.0.0
-skip-name-resolve
-...
+```
+   [mariadb]
+   ...
+   bind-address=0.0.0.0
+   skip-name-resolve
+   ...
+```
 
 Restart MariaDB
 
