@@ -47,10 +47,10 @@ echo "Copying utility binaries"
 cp -v ../util/!(*@exe) $BINDIR
 
 echo "Copying scripts"
-cp bin/* $BINDIR
-cp lib/* $LIBDIR
-cp db/* $DBDIR
-cp level/* $SRCDIR
+cp -v bin/* $BINDIR
+cp -v lib/* $LIBDIR
+cp -v db/* $DBDIR
+cp -v level/* $SRCDIR
 
 echo "1" > $HOSTIDTXT
 
