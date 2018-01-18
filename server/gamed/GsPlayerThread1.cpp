@@ -817,10 +817,13 @@ void GsPlayerThread::handle_GMsg_CreateItem(LmSrvMesgBuf* msgbuf, LmConnection* 
   item.Header().SetSerial(serial);
   // log creation
   item.UnParse(itemstr, sizeof(itemstr));
+  
+  const TCHAR* creator_name = main_->PlayerNameMap()->PlayerName(player_->PlayerID());
+
   if (msg.Description ())
-    SECLOG(-6, "%s: player %u: created item: %s with text: %s", method, player_->PlayerID(), itemstr, msg.Description ());
+    SECLOG(-6, "%s: player %u, %s: created item: %s with text: %s", method, player_->PlayerID(), creator_name, itemstr, msg.Description ());
   else
-    SECLOG (-6, "%s: player %u: created item: %s with NULL text",method,player_->PlayerID (), itemstr);
+    SECLOG (-6, "%s: player %u, %s: created item: %s with NULL text",method, player_->PlayerID(), creator_name, itemstr);
   // add to player's inventory
   player_->AddItem(item);
   // send ack
