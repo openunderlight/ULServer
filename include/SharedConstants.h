@@ -12,7 +12,7 @@
 
  
 const int NUM_TIMED_EFFECTS = 30; // add one for NONE
-const int NUM_ARTS = 147;
+const int NUM_ARTS = 148;
 const int NUM_MODIFIERS = 64;
 const int NUM_DURATIONS = 64;
 const int NUM_PLAYER_STATS = 5;
@@ -264,6 +264,7 @@ struct Arts {
   CHAOS_WELL, // Essence Container
   RALLY, // Summon party member
   CHANNEL,
+  BULWARK,
   
 	// END OF ARTS LIST - below are art-related constants
 
@@ -683,7 +684,11 @@ struct LyraEffect {
 	PLAYER_NO_POISON,
   PLAYER_SPIN,
 
-	MAX_ITEM_EFFECT = PLAYER_SPIN
+	MAX_ITEM_EFFECT = PLAYER_SPIN,
+	// Non-forgable effects
+	PLAYER_CRIPPLE,
+	PLAYER_SHIELD,
+	PLAYER_GKSHIELD, // Bulwark
 	};
 };
 
