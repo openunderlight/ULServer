@@ -46,7 +46,7 @@ public:
     MISSILE_FUNCTION,        // 6 bytes
     EFFECT_PLAYER_FUNCTION,  // 3 bytes
     AMULET_FUNCTION,         // 6 bytes
-    AREA_EFFECT_FUNCTION,    // 8 bytes
+    AREA_EFFECT_FUNCTION,    // 9 bytes
     ESSENCE_FUNCTION,	     // 8 bytes
     ARMOR_FUNCTION,			 // 4 bytes
     SUPPORT_FUNCTION,        // 10 bytes
@@ -77,6 +77,7 @@ public:
     TRANSLATION_GUILDTOKEN,
     TRANSLATION_LEVEL_ID,
     TRANSLATION_TPORT_DEST,
+	TRANSLATION_DISTANCE
   };
   
   // descriptor table selectors
@@ -248,6 +249,9 @@ struct lyra_item_amulet_t {  // 8 bytes
   unsigned char strength;    // skill of caster
   short unused;
   unsigned int	player_id;	 // id of caster
+  inline bool IsKey() {
+	  return strength > 99;
+  }
   // conversion methods
   inline void hton() {
     HTONL(player_id);
@@ -257,11 +261,13 @@ struct lyra_item_amulet_t {  // 8 bytes
   }
 };
 
-struct lyra_item_area_effect_t {  // 8 bytes 
+struct lyra_item_area_effect_t {  // 10 bytes 
   unsigned char type;      // AREA_EFFECT_FUNCTION
   unsigned char effect;    // timed effect constant activate on hit
+  unsigned char duration;
+  unsigned char stat;
   char          damage;    // index into modifier table for damage
-  unsigned char detonate;  // seconds until detonation
+  unsigned char distance;
   lyra_id_t     caster_id; // player id of caster
   // conversion methods
   inline void hton() {
@@ -552,3 +558,4 @@ struct lyra_item_gratitude_t { // 10 bytes
 #endif
 
 #endif /* INCLUDED_LmItemDefs */
+
