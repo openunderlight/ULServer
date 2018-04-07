@@ -1,0 +1,333 @@
+#!/bin/tcsh -f
+
+# ulctl - Underlight control script
+#
+# run 'ulctl help' for usage information
+
+# get args
+set cmd = $1
+
+source $HOME/lyra/bin/ulctl_vars.csh
+
+set HOSTID = `cat ${UL_HOME}/src/hostid.txt`;
+
+# check command
+switch ($cmd)
+
+#
+# start
+#
+
+case "start":
+  # check if master daemon appears to be up
+  if (-e ${UL_PIDDIR}/masterd.pid) then
+    echo "ulctl: start: master daemon already started in ${UL_PROD}"
+    exit
+  endif
+  # check that master daemon exists
+  if (! -x ${UL_SBINDIR}/masterd) then
+    echo "ulctl: start: could not find master daemon in ${UL_PROD}"
+    exit
+  endif
+  # check again if master daemon appears to be up
+  if (-e ${UL_PIDDIR}/masterd.pid) then
+    echo "ulctl: start: master daemon already started in ${UL_PROD}"
+    exit
+  endif
+
+  # run script to delete extra level items
+  ${UL_PROD}/db/fix_level_items.pl ${HOSTID}
+  # run script to fix ghosted (still logged in) users
+  ${UL_PROD}/bin/fix_ghost ${HOSTID} 0 
+  # delete PID files from previous execution
+  echo "rm ${UL_PIDDIR}/*.pid"
+  rm ${UL_PIDDIR}/*.pid
+
+
+  # start the master daemon with cwd being the log dir
+  pushd ${UL_LOGDIR} >& /dev/null
+  ${UL_SBINDIR}/masterd ${UL_PROD} 
+  echo "ulctl: start: master daemon started in ${UL_PROD}"
+  popd >& /dev/null
+  # start log tail file
+  #  /usr/local/bin/starttailfile
+  breaksw
+
+#
+# stop
+#
+
+case "stop":
+  # check if they are running
+  if (! -e ${UL_PIDDIR}/masterd.pid) then
+    echo "ulctl: stop: master daemon not started in ${UL_PROD}"
+    exit
+  endif
+  # send SIGTERM to master daemon, which will shut down any children it has
+  (kill -TERM `cat ${UL_PIDDIR}/masterd.pid`)
+  echo "ulctl: stop: master daemon shutting down; please wait a few minutes for servers to exit"
+  breaksw
+
+#
+# shutdown
+#
+
+case "shutdown":
+  # get list of server pid files
+  pushd ${UL_PIDDIR} >& /dev/null
+  set nonomatch
+  set pidfiles=(*.pid)
+  set noglob
+  if ("$pidfiles" == "*.pid") then
+    echo "ulctl: shutdown: no servers found in ${UL_PROD}"
+    exit
+  endif
+  # send SIGTERM to all servers
+  foreach pf ($pidfiles)
+    set pid=`cat $pf`
+    echo "ulctl: shutdown: sending SIGTERM to process $pid"
+    (kill -TERM $pid)
+  end
+  popd >& /dev/null
+  breaksw
+
+#
+# nuke
+#
+
+case "nuke":
+  # get list of server pid files
+  pushd ${UL_PIDDIR} >& /dev/null
+  set nonomatch
+  set pidfiles=(*.pid)
+  set noglob
+  if ("$pidfiles" == "*.pid") then
+    echo "ulctl: nuke: no servers found in ${UL_PROD}"
+    exit
+  endif
+  # send SIGKILL to all servers
+  foreach pf ($pidfiles)
+    set pid=`cat $pf`
+    echo "ulctl: nuke: sending SIGKILL to process $pid"
+    (kill -KILL $pid)
+  end
+  popd >& /dev/null
+  # now invoke gamed_kill and leveld_kill for good measure
+  ${UL_BINDIR}/gamed_kill
+  ${UL_BINDIR}/leveld_kill
+  breaksw
+
+#
+# dump
+#
+
+case "dump":
+  # get list of server pid files
+  pushd ${UL_PIDDIR} >& /dev/null
+  set nonomatch
+  set pidfiles=(*.pid)
+  set noglob
+  if ("$pidfiles" == "*.pid") then
+    echo "ulctl: dump: no servers found in ${UL_PROD}"
+    exit
+  endif
+  # send SIGUSR1 to all servers
+  foreach pf ($pidfiles)
+    set pid=`cat $pf`
+    echo "ulctl: dump: sending SIGUSR1 to process $pid"
+    (kill -USR1 $pid)
+  end
+  popd >& /dev/null
+  breaksw
+
+#
+# rotate
+#
+
+case "rotate":
+  # kill tailing file and remove
+  /usr/local/bin/killtailfile
+  # make subdirectory in log dir for rotated logs, and move them there
+  echo "rotating" 
+  echo ${UL_OLOGDIR}
+  pushd ${UL_LOGDIR}
+  mkdir old >& /dev/null # create old log directory, if needed
+  popd
+  pushd ${UL_OLOGDIR}#  >& /dev/null
+#  set dv=`date +"%Y.%m.%d_%T"`   # use this for additional time stamp 
+  set dv=`date +"%Y.%m.%d"`
+  mkdir $dv
+  (mv -f ../*.log $dv) >& /dev/null
+  # symlink to most recent logs
+  /bin/rm -f recent
+  /bin/ln -s $dv recent
+  popd >& /dev/null
+  # move any dump files into old directory
+  pushd ${UL_DUMPDIR} >& /dev/null
+  (mv -f *dump* old) >& /dev/null
+  popd >& /dev/null
+
+  # send messages to servers to rotate logs
+  ${UL_BINDIR}/rotate_logs ${HOSTID} 
+  # masterd uses a signal to rotate
+  (kill -USR2 `cat ${UL_PIDDIR}/masterd.pid`)
+  echo "ulctl: rotate: logs rotated, moved to ${UL_LOGDIR}/${dv}"
+  popd >& /dev/null
+  # start new log tailer
+  #  /usr/local/bin/starttailfile
+  breaksw
+
+#
+# ps
+#
+
+case "ps":
+  # only list Underlight servers
+  /bin/ps auxw | grep "${UL_PROD}/sbin" | grep -v grep | sort
+  breaksw
+
+#
+# clean
+#
+
+case "clean":
+  /bin/rm -f ${UL_DUMPDIR}/old/* ${UL_VARDIR}/cores/core.* >& /dev/null
+  /bin/rm -rf ${UL_OLOGDIR}/* >& /dev/null
+  breaksw
+
+#
+# wipe
+#
+
+case "wipe":
+  /bin/rm -f ${UL_PIDDIR}/*.pid ${UL_LOGDIR}/*.log ${UL_DUMPDIR}/* ${UL_DUMPDIR}/old/* ${UL_LSDIR}/*.state ${UL_VARDIR}/cores/core.* >& /dev/null
+  /bin/rm -rf ${UL_OLOGDIR}/* >& /dev/null
+  breaksw
+
+#
+# rmpidrc
+# Used in /etc/rc.local to check for left over pid due to crash - added by DW
+
+case "rmpidrc":
+  # get list of server pid files
+  pushd ${UL_PIDDIR} >& /dev/null
+  set nonomatch
+  set pidfiles=(*.pid)
+  # set noglob
+  if ("$pidfiles" == "*.pid") then
+    echo "ulctl: Startup: Previous shutdown was graceful, no pid files present in ${UL_PIDDIR}"
+    echo "ulctl: Startup: Continuing with startup process"
+    exit
+  endif
+  popd >& /dev/null
+  # Remove all ungraceful pids
+  /bin/rm -f ${UL_PIDDIR}/*.pid
+  echo "ulctl: Startup: Detected Ungraceful Shutdown: Deleted PID files"
+  sleep 2
+  breaksw
+
+#
+# ping
+#
+
+case "ping":
+  if (! -x ${UL_BINDIR}/ping_servers) then
+    echo "ulctl: ping: could not find ping_servers program"
+    exit
+  endif
+  ${UL_BINDIR}/ping_servers 
+  breaksw
+
+#
+# status
+#
+
+case "status":
+  if (! -x ${UL_BINDIR}/get_server_status) then
+    echo "ulctl: status: could not find get_server_status program"
+    exit
+  endif
+  # don't list players, and only list this machine's servers
+  ${UL_BINDIR}/get_server_status 0 ${HOSTID} 
+  breaksw
+
+#
+# players
+#
+
+case "players":
+  if (! -x ${UL_BINDIR}/get_server_status) then
+    echo "ulctl: players: could not find get_server_status program"
+    exit
+  endif
+  # list players, and only list this machine's servers
+  ${UL_BINDIR}/get_server_status  1 ${HOSTID}
+  breaksw
+
+#
+# status_all
+#
+
+case "status_all":
+  if (! -x ${UL_BINDIR}/get_server_status) then
+    echo "ulctl: status_all: could not find get_server_status program"
+    exit
+  endif
+  # don't list players, and get all servers
+  ${UL_BINDIR}/get_server_status 0 all 
+  breaksw
+
+#
+# players_all
+#
+
+case "players_all":
+  if (! -x ${UL_BINDIR}/get_server_status) then
+    echo "ulctl: players_all: could not find get_server_status program"
+    exit
+  endif
+  # list players, and get all servers
+  ${UL_BINDIR}/get_server_status 1 all 
+  breaksw
+
+#
+# help
+#
+
+case "help":
+  echo "usage: ulctl <cmd>"
+  echo "  and where <cmd> is one of the following:"
+  echo " "
+  echo "  start:        start servers (via masterd)"
+  echo "  stop:         stop servers gracefully (masterd)"
+  echo "  rotate:       rotate server log files"
+  echo "  shutdown:     stop servers using pid files (if masterd is down)"
+  echo "  nuke:         stop servers with extreme prejudice (using pid files)"
+  echo " "
+  echo "  dump:         signal servers to dump state"
+#  echo "  rotate:       signal servers to rotate logs"
+  echo "  clean:        remove old log/dump files"
+  echo "  wipe:         remove all log/dump/pid files, and level state files"
+  echo "  rmpidrc:      remove all pids: used for when server crash/restart in rc.local"
+  echo " "
+  echo "  ps:           list servers running on this machine, using 'ps'"
+  echo "  status:       print status for servers running on this machine"
+  echo "  players:      print status for servers running on this machine, plus players"
+  echo " "
+  echo "  ping:         print ping status for all servers"
+  echo "  status_all:   print status for all servers"
+  echo "  players_all:  print status for all servers, plus players"
+  echo " "
+  echo "  help:         print help message"
+  breaksw
+
+#
+# default
+#
+
+default:
+  echo "ulctl: run 'ulctl help' for help."
+  breaksw
+
+# end case
+endsw
