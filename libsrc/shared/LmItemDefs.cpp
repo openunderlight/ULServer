@@ -34,7 +34,7 @@ const LyraItem::item_format_entry_t LyraItem::item_formats[] = {
   // single use items
   {  0,     {  2, 0, 0 } },  // 2
   {  1,     {  3, 0, 0 } },  // 3
-  {  2,     {  4, 0, 0 } },  // 4  
+  {  2,     {  4, 0, 0 } },  // 4 
   {  3,     {  5, 0, 0 } },  // 5
   {  4,     {  6, 0, 0 } },  // 6
   {  5,     {  7, 0, 0 } },  // 7
@@ -99,7 +99,7 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
 
   /*
   *		SUPER IMPORTANT NOTE!!!!!
-  *		
+  *
   *		Items can have up to 6 function entries but forge can only forge up to 5!!!!
   *		Don't bother trying to change forge: that way lies madness. Simply accept the fact and move on!
   *			- MDA, 2014
@@ -151,31 +151,28 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
   { ITEM_AMULET, 8, 3, true, false, false, false, true, false, true, {
     { ITEM_STR, 1, TRANSLATION_NONE, true, Stats::SKILL_MIN, Stats::SKILL_MAX},
     { ITEM_UNUSED, 2, TRANSLATION_NONE, false, INT_MIN, INT_MAX},
-    // Using -1 instead of UINT_MAX to avoid implicit type conversion to signed int
-    { ITEM_CODE, 4, TRANSLATION_NONE, true, 0, -1},
+    { ITEM_CODE, 4, TRANSLATION_NONE, true, 0, UINT_MAX}, 
     NO_FIELD,
     NO_FIELD,
     NO_FIELD},
   },
 
   // AREA_EFFECT_FUNCTION
-  { ITEM_AE, 8, 4, false, false, false, true, true, false, true, {
-    { ITEM_EFFECT, 1, TRANSLATION_EFFECT, true, 0, NUM_TIMED_EFFECTS},
-    { ITEM_DAMAGE, 1, TRANSLATION_POS_MODIFIER, true, -NUM_MODIFIERS+1, NUM_MODIFIERS-1},
-    { ITEM_TIME, 1, TRANSLATION_NONE, true, 0, INT_MAX},
-    // Using -1 instead of UINT_MAX to avoid implicit type conversion to signed int
-    { ITEM_CASTER, 4, TRANSLATION_NONE, false, 0, -1},
-    NO_FIELD,
-    NO_FIELD},
-  },
+  { ITEM_AE, 10, 6, false, false, true, true, true, false, true, {
+	{ ITEM_EFFECT, 1, TRANSLATION_EFFECT, true, 0, NUM_TIMED_EFFECTS},
+	{ ITEM_DUR, 1, TRANSLATION_DURATION, true, 0, NUM_DURATIONS - 1 },
+	{ ITEM_STAT, 1, TRANSLATION_STAT, true, 0, NUM_PLAYER_STATS - 1 },
+	{ ITEM_MOD, 1, TRANSLATION_MODIFIER, true, -NUM_MODIFIERS + 1, NUM_MODIFIERS - 1},
+	{ ITEM_DISTANCE, 1, TRANSLATION_DISTANCE, true, 0, NUM_DISTANCES - 1},
+	{ ITEM_CASTER, 4, TRANSLATION_NONE, false, 0, INT_MAX},
+  } },
 
   // MARE_ESSENSE_FUNCTION
   { ITEM_ESSENCE, 8, 4, true, false, false, false, false, false, true, {
     { ITEM_ESSTYPE, 1, TRANSLATION_NIGHTMARE, true, 0, Avatars::MAX_AVATAR_TYPE},
     { ITEM_STR, 1, TRANSLATION_NONE, true, Stats::SKILL_MIN, Stats::SKILL_MAX},
     { ITEM_WPNTYPE, 1, TRANSLATION_NONE, false, 0, 1},
-    // Using -1 instead of UINT_MAX to avoid implicit type conversion to signed int
-    { ITEM_MAKER, 4, TRANSLATION_NONE, false, 0, -1},
+    { ITEM_MAKER, 4, TRANSLATION_NONE, false, 0, UINT_MAX},
     NO_FIELD,
     NO_FIELD},
   },
@@ -210,12 +207,11 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
     NO_FIELD},
   },
 
-  // SCROLL_FUNCTION 
+  // SCROLL_FUNCTION
   { ITEM_CODEX, 10, 4, true, false, false, true, false, false, false, {
     { ITEM_ARTID, 1, TRANSLATION_ART, false, 0, UCHAR_MAX},
     { ITEM_TARGETHI, 2, TRANSLATION_NONE, false, 0, USHRT_MAX},
-    // Using -1 instead of UINT_MAX to avoid implicit type conversion to signed int
-    { ITEM_MAKER, 4, TRANSLATION_NONE, false, 0, -1},
+    { ITEM_MAKER, 4, TRANSLATION_NONE, false, 0, UINT_MAX},
     { ITEM_TARGETLO, 2, TRANSLATION_NONE, false, 0, USHRT_MAX},
     NO_FIELD,
     NO_FIELD},
@@ -268,7 +264,7 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
     { ITEM_UNUSED, 1, TRANSLATION_NONE, false, 0, 0},
     { ITEM_TARGETHI, 2, TRANSLATION_NONE, true, 0, USHRT_MAX},
     { ITEM_TARGETLO, 2, TRANSLATION_NONE, true, 0, USHRT_MAX},
-    { ITEM_CREATORLO, 2, TRANSLATION_NONE, true, 0, USHRT_MAX}},
+    { ITEM_CREATORLO, 2, TRANSLATION_NONE, true, 0, UINT_MAX}},
 	},
 
    // GRATITUDE_FUNCTION
@@ -283,7 +279,7 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
 
   // META_ESSENCE_NEXUS_FUNCTION
   { ITEM_NEXUS, 10, 4, true, false, true, true, false, false, false, {
-	  { ITEM_UNUSED, 1, TRANSLATION_NONE, false, 0, 0}, // might eventually be the type, like Imprison, Banish, etc.
+	  { ITEM_UNUSED, 1, TRANSLATION_NONE, false, 0, 0 }, // might eventually be the type, like Imprison, Banish, etc.
 	  { ITEM_STR, 2, TRANSLATION_NONE, false, 0, USHRT_MAX },
 	  { ITEM_ESSENCE, 2, TRANSLATION_NONE, false, 0, USHRT_MAX },
 	  { ITEM_STRCAP, 2, TRANSLATION_NONE, false, 0, USHRT_MAX },
@@ -677,9 +673,9 @@ void FASTCALL LyraItem::ConvertStateToNetwork(void* ssptr)
 	convert_hton(gratitude, ssptr);
 	break;
   case META_ESSENCE_NEXUS_FUNCTION:
-	  lyra_item_meta_essence_nexus_t nexus;
-	  convert_hton(nexus, ssptr);
-	  break;
+	lyra_item_meta_essence_nexus_t nexus;
+	convert_hton(nexus, ssptr);
+	break;
   case NO_FUNCTION: // should be an error
   case EFFECT_PLAYER_FUNCTION:
   case CHANGE_STAT_FUNCTION:
@@ -760,9 +756,9 @@ void FASTCALL LyraItem::ConvertStateToHost(void* ssptr)
 	convert_ntoh(gratitude, ssptr);
 	break;
   case META_ESSENCE_NEXUS_FUNCTION:
-	  lyra_item_meta_essence_nexus_t nexus;
-	  convert_ntoh(nexus, ssptr);
-	  break;
+	lyra_item_meta_essence_nexus_t nexus;
+	convert_ntoh(nexus, ssptr);
+	break;
   case NO_FUNCTION: // should be an error
   case EFFECT_PLAYER_FUNCTION:
   case CHANGE_STAT_FUNCTION:
