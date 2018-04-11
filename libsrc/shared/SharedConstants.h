@@ -11,12 +11,12 @@
 // NOTE: keep consistent with Visual Effects.ASC!
 
  
-const int NUM_TIMED_EFFECTS = 30; // add one for NONE
-const int NUM_ARTS = 148;
+const int NUM_TIMED_EFFECTS = 33; // add one for NONE
+const int NUM_ARTS = 149;
 const int NUM_MODIFIERS = 64;
 const int NUM_DURATIONS = 64;
 const int NUM_PLAYER_STATS = 5;
-const int NUM_DISTANCES = 5;
+const int NUM_DISTANCES = 7;
 const int NUM_GUILDS = 8;
 const int NUM_HOUSES = 8;
 const int NUM_RANKS = 3;
@@ -29,7 +29,7 @@ const int ART_MISSILE_VELOCITY = 4;
 const int NUM_ACTOR_COLORS = 16;
 const int NUM_MONSTER_COLORS = 16;
 const int ANY_COLOR = NUM_ACTOR_COLORS;
-
+const int BULWARK_ABSORB = 15;
 const int PPOINTS_PER_PMARE_CREDIT = 20;
 
 // these are indexes into the modifier table
@@ -40,6 +40,18 @@ const int SHAMBLIX_DAMAGE = 60;
 const int SHAMBLIX_DAMAGE_XTR = 29;
 const int HORRON_DAMAGE = 38;
 const int HORRON_DAMAGE_XTR = 8;
+
+struct EffectOrigin {
+	enum {
+		UNDEFINED = -1,
+		KEYBOARD = 0,
+		MISSILE,
+		ART_EVOKE,
+		MASS_EVOKE,
+		USE_ITEM,
+		AE_ITEM
+	};
+};
 
 struct Stats {
 	enum {
@@ -264,7 +276,8 @@ struct Arts {
   CHAOS_WELL, // Essence Container
   RALLY, // Summon party member
   CHANNEL,
-  BULWARK,
+BULWARK,
+PORTKEY,
 	// END OF ARTS LIST - below are art-related constants
 
 	INITIATE_DRAIN = 100,   // amount of essences drained from prime to Initiate
@@ -368,6 +381,7 @@ struct LyraBitmap {
 
 		// missiles
 		DREAMBLADE_MISSILE = 40,
+		INVIS_ITEM = DREAMBLADE_MISSILE,
 		MINIMUM_MISSILE_BITMAP = DREAMBLADE_MISSILE,
 		MARE_MELEE_MISSILE = 41,
 		PUSH_MISSILE = MARE_MELEE_MISSILE, // dummy bitmap
@@ -636,7 +650,8 @@ struct LyraPalette {
 	enum palette_ids {
 		NONE	= -1,
 		BANNER_PALETTE = 255,
-		FX_PALETTE     = 1020
+		FX_PALETTE     = 1020,
+		HALO_PALETTE = 1015
 	};
 };
 
@@ -681,12 +696,13 @@ struct LyraEffect {
 	PLAYER_PEACE_AURA,
 	PLAYER_NO_PARTY,
 	PLAYER_NO_POISON,
-  PLAYER_SPIN,
+	PLAYER_SPIN,
 
 	MAX_ITEM_EFFECT = PLAYER_SPIN,
+	// Non-forgable effects
 	PLAYER_CRIPPLE,
 	PLAYER_SHIELD,
-	PLAYER_GKSHIELD // Bulwark
+	PLAYER_GKSHIELD, // Bulwark
 	};
 };
 
@@ -837,5 +853,10 @@ const int no_rally_levels[] =
 
 const int num_no_rally_levels =
   sizeof(no_rally_levels) / sizeof(int);
+
+const int no_damage_levels[] = {41, 47};
+
+const int num_no_damage_levels =
+	sizeof(no_damage_levels) / sizeof(int);
 
 #endif

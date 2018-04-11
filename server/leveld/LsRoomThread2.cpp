@@ -427,7 +427,7 @@ void LsRoomThread::perform_create_essence(LsPlayer* player, LsRoomState* room, l
   ihdr.SetStateFormat(LyraItem::FormatType(LyraItem::FunctionSize(LyraItem::ESSENCE_FUNCTION)));
   // create essence object, fill in values
   lyra_item_essence_t essence = { LyraItem::ESSENCE_FUNCTION, 0, 0, 0, 0 };
-  essence.strength = state2;
+  int str = state2 == 1 ? 0 : 1;
   essence.weapon_type = 0;
   essence.slaver_id = slaverid;
 #ifdef Ul3D
@@ -439,10 +439,10 @@ void LsRoomThread::perform_create_essence(LsPlayer* player, LsRoomState* room, l
   if ((state1 < 100) || (state1 > 150)) { // player: state1 = orbit, state2 = DS
     item_ttl = 60; 
     ihdr.SetFlags(LyraItem::FLAG_IMMUTABLE);
-   _stprintf(itemname, _T("%s"), player->PlayerName());
-    
+   _stprintf(itemname, _T("%s"), player->PlayerName());    
     essence.mare_type = player->Avatar().AvatarType();
-
+    int orb = state1 > 150 ? state2 : state1;
+    essence.strength = (orb - (orb%10));
   }
   else { // nightmare: state1 - 100 = nightmare index, state2 = DS
     item_ttl = 60; 
@@ -450,7 +450,30 @@ void LsRoomThread::perform_create_essence(LsPlayer* player, LsRoomState* room, l
     essence.mare_type = state1 - 100;
 // *** STRING LITERAL ***  
    _stprintf(itemname, _T("%s Essence"), player->PlayerName());
+    switch(essence.mare_type)
+    {
+	case Avatars::EMPHANT:
+		str += 1;
+		break;
+	case Avatars::BOGROM:
+		str += 5;
+		break;
+	case Avatars::AGOKNIGHT:
+		str += 10;
+		break;
+	case Avatars::SHAMBLIX:
+		str += 25;
+		break;
+	case Avatars::HORRON:
+		str += 50;
+		break;
+	default:
+		str = 1;
+		break;
+    }
+    essence.strength = str;
   }
+  
   // create item state, copy info
   LmItem item;
   item.Init(ihdr, itemname);

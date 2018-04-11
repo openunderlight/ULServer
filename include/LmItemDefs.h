@@ -37,7 +37,7 @@ public:
     FLAG_ALWAYS_DROP    = 0x10,  // item is auto-dropped upon player logout
     FLAG_HASDESCRIPTION = 0x20,  // item has text description
 
-    MAX_FIELDS_PER_FUNCTION = 6, // max # of subfields per function
+    MAX_FIELDS_PER_FUNCTION = 7, // max # of subfields per function
 
     // item functions
     NO_FUNCTION = 0,		
@@ -59,6 +59,7 @@ public:
 	SUPPORT_TRAIN_FUNCTION,  // 10 bytes
 	GRATITUDE_FUNCTION,		 // 10 bytes
 	META_ESSENCE_NEXUS_FUNCTION, // 9 bytes
+	PORTKEY_FUNCTION, // 7 bytes
     
     // translation types for item effect fields
     TRANSLATION_NONE = 0,
@@ -261,21 +262,65 @@ struct lyra_item_amulet_t {  // 8 bytes
   }
 };
 
-struct lyra_item_area_effect_t {  // 10 bytes 
+struct lyra_item_area_effect_t {  // 10
   unsigned char type;      // AREA_EFFECT_FUNCTION
-  unsigned char effect;    // timed effect constant activate on hit
+  unsigned char effect;    // timed effect constant activate on hit, hibit is effect self and party. 0 means to effect.
   unsigned char duration;
   unsigned char stat;
   char          damage;    // index into modifier table for damage
   unsigned char distance;
-  lyra_id_t     caster_id; // player id of caster
+  unsigned short id_hi_bits;	// top bits of id of ward placer
+  unsigned short id_lo_bits;	// bottom bits of id of ward placer
+								// aux methods
+  inline unsigned int player_id() {
+	  return ((id_hi_bits << 16) | id_lo_bits);
+  };
+  inline void set_player_id(unsigned int id) {
+	  id_hi_bits = (id >> 16);
+	  id_lo_bits = (id & 0x0000ffff);
+  };
   // conversion methods
   inline void hton() {
-    HTONL(caster_id);
+    HTONS(id_hi_bits);
+	HTONS(id_lo_bits);
   }
   inline void ntoh() {
-    NTOHL(caster_id);
+    NTOHS(id_hi_bits);
+	NTOHS(id_lo_bits);
   }
+  inline void set_effects_party_and_self(bool effect_party)
+  {
+	  if (!effect_party)
+		  effect |= (1 << 8);
+	  else
+		  effect &= 127; // 0111111
+  }
+  inline bool effects_party_and_self()
+  {
+	  // returns true if effects false if not.
+	  return !(effect & (1 << 8));
+  }
+  inline unsigned char get_effect() {
+	  return effect & 127;
+  }
+};
+
+struct lyra_item_portkey_t {
+	unsigned char type;      // PORTKEY_FUNCTION
+	unsigned char unused;
+	unsigned char distance;
+	unsigned char	level_id;
+	short x;
+	short y;
+
+	inline void hton() {
+		HTONS(x);
+		HTONS(y);
+	}
+	inline void ntoh() {
+		NTOHS(x);
+		NTOHS(y);		
+	}
 };
 
 struct lyra_item_essence_t {  // 8 bytes 
@@ -558,4 +603,3 @@ struct lyra_item_gratitude_t { // 10 bytes
 #endif
 
 #endif /* INCLUDED_LmItemDefs */
-
