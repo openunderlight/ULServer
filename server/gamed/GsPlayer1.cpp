@@ -462,6 +462,9 @@ bool GsPlayer::CanCreateItem(const LmItem& item) const
     }
     // TODO: check strength?
   }
+  case LyraItem::AREA_EFFECT_FUNCTION: {
+     return true;		
+  }
   break;
   case LyraItem::SUPPORT_FUNCTION: {
     lyra_item_support_t support;
