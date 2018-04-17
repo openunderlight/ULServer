@@ -1,0 +1,69 @@
+# This is actually -*- Perl -*-
+
+##
+## Default Values
+##
+
+# level default parameters
+
+%Level_Default = ();
+
+# room default parameters
+
+%Room_Default = (
+  Name => 'Unnamed Room',
+  MaxPlayers => '100',
+  EntryArea => '0',
+  Generators => '0',
+  Portals => '0',
+  NoReapItems => '0',
+);
+
+# item generator default parameters (for each generator type, 1..5)
+# (delays given in seconds)
+
+# 1-4: chakram/elemen/alteror/shield, 4 levels
+# 5: codex (randomly chosen text)
+
+%ItemGen_Default_1 = (
+  BaseDelay => '120',
+  VarDelay => '30',
+  TimeToLive => '60',
+  VarTimeToLive => '30',
+);
+
+%ItemGen_Default_2 = (
+  BaseDelay => '180',
+  VarDelay => '60',
+  TimeToLive => '60',
+  VarTimeToLive => '30',
+);
+
+%ItemGen_Default_3 = (
+  BaseDelay => '240',
+  VarDelay => '60',
+  TimeToLive => '30',
+  VarTimeToLive => '30',
+);
+
+%ItemGen_Default_4 = (
+  BaseDelay => '240',
+  VarDelay => '120',
+  TimeToLive => '30',
+  VarTimeToLive => '15',
+);
+
+%ItemGen_Default_5 = (
+  BaseDelay => '90',
+  VarDelay => '30',
+  TimeToLive => '60',
+  VarTimeToLive => '30',
+);
+
+##
+## no changes beyond this point
+##
+
+###
+# so "require" returns true
+1;
