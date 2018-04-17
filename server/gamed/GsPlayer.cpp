@@ -179,7 +179,7 @@ art_t art_info[NUM_ARTS] = // 		  			    Evoke
 {IDS_PASSLOCK,						Stats::INSIGHT,		50, 30, 6,	5, 	-1, SANCT|FOCUS},
 {IDS_HEAL, 							Stats::RESILIENCE,	10, 5,  0,	1, 	-1, SANCT},
 {IDS_SANCTIFY, 						Stats::WILLPOWER,	15, 5,  13, 2, 	-1, SANCT},
-{IDS_LOCK, 							Stats::WILLPOWER,	20, 20, 0,	5, 	-1, MAKE_ITEM|FOCUS},
+{IDS_DISABLE_PORTAL, 							Stats::WILLPOWER,	20, 20, 0,	5, 	-1, MAKE_ITEM|FOCUS},
 {IDS_KEY,							Stats::WILLPOWER,	20, 1,  0,	2, 	-1, SANCT|MAKE_ITEM|FOCUS},
 {IDS_BREAK_LOCK, 					Stats::WILLPOWER,	40, 40, 0,	8, 	-1, SANCT|FOCUS},
 {IDS_REPAIR, 						Stats::RESILIENCE,	15, 10, 0,	4, 	-1, SANCT|NEED_ITEM},
@@ -198,7 +198,9 @@ art_t art_info[NUM_ARTS] = // 		  			    Evoke
 {IDS_CHAOTIC_VORTEX,       Stats::DREAMSOUL,    70,  40, 4, 5,  -1, NEIGH|NEED_ITEM},
 {IDS_CHAOS_WELL,				Stats::DREAMSOUL, 30, 5, 0, 5, -1, SANCT|MAKE_ITEM|LEARN },
 {IDS_RALLY,		Stats::DREAMSOUL,	30, 30, 0,  5,   -1, SANCT|NEIGH},
-{IDS_CHANNEL,           Stats::DREAMSOUL,   40, 35, 25, 3,  -1, SANCT|NEIGH|LEARN}
+{IDS_CHANNEL,           Stats::DREAMSOUL,   40, 35, 25, 3,  -1, SANCT|NEIGH|LEARN},
+{IDS_GKSHIELD, Stats::WILLPOWER, 70, 30, 13, 5, -1, SANCT | FOCUS | LEARN}
+
 };
 
 
