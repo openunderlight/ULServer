@@ -191,7 +191,7 @@ void gen_armor_item_state(int gen_type, lyra_item_armor_t& state)
 void gen_armor_item(int gen_type, LmItem& item)
 {
   LmItemHdr hdr;
-  hdr.Init(0, 0);
+  hdr.Init(0, 0, 0);
 
   CHECK_GENTYPE(gen_type);
   const armor_gen_table_entry& entry = armor_gen_table[gen_type];
@@ -266,7 +266,7 @@ void gen_changestat_item_state(int gen_type, int& modifier_index, lyra_item_chan
 void gen_changestat_item(int gen_type, LmItem& item)
 {
   LmItemHdr hdr;
-  hdr.Init(0, 0);
+  hdr.Init(0, 0, 0);
 
   CHECK_GENTYPE(gen_type);
   const changestat_gen_table_entry& entry = changestat_gen_table[gen_type];
@@ -361,7 +361,7 @@ void gen_missile_item_state(int gen_type, int& damage_index, lyra_item_missile_t
 void gen_missile_item(int gen_type, LmItem& item)
 {
   LmItemHdr hdr;
-  hdr.Init(0, 0);
+  hdr.Init(0, 0, 0);
 
   CHECK_GENTYPE(gen_type);
   const missile_gen_table_entry& entry = missile_gen_table[gen_type];
@@ -409,7 +409,7 @@ void gen_missile_item(int gen_type, LmItem& item)
 void gen_token_item(int gen_type, LmItem& item)
 {
 	LmItemHdr hdr;
-	hdr.Init(0, 0);
+	hdr.Init(0,0, 0);
 
 	CHECK_GENTYPE(gen_type);
 
@@ -493,7 +493,7 @@ void gen_effect_player_item_state(int gen_type, int& dur_index, int& pos_effect,
 void gen_effect_player_item(int gen_type, LmItem& item)
 {
   LmItemHdr hdr;
-  hdr.Init(0, 0);
+  hdr.Init(0,0, 0);
 
   CHECK_GENTYPE(gen_type);
   const playereffect_gen_table_entry& entry = playereffect_gen_table[gen_type];
@@ -541,7 +541,7 @@ void gen_effect_player_item(int gen_type, LmItem& item)
 void gen_codex(LmItem& item)
 {
   LmItemHdr hdr;
-  hdr.Init(0, 0);
+  hdr.Init(0,0, 0);
 
   // fill in state info
   lyra_item_scroll_t state;

@@ -244,8 +244,8 @@ int LmItemDBC::CreateItem(lyra_id_t owner, const LmItem& item, int& item_id, con
   int blah =_tcslen(escaped_descrip);
   */
 
- _stprintf(query, _T("INSERT INTO item (ITEM_ID, ITEM_HDR, ITEM_STATE1, ITEM_STATE2, ITEM_STATE3, ITEM_NAME, OWNER_TYPE, OWNER_ID, OWNER_SUBID, X, Y, ITEM_DESCRIP) VALUES (NULL, %u, %u, %u, %u, '%s', 1, %u, 0, 0, 0, '%s');"), 
-	  item.ItemID(), item.State1(), item.State2(), item.State3(), 
+ _stprintf(query, _T("INSERT INTO item (ITEM_ID, ITEM_HDR, ITEM_HDR_2, ITEM_STATE1, ITEM_STATE2, ITEM_STATE3, ITEM_NAME, OWNER_TYPE, OWNER_ID, OWNER_SUBID, X, Y, ITEM_DESCRIP) VALUES (NULL, %u, %u, %u, %u, %u, '%s', 1, %u, 0, 0, 0, '%s');"), 
+	  item.Header().ItemHdr1(), item.Header().ItemHdr2(), item.State1(), item.State2(), item.State3(), 
 	  escaped_name,  owner, escaped_descrip);
 
   ////timer.Start();
@@ -368,7 +368,7 @@ int LmItemDBC::UpdateItemFullState(const LmItem& item)
   TCHAR escaped_name[40];
   mysql_escape_string((TCHAR*)escaped_name, item.Name(),_tcslen(item.Name()));
 
- _stprintf(query, _T("UPDATE item SET item_state1 = %u, item_state2 = %u, item_state3 = %u, item_hdr = %u, item_name = '%s' WHERE item_id = %u;"), item.State1(), item.State2(), item.State3(), item.ItemID(), escaped_name, item.Serial());
+ _stprintf(query, _T("UPDATE item SET item_state1 = %u, item_state2 = %u, item_state3 = %u, item_hdr = %u, item_hdr_2 = %u, item_name = '%s' WHERE item_id = %u;"), item.State1(), item.State2(), item.State3(), item.Header().ItemHdr1(), item.Header().ItemHdr2(), escaped_name, item.Serial());
 
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
@@ -403,7 +403,7 @@ int LmItemDBC::UpdateRoomItem(const LmRoomItem& roomitem)
   TCHAR escaped_name[40];
   mysql_escape_string((TCHAR*)escaped_name, roomitem.Item().Name(),_tcslen(roomitem.Item().Name()));
 
- _stprintf(query, _T("UPDATE item SET item_state1 = %u, item_state2 = %u, item_state3 = %u, item_hdr = %u, item_name = '%s', x = %d, y = %d  WHERE item_id = %u;"), roomitem.Item().State1(), roomitem.Item().State2(), roomitem.Item().State3(), roomitem.Item().ItemID(), escaped_name, roomitem.Position().X(), roomitem.Position().Y(), roomitem.Item().Serial());
+ _stprintf(query, _T("UPDATE item SET item_state1 = %u, item_state2 = %u, item_state3 = %u, item_hdr = %u, item_hdr_2 = %u, item_name = '%s', x = %d, y = %d  WHERE item_id = %u;"), roomitem.Item().State1(), roomitem.Item().State2(), roomitem.Item().State3(), roomitem.Item().Header().ItemHdr1(), roomitem.Item().Header().ItemHdr2(), escaped_name, roomitem.Position().X(), roomitem.Position().Y(), roomitem.Item().Serial());
 
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
@@ -474,7 +474,7 @@ int LmItemDBC::SaveRoomItems(lyra_id_t level_id, lyra_id_t room_id, const LmRoom
     TCHAR* escaped_name = LmNEW(TCHAR[_tcslen(ritem.Item().Name())*2+1]);
     mysql_escape_string(escaped_name, ritem.Item().Name(),_tcslen(ritem.Item().Name()));
    
-   _stprintf(query, _T("UPDATE item SET owner_subid = %u, item_hdr = %u,  item_state1 = %u, item_state2 = %u,  item_state3 = %u, item_name = '%s',  x = %d, y = %d WHERE item_id = %u;"), room_id, ritem.Item().ItemID(), ritem.Item().State1(), ritem.Item().State2(), ritem.Item().State3(), escaped_name, ritem.Position().X(), ritem.Position().Y(), ritem.Item().Serial()); 
+   _stprintf(query, _T("UPDATE item SET owner_subid = %u, item_hdr = %u, item_hdr_2 = %u, item_state1 = %u, item_state2 = %u,  item_state3 = %u, item_name = '%s',  x = %d, y = %d WHERE item_id = %u;"), room_id, ritem.Item().Header().ItemHdr1(), ritem.Item().Header().ItemHdr2(), ritem.Item().State1(), ritem.Item().State2(), ritem.Item().State3(), escaped_name, ritem.Position().X(), ritem.Position().Y(), ritem.Item().Serial()); 
 
     ////timer.Start();
     int error = mysql_query(&m_mysql, query);
@@ -634,7 +634,7 @@ int LmItemDBC::GetPlayerInventory(lyra_id_t owner, LmInventory& inventory)
 
   // Lyra::INVENTORY_MAX = 50
 
- _stprintf(query, _T("SELECT item_id, item_hdr, item_state1, item_state2, item_state3, item_name, x  FROM item  WHERE owner_id = %u AND owner_type = %u;"), owner, OWNER_PLAYER);
+ _stprintf(query, _T("SELECT item_id, item_hdr, item_state1, item_state2, item_state3, item_name, x, item_hdr_2  FROM item  WHERE owner_id = %u AND owner_type = %u;"), owner, OWNER_PLAYER);
 
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
@@ -658,7 +658,7 @@ int LmItemDBC::GetPlayerInventory(lyra_id_t owner, LmInventory& inventory)
     // create and initialize new room item
     LmItem item; 
     //   _tprintf(_T("about to create a new player item!\n"));
-    item.Init(ATOI(row[0]), ATOI(row[1]), row[5], ATOI(row[2]), ATOI(row[3]), ATOI(row[4]));
+    item.Init(ATOI(row[0]), ATOI(row[1]), ATOI(row[7]), row[5], ATOI(row[2]), ATOI(row[3]), ATOI(row[4]));
     float s1 = atof(row[2]);
     inventory.AddItem(item);
     inventory.SetItemX(ATOI(row[0]), ATOI(row[6]));
@@ -738,7 +738,7 @@ int LmItemDBC::GetRoomItems(lyra_id_t level_id, lyra_id_t room_id, LmRoomItemLis
 
   // else: not too many items, load their ids
 
- _stprintf(query, _T("SELECT item_id, item_hdr, item_state1, item_state2, item_state3, item_name, x, y FROM item WHERE owner_id = %u AND owner_subid = %u AND owner_type = %u;"), level_id, room_id, OWNER_ROOM);
+ _stprintf(query, _T("SELECT item_id, item_hdr, item_state1, item_state2, item_state3, item_name, x, y, item_hdr_2 FROM item WHERE owner_id = %u AND owner_subid = %u AND owner_type = %u;"), level_id, room_id, OWNER_ROOM);
 
   ////timer.Start();
   error = mysql_query(&m_mysql, query);
@@ -765,7 +765,7 @@ int LmItemDBC::GetRoomItems(lyra_id_t level_id, lyra_id_t room_id, LmRoomItemLis
 
     // create and initialize new room item
     LmRoomItem ritem; 
-    ritem.Item().Init(ATOI(row[0]), ATOI(row[1]), row[5], ATOI(row[2]), ATOI(row[3]), ATOI(row[4]));
+    ritem.Item().Init(ATOI(row[0]), ATOI(row[1]), ATOI(row[8]), row[5], ATOI(row[2]), ATOI(row[3]), ATOI(row[4]));
     ritem.Position().Init(_ttoi(row[6]), _ttoi(row[7]), 0, 0); // height/angle not stored
     ritem.SetLifetime(60); // live for a minute after being loaded?
     // append to list

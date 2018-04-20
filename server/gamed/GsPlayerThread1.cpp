@@ -849,8 +849,8 @@ void GsPlayerThread::handle_GMsg_DestroyItem(LmSrvMesgBuf* msgbuf, LmConnection*
   LmItemHdr hdr = msg.ItemHeader();
   // check that player has item
   if (!player_->DB().Inventory().HasItem(hdr)) {
-    SECLOG(6, "%s: player %u: cannot destroy item [%u/%u], not in inventory", method,
-	   player_->PlayerID(), hdr.ItemID(), hdr.Serial());
+    SECLOG(6, "%s: player %u: cannot destroy item [%u/%u/%u], not in inventory", method,
+	   player_->PlayerID(), hdr.ItemHdr1(), hdr.ItemHdr2(), hdr.Serial());
     send_GMsg_ItemDrop(conn, hdr, GMsg_ItemDrop::DROP_ERROR);
     return;
   }
