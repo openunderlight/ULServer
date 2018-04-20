@@ -383,7 +383,7 @@ bool GsPlayer::CanCreateItem(const LmItem& item) const
   LmLocker mon(lock_); // lock object during method duration
   // created item's name must not be null
   //
-  SECLOG(6, "%s: CHECKING CANCREATEITEM", method); 
+
   if (_tcslen(item.Name()) == 0) {
     return false;
   }
