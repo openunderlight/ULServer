@@ -257,7 +257,8 @@ int GsPlayer::adjust_xp(int xpdelta)
     // determine if orbit changed
     int new_orbit = db_.Stats().Orbit();
     if (old_orbit < new_orbit) { // gained an orbit
-      db_.Stats().GainOrbit(new_orbit);
+      for(int orb = old_orbit + 1; orb <= new_orbit; orb++)
+	      db_.Stats().GainOrbit(orb);
     }
     else if (old_orbit > new_orbit) { // lost an orbit
       db_.Stats().LoseOrbit(new_orbit);
