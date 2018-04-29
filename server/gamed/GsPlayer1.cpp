@@ -235,7 +235,7 @@ bool GsPlayer::can_update_state(const void* old_state, const void* new_state) co
     memcpy(&new_essence, new_state, sizeof(lyra_item_essence_t));
     // mare_type, weapon_type, slaver_id cannot change
     if ((old_essence.mare_type != new_essence.mare_type) ||
-	(old_essence.weapon_type != new_essence.weapon_type) ||
+	//(old_essence.weapon_type != new_essence.weapon_type) ||
 	(old_essence.slaver_id != new_essence.slaver_id)) {
       return false;
     }
