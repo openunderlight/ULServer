@@ -380,7 +380,7 @@ void LsRoomState::ReapItems(LmRoomItemList& reaped)
       continue;
     }
     // if room has "noreap" flag set, reap time is extended by 30 days, and codexes are not reaped
-    if (db_->NoReapItems()) {
+    if (db_->NoReapItems() && !(ri.Item().Header().FlagSet(LyraItem::FLAG_ALWAYSREAP))) {
       if (LyraItem::StateFunction(ri.Item().StateField(0)) == LyraItem::SCROLL_FUNCTION) {
 	continue;
       }

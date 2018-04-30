@@ -382,6 +382,8 @@ bool GsPlayer::CanCreateItem(const LmItem& item) const
   DEFMETHOD(GsPlayer, CanCreateItem);
   LmLocker mon(lock_); // lock object during method duration
   // created item's name must not be null
+  //
+
   if (_tcslen(item.Name()) == 0) {
     return false;
   }
@@ -393,15 +395,15 @@ bool GsPlayer::CanCreateItem(const LmItem& item) const
   // non-GM checks below
   // created item cannot be an artifact
   if (item.IsArtifact()) {
-    return false;
+  	return false;
   }
   // created item must be reapable by server
   if (item.FlagSet(LyraItem::FLAG_NOREAP)) {
-    return false;
+      return false;
   }
   // created item can have a single function
   if (item.NumFields() > 1) {
-    return false;
+      return false;
   }
   // get item function, state pointer
   const void* func_field = item.StateField(0);
@@ -409,12 +411,13 @@ bool GsPlayer::CanCreateItem(const LmItem& item) const
   // check for functions that the player can create
   if (!LyraItem::FunctionCreateByArt(func_type) && 
       !LyraItem::FunctionCreateByForge(func_type)) {
-      return false;
+        return false;
   }
 
   if (this->PPEvoking()) { // we spent pp's to evoke an item creation art once
 		return true;
   }
+  
 
 
   // check function type
@@ -425,12 +428,14 @@ bool GsPlayer::CanCreateItem(const LmItem& item) const
   case LyraItem::WARD_FUNCTION: {
     // player must have WARD art
     if (db_.Arts().Skill(Arts::WARD) < 1) {
+      SECLOG(6, "%s: doesn't have ward",  method);	
       return false;
     }
     lyra_item_ward_t ward;
     memcpy(&ward, func_field, sizeof(lyra_item_ward_t));
     // check creator field
     if (ward.player_id() != db_.PlayerID()) {
+      SECLOG(6, "%s: illegal playerid", method);	
       return false;
     }
     // TODO: check strength?
@@ -654,10 +659,12 @@ bool GsPlayer::CanCreateItem(const LmItem& item) const
   case LyraItem::GRATITUDE_FUNCTION: 
   case LyraItem::MAP_FUNCTION:            
   case LyraItem::TELEPORTER_FUNCTION:
+    SECLOG(6, "%s: illegal func type %d", method, func_type);
     PDEBUG((_T("%s: illegal function type %d"), method, func_type));
     return false;
     break;
   default: // unknown
+    SECLOG(6, "%s: unknown func type %d", method, func_type);
     PDEBUG((_T("%s: unknown function type %d"), method, func_type));
     return false;
     break;
