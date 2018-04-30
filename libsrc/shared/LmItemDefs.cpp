@@ -168,7 +168,7 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
 	{ ITEM_DUR, 1, TRANSLATION_DURATION, true, 0, NUM_DURATIONS - 1 },
 	{ ITEM_STAT, 1, TRANSLATION_STAT, true, 0, NUM_PLAYER_STATS - 1 },
 	{ ITEM_MOD, 1, TRANSLATION_MODIFIER, true, -NUM_MODIFIERS + 1, NUM_MODIFIERS - 1},
-	{ ITEM_DISTANCE, 1, TRANSLATION_DISTANCE, true, 0, NUM_DISTANCES - 1},
+	{ ITEM_DISTANCE, 1, TRANSLATION_DISTANCE, true, 0, 255},
 	{ ITEM_HIBIT, 2, TRANSLATION_NONE, false, INT_MIN, INT_MAX },
 	{ ITEM_LOBIT, 2, TRANSLATION_NONE, false, INT_MIN, INT_MAX },
   } },
@@ -310,7 +310,29 @@ const LyraItem::item_function_entry_t LyraItem::item_functions[] = {
 	{ ITEM_Y, 2, TRANSLATION_TPORT_DEST, false, SHRT_MIN, SHRT_MAX },
 	NO_FIELD, NO_FIELD,
 	},
-}
+},
+/*
+
+// used to translate item functions into human readable interfaces
+struct item_function_entry_t {
+TCHAR name[20];
+short size;
+int	num_valid_fields;
+bool create_by_art; // can they be created by arts?
+bool create_by_forge; // can they be created by forge talisman?
+bool create_by_gm; // can they be created by a gm terminal?
+bool always_send_state; // do items with the funtion always send state?
+bool immutable; // is the function always immutable?
+bool change_charges; // is the function always immutable except # of charges?
+bool losable; // is item a candiate for dropping at logout?
+item_function_field_t fields[MAX_FIELDS_PER_FUNCTION];
+};
+*/
+{ ITEM_TRIP, 2, 2, false, false, true, true, true, false, true,{
+	{ ITEM_DISTANCE, 1, TRANSLATION_DISTANCE, true, 0, NUM_DISTANCES - 1},
+	{ITEM_FREQUENCY, 1, TRANSLATION_FREQUENCY, true, 0, NUM_FREQUENCIES - 1},
+	NO_FIELD, NO_FIELD, NO_FIELD, NO_FIELD, NO_FIELD
+	} }
 };
 
 const int LyraItem::item_functions_num =

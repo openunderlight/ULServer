@@ -1055,7 +1055,7 @@ void GsPlayer::clear_information()
   lsconn_ = 0;
   level_addr_.Init();
 
-  update_.Init(0, 0, 0, 0, 0, 0);
+  update_.Init(0, 0, 0,0, 0, 0, 0);
   last_update_ = 0;
   idle_null_connection_ = false;
   weapon_bad_ = false;
