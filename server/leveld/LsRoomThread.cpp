@@ -257,6 +257,7 @@ void LsRoomThread::handle_SMsg_PutItem(LmSrvMesgBuf* msgbuf, LmConnection* conn)
     return;
   }
   // if room has "noreapitems" flag set, then check that item is not a ward
+#if 0 
   if (room->DB()->NoReapItems()) {
     // wards are single-function items
     if ((item.NumFields() == 1) && (LyraItem::StateFunction(item.StateField(0)) == LyraItem::WARD_FUNCTION)) {
@@ -265,6 +266,7 @@ void LsRoomThread::handle_SMsg_PutItem(LmSrvMesgBuf* msgbuf, LmConnection* conn)
       return;
     }
   }
+#endif
   // if playerid is 0, then item is an "auto-dropped" item, and MUST be placed in the room
   if (playerid != Lyra::ID_UNKNOWN) { // playerid != 0, could reject drop
     // check player's connection
