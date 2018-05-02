@@ -36,7 +36,7 @@ RMsg_PlayerMsg::RMsg_PlayerMsg()
   : LmMesg(RMsg::PLAYERMSG, sizeof(data_t), sizeof(data_t), &data_)
 {
   // initialize default message data values
-  Init(Lyra::ID_UNKNOWN, Lyra::ID_UNKNOWN, RMsg_PlayerMsg::UNKNOWN, 0, 0, 0);
+  Init(Lyra::ID_UNKNOWN, Lyra::ID_UNKNOWN, RMsg_PlayerMsg::UNKNOWN, 0, 0);
 }
 
 ////
@@ -90,7 +90,7 @@ void RMsg_PlayerMsg::ntoh()
   NTOHS(data_.state1);
   NTOHS(data_.state2);
   NTOHS(data_.state3);
-  // no conversion: state1, state2
+  // no conversion: state1, state2, state3
 }
 
 ////
@@ -104,7 +104,7 @@ void RMsg_PlayerMsg::Dump(FILE* f, int indent) const
  _ftprintf(f, _T("<RMsg_PlayerMsg[%p,%d]: "), this, sizeof(RMsg_PlayerMsg));
   if (ByteOrder() == ByteOrder::HOST) {
    _ftprintf(f, _T("sender=%u receiver=%u mtype=%d state=(%d,%d,%d)>\n"),
-	   SenderID(), ReceiverID(), MsgType(), State1(), State2(), State3());
+	    SenderID(), ReceiverID(), MsgType(), State1(), State2(), State3());
   }
   else {
    _ftprintf(f, _T("(network order)>\n"));
@@ -180,7 +180,7 @@ int RMsg_PlayerMsg::ArtType(int msgtype)
   case MISDIRECTION:    retval = Arts::MISDIRECTION; break;
   case CHAOTIC_VORTEX:  retval = Arts::CHAOTIC_VORTEX; break;
   case RALLY:				retval = Arts::RALLY; break;
-
+  case ENFEEBLEMENT: retval = Arts::ENFEEBLEMENT; break; 
   default:
     retval = Arts::NONE;
   }

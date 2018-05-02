@@ -393,6 +393,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::KINESIS:         // skill, angle
   case RMsg_PlayerMsg::MISDIRECTION:    // skill, unused
   case RMsg_PlayerMsg::CHAOTIC_VORTEX:  // skill
+  case RMsg_PlayerMsg::ENFEEBLEMENT:
     {
     // check that player can use given art, at the given skill level
     int art = RMsg_PlayerMsg::ArtType(msg.MsgType());
