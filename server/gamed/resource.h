@@ -2984,6 +2984,36 @@
 #define IDS_ARTIFACT_NO_TP              4460
 #define IDC_NUKE_PARTICLES              4802
 #define IDC_PARTICLE_RELOAD             4803
+#define IDS_CLOSEST                     4461
+#define IDS_VERY_CLOSE                  4462
+#define IDS_NEARBY                      4463
+#define IDS_WIDE_RANGE                  4464
+#define IDS_WHOLE_ROOM                  4465
+#define IDS_ALREADY_HAVE_PORTKEY        4466
+#define IDS_PORTKEY                     4467
+#define IDS_CLOSE                       4468
+#define IDS_WHISPERABLE                 4469
+#define IDS_RAZORWIND_AREA_EFFECT       4470
+#define IDS_BULWARK_MORE                4471
+#define IDS_SHIELD_MAX_NOW              4472
+#define IDS_TALISMAN_RECHARGED_NOW      4473
+#define IDS_RW_REAPPLIED                4474
+#define IDS_POWER_TOKEN_DESTROYED       4475
+#define IDS_ANY_BELIEF                  4476
+#define IDS_BANISHED_WELL               4477
+#define IDS_IMPRISONED_WELL             4478
+#define IDS_CLEANSED_WELL               4479
+#define IDS_PLAYER_WALK_ON              4480
+#define IDS_PLAYER_WALK_MORE            4481
+#define IDS_PLAYER_WALK_OFF             4482
+#define IDS_ENFEEBLEMENT                4483
+#define IDS_PLAYER_SPRINT               4484
+#define IDS_PLAYER_SPRINT_ON            4484
+#define IDS_PLAYER_SPRINT_MORE          4485
+#define IDS_PLAYER_SPRINT_OFF           4486
+#define IDS_SPRINT                      4487
+#define IDS_ENFEEBLE_APPLIED            4488
+
 #define IDC_AVATAR_COMBO                16666
 
 // Next default values for new objects
