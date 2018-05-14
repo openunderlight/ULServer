@@ -11,13 +11,15 @@
 // NOTE: keep consistent with Visual Effects.ASC!
 
  
-const int NUM_TIMED_EFFECTS = 33; // add one for NONE
-const int NUM_ARTS = 149;
+const int NUM_TIMED_EFFECTS = 36; // add one for NONE
+const int NUM_ARTS = 151; // BACARDI N COLA DO IT DO IT
 const int NUM_MODIFIERS = 64;
 const int NUM_DURATIONS = 64;
 const int NUM_PLAYER_STATS = 5;
 const int NUM_DISTANCES = 7;
+const int NUM_FREQUENCIES = 6;
 const int NUM_GUILDS = 8;
+const int NUM_BELIEFS = 4;
 const int NUM_HOUSES = 8;
 const int NUM_RANKS = 3;
 const int NUM_TOKENS = 4;
@@ -269,15 +271,18 @@ struct Arts {
 	MERGE_TALISMAN, // combine
 	NP_SYMBOL,	 // use NP symbol on chest
 	SENSE_MARE,  // sense pmares & dark mares
-  TEMPEST,    // Tempest // 140
-  KINESIS,    // Kinesis
-  MISDIRECTION, // Misdirection
-  CHAOTIC_VORTEX, // Chaotic Vortex
-  CHAOS_WELL, // Essence Container
-  RALLY, // Summon party member
-  CHANNEL,
-BULWARK,
-PORTKEY,
+	TEMPEST,    // Tempest // 140
+	KINESIS,    // Kinesis
+	MISDIRECTION, // Misdirection
+	CHAOTIC_VORTEX, // Chaotic Vortex
+	CHAOS_WELL, // Essence Container
+	RALLY, // Summon party member
+	CHANNEL,
+	BULWARK,
+	PORTKEY,
+	SPRINT,
+	ENFEEBLEMENT,
+
 	// END OF ARTS LIST - below are art-related constants
 
 	INITIATE_DRAIN = 100,   // amount of essences drained from prime to Initiate
@@ -697,8 +702,11 @@ struct LyraEffect {
 	PLAYER_NO_PARTY,
 	PLAYER_NO_POISON,
 	PLAYER_SPIN,
+	PLAYER_FLYING,
+	PLAYER_WALK,
+	PLAYER_SPRINT,
 
-	MAX_ITEM_EFFECT = PLAYER_SPIN,
+	MAX_ITEM_EFFECT = PLAYER_SPRINT,
 	// Non-forgable effects
 	PLAYER_CRIPPLE,
 	PLAYER_SHIELD,
