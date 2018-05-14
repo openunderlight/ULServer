@@ -393,6 +393,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::KINESIS:         // skill, angle
   case RMsg_PlayerMsg::MISDIRECTION:    // skill, unused
   case RMsg_PlayerMsg::CHAOTIC_VORTEX:  // skill
+  case RMsg_PlayerMsg::ENFEEBLEMENT:
     {
     // check that player can use given art, at the given skill level
     int art = RMsg_PlayerMsg::ArtType(msg.MsgType());
@@ -937,7 +938,8 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   // collapsed to soulsphere
   case RMsg_PlayerMsg::YOUGOTME: {           // victim's orbit/100 + nightmare index, DS at dissolution
     // determine how much XP to lose
-    int xp_adj = - (int) ((double) player_->DB().Stats().XP() * 0.01); // lose up to 1%
+    float xp_adj_pct = msg.State3() ? 0.009 : 0.01;
+    int xp_adj = - (int) ((double) player_->DB().Stats().XP() * xp_adj_pct); // lose up to 1%
     adjust_xp(xp_adj, _T("being dissolved by player"), msg.ReceiverID(), true);
     // fill in orbit (state1), DS field with "1", if player (monster/admin client will fill in fields)
     if (player_->DB().AccountType() == LmPlayerDB::ACCT_PLAYER)

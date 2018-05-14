@@ -420,7 +420,7 @@ void LsRoomThread::perform_create_essence(LsPlayer* player, LsRoomState* room, l
   // create item header
   int serial = main_->LevelState()->Serials().GetNextSerial();
   LmItemHdr ihdr;
-  ihdr.Init(0, serial);
+  ihdr.Init(0,0, serial);
   // TODO: set colors based on avatar color?
   ihdr.SetColor1(0);
   ihdr.SetColor2(0);
@@ -561,7 +561,7 @@ void LsRoomThread::perform_create_soulessence(LsPlayer* player, LsRoomState* roo
   // create item header
   int serial = main_->LevelState()->Serials().GetNextSerial();
   LmItemHdr ihdr;
-  ihdr.Init(0, serial);
+  ihdr.Init(0, 0, serial);
   // TODO: set colors based on avatar color?
   ihdr.SetColor1(0);
   ihdr.SetColor2(0);

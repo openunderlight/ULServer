@@ -85,8 +85,8 @@ art_t art_info[NUM_ARTS] = // 		  			    Evoke
 {IDS_ANTIDOTE,				Stats::RESILIENCE,	30, 10, 0,	2, 	3, SANCT|FOCUS|LEARN},
 {IDS_CURSE,					Stats::RESILIENCE,	40, 10, 13, 3, 	3, NEIGH|FOCUS|LEARN},
 {IDS_DRAIN_ESSENCE,			Stats::RESILIENCE,	0,  0,  0,	1, 	1, SANCT|NEED_ITEM|LEARN},
-{IDS_BANISH_MARE,			Stats::RESILIENCE,	50, 5,  0,	1, 	1, SANCT|NEED_ITEM|MAKE_ITEM|FOCUS|LEARN},
-{IDS_IMPRISON_MARE,			Stats::RESILIENCE,	50, 5,  0,	1, 	1, SANCT|NEED_ITEM|MAKE_ITEM|FOCUS|LEARN},
+{IDS_BANISH_MARE,			Stats::RESILIENCE,	10, 5,  0,	1, 	1, SANCT|NEED_ITEM|MAKE_ITEM|LEARN},
+{IDS_IMPRISON_MARE,			Stats::RESILIENCE,	10, 5,  0,	1, 	1, SANCT|NEED_ITEM|MAKE_ITEM|LEARN},
 {IDS_TRAP_MARE,				Stats::RESILIENCE,	50, 10, 0,	3, 	3, SANCT|NEIGH|FOCUS|LEARN},
 {IDS_DREAMBLADE, 			Stats::INSIGHT,		0,  5,  23, 1, 	-1, SANCT|MAKE_ITEM|FOCUS},
 {IDS_TRAIL,					Stats::LUCIDITY,	0,  2,  25, 1, 	-1, SANCT|LEARN},
@@ -146,7 +146,7 @@ art_t art_info[NUM_ARTS] = // 		  			    Evoke
 {IDS_SUSPEND,						Stats::NO_STAT,		0,  0,  0,	0, 	-1, SANCT},
 {IDS_REFLECT_ART_NAME,				Stats::WILLPOWER,   65, 40, 9,  3,	-1, SANCT|FOCUS|LEARN},
 {IDS_SACRIFICE,					Stats::DREAMSOUL,	20, 10,  0,	1, 	-1, SANCT|NEED_ITEM},
-{IDS_CLEANSE_MARE,					Stats::RESILIENCE,	50, 5,  0,	1, 	1, SANCT|NEED_ITEM|MAKE_ITEM|FOCUS|LEARN},
+{IDS_CLEANSE_MARE,					Stats::RESILIENCE,	10, 5,  0,	1, 	1, SANCT|NEED_ITEM|MAKE_ITEM|LEARN},
 {IDS_CREATE_ID_TOKEN,				Stats::DREAMSOUL,	0,  20, 0,	1, 	-1, SANCT|NEED_ITEM|MAKE_ITEM},
 {IDS_SENSE,							Stats::DREAMSOUL,	0,  0,  0,	1,  -1, SANCT|LEARN},
 {IDS_EXPEL_ART_NAME,				Stats::DREAMSOUL,	20, 0,  0,	1,  -1, SANCT|NEED_ITEM|NEIGH},
@@ -199,7 +199,10 @@ art_t art_info[NUM_ARTS] = // 		  			    Evoke
 {IDS_CHAOS_WELL,				Stats::DREAMSOUL, 30, 5, 0, 5, -1, SANCT|MAKE_ITEM|LEARN },
 {IDS_RALLY,		Stats::DREAMSOUL,	30, 30, 0,  5,   -1, SANCT|NEIGH},
 {IDS_CHANNEL,           Stats::DREAMSOUL,   40, 35, 25, 3,  -1, SANCT|NEIGH|LEARN},
-{IDS_GKSHIELD, Stats::WILLPOWER, 70, 30, 13, 5, -1, SANCT | FOCUS | LEARN}
+{IDS_GKSHIELD, Stats::WILLPOWER, 70, 30, 13, 5, -1, SANCT | FOCUS | LEARN},
+{IDS_PORTKEY,						Stats::DREAMSOUL, 90, 50, 13, 5, -1, SANCT | LEARN | MAKE_ITEM},
+{IDS_SPRINT,						Stats::WILLPOWER, 35, 20, 13, 2, 2, SANCT | LEARN},
+{IDS_ENFEEBLEMENT,					Stats::LUCIDITY,	35, 20, 13, 2, 	 2, LEARN | FOCUS | NEIGH }
 
 };
 
@@ -1055,7 +1058,7 @@ void GsPlayer::clear_information()
   lsconn_ = 0;
   level_addr_.Init();
 
-  update_.Init(0, 0, 0, 0, 0, 0);
+  update_.Init(0, 0, 0,0, 0, 0, 0);
   last_update_ = 0;
   idle_null_connection_ = false;
   weapon_bad_ = false;
