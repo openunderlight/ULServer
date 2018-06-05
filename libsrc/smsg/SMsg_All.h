@@ -35,7 +35,7 @@
 #include "SMsg_SetAvatarDescription.h"
 #include "SMsg_ShowItem.h"
 #include "SMsg_TakeItemAck.h"
-
+#include "SMsg_UniverseBroadcast.h"
 #include "SMsg_RecvMesg.h"
 #include "SMsg_SendMesg.h"
 

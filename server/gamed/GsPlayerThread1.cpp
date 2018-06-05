@@ -1079,6 +1079,18 @@ void GsPlayerThread::handle_GMsg_GotoLevel(LmSrvMesgBuf* msgbuf, LmConnection* c
   }
 }
 
+/////
+// connectToBcastLevelD
+/////
+LmConnection* GsPlayerThread::connectToBcastLevelD()
+{
+	const int BROADCAST_LEVELD = 20; // Thresh
+	const LmLevelDBC* ldb = main_->LevelSet()->LevelDBC(BROADCAST_LEVELD);
+	if(!ldb)
+		return NULL;
+	return GsUtil::ConnectToLevelServer(main_, ldb);
+}
+
 ////
 // handle_GMsg_DestroyRoomItem
 ////
