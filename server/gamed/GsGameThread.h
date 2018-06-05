@@ -69,7 +69,7 @@ private:
   void handle_SMsg_DumpState(LmSrvMesgBuf* msgbuf, LmConnection* conn);
   void handle_SMsg_RotateLogs(LmSrvMesgBuf* msgbuf, LmConnection* conn);
   void handle_SMsg_DBQueryAckGT(LmSrvMesgBuf* msgbuf, LmConnection* conn);
-
+  void handle_SMsg_UniverseBroadcast(LmSrvMesgBuf* msgbuf, LmConnection* conn);
   // SMsg_GS_* message handlers
   void handle_SMsg_GS_Action(LmSrvMesgBuf* msgbuf, LmConnection* conn);
   void handle_SMsg_GS_Logout(LmSrvMesgBuf* msgbuf, LmConnection* conn);

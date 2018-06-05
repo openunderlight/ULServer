@@ -104,7 +104,8 @@ static const int level_messages[] = {
   SMsg::GETSERVERSTATUS,
   SMsg::ROTATE_LOGS, 
   SMsg::DUMP_STATE,
-  SMsg::RESETPORT
+  SMsg::RESETPORT,
+  SMsg::UNIVERSEBROADCAST
 };
 static const int num_level_messages = sizeof(level_messages) / sizeof(int);
 

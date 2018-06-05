@@ -141,6 +141,7 @@ static const msg_table_entry msg_table[] = {
   TABLE_ENTRY(SMsg::CONNSTATUS),
   TABLE_ENTRY(SMsg::SHOWITEM),
   TABLE_ENTRY(SMsg::SETAVATARDESCRIPTION),
+  TABLE_ENTRY(SMsg::UNIVERSEBROADCAST),
   TABLE_ENTRY(SMsg::MAX),
 
 #endif /* USE_DEBUG */
