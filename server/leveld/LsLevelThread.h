@@ -58,6 +58,7 @@ private:
   void handle_SMsg_DumpState(LmSrvMesgBuf* msgbuf, LmConnection* conn);
   void handle_SMsg_RotateLogs(LmSrvMesgBuf* msgbuf, LmConnection* conn);
   void handle_SMsg_ResetPort(LmSrvMesgBuf* msgbuf, LmConnection* conn);
+  void handle_SMsg_UniverseBroadcast(LmSrvMesgBuf* msgbuf, LmConnection* conn);
 
   // SMsg_LS_* message handlers
   void handle_SMsg_LS_Action(LmSrvMesgBuf* msgbuf, LmConnection* conn);

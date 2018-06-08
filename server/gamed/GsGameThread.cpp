@@ -177,6 +177,7 @@ void GsGameThread::register_handlers()
   RegisterHandler(SMsg::DUMP_STATE, (MsgHandler)&GsGameThread::handle_SMsg_DumpState);
   RegisterHandler(SMsg::ROTATE_LOGS, (MsgHandler)&GsGameThread::handle_SMsg_RotateLogs);
   RegisterHandler(SMsg::SERVERERROR, (MsgHandler)&GsGameThread::handle_SMsg_Error);
+  RegisterHandler(SMsg::UNIVERSEBROADCAST, (MsgHandler)&GsGameThread::handle_SMsg_UniverseBroadcast);
 }
 
 
@@ -782,6 +783,33 @@ void GsGameThread::handle_SMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
   conn->SetMessageRange(SMsg::MIN, SMsg::MAX);
 }
 
+void GsGameThread::handle_SMsg_UniverseBroadcast(LmSrvMesgBuf* msgbuf, LmConnection* conn)
+{
+  DEFMETHOD(GsGameThread, handle_SMsg_UniverseBroadcast);
+  DECLARE_TheLineNum;
+  HANDLER_ENTRY(false);
+  //TLOG_Warning(_T("%s: recv bcast from level"), method);
+  CHECK_CONN_NONNULL();
+  ACCEPT_MSG(SMsg_UniverseBroadcast, true);
+  //TLOG_Warning(_T("%s: read msg"), method);
+  // Read the msg inside the message
+  LmSrvMesgBuf* mbuf = main_->BufferPool()->AllocateBuffer(msg.EnclosedMessageSize());
+  LmMesgHdr mhdr;
+  mhdr.Init(msg.EnclosedMessageType(), msg.EnclosedMessageSize());
+  mbuf->ReadHeader(mhdr);
+  memcpy(mbuf->MessageAddress(), msg.MessageBytes(), msg.EnclosedMessageSize());
+  //TLOG_Warning(_T("%s: read inner message"), method);  
+
+  GsPlayerList players;
+  main_->PlayerSet()->GetPlayerList(players);
+  for (GsPlayerList::iterator i = players.begin(); !(bool)(i == players.end()); ++i) {
+    LmConnection* conn = (*i)->Connection();
+    if (conn) {
+      //TLOG_Warning(_T("%s: dispatching msg to player"), method);
+      main_->OutputDispatch()->SendMessage(mbuf, conn);
+    }
+  }
+}
 
 ////
 // handle_SMsg_GetServerStatus
