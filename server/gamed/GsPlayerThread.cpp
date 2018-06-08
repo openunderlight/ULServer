@@ -66,6 +66,7 @@ GsPlayerThread::GsPlayerThread(GsMain* gsmain)
 {
   // register message handlers
   register_handlers();
+  connectToBcastLevelD();
 }
 
 ////
