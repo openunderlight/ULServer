@@ -23,6 +23,7 @@
 #include "LmDebug.h"
 #include "GMsg_All.h"
 #include "SMsg_All.h"
+#include "RMsg_PlayerMsg.h"
 #include "GsPlayer.h"
 #include "GsPlayerSet.h"
 #include "GsOutputDispatch.h"
@@ -798,20 +799,55 @@ void GsGameThread::handle_SMsg_UniverseBroadcast(LmSrvMesgBuf* msgbuf, LmConnect
   mhdr.Init(msg.EnclosedMessageType(), msg.EnclosedMessageSize());
   mbuf->ReadHeader(mhdr);
   memcpy(mbuf->MessageAddress(), msg.MessageBytes(), msg.EnclosedMessageSize());
-  //TLOG_Warning(_T("%s: read inner message"), method);  
+  switch(msg.EnclosedMessageType()) {
+	case RMsg::PLAYERMSG:
+		handle_SMsg_UniverseBroadcast_RMsg_PlayerMsg(mbuf);
+		break;
+	default:
+		broadcast_to_game(mbuf);
+		break;
+  }
+}
 
+void GsGameThread::handle_SMsg_UniverseBroadcast_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
+{
+  DEFMETHOD(GsGameThread, handle_SMsg_UniverseBroadcast_RMsg_PlayerMsg);
+  PROXY_HANDLER_ENTRY(false);
+  PROXY_ACCEPT_MSG(RMsg_PlayerMsg);
+  if(!msg.AllowedToDreamwideBroadcast(msg.MsgType()))
+  {
+	TLOG_Warning("Attempting to broadcast a playermsg with a non-art message; not forwarding.");
+	return;
+  }
+
+  msg.SetSenderID(DUMMY_PID_FOR_DREAMWIDE_EVOKES);
   GsPlayerList players;
   main_->PlayerSet()->GetPlayerList(players);
   for (GsPlayerList::iterator i = players.begin(); !(bool)(i == players.end()); ++i) {
     LmConnection* conn = (*i)->Connection();
     if (conn) {
-      //TLOG_Warning(_T("%s: dispatching msg to player"), method);
+      main_->OutputDispatch()->SendMessage(&msg, conn);
+    }
+  }
+
+  //broadcast_to_game(&msg);
+}
+
+void GsGameThread::broadcast_to_game(LmSrvMesgBuf* mbuf)
+{
+  GsPlayerList players;
+  main_->PlayerSet()->GetPlayerList(players);
+  for (GsPlayerList::iterator i = players.begin(); !(bool)(i == players.end()); ++i) {
+    LmConnection* conn = (*i)->Connection();
+    if (conn) {
       main_->OutputDispatch()->SendMessage(mbuf, conn);
     }
   }
 }
 
-////
+
+/////
+//
 // handle_SMsg_GetServerStatus
 ////
 

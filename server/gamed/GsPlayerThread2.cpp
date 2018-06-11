@@ -361,6 +361,10 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 	  //   player_->PlayerID(), art);
       //send_to_level = false;
   //} else
+  if (msg.Universal() && player_->DB().AccountType() != LmPlayerDB::ACCT_ADMIN) {
+	SECLOG(5, _T("%s: player %u sending illegal universe message"), method, msg.SenderID());
+	return;
+  }
 
   switch (msg.MsgType()) {
 
@@ -1057,8 +1061,12 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   break;
 
   } // end switch
+  if(msg.Universal())
+  {
+	send_SMsg_UniverseBroadcast(msg);
+  }
   // create proxy message, copy message into it, send to player's level server
-  if (send_to_level) {
+  else if (send_to_level) {
     send_SMsg_Proxy(player_->LevelConnection(), msg);
   }
 }

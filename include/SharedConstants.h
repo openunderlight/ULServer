@@ -864,7 +864,8 @@ const int num_no_rally_levels =
 
 const int no_damage_levels[] = {41, 47};
 
-const int num_no_damage_levels =
-	sizeof(no_damage_levels) / sizeof(int);
+const int num_no_damage_levels = sizeof(no_damage_levels) / sizeof(int);
+
+const int DUMMY_PID_FOR_DREAMWIDE_EVOKES = 999999;
 
 #endif
