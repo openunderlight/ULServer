@@ -58,10 +58,9 @@ public:
     // bitfield widths for u1
     ANGLE_WIDTH = 10,        // 10
     ATTACKBITS_WIDTH = 5,    // 15
-    FLAGS_WIDTH = 9,         // 24
-    WEAPONDAMAGE_WIDTH = 6,  // 30
-	FLIGHT_WIDTH = 1,    // 31
-	UNUSED_WIDTH_U1 = 1, // 32
+    FLAGS_WIDTH = 10,         // 25
+    WEAPONDAMAGE_WIDTH = 6,  // 31
+	FLIGHT_WIDTH = 1,    // 32
 
     // bitfield widths for u2
     WEAPONBITMAP_WIDTH = 3,    // 3
@@ -73,7 +72,8 @@ public:
     HARMFUL_WIDTH = 1,         // 24
     PRIMARY_COLOR_WIDTH = 3,   // 27
     SECONDARY_COLOR_WIDTH = 3, // 30
-    WAVE_WIDTH = 1,			   // 31 - only 31 since we stole one for INVIS
+    WAVE_WIDTH = 1,			   // 31
+    UNUSED_WIDTH_U2, 		//32
 
     // starting positions for u1 (shouldn't need to be modified)
     ANGLE_START = 0,
