@@ -74,7 +74,7 @@ public:
     PRIMARY_COLOR_WIDTH = 3,   // 27
     SECONDARY_COLOR_WIDTH = 3, // 30
     WAVE_WIDTH = 1,			   // 31
-    UNUSED_WIDTH_U2 = 1,	   // 32
+//    UNUSED_WIDTH_U2 = 1,	   // 32
 
     // starting positions for u1 (shouldn't need to be modified)
     ANGLE_START = 0,
@@ -100,10 +100,11 @@ public:
     LG_BACKWARDS   = 0x0004,
     LG_JUMPED      = 0x0008,
     LG_STRAFING    = 0x0010, // normal=left, reverse=right
-    LG_INVISIBLE   = 0x0020,
+    LG_CHAMELE     = 0x0020,
     LG_SOULSPHERE  = 0x0040,
     LG_EVOKING     = 0x0080,
-    LG_EVOKED      = 0x0100
+    LG_EVOKED      = 0x0100,
+    LG_INVIS_NOVIS = 0x0200
 
   };
 
