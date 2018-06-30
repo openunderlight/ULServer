@@ -57,11 +57,10 @@ public:
   enum {
     // bitfield widths for u1
     ANGLE_WIDTH = 10,        // 10
-    ATTACKBITS_WIDTH = 5,    // 14
-    FLAGS_WIDTH = 9,         // 23
-    WEAPONDAMAGE_WIDTH = 6,  // 29
-	FLIGHT_WIDTH = 1,
-	UNUSED_WIDTH_U1 = 1,
+    ATTACKBITS_WIDTH = 5,    // 15
+    FLAGS_WIDTH = 10,         // 25
+    WEAPONDAMAGE_WIDTH = 6,  // 31
+    FLIGHT_WIDTH = 1,		// 32
 
     // bitfield widths for u2
     WEAPONBITMAP_WIDTH = 3,    // 3
@@ -100,10 +99,11 @@ public:
     LG_BACKWARDS   = 0x0004,
     LG_JUMPED      = 0x0008,
     LG_STRAFING    = 0x0010, // normal=left, reverse=right
-    LG_INVISIBLE   = 0x0020,
+    LG_CHAMELE     = 0x0020,
     LG_SOULSPHERE  = 0x0040,
     LG_EVOKING     = 0x0080,
-    LG_EVOKED      = 0x0100
+    LG_EVOKED      = 0x0100,
+    LG_INVIS_NOVIS = 0x0200
 
   };
 
