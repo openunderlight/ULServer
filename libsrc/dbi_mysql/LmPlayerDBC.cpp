@@ -378,7 +378,7 @@ int LmPlayerDBC::SavePlayer(LmPlayerDB& player_record, bool force)
     // Login
     ////
 
-int LmPlayerDBC::Login(lyra_id_t player_id, int pmare_type, int pmare_billing, TCHAR* gamed_ip, unsigned int gamed_port)
+int LmPlayerDBC::Login(lyra_id_t player_id, int pmare_type, int pmare_billing, TCHAR* gamed_ip, unsigned int gamed_port, bool first_login)
 {
   DEFMETHOD(LmPlayerDBC, Login);
   LmLocker mon(lock_); // lock object for method duration
@@ -404,6 +404,11 @@ int LmPlayerDBC::Login(lyra_id_t player_id, int pmare_type, int pmare_billing, T
   int error = mysql_query(&m_mysql, query);
   ////timer.Stop();
 
+  if(first_login) 
+  {
+    _stprintf(query, _T("UPDATE player SET first_login=CURDATE() WHERE player_id = %u;"), player_id);
+    error = mysql_query(&m_mysql, query); 
+  }
   if (error)
     {
       LOG_Error(_T("%s: Could not login player %u; mysql error %s"), method, player_id, mysql_error(&m_mysql));
@@ -778,7 +783,7 @@ int LmPlayerDBC::SetInitiator(lyra_id_t player_id, lyra_id_t initiator_id, lyra_
 // CanLogin
 ////
 
-int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_type)
+int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, bool* first_login, int pmare_type)
 {
   DEFMETHOD(LmPlayerDBC, CanLogin);
   LmLocker mon(lock_); // lock object for method duration
@@ -798,7 +803,7 @@ int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_ty
   LmAvatar avatar;
 
 
-  _stprintf(query, _T("SELECT acct_type, billing_id, (TO_DAYS(suspended_date) - TO_DAYS(CURDATE())), avatar, avatar2, logged_in, pmare_session_start FROM player WHERE player_id = %u"), player_id);
+  _stprintf(query, _T("SELECT acct_type, billing_id, (TO_DAYS(suspended_date) - TO_DAYS(CURDATE())), avatar, avatar2, logged_in, pmare_session_start, UNIX_TIMESTAMP(first_login) FROM player WHERE player_id = %u"), player_id);
 
   ////timer.Start();
   int error = mysql_query(&m_mysql, query);
@@ -838,6 +843,12 @@ int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_ty
 
   if (row[6]) {
     pmare_session_start = ATOI(row[6]);
+  }
+
+  if(!row[7]) {
+    *first_login = true;
+  } else {
+    *first_login = false;
   }
 
   mysql_free_result(res);
@@ -1067,6 +1078,56 @@ int LmPlayerDBC::GetLocation(lyra_id_t player_id, lyra_id_t& level_id, lyra_id_t
 
   mysql_free_result(res);
 
+  return ret;
+}
+
+int LmPlayerDBC::NewlyNeedsAnnounce(lyra_id_t player_id, bool* announce)
+{
+  DEFMETHOD(LmPlayerDBC, NewlyNeedsAnnounce);
+  LmLocker mon(lock_); // lock object for method duration
+  //LmFuncTimer( timernum_calls_, num_ms_, last_ms_); // time function
+  //  ////LmTimer timer(&sql_ms_);
+  //
+  TCHAR query[256];
+  MYSQL_RES *res;
+  MYSQL_ROW row;
+  _stprintf(query, _T("SELECT TO_DAYS(CURDATE()) - TO_DAYS(first_login),time_online,TIMESTAMPDIFF(MINUTE, last_logout, NOW()), xp from player where player_id=%u"), player_id);
+  int ret = 0;
+  int error = mysql_query(&m_mysql, query);
+
+  if (error)
+    {
+      LOG_Error(_T("%s: Could not get newlyannounce for player %u; mysql error %s"), method, player_id, mysql_error(&m_mysql));
+      return MYSQL_ERROR;
+    }
+    res = mysql_store_result(&m_mysql);
+
+  if (!mysql_num_rows(res)) {
+    mysql_free_result(res);
+    return MYSQL_ERROR;
+  }
+
+  row = mysql_fetch_row(res);
+  int days = 0;
+  if(row[0])
+  	days = ATOI(row[0]);
+  int seconds_online = 0;
+  if(row[1])
+  	seconds_online = ATOI(row[1]);
+  int minutes_since_last_logout = 30;
+  if(row[2])
+  	minutes_since_last_logout = ATOI(row[2]);
+  int xp = 0;
+  if(row[3])
+	xp = ATOI(row[3]);
+  LOG_Debug(_T("%s: player %d days=%d;seconds_online=%d;minutes_since_last_logout=%d;xp=%d"), method, player_id, days, seconds_online, minutes_since_last_logout, xp);
+  if(xp > 10000 || minutes_since_last_logout < 30)
+	*announce = false;
+  else if(days < 10 || (seconds_online/60) < 300)
+	*announce = true;
+  else
+	*announce = false;
+  
   return ret;
 }
 
