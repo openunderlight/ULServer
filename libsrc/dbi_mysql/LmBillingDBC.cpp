@@ -666,4 +666,32 @@ int LmBillingDBC::DisablePlayer(lyra_id_t player_id)
   return 0;
 }
 
+int LmBillingDBC::IsPrimary(lyra_id_t player_id, bool* is_prim)
+{
+  DEFMETHOD(LmBillingDBC, IsPrimary);
+  LmLocker mon(lock_);
+  TCHAR query[256];
+  MYSQL_RES *res;
+  MYSQL_ROW row;
+
+  _stprintf(query, _T("SELECT type FROM underlight WHERE underlight_id=%u"), player_id);
+  int error = mysql_query(&mysql_, query);
+  if(error)
+  {
+    LOG_Error(_T("%s: Could not check if account is primary for player %u; mysql error %s"), method, player_id, mysql_error(&mysql_));
+    return MYSQL_ERROR;
+  }
+
+  res = mysql_store_result(&mysql_);
+
+  if (!mysql_num_rows(res)) {
+    mysql_free_result(res);
+    return MYSQL_ERROR; // whatever, just assume primary
+  }
+
+  row = mysql_fetch_row(res);
+  *is_prim = _tcscmp(row[0], "PRIMARY") == 0;
+  return 0;
+}
+
 
