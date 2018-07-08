@@ -54,7 +54,7 @@ public:
   // database mutators
   //  int CreatePlayer(const TCHAR* playername, int focus_stat, const LmAvatar& avatar, unsigned int billing_id, const TCHAR* email, int acct_type, lyra_id_t& playerid);
   int SavePlayer(LmPlayerDB& player_record, bool force);
-  int Login(lyra_id_t player_id, int pmare_type, int pmare_billing_type, TCHAR* gamed_ip, unsigned int gamed_port);
+  int Login(lyra_id_t player_id, int pmare_type, int pmare_billing_type, TCHAR* gamed_ip, unsigned int gamed_port, bool first_login=false);
   int Logout(lyra_id_t player_id, unsigned int timeonline);
   int UpdateLocation(lyra_id_t player_id, lyra_id_t level_id, lyra_id_t room_id);
   int SetInitiator(lyra_id_t player_id, lyra_id_t initiator_id, lyra_id_t guild_id);
@@ -78,11 +78,12 @@ public:
   int CheckPassword(lyra_id_t player_id, const MD5Hash_t* phash, const TCHAR* challenge);
   int GetLocation(lyra_id_t player_id, lyra_id_t& level_id, lyra_id_t& room_id, int& acct_type, bool isGM);
   int GetLoginStatus(lyra_id_t player_id);
-  int CanLogin(lyra_id_t player_id, int* suspended_days, int pmare_type);
+  int CanLogin(lyra_id_t player_id, int* suspended_days, bool* first_login, int pmare_type);
   int GetBillingID(lyra_id_t player_id, lyra_id_t& billing_id);
   int LocateNewlyAwakened(GMsg_LocateNewliesAck* pnewly_msg);
   int LocateMares(GMsg_LocateMaresAck* pmare_msg);
   int FindHouseMembers(GMsg_LocateAvatarAck& locate_msgack, lyra_id_t guild_id, bool gm, lyra_id_t player_id);
+  int NewlyNeedsAnnounce(lyra_id_t player_id, bool* announce);
 
   long LastSQLCode() const;
 

@@ -400,7 +400,8 @@ void GsGameThread::handle_GMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
 
   // check that this account can log in to the player db
   int suspended_days = 0;
-  rc = main_->PlayerDBC()->CanLogin(playerid, &suspended_days, pmare_type); 
+  bool first_login = false;
+  rc = main_->PlayerDBC()->CanLogin(playerid, &suspended_days, &first_login, pmare_type); 
   sc = main_->PlayerDBC()->LastSQLCode();
   lt = main_->PlayerDBC()->LastCallTime();
   //  main_->Log()->Debug(_T("%s: LmPlayerDBC::CanLogin took %d ms"), method, lt);
@@ -428,7 +429,7 @@ void GsGameThread::handle_GMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
   // load player database
   player->Init(conn, msg.ServerPort(), Log(), true, msg.TCPOnly());
   TLOG_Debug("%s: initialized player %d, firewall is true, TCPOnly is %d", method, playerid, msg.TCPOnly());
-  if (player->Login(playerid, pmare_type) < 0) {
+  if (player->Login(playerid, pmare_type, first_login) < 0) {
     TLOG_Error(_T("%s: could not load database for player %u"), method, playerid);
     send_GMsg_LoginAck(conn, conn_time, GMsg_LoginAck::LOGIN_UNKNOWNERROR);
     main_->PlayerSet()->RemovePlayer(player, false);
