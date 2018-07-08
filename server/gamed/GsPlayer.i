@@ -49,6 +49,17 @@ INLINE const LmPeerUpdate& GsPlayer::PlayerUpdate() const
   return update_;
 }
 
+INLINE bool GsPlayer::NewlyNeedsAnnounce() 
+{ 
+  return newly_announce;
+}
+
+INLINE void GsPlayer::SetNewlyNeedsAnnounce(bool announce)
+{
+        newly_announce = announce;
+}
+
+
 INLINE time_t GsPlayer::LastUpdateTime() const
 {
   return last_update_;
