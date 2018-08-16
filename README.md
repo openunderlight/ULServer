@@ -1,113 +1,145 @@
-Install
-CentOS 7
-AWS
-Create a new EC2 instance in your region of choice.
-For now use CentOS. Technically any distro should work but Underlight uses CentOS for its SELinux capabilities. Note: Amazon doesn't have an AMI of its own for CentOS, but you can get it for free in the AMI Marketplace.
-Open ports 7500-7509 TCP in/out.
-Open port 80 if you want an HTTP server.
-Open all inbound/outbound UDP traffic. This will be necessary for agents.
-Log on as centos@ec2-blah.12.34.56.78 with the pem/ppk provided during setup of your instance.
-sudo adduser ulprod
-sudo su
-cd ~ulprod
-cat authorized_keys
-Now paste your public SSH key into here. It can be the same as the one for your root access but it SHOULDN'T BE, I mean are you INSANE?
-chmod 700 .ssh/
-chmod 600 authorized_keys
-restorecon -R -v .ssh
-Build Dependencies -- Run these as root!
-yum install -y epel-release
+# Install
 
-yum update -y
+## CentOS 7
 
-yum groupinstall -y "Development Tools"
+### AWS
+* Create a new EC2 instance in your region of choice. 
+* For now use CentOS. Technically any distro should work but Underlight uses CentOS for its SELinux capabilities. Note: Amazon doesn't have an AMI of its own for CentOS, but you can get it for free in the AMI Marketplace.
+* Open ports 7500-7509 TCP in/out.
+* Open port 80 if you want an HTTP server.
+* Open all inbound/outbound UDP traffic. This will be necessary for agents.
+* Log on as centos@ec2-blah.12.34.56.78 with the pem/ppk provided during setup of your instance.
+* sudo adduser ulprod
+* sudo su
+* cd ~ulprod
+* cat authorized_keys
+* Now paste your public SSH key into here. It can be the same as the one for your root access but it SHOULDN'T BE, I mean are you INSANE?
+* chmod 700 .ssh/
+* chmod 600 authorized_keys
+* restorecon -R -v .ssh
 
-yum install -y bind-utils network-tools pwgen \ p7zip tcsh vim-enhanced screen telnet \ wget pth pth-devel gdbm-devel gdbm dbi \ zlib-devel asciidoc pkgconfig \ python34 python34-setuptools perl-DBD-mysql
+### Build Dependencies -- Run these as root!
 
-easy_install-3.4 pip
+`yum install -y epel-release`
 
-Ninja
-cd /usr/src
+`yum update -y`
 
-git clone git://github.com/ninja-build/ninja.git
+`yum groupinstall -y "Development Tools"`
 
-cd ninja
+`yum install -y bind-utils network-tools pwgen \ 
+                p7zip tcsh vim-enhanced screen telnet  \
+                wget pth pth-devel gdbm-devel gdbm dbi \
+                zlib-devel asciidoc pkgconfig  \
+                python34 python34-setuptools perl-DBD-mysql`
 
-git checkout release
+`easy_install-3.4 pip`
 
-./configure.py --bootstrap
+### Ninja
 
-./ninja rpm
+`cd /usr/src`
 
-rpm -i <insert ninja RPM filename here>
+`git clone git://github.com/ninja-build/ninja.git`
 
-Verify: ninja
+`cd ninja`
 
-Meson
-pip3 install meson=0.44
+`git checkout release`
 
-Verify: meson
+`./configure.py --bootstrap`
 
-Install MariaDB
-cd /etc/yum.repos.d vim MariaDB.repo * Add this to that file in vim [mariadb] name = MariaDB baseurl = http://yum.mariadb.org/10.1/centos7-amd64 gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB gpgcheck = 1
+`./ninja rpm`
 
-yum update -y
+`rpm -i <insert ninja RPM filename here>`
 
-yum install MariaDB-server MariaDB-client MariaDB-devel -y
+Verify: `ninja`
 
-systemctl enable mariadb
+### Meson
 
-systemctl start mariadb
+`pip3 install meson=0.44`
 
-mysql_secure_installation
+Verify: `meson`
 
-Note: Be sure to remember the root password for MariaDB. This will be needed for configuring the server after building.
+### Install MariaDB
 
-cd /usr/lib64 ln -s libmysqlclient.so.18 libmysqlclient.so
+`cd /etc/yum.repos.d`
+`vim MariaDB.repo`
+* Add this to that file in vim
+`[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.1/centos7-amd64
+gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck = 1
+`
 
-vi /etc/my.cnf.d/server.cnf
+`yum update -y`
+
+`yum install MariaDB-server MariaDB-client MariaDB-devel -y`
+
+`systemctl enable mariadb`
+
+`systemctl start mariadb`
+
+`mysql_secure_installation`
+
+Note: Be sure to remember the root password for MariaDB. This will be needed
+for configuring the server after building.
+
+`cd /usr/lib64`
+`ln -s libmysqlclient.so.18 libmysqlclient.so`
+
+`vi /etc/my.cnf.d/server.cnf`
 
 Uncomment the line bind-address=0.0.0.0 and enable skip-name-resolve
 
+```
    [mariadb]
    ...
    bind-address=0.0.0.0
    skip-name-resolve
    ...
+```
+
 Restart MariaDB
 
-systemctl restart mariadb
+`systemctl restart mariadb`
 
-Clone Repository & Build
-For security it is best to build and run server as a regular user. The development environment user is 'uldev'. The test and production servers use 'ulprod'. The instructions following assume cloning and building will be done from the current user home directory.
+### Clone Repository & Build
 
-git clone ssh://git@ulgit.koiware.com:423/KoiWare/ulserver.git
+For security it is best to build and run server as a regular user. The 
+development environment user is 'uldev'. The test and production servers use 
+'ulprod'. The instructions following assume cloning and building will be done 
+from the current user home directory.
 
-cd $HOME/ulserver/build
+`git clone ssh://git@ulgit.koiware.com:423/KoiWare/ulserver.git`
 
-meson ..
+`cd $HOME/ulserver/build`
 
-ninja
+`meson ..`
 
-Install Server
-cd $HOME/ulserver/build/scripts
+`ninja`
 
-./install.sh
+### Install Server
+
+`cd $HOME/ulserver/build/scripts`
+
+`./install.sh`
 
 Follow the prompts for entering the root password and IP address assignment.
 
-Load Level Files
+### Load Level Files
+
 Copy the server level files generated by the level editor to $HOME/lyra/src
 
-cd $HOME/lyra/src
+`cd $HOME/lyra/src`
 
-make level
+`make level`
 
-Start Server
-cd $HOME/lyra/bin
+### Start Server
 
-./ulctl start
+`cd $HOME/lyra/bin`
 
-Shutdown Server
-cd $HOME/lyra/bin ./ulctl stop
+`./ulctl start`
 
+### Shutdown Server
+
+`cd $HOME/lyra/bin`
+`./ulctl stop`
