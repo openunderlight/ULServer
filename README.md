@@ -1,5 +1,8 @@
 # Install
 
+## Questions?
+Find us in Discord: https://discord.gg/yuDngyj
+
 ## CentOS 7
 
 ### AWS
