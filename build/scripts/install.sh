@@ -84,7 +84,8 @@ echo "ul_billing ul_billing $DBPASS" >> $PWTXT
 echo "Installing databases"
 for DATABASE in ${DATABASES[@]}
 do
-  mysql -u root -p"$ROOTPASS" < sql/$DATABASE.sql
+  mysql -u root -p"$ROOTPASS" -e "create database $DATABASE";
+  mysql -u root -p"$ROOTPASS" $DATABASE < sql/$DATABASE.sql
   mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'$IPADDR' IDENTIFIED BY '$DBPASS'"
 done
 
