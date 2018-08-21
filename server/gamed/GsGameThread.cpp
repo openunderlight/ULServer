@@ -23,6 +23,7 @@
 #include "LmDebug.h"
 #include "GMsg_All.h"
 #include "SMsg_All.h"
+#include "RMsg_PlayerMsg.h"
 #include "GsPlayer.h"
 #include "GsPlayerSet.h"
 #include "GsOutputDispatch.h"
@@ -177,6 +178,7 @@ void GsGameThread::register_handlers()
   RegisterHandler(SMsg::DUMP_STATE, (MsgHandler)&GsGameThread::handle_SMsg_DumpState);
   RegisterHandler(SMsg::ROTATE_LOGS, (MsgHandler)&GsGameThread::handle_SMsg_RotateLogs);
   RegisterHandler(SMsg::SERVERERROR, (MsgHandler)&GsGameThread::handle_SMsg_Error);
+  RegisterHandler(SMsg::UNIVERSEBROADCAST, (MsgHandler)&GsGameThread::handle_SMsg_UniverseBroadcast);
 }
 
 
@@ -398,7 +400,8 @@ void GsGameThread::handle_GMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
 
   // check that this account can log in to the player db
   int suspended_days = 0;
-  rc = main_->PlayerDBC()->CanLogin(playerid, &suspended_days, pmare_type); 
+  bool first_login = false;
+  rc = main_->PlayerDBC()->CanLogin(playerid, &suspended_days, &first_login, pmare_type); 
   sc = main_->PlayerDBC()->LastSQLCode();
   lt = main_->PlayerDBC()->LastCallTime();
   //  main_->Log()->Debug(_T("%s: LmPlayerDBC::CanLogin took %d ms"), method, lt);
@@ -426,7 +429,7 @@ void GsGameThread::handle_GMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
   // load player database
   player->Init(conn, msg.ServerPort(), Log(), true, msg.TCPOnly());
   TLOG_Debug("%s: initialized player %d, firewall is true, TCPOnly is %d", method, playerid, msg.TCPOnly());
-  if (player->Login(playerid, pmare_type) < 0) {
+  if (player->Login(playerid, pmare_type, first_login) < 0) {
     TLOG_Error(_T("%s: could not load database for player %u"), method, playerid);
     send_GMsg_LoginAck(conn, conn_time, GMsg_LoginAck::LOGIN_UNKNOWNERROR);
     main_->PlayerSet()->RemovePlayer(player, false);
@@ -672,7 +675,7 @@ void GsGameThread::handle_GMsg_AgentLogin(LmSrvMesgBuf* msgbuf, LmConnection* co
     return;
   }
   // load player database
-  player->Init(conn, msg.ServerPort(), Log(), false, msg.TCPOnly()); // mare server shouldn't be behind a firewall
+  player->Init(conn, msg.ServerPort(), Log(), false, false); // mare server shouldn't be behind a firewall
   if (player->Login(playerid, 0) < 0) {
     TLOG_Error(_T("%s: could not load database for player %u"), method, playerid);
     send_GMsg_LoginAck(conn, conn_time, GMsg_LoginAck::LOGIN_USERNOTFOUND);
@@ -782,8 +785,70 @@ void GsGameThread::handle_SMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
   conn->SetMessageRange(SMsg::MIN, SMsg::MAX);
 }
 
+void GsGameThread::handle_SMsg_UniverseBroadcast(LmSrvMesgBuf* msgbuf, LmConnection* conn)
+{
+  DEFMETHOD(GsGameThread, handle_SMsg_UniverseBroadcast);
+  DECLARE_TheLineNum;
+  HANDLER_ENTRY(false);
+  //TLOG_Warning(_T("%s: recv bcast from level"), method);
+  CHECK_CONN_NONNULL();
+  ACCEPT_MSG(SMsg_UniverseBroadcast, true);
+  //TLOG_Warning(_T("%s: read msg"), method);
+  // Read the msg inside the message
+  LmSrvMesgBuf* mbuf = main_->BufferPool()->AllocateBuffer(msg.EnclosedMessageSize());
+  LmMesgHdr mhdr;
+  mhdr.Init(msg.EnclosedMessageType(), msg.EnclosedMessageSize());
+  mbuf->ReadHeader(mhdr);
+  memcpy(mbuf->MessageAddress(), msg.MessageBytes(), msg.EnclosedMessageSize());
+  switch(msg.EnclosedMessageType()) {
+	case RMsg::PLAYERMSG:
+		handle_SMsg_UniverseBroadcast_RMsg_PlayerMsg(mbuf);
+		break;
+	default:
+		broadcast_to_game(mbuf);
+		break;
+  }
+}
 
-////
+void GsGameThread::handle_SMsg_UniverseBroadcast_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
+{
+  DEFMETHOD(GsGameThread, handle_SMsg_UniverseBroadcast_RMsg_PlayerMsg);
+  PROXY_HANDLER_ENTRY(false);
+  PROXY_ACCEPT_MSG(RMsg_PlayerMsg);
+  if(!msg.AllowedToDreamwideBroadcast(msg.MsgType()))
+  {
+	TLOG_Warning("Attempting to broadcast a playermsg with a non-art message; not forwarding.");
+	return;
+  }
+
+  msg.SetSenderID(DUMMY_PID_FOR_DREAMWIDE_EVOKES);
+  GsPlayerList players;
+  main_->PlayerSet()->GetPlayerList(players);
+  for (GsPlayerList::iterator i = players.begin(); !(bool)(i == players.end()); ++i) {
+    LmConnection* conn = (*i)->Connection();
+    if (conn) {
+      main_->OutputDispatch()->SendMessage(&msg, conn);
+    }
+  }
+
+  //broadcast_to_game(&msg);
+}
+
+void GsGameThread::broadcast_to_game(LmSrvMesgBuf* mbuf)
+{
+  GsPlayerList players;
+  main_->PlayerSet()->GetPlayerList(players);
+  for (GsPlayerList::iterator i = players.begin(); !(bool)(i == players.end()); ++i) {
+    LmConnection* conn = (*i)->Connection();
+    if (conn) {
+      main_->OutputDispatch()->SendMessage(mbuf, conn);
+    }
+  }
+}
+
+
+/////
+//
 // handle_SMsg_GetServerStatus
 ////
 

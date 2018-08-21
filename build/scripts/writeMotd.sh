@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MOTDFILE='/opt/lyra/ul/prod/var/text/motd.txt'
+MOTDFILE="$HOME/lyra/var/text/motd.txt"
 
 BRANCH=$1
 DATE=`date '+%Y-%m-%d %H:%M:%S'`

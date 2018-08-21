@@ -16,7 +16,7 @@ const int NUM_ARTS = 151; // BACARDI N COLA DO IT DO IT
 const int NUM_MODIFIERS = 64;
 const int NUM_DURATIONS = 64;
 const int NUM_PLAYER_STATS = 5;
-const int NUM_DISTANCES = 7;
+const int NUM_DISTANCES = 8;
 const int NUM_FREQUENCIES = 6;
 const int NUM_GUILDS = 8;
 const int NUM_BELIEFS = 4;
@@ -864,7 +864,8 @@ const int num_no_rally_levels =
 
 const int no_damage_levels[] = {41, 47};
 
-const int num_no_damage_levels =
-	sizeof(no_damage_levels) / sizeof(int);
+const int num_no_damage_levels = sizeof(no_damage_levels) / sizeof(int);
+
+const int DUMMY_PID_FOR_DREAMWIDE_EVOKES = 999999;
 
 #endif

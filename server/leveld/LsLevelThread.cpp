@@ -147,6 +147,7 @@ void LsLevelThread::register_handlers()
   RegisterHandler(SMsg::RESETPORT, (MsgHandler)&LsLevelThread::handle_SMsg_ResetPort);
   // register SMsg_LS message handlers
   RegisterHandler(SMsg::LS_ACTION, (MsgHandler)&LsLevelThread::handle_SMsg_LS_Action);
+  RegisterHandler(SMsg::UNIVERSEBROADCAST, (MsgHandler)&LsLevelThread::handle_SMsg_UniverseBroadcast);
 }
 
 
@@ -190,6 +191,29 @@ void LsLevelThread::handle_SMsg_Ping(LmSrvMesgBuf* msgbuf, LmConnection* conn)
   else {
     TLOG_Warning(_T("%s: unknown ping %d from conn [%p] (%c,%d)"), method, msg.PingType(), conn, conn->Type(), conn->ID());
   }
+}
+
+void LsLevelThread::handle_SMsg_UniverseBroadcast(LmSrvMesgBuf* msgbuf, LmConnection* conn)
+{	
+	DEFMETHOD(LsLevelThread, handle_SMsg_UniverseBroadcast);
+	DECLARE_TheLineNum;
+	HANDLER_ENTRY(false);
+	//TLOG_Warning(_T("%s: recv bcast msg"), method);
+	CHECK_CONN_NONNULL();
+	CHECK_CONN_ISGAME();
+        //TLOG_Warning(_T("%s: cxn not null, is game"), method);
+	ACCEPT_MSG(SMsg_UniverseBroadcast, true);
+        //TLOG_Warning(_T("%s: got msg"), method);
+	LmConnectionList list;
+	main_->ConnectionSet()->GetConnectionList(list);
+	for(LmConnectionList::iterator c = list.begin(); !(bool)(c == list.end()); ++c) {
+		LmConnection* conn2 = *c;
+		if(conn2->Type() != LmConnection::CT_GSRV)
+			continue;
+		//TLOG_Warning(_T("%s: dispatching to gamed"), method);
+		main_->OutputDispatch()->SendMessage(&msg, conn2);
+	}
+		
 }
 
 ////

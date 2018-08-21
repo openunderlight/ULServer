@@ -251,6 +251,7 @@ GsPlayer::GsPlayer()
   is_mare_ = false;
   pp_evoking_ = Arts::NONE;
   pp_skill_ = 0;
+  newly_announce=false;
 }
 
 ////
@@ -266,7 +267,7 @@ GsPlayer::~GsPlayer()
 // Login - load from database; return 0 if ok, -1 otherwise
 ////
 
-int GsPlayer::Login(lyra_id_t playerid, int pmare_type)
+int GsPlayer::Login(lyra_id_t playerid, int pmare_type, bool first_login)
 {
   DEFMETHOD(GsPlayer, Login);
   // load the player info from the player database
@@ -331,7 +332,7 @@ int GsPlayer::Login(lyra_id_t playerid, int pmare_type)
 
   // log player in
   rc = main_->PlayerDBC()->Login(playerid, pmare_type, db_.PMareBilling(),
-	  main_->HostIP(), main_->ServerPort());
+	  main_->HostIP(), main_->ServerPort(), first_login);
   sc = main_->PlayerDBC()->LastSQLCode();
   lt = main_->PlayerDBC()->LastCallTime();
   //  main_->Log()->Debug(_T("%s: LmPlayerDBC::Login took %d ms"), method, lt);
@@ -344,7 +345,21 @@ int GsPlayer::Login(lyra_id_t playerid, int pmare_type)
   db_.SetLastLogin(time(NULL));
   // set current avatar from database
   avatar_ = db_.Avatar();
+  bool is_primary = false;
+  rc = main_->BillingDBC()->IsPrimary(playerid, &is_primary);
+  sc = main_->PlayerDBC()->LastSQLCode();
+  lt = main_->PlayerDBC()->LastCallTime();
+  if (rc < 0) {
+    main_->Log()->Error(_T("%s: could not retrieve primary status for %u; rc=%d, sqlcode=%d"), method, playerid, rc, sc);
+    //GsUtil::HandlePlayerError(main_, method, rc, sc, false);
+    //return -1;
+  }
 
+  main_->Log()->Debug(_T("%s: %u is_primary is %d"), method, playerid, is_primary);
+  if(is_primary && db_.AccountType() == LmPlayerDB::ACCT_PLAYER) {
+  	main_->PlayerDBC()->NewlyNeedsAnnounce(playerid, &newly_announce);
+	main_->Log()->Debug(_T("%s: %u newly_announce=%d"), method, playerid, newly_announce);
+  } 
   // set login time
   time(&login_time_);
 
