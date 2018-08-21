@@ -112,7 +112,7 @@ development environment user is 'uldev'. The test and production servers use
 'ulprod'. The instructions following assume cloning and building will be done 
 from the current user home directory.
 
-`git clone ssh://git@ulgit.koiware.com:423/KoiWare/ulserver.git`
+`git clone https://github.com/openunderlight/ULServer`
 
 `cd $HOME/ulserver/build`
 
