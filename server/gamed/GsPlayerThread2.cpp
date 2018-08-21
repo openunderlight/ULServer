@@ -217,7 +217,12 @@ void GsPlayerThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LmConnection* conn
   // accept message, send error
   ACCEPT_MSG(RMsg_Speech, true);
   // process certain kinds of speech in game server
-  bool send_out = true;
+  bool send_out = true, send_universe = msg.IsUniverseWide();
+  if (send_universe && player_->DB().AccountType() != LmPlayerDB::ACCT_ADMIN) {
+      SECLOG(2, _T("%s: player %u: illegal UNIVERSE-WIDE GM-only speech (%c)"), method, player_->PlayerID(), msg.SpeechType());
+      return;
+    }
+
   switch (msg.SpeechType()) {
   case RMsg_Speech::REPORT_BUG:
     msg.RemoveNewlines();
@@ -225,6 +230,7 @@ void GsPlayerThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LmConnection* conn
 	   player_->PlayerID(), player_->LevelID(), player_->RoomID(),
 	   player_->PlayerUpdate().X(), player_->PlayerUpdate().Y(), msg.SpeechText());
     send_out = false;
+    send_universe = false;
     break;
   //case RMsg_Speech::REPORT_QUEST: // eliminated unnecessary double sending of text
 //    msg.RemoveNewlines();
@@ -239,6 +245,7 @@ void GsPlayerThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LmConnection* conn
     SECLOG(-2, _T("%s: player %u: ROLE PLAY REPORT: %s"), method,
 	   player_->PlayerID(), msg.SpeechText());
     send_out = false;
+    send_universe = false;
     break;
   case RMsg_Speech::REPORT_DEBUG:
     msg.RemoveNewlines();
@@ -246,6 +253,7 @@ void GsPlayerThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LmConnection* conn
 	   player_->PlayerID(), player_->LevelID(), player_->RoomID(),
 	   player_->PlayerUpdate().X(), player_->PlayerUpdate().Y(), msg.SpeechText());
     send_out = false;
+    send_universe = false;
     break;
   case RMsg_Speech::REPORT_CHEAT:
     if (player_->DB().AccountType() != LmPlayerDB::ACCT_MONSTER) { // don't log cheat reports from agents
@@ -253,6 +261,7 @@ void GsPlayerThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LmConnection* conn
       SECLOG(2, _T("%s: player %u: CHEAT (level=%u, room=%u): %s"), method, player_->PlayerID(),  player_->LevelID(), player_->RoomID(), msg.SpeechText());
     }
     send_out = false;
+    send_universe = false;
     break;
   case RMsg_Speech::AUTO_CHEAT:
     if (player_->DB().AccountType() != LmPlayerDB::ACCT_MONSTER) { // don't log cheat reports from agents
@@ -260,11 +269,13 @@ void GsPlayerThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LmConnection* conn
       SECLOG(2, _T("%s: player %u: AUTOCHEAT  (level=%u, room=%u): %s"), method, player_->PlayerID(),  player_->LevelID(), player_->RoomID(),msg.SpeechText());
     }
     send_out = false;
+    send_universe = false;
     break;
   case RMsg_Speech::SERVER_TEXT:
     // shouldn't ever be sent from client, just ignore it
     SECLOG(2, _T("%s: player %u: illegal SERVER_TEXT speech"), method, player_->PlayerID());
     send_out = false;
+    send_universe = false;
     break;
   case RMsg_Speech::RAW_EMOTE: // GM-only
   case RMsg_Speech::GLOBALSHOUT:
@@ -288,13 +299,19 @@ void GsPlayerThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LmConnection* conn
   default: // unknown
     SECLOG(2, _T("%s: player %u: illegal unknown speech (%c)"), method, player_->PlayerID(), msg.SpeechType());
     send_out = false;
+    send_universe = false;
     break;
   }
   // send it?
-  if (send_out) {
+  if (send_out && !send_universe) {
     CHECK_PLAYER_INLEVEL();
     // send to level server
     send_SMsg_Proxy(player_->LevelConnection(), msgbuf);
+  }
+
+  if (send_out && send_universe) {
+    SECLOG(2, _T("%s: player %u doing global bcast"), method, player_->PlayerID());
+    send_SMsg_UniverseBroadcast(msgbuf);
   }
 }
 
@@ -344,6 +361,10 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 	  //   player_->PlayerID(), art);
       //send_to_level = false;
   //} else
+  if (msg.Universal() && player_->DB().AccountType() != LmPlayerDB::ACCT_ADMIN) {
+	SECLOG(5, _T("%s: player %u sending illegal universe message"), method, msg.SenderID());
+	return;
+  }
 
   switch (msg.MsgType()) {
 
@@ -1040,8 +1061,12 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   break;
 
   } // end switch
+  if(msg.Universal())
+  {
+	send_SMsg_UniverseBroadcast(msg);
+  }
   // create proxy message, copy message into it, send to player's level server
-  if (send_to_level) {
+  else if (send_to_level) {
     send_SMsg_Proxy(player_->LevelConnection(), msg);
   }
 }

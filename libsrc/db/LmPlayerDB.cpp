@@ -174,7 +174,6 @@ int LmPlayerDB::FixAvatar(bool modify)
   if (modify) {
 
 	avatar_.SetFocus(this->Stats().FocusStat());
- 	avatar_.SetPlayerInvis(0);
 	if (this->Arts().Skill(Arts::DREAMSTRIKE) > 0 ) 
 		avatar_.SetDreamstrike(1);
 	else

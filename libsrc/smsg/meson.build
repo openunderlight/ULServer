@@ -34,5 +34,6 @@ SMSG_FILES = files(
 		'SMsg_ServerStatus.cpp',
 		'SMsg_SetAvatarDescription.cpp',
 		'SMsg_ShowItem.cpp',
-		'SMsg_TakeItemAck.cpp'
+		'SMsg_TakeItemAck.cpp',
+		'SMsg_UniverseBroadcast.cpp'
 )

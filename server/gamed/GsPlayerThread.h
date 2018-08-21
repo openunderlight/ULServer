@@ -162,6 +162,9 @@ private:
   void send_SMsg_GetItem(LmConnection* lsconn, lyra_id_t roomid, const LmItemHdr& itemhdr);
   void send_SMsg_Proxy(LmConnection* lsconn, LmSrvMesgBuf* msgbuf);
   void send_SMsg_Proxy(LmConnection* lsconn, LmMesg& msg);
+  void send_SMsg_UniverseBroadcast(LmSrvMesgBuf* msgbuf);
+  void send_SMsg_UniverseBroadcast(LmMesg& msg);
+
   void send_SMsg_DestroyRoomItem(LmConnection* lsconn, lyra_id_t roomid, const LmItemHdr& itemhdr);
   void send_SMsg_GetLevelPlayers(LmConnection* lsconn);
   void send_SMsg_TakeItemAck(LmConnection* lsconn, lyra_id_t targetid, const LmItemHdr& itemhdr, int status);
@@ -187,7 +190,7 @@ private:
   void adjust_offline_xp(int xp_adj, const TCHAR* why, lyra_id_t why_id, bool send_msg);
   void hide_player(int hide);
   void send_motd();
-
+  LmConnection* connectToBcastLevelD();
   void open_log();
   void close_log();
   void register_handlers();

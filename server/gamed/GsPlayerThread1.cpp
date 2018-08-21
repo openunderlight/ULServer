@@ -1068,6 +1068,16 @@ void GsPlayerThread::handle_GMsg_GotoLevel(LmSrvMesgBuf* msgbuf, LmConnection* c
   // update player database
   if (player_->IsHidden()) {
     levelid += Lyra::HIDDEN_DELTA; // player hidden from location?
+  } else {
+    if(levelid == 20 && player_->NewlyNeedsAnnounce()) {
+	RMsg_Speech annc;
+	TCHAR buf[512];
+	_stprintf(buf, _T("%s, a newly awakened dreamer, has entered the dream"), player_->DB().PlayerName());
+        annc.Init(RMsg_Speech::SPEECH, 0, 0, buf);
+	annc.SetUniverseWide(true);
+	send_SMsg_UniverseBroadcast(annc);
+	player_->SetNewlyNeedsAnnounce(false);
+    }
   }
   int rc = main_->PlayerDBC()->UpdateLocation(player_->PlayerID(), levelid, roomid);
   int sc = main_->PlayerDBC()->LastSQLCode();
@@ -1077,6 +1087,18 @@ void GsPlayerThread::handle_GMsg_GotoLevel(LmSrvMesgBuf* msgbuf, LmConnection* c
     main_->Log()->Error(_T("%s: could not update player location; rc=%d, sqlcode=%d"), method, rc, sc);
     //    GsUtil::HandlePlayerError(main_, method, rc, sc);
   }
+}
+
+/////
+// connectToBcastLevelD
+/////
+LmConnection* GsPlayerThread::connectToBcastLevelD()
+{
+	const int BROADCAST_LEVELD = 20; // Thresh
+	const LmLevelDBC* ldb = main_->LevelSet()->LevelDBC(BROADCAST_LEVELD);
+	if(!ldb)
+		return NULL;
+	return GsUtil::ConnectToLevelServer(main_, ldb);
 }
 
 ////

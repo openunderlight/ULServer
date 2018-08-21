@@ -60,7 +60,7 @@ public:
 
   void SetMain(GsMain* gsmain);
 
-  int Login(lyra_id_t playerid, int pmare_type);
+  int Login(lyra_id_t playerid, int pmare_type, bool first_login=false);
   void Init(LmConnection* conn, int serv_port, LmLog* log, bool firewall, short tcp_only);
   void Logout(bool save = true);
 
@@ -150,7 +150,7 @@ public:
   void GotoRoom(lyra_id_t roomid);
   void UpdateStats(const LmStats& stats, const LmArts& arts);
   int ChangeAvatar(const LmAvatar& avatar, int which);
-
+  void SetNewlyNeedsAnnounce(bool announce);
   bool ChangeCurrentStat(int stat_num, int value);
   bool ChangeMaxStat(int stat_num, int value);
   bool ChangeGuildRank(int guild_num, int rank);
@@ -223,7 +223,7 @@ public:
   void SetPPEvoking(int value);
   int PPSkill() const;
   void SetPPSkill(int value);
-
+  bool NewlyNeedsAnnounce();
   void DumpInventory(const TCHAR* when = NULL);
 
 
@@ -287,6 +287,7 @@ private:
   bool tcp_only_; // true if we're tcp only
   int pp_evoking_;			   // set to the art # being evoked via pp; usually NO_ART
   int pp_skill_;
+  bool newly_announce;
 
   bool in_level_;              // player in level?
   const LmLevelDBC* ldbc_;       // current level

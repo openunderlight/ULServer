@@ -392,6 +392,23 @@ void GsPlayerThread::send_SMsg_Proxy(LmConnection* lsconn, LmMesg& pmsg)
   main_->OutputDispatch()->SendMessage(&msg, lsconn);
 }
 
+
+void GsPlayerThread::send_SMsg_UniverseBroadcast(LmSrvMesgBuf* msgbuf)
+{
+  SMsg_UniverseBroadcast msg;
+  msg.Init(msgbuf);
+  main_->OutputDispatch()->SendMessage(&msg, connectToBcastLevelD());
+}
+
+void GsPlayerThread::send_SMsg_UniverseBroadcast(LmMesg& pmsg)
+{
+  SMsg_UniverseBroadcast msg;
+  msg.Init(pmsg);
+  main_->OutputDispatch()->SendMessage(&msg, connectToBcastLevelD());
+}
+
+
+
 ////
 // send_SMsg_DestroyRoomItem - send destroyroomitem message to level server
 ////

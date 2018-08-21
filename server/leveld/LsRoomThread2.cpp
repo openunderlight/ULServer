@@ -453,25 +453,25 @@ void LsRoomThread::perform_create_essence(LsPlayer* player, LsRoomState* room, l
     switch(essence.mare_type)
     {
 	case Avatars::EMPHANT:
-		str += 1;
+		str = 1;
 		break;
 	case Avatars::BOGROM:
-		str += 5;
+		str = 5;
 		break;
 	case Avatars::AGOKNIGHT:
-		str += 10;
+		str = 10;
 		break;
 	case Avatars::SHAMBLIX:
-		str += 25;
+		str = 25;
 		break;
 	case Avatars::HORRON:
-		str += 50;
+		str = 50;
 		break;
 	default:
 		str = 1;
 		break;
     }
-    essence.strength = str;
+    essence.strength = str + state2;
   }
   
   // create item state, copy info

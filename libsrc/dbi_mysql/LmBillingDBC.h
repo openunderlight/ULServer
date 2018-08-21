@@ -56,7 +56,7 @@ public:
   long LastCallTime() const;
   long TotalCallTime() const;
   long TotalSQLTime() const;
-
+  int IsPrimary(lyra_id_t player_id, bool* is_prim);
   void Dump(FILE* f, int indent = 0) const;
 
   static const TCHAR* ProgramName(int servertype);
