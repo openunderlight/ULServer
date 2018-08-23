@@ -144,6 +144,9 @@ mysql -u root -p
 To test (should login with password, type to leave it)
 
 mysql_secure_installation
+ALLOW connections remotely? Y
+
+
 lets check firewall and open ports.
 
 sudo ufw status
@@ -155,7 +158,7 @@ Firewall is active and enabled on system startup
 sudo ufw allow 7500:7509/tcp
 sudo ufw allow 1:65535/udp
 sudo ufw allow 22/tcp
-sudo ufw allow from 127.0.0.1 to 127.0.0.1 port 80 proto tcp
+sudo ufw allow 3306/tcp
 
 confirm open ports ..
 sudo ufw status
@@ -181,7 +184,7 @@ cd ~/ULServer/build/scripts
 enter the database root password you made before.
 
 Available IP addresses 
-enter 127.0.0.1
+type in whatever is available
 
 cd ~/lyra/bin
 
