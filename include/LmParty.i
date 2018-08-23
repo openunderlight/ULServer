@@ -1,5 +1,5 @@
 // LmParty.i  -*- C++ -*-
-// $Id: LmParty.i,v 1.2 1997-11-17 14:05:12-08 jason Exp $
+// $Id: LmParty.i,v 1.3 1997-07-18 16:04:59-07 jason Exp $
 // Copyright 1996-1997 Lyra LLC, All rights reserved. 
 //
 // optionally inlined methods/functions
@@ -48,9 +48,9 @@ INLINE lyra_id_t LmParty::LeaderID() const
 
 INLINE lyra_id_t LmParty::CreatorID() const
 {
-  return creatorid_;
-}
-
+	return creatorid_;
+	}
+	
 INLINE lyra_id_t LmParty::PlayerID(int index) const
 {
   return members_[index];
