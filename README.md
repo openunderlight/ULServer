@@ -100,20 +100,20 @@ sudo add-apt-repository universe
 sudo add-apt-repository restricted
 sudo add-apt-repository multiverse
 sudo apt update
+reboot to make sure changes are applied if updated.
 
-sudo apt-get install build-essential mtools python-pip python3-pip ninja-build meson libpth-dev libgdbm-dev tcsh pwgen -y
-
+sudo apt-get install build-essential mtools python-pip python3-pip ninja-build meson libpth-dev libgdbm-dev tcsh pwgen libapache-dbi-perl -y
+sudo apt update
+reboot to make sure changes are applied if updated.
 
 Install MariaDB
-sudo apt-get remove mariadb-server && sudo apt autoremove
-sudo apt-get install software-properties-common
 
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 
 sudo add-apt-repository 'deb [arch=amd64] http://mirror.zol.co.zw/mariadb/repo/10.3/ubuntu bionic main'
 
 sudo apt update
-sudo apt install mariadb-server libmysqlclient-dev
+sudo apt install software-properties-common mariadb-server libmysqlclient-dev -y
 Enter root password (KEEP THIS SAFE, and remember it please)
 
 sudo vi /etc/mysql/mariadb.conf.d/50-server.cnf
@@ -128,7 +128,11 @@ Press insert on keyboard to edit
    skip-name-resolve
    ...
 
-save
+save and exit :wq!
+
+sudo systemctl stop mariadb.service
+sudo systemctl start mariadb.service
+sudo systemctl enable mariadb.service
 
 sudo mysql
 use mysql;
@@ -139,7 +143,7 @@ exit
 mysql -u root -p
 To test (should login with password, type to leave it)
 
-
+mysql_secure_installation
 lets check firewall and open ports.
 
 sudo ufw status
@@ -149,9 +153,9 @@ sudo ufw enable
 Firewall is active and enabled on system startup
 
 sudo ufw allow 7500:7509/tcp
-sudo ufw allow 1:65535:/udp
+sudo ufw allow 1:65535/udp
 sudo ufw allow 22/tcp
-sudo ufw allow 3306/tcp
+sudo ufw allow from 127.0.0.1 to 127.0.0.1 port 80 proto tcp
 
 confirm open ports ..
 sudo ufw status
@@ -161,7 +165,7 @@ For security it is best to build and run server as a regular user. The developme
 
 cd ~
 
-git clone https://github.com/openunderlight/ULServer
+git clone -b ubuntu_build https://github.com/openunderlight/ULServer
 
 cd $HOME/ULServer/build
 
@@ -189,4 +193,3 @@ To stop the server:
 
 To verify it's running.
 ps -ef | grep game
-
