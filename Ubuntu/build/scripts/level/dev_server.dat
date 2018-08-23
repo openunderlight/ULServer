@@ -1,0 +1,76 @@
+# This is actually -*- Perl -*-
+
+##
+## Server Database
+##
+
+## format:
+##
+## DEFSERVER((
+##   HostID => 'hostid',      # hostid of hostname (output from gethostid)
+##   HostName => 'hostname',  # fully-qualified hostname (ie. orcus.lyrastudios.com)
+##   ServerType => 'S',       # G: standard game server, g: MP game server, L: level server, m: monitor, a: agent
+##   Arg1 => 'X',             # server arg 1 (port number)
+##   Arg2 => 'Y',             # server arg 2 (level number for LS, max_players for GS)
+## ));
+
+## servers defined:
+##
+## variable hostid   hostname                 servers
+##
+##
+## server variables
+##
+
+## NOTE: hostname changed to an IP address for Linux port
+
+$grzzt_hostid = '1'; # contents of hostid.txt
+$grzzt_hostname = '65.41.106.19'
+FILEPATH("/home/https/htdocs/ullogin.txt");
+
+##
+## Game Servers
+##
+
+## NOTE: start servers that can handle 100 players each
+
+for ($port = 7500; $port < 7501; $port++) {
+    DEFSERVER(( HostID => $grzzt_hostid, HostName => $grzzt_hostname, ServerType => 'G', Arg1 => $port, Arg2 => '100', AllowPlayers => 'YES' ));
+}
+
+# start a mare server to handle up to 50 mare logins
+for ($port = 7503; $port < 7504; $port++) {
+#    DEFSERVER(( HostID => $grzzt_hostid, HostName => $grzzt_hostname, ServerType => 'G', Arg1 => $port, Arg2 => '50', AllowPlayers => 'NO' ));
+}
+
+##
+## Level Servers
+##
+
+# note: level 1 is offline threshold, no server needed
+
+for ($level = 2; $level <= 46; $level++) {
+#for ($level = 29; $level <= 29; $level++) {
+#for ($level = 29; $level <= 31; $level++) {
+  $arg1 = 8400 + $level;
+  $arg2 = $level;
+  DEFSERVER(( HostID => $grzzt_hostid, HostName => $grzzt_hostname, ServerType => 'L', Arg1 => $arg1, Arg2 => $arg2, AllowPlayers => 'YES' ));
+}
+
+##
+## Pseudo-Servers: monitors, and agent servers; these are in this list simply so that
+## game and level servers can determine if an incoming connection is valid or not.
+##
+
+## Agent Servers
+
+## Lolth
+#DEFSERVER(( HostID => "none", HostName => "24.130.20.226", ServerType => 'a', Arg1 => '0', Arg2 => '0' ));
+
+##
+## no changes beyond this point
+##
+
+###
+# so "require" returns true
+1;
