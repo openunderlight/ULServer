@@ -65,6 +65,9 @@ Use entire disk
 
 select disk
 done
+The development environment user is 'uldev'. The test and production servers use 
+'ulprod'. The instructions following assume cloning and building will be done 
+from the current user home directory.
 
 name: ulprod
 server name: ulprod
