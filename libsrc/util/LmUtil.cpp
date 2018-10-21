@@ -145,7 +145,7 @@ void LmUtil::SendMail(const TCHAR* source, const TCHAR* target, const TCHAR* sub
   // we do this by first creating a temp file with the headers/message, and then
   // running "sendmail -t" to send it.  simplicity itself...  who needs MAPI?  :)
 
-#if 0
+
 #ifdef WIN32
 	// NO EMAIL SUPPORT YET FOR WIN32 PORT
 #else
@@ -178,7 +178,6 @@ void LmUtil::SendMail(const TCHAR* source, const TCHAR* target, const TCHAR* sub
  _tsystem(cmd);
   // remove temp file
   _tunlink(tmpfname);
-#endif
 #endif
 }
 

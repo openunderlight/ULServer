@@ -1481,7 +1481,7 @@ int LmPlayerDBC::LoadPlayer(lyra_id_t player_id, LmPlayerDB& player_record, int 
 		// now, if there is a login alert set, send email
 		// Added correct email - DiscoWay
 		if (login_alert) {
-			LmUtil::SendMail(_T("accounts@underlolz.lolz"), login_email,
+			LmUtil::SendMail(_T("accounts@underlight.com"), login_email,
 				_T("Underlight login alert"), _T("Underlight account %s, controlled by player %s, has just logged in. \n\n -gamed"), player_record.PlayerName(), player_record.RealName());
 
 		}
