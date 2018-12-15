@@ -404,10 +404,10 @@ int LmPlayerDBC::Login(lyra_id_t player_id, int pmare_type, int pmare_billing, T
   int error = mysql_query(&m_mysql, query);
   ////timer.Stop();
 
-  if(first_login) 
+  if(first_login)
   {
     _stprintf(query, _T("UPDATE player SET first_login=CURDATE() WHERE player_id = %u;"), player_id);
-    error = mysql_query(&m_mysql, query); 
+    error = mysql_query(&m_mysql, query);
   }
   if (error)
     {
@@ -1065,9 +1065,9 @@ int LmPlayerDBC::GetLocation(lyra_id_t player_id, lyra_id_t& level_id, lyra_id_t
     level_id = ATOI(row[1]);
   acct_type = ATOI(row[2]);
   _tcscpy(realName, row[3]);
- 
 
-  if(!isGM && acct_type == LmPlayerDB::ACCT_ADMIN && ((NULL != _tcsstr(realName, _T("INVIS"))) || 
+
+  if(!isGM && acct_type == LmPlayerDB::ACCT_ADMIN && ((NULL != _tcsstr(realName, _T("INVIS"))) ||
 		(NULL != _tcsstr(realName, _T("invis"))) ||
 		(NULL != _tcsstr(realName, _T("Invis")))) && level_id >= Lyra::HIDDEN_DELTA )
   {
@@ -1127,7 +1127,7 @@ int LmPlayerDBC::NewlyNeedsAnnounce(lyra_id_t player_id, bool* announce)
 	*announce = true;
   else
 	*announce = false;
-  
+
   return ret;
 }
 
@@ -1663,7 +1663,7 @@ int LmPlayerDBC::LocateNewlyAwakened(GMsg_LocateNewliesAck* pnewly_msg)
 
 //  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE logged_in = 1 AND (acct_type = %u OR acct_type = %u) AND time_online < 72000 ORDER BY time_online ASC"),
 // Prior fix_ghosted.pl script interferrence, fixed with this change; added check for only unsphered - DiscoWay
-  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND xp < 60,000 AND time_online < 72000 ORDER BY time_online ASC"),
+  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND xp < 60000 AND time_online < 72000 ORDER BY time_online ASC"),
 	  LmPlayerDB::ACCT_PLAYER, LmPlayerDB::ACCT_ADMIN);
 
   ////timer.Start();
