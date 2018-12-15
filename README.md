@@ -103,6 +103,9 @@ sudo add-apt-repository universe;
 sudo add-apt-repository restricted;
 sudo add-apt-repository multiverse;
 sudo apt update
+sudo apt upgrade
+sudo apt update
+sudo apt-get update
 reboot to make sure changes are applied if updated.
 
 sudo apt-get install build-essential mtools python-pip python3-pip ninja-build meson libpth-dev libgdbm-dev tcsh pwgen libapache-dbi-perl -y
@@ -119,16 +122,17 @@ sudo apt update
 sudo apt install software-properties-common mariadb-server libmysqlclient-dev -y
 Enter root password (KEEP THIS SAFE, and remember it please)
 
-sudo vi /etc/mysql/mariadb.conf.d/50-server.cnf
+sudo vi /etc/mysql/my.conf
 add in [mysqld] section
 plugin-load-add = auth_socket.so
 
-Uncomment the line bind-address=0.0.0.0 and enable skip-name-resolve
+Uncomment the line bind-address=0.0.0.0 and enable skip-name-resolve temporarily add skip-grant-tables
 Press insert on keyboard to edit
 [mariadb]
    ...
    bind-address=0.0.0.0
    skip-name-resolve
+   skip-grant-tables
    ...
 
 save and exit :wq!
@@ -143,11 +147,22 @@ update user set plugin='' where User='root';
 flush privileges;
 exit
 
+
+sudo vi /etc/mysql/my.conf
+remove skip-grant-tables
+
+save and exit :wq
+
+sudo systemctl stop mariadb.service
+sudo systemctl start mariadb.service
+sudo systemctl enable mariadb.service
+
 mysql -u root -p
-To test (should login with password, type to leave it)
+To test (should login with password)
+exit
 
 mysql_secure_installation
-ALLOW connections remotely? Y
+
 
 
 lets check firewall and open ports.
@@ -187,7 +202,7 @@ cd ~/ULServer/build/scripts
 enter the database root password you made before.
 
 Available IP addresses 
-type in whatever is available
+127.0.0.1
 
 cd ~/lyra/bin
 
