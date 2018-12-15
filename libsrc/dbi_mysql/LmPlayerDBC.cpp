@@ -1663,7 +1663,7 @@ int LmPlayerDBC::LocateNewlyAwakened(GMsg_LocateNewliesAck* pnewly_msg)
 
 //  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE logged_in = 1 AND (acct_type = %u OR acct_type = %u) AND time_online < 72000 ORDER BY time_online ASC"),
 // Prior fix_ghosted.pl script interferrence, fixed with this change; added check for only unsphered - DiscoWay
-  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND xp < 10000 AND time_online < 72000 ORDER BY time_online ASC"),
+  _stprintf(query, _T("SELECT player_name, level_id, room_id, time_online FROM player WHERE (logged_in = 1 OR room_id != 0 OR level_id != 0) AND (acct_type = %u OR acct_type = %u) AND xp < 60,000 AND time_online < 72000 ORDER BY time_online ASC"),
 	  LmPlayerDB::ACCT_PLAYER, LmPlayerDB::ACCT_ADMIN);
 
   ////timer.Start();
