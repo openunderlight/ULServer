@@ -98,10 +98,10 @@ sudo do-release-upgrade -d
 sudo apt-get update
 reboot to make sure changes are applied if updated.
 
-sudo add-apt-repository main
-sudo add-apt-repository universe
-sudo add-apt-repository restricted
-sudo add-apt-repository multiverse
+sudo add-apt-repository main;
+sudo add-apt-repository universe;
+sudo add-apt-repository restricted;
+sudo add-apt-repository multiverse;
 sudo apt update
 reboot to make sure changes are applied if updated.
 
