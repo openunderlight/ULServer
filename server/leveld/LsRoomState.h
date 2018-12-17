@@ -65,7 +65,7 @@ public:
   bool CanAddItem() const;
   const LmRoomItemList& ItemList() const;
   void MakeSpaceForItem(const LmItemHdr& itemhdr, LmRoomItem& reaped);
-
+  int NumActiveRazorwindBlades();
   void ReapItems(LmRoomItemList& reaped);
   void GenerateItems(LmRoomItemList& generated);
 

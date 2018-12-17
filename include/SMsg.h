@@ -79,6 +79,7 @@ struct SMsg {
     DUMP_STATE,            // dump state to log file
     ROTATE_LOGS,           // rotate log files
     UNIVERSEBROADCAST,
+    GS_FAKELOGOUT,	// fakelogout msg
     MAX                    // maximum known type (must be last)
   };
 };

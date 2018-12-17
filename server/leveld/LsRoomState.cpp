@@ -570,6 +570,26 @@ const LmItemHdr* LsRoomState::has_prime(const lyra_id_t guild_id)
   return retval;
 }
 
+int LsRoomState::NumActiveRazorwindBlades()
+{
+	DECLARE_TheLineNum;
+	int numblades = 0;
+	const void* state;
+	struct lyra_item_area_effect_t aoe;
+	LmRoomItemList::const_iterator i;
+	for(i = items_.begin(); (bool)(i == items_.end()); ++i) {
+		state = (*i).Item().StateField(0);
+		unsigned char type =*((unsigned char*)state);
+		if(type != LyraItem::AREA_EFFECT_FUNCTION)
+			continue;
+		state = (*i).Item().StateField(0);
+		memcpy(&aoe, state, sizeof(lyra_item_area_effect_t));
+		if(aoe.is_razorwind())
+			numblades++;
+	}
+
+	return numblades;
+}
 ////
 // remove_item - non-locking
 ////

@@ -26,11 +26,10 @@ INLINE const TCHAR* GMsg_Login::PlayerName() const
   return data_.playername;
 }
 
-/*INLINE const TCHAR* GMsg_Login::Password() const
-{
-  return data_.password;
-}
-*/
+//INLINE const TCHAR* GMsg_Login::Password() const
+//{
+//  return data_.password;
+//}
 INLINE const MD5Hash_t* GMsg_Login::HashPtr() const
 {
   return &(data_.hash);
@@ -40,12 +39,12 @@ INLINE int GMsg_Login::ServerPort() const
 {
   return data_.serv_port;
 }
-/*
-INLINE int GMsg_Login::Firewall() const
-{
-  return data_.firewall;
-}
-*/
+
+//INLINE int GMsg_Login::Firewall() const
+//{
+//  return data_.firewall;
+//}
+
 
 INLINE short GMsg_Login::PMareType() const
 {
@@ -53,8 +52,11 @@ INLINE short GMsg_Login::PMareType() const
 }
 
 
-INLINE short GMsg_Login::TCPOnly() const
+INLINE unsigned char GMsg_Login::TCPOnly() const
 {  return data_.tcp_only; }
+
+INLINE unsigned char GMsg_Login::DeghostAttempt() const
+{  return data_.deghost_attempt; }
 
 INLINE void GMsg_Login::SetVersion(int version)
 {
@@ -70,17 +72,20 @@ INLINE void GMsg_Login::SetServerPort(int serv_port)
 {
   data_.serv_port = serv_port;
 }
-/*
-INLINE void GMsg_Login::SetFirewall(int firewall)
-{
-  data_.firewall = firewall;
-}
-*/
+
+//INLINE void GMsg_Login::SetFirewall(int firewall)
+//{
+//  data_.firewall = firewall;
+//}
+
 
 INLINE void GMsg_Login::SetPMareType(short pmare_type)
 {
   data_.pmare_type = pmare_type;
 }
 
-INLINE void GMsg_Login::SetTCPOnly(short tcp_only)
+INLINE void GMsg_Login::SetTCPOnly(unsigned char tcp_only)
  {  data_.tcp_only = tcp_only;  }
+
+ INLINE void GMsg_Login::SetDeghostAttempt(unsigned char deghost_attempt)
+ {  data_.deghost_attempt = deghost_attempt;  }
