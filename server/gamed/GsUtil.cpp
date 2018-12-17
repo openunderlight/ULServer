@@ -27,6 +27,7 @@
 #include "LmConnectionSet.h"
 #include "LmLogFile.h"
 #include "GsOutputDispatch.h"
+#include "GsLevelSet.h"
 #include "GsInputDispatch.h"
 #include "GsPlayerSet.h"
 #include "GMsg_Error.h"
@@ -326,6 +327,15 @@ void GsUtil::FakeLogout(GsMain* main, GsPlayer* player)
     pthr->PassMessage(mbuf, 0);
 
   }
+}
+
+LmConnection* GsUtil::ConnectToBcastLevelD(GsMain* main)
+{
+        const int BROADCAST_LEVELD = 20; // Thresh
+        const LmLevelDBC* ldb = main->LevelSet()->LevelDBC(BROADCAST_LEVELD);
+        if(!ldb)
+                return NULL;
+        return ConnectToLevelServer(main, ldb);
 }
 
 ////

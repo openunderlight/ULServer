@@ -40,6 +40,7 @@ struct GsUtil {
   static int NightmareXP(int mare_index);
   static void HandleItemError(GsMain* main, const TCHAR* method, int rc, int sc);
   static void HandlePlayerError(GsMain* main, const TCHAR* method, int rc, int sc, bool exit);
+  static LmConnection* ConnectToBcastLevelD(GsMain* main);
 };
 
 #ifdef USE_INLINE
