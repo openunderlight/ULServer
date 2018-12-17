@@ -418,7 +418,20 @@ int LmPlayerDBC::Login(lyra_id_t player_id, int pmare_type, int pmare_billing, T
   return 0;
 }
 
-
+int LmPlayerDBC::ForceGhostLogout(lyra_id_t player_id)
+{
+	DEFMETHOD(LmPlayerDBC, ForceGhostLogout);
+	LmLocker mon(lock_);
+	TCHAR query[512];
+	_stprintf(query, _T("UPDATE player SET level_id=0, room_id=0, logged_in=0 WHERE player_id=%u;"), player_id);
+	int error = mysql_query(&m_mysql, query);
+	if(error)
+	{
+		LOG_Error(_T("%s: Could not force unghost player %u; mysql error %s"), method, player_id, mysql_error(&m_mysql));
+		return MYSQL_ERROR;
+	}
+	return 0;
+}
 ////
 // Logout
 ////

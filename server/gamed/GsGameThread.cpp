@@ -422,7 +422,17 @@ void GsGameThread::handle_GMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
     }
   } else if(msg.DeghostAttempt()) {
 	// This is a deghost message but they're not on THIS gamed. 
-	
+	SMsg_GS_FakeLogout fakelogout;
+	fakelogout.Init(playerid, main_->ServerPort());
+	SMsg_UniverseBroadcast bcmsg;
+  	bcmsg.Init(fakelogout);
+	main_->OutputDispatch()->SendMessage(&msg, GsUtil::ConnectToBcastLevelD(main_));
+	//send_SMsg_UniverseBroadcast(fakelogout);
+  }
+
+  if(msg.DeghostAttempt())
+  {
+	main_->PlayerDBC()->ForceGhostLogout(playerid);
   }
   // allocate player in player set
   GsPlayer* player = main_->PlayerSet()->AllocatePlayer(playerid);

@@ -1094,11 +1094,7 @@ void GsPlayerThread::handle_GMsg_GotoLevel(LmSrvMesgBuf* msgbuf, LmConnection* c
 /////
 LmConnection* GsPlayerThread::connectToBcastLevelD()
 {
-	const int BROADCAST_LEVELD = 20; // Thresh
-	const LmLevelDBC* ldb = main_->LevelSet()->LevelDBC(BROADCAST_LEVELD);
-	if(!ldb)
-		return NULL;
-	return GsUtil::ConnectToLevelServer(main_, ldb);
+	return GsUtil::ConnectToBcastLevelD(main_);
 }
 
 ////
