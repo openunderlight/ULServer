@@ -52,6 +52,13 @@ GET_SERVER_STATUS = executable('get_server_status',
                 include_directories: incdir
 )
 
+DEGHOST = executable('deghost',
+                'deghost.cpp',
+                link_with: LYRA,
+                include_directories: incdir
+)
+
+
 GET_SERVER_STATUS2 = executable('get_server_status2',
 		'get_server_status2.cpp',
 		link_with: LYRA,
