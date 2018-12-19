@@ -18,15 +18,19 @@
 #include "LmSocket.h"
 #include "LmServerDBC.h"
 #include "LmPlayerDBC.h"
+#include "LmItemDBC.h"
 #include "LmConnection.h"
 #include "LmSrvMesgBuf.h"
 #include "LmServerDBC.h"
+#include "LmInventory.h"
+#include "LmItem.h"
 #include "SMsg_All.h"
 
 //void get_status(FILE* outf, LmSocket& sock, bool list_players);
 void deghost(int num_players_db, lyra_id_t* players_db, int num_players_server, lyra_id_t* players_server, LmPlayerDBC* pdbc);
 void get_logged_in_players(LmSocket& sock, int* num_players, lyra_id_t** players);
 void deghost_player(lyra_id_t player, LmPlayerDBC* pdbc);
+LmItemDBC* idbc;
 
 void bail(TCHAR* str)
 {
@@ -54,6 +58,8 @@ int _tmain(int argc, TCHAR** argv)
   //_ftprintf(outf, "Password file is: %s\n", pw_file);
   serverdbc_->LoadPasswords(pw_file);
   LmPlayerDBC* pdbc =  LmNEW(LmPlayerDBC(serverdbc_->PlayerDBUsername(), serverdbc_->PlayerDBPassword(), serverdbc_->DatabaseHost(), serverdbc_->DatabasePort()));
+  idbc =  LmNEW(LmItemDBC(serverdbc_->ItemDBUsername(), serverdbc_->ItemDBPassword(), serverdbc_->DatabaseHost(), serverdbc_->DatabasePort()));
+
   serverdbc_->Connect();
   int rc = serverdbc_->Load();
   if(rc < 0) {
@@ -62,6 +68,7 @@ int _tmain(int argc, TCHAR** argv)
   }
   serverdbc_->Disconnect();
   pdbc->Connect();
+  idbc->Connect();
   // print time
   time_t now = time(NULL);
   _ftprintf(outf, _T("TIME %u : %s"), now,_tctime(&now)); //_tctime() adds newline
@@ -116,7 +123,9 @@ int _tmain(int argc, TCHAR** argv)
   fclose(outf);
   LmDELETE(serverdbc_);
   pdbc->Disconnect();
+  idbc->Disconnect();
   LmDELETE(pdbc);
+  LmDELETE(idbc);
   pth_kill();
   return 0;
 }
@@ -156,6 +165,23 @@ void deghost_player(lyra_id_t pid, LmPlayerDBC* pdbc)
 	// 	 Fetch player pos from LmPlayerDBC
 	// 	 ForEach prime in pack: drop prime at pos
 	// 	 TODO TODO: sendSMsgPutItem when you drop so it updates live.
+	LmInventory inventory;
+	idbc->GetPlayerInventory(pid, inventory);
+	bool hasprime = false;
+	for(int i = 0; i < inventory.NumItems(); i++)
+	{
+		LmItem item = inventory.ItemByIndex(i);
+		if(item.FlagSet(LyraItem::FLAG_ALWAYS_DROP)) {
+			hasprime = true;
+			break;
+		}
+	}
+
+	if(hasprime) {
+		_ftprintf(stdout, "WARNING: %d GHOSTED while holding prime - NOT DEGHOSTING!\n", pid);
+		return;
+	}
+
 	int rc = pdbc->ForceDeghost(pid);
 	if(rc < 0)
 		_ftprintf(stdout, "\tERROR DEGHOSTING %u\n", pid);
