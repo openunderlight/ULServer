@@ -47,21 +47,28 @@ int _tmain(int argc, TCHAR** argv)
   int gamed_port = _ttoi(argv[2]);
   LmGlobalDB* globaldb_ = LmNEW(LmGlobalDB(root_dir));
   LmServerDBC* serverdbc_ = LmNEW(LmServerDBC());
+  FILE* outf = stdout;
   // load passwords & server info
   TCHAR pw_file[FILENAME_MAX];
   globaldb_->GetPasswordFile(pw_file);
+  //_ftprintf(outf, "Password file is: %s\n", pw_file);
   serverdbc_->LoadPasswords(pw_file);
   LmPlayerDBC* pdbc =  LmNEW(LmPlayerDBC(serverdbc_->PlayerDBUsername(), serverdbc_->PlayerDBPassword(), serverdbc_->DatabaseHost(), serverdbc_->DatabasePort()));
   serverdbc_->Connect();
-  serverdbc_->Load();
+  int rc = serverdbc_->Load();
+  if(rc < 0) {
+	_ftprintf( outf, "Load returned error\n" );
+	exit(1);
+  }
   serverdbc_->Disconnect();
-  FILE* outf = stdout;
+  pdbc->Connect();
   // print time
   time_t now = time(NULL);
   _ftprintf(outf, _T("TIME %u : %s"), now,_tctime(&now)); //_tctime() adds newline
-
+  //_ftprintf(outf, _T("Entering loop...\n"));
   // for each server in database
   for (int i = 0; i < serverdbc_->NumServers(); ++i) {
+    //_ftprintf(outf, _T("Considering server %d\n"), i);
     // if server arg1 is 0, it's an inactive server, don't try to connect
     if (serverdbc_->Arg1(i) == 0) {      
       continue;
@@ -74,22 +81,23 @@ int _tmain(int argc, TCHAR** argv)
     if (serverdbc_->Arg1(i) != gamed_port) {
        continue;
     }
-  
+    
+    _ftprintf(outf, _T("Checking server %d\n"), gamed_port); 
     // create socket
     LmSocket sock;
     if (sock.Socket(LmSockType::Inet_Stream()) < 0) {
       bail(_T("could not create socket\n"));
     }
+    
     // get server address
     LmSockAddrInet addr;
     addr.Init(serverdbc_->HostIPAddr(i), serverdbc_->Arg1(i));
     // print server header
     int num_players_db = 0;
     lyra_id_t* players_db;
+    _ftprintf(outf, "Retrieving logged in players for gamed %d from playerdb\n", gamed_port);
     pdbc->GetLoggedInPlayersForGamed(gamed_port, &num_players_db, &players_db);
-   _ftprintf(outf, _T("SERVER hostid=%s hostname=%s ip=%s type=%c arg1=%d arg2=%d "),
-	    serverdbc_->HostID(i), serverdbc_->HostName(i), addr.AddressString(), serverdbc_->ServerType(i),
-	    serverdbc_->Arg1(i), serverdbc_->Arg2(i));
+    _ftprintf(outf, "Done retrieving players from playerdb\n");
     // attempt to connect to server
     if (sock.Connect(addr) < 0) {
     	_ftprintf(outf, _T("  STATUS DOWN (%s)\n"), strerror(errno));
@@ -104,6 +112,7 @@ int _tmain(int argc, TCHAR** argv)
     sock.Close();
     break;
   }
+  //_ftprintf(outf, _T("Done with loop...\n"));
   fclose(outf);
   LmDELETE(serverdbc_);
   pdbc->Disconnect();
@@ -119,19 +128,23 @@ void deghost(int num_players_db, lyra_id_t* players_db, int num_players_server, 
 	for(int i = 0; i < num_players_db; i++)
 	{
 		lyra_id_t dbplayer = players_db[i];
+		_ftprintf(stdout, _T("PID: %u listed ONLINE in db... "), dbplayer);
 		bool found = false;
 		// O(n^2), whatever
 		for(int j = 0; j < num_players_server; j++)
 		{
-			if(players_server[i] == dbplayer)
+			if(players_server[j] == dbplayer)
 			{
 				found = true;
+				_ftprintf(stdout, _T("OK!\n"));
 				break;
 			}
 		}
-
-		if(!found)
+                
+		if(!found) {
+			_ftprintf(stdout, _T("GHOSTED!\n"));
 			deghost_player(dbplayer, pdbc);
+		}
 	}
 }
 
@@ -143,7 +156,11 @@ void deghost_player(lyra_id_t pid, LmPlayerDBC* pdbc)
 	// 	 Fetch player pos from LmPlayerDBC
 	// 	 ForEach prime in pack: drop prime at pos
 	// 	 TODO TODO: sendSMsgPutItem when you drop so it updates live.
-	pdbc->ForceDeghost(pid);	
+	int rc = pdbc->ForceDeghost(pid);
+	if(rc < 0)
+		_ftprintf(stdout, "\tERROR DEGHOSTING %u\n", pid);
+	else	
+		_ftprintf(stdout, "\tDeghosted %d\n", pid);
 }
 
 void get_logged_in_players(LmSocket& sock, int* num_players, lyra_id_t** players)
@@ -191,7 +208,7 @@ void get_logged_in_players(LmSocket& sock, int* num_players, lyra_id_t** players
     *players = new lyra_id_t[*num_players];
   for (int i = 0; i < msg_ss.NumPlayers(); ++i) {
     lyra_id_t playerid = msg_ss.PlayerID(i);
-    *players[i] = playerid;
+    (*players)[i] = playerid;
   }
   // logout from server
   SMsg_Logout msg_logout;

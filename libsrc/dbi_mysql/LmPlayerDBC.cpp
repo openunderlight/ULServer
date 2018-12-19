@@ -2324,7 +2324,7 @@ int LmPlayerDBC::GetLoggedInPlayersForGamed(unsigned int gamed_port, unsigned in
 	MYSQL_RES* res;
 	MYSQL_ROW row;
 
-	_stprintf(query, _T("SELECT player_id FROM player WHERE logged_in=1 and gamed_port=%u"), gamed_port);
+	_stprintf(query, _T("SELECT player_id FROM player WHERE logged_in=1 and gamed_port=%u"), gamed_port);	
 	int error = mysql_query(&m_mysql, query);
 	if(error)
 	{
@@ -2334,7 +2334,7 @@ int LmPlayerDBC::GetLoggedInPlayersForGamed(unsigned int gamed_port, unsigned in
 
         res = mysql_store_result(&m_mysql);
         *num_players = mysql_num_rows(res);
-
+        
         if (!(*num_players))
         {
                 mysql_free_result(res);
@@ -2344,7 +2344,7 @@ int LmPlayerDBC::GetLoggedInPlayersForGamed(unsigned int gamed_port, unsigned in
 	*player_list = new lyra_id_t[*num_players];
         for (int i=0; i<*num_players; i++) {
         	row = mysql_fetch_row(res);
-		*player_list[i] = ATOI(row[0]);
+		(*player_list)[i] = ATOI(row[0]);
                 //player_id = ATOI(row[0]);
 	}
 
