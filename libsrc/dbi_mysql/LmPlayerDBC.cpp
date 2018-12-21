@@ -418,7 +418,20 @@ int LmPlayerDBC::Login(lyra_id_t player_id, int pmare_type, int pmare_billing, T
   return 0;
 }
 
-
+int LmPlayerDBC::ForceGhostLogout(lyra_id_t player_id)
+{
+	DEFMETHOD(LmPlayerDBC, ForceGhostLogout);
+	LmLocker mon(lock_);
+	TCHAR query[512];
+	_stprintf(query, _T("UPDATE player SET level_id=0, room_id=0, logged_in=0 WHERE player_id=%u;"), player_id);
+	int error = mysql_query(&m_mysql, query);
+	if(error)
+	{
+		LOG_Error(_T("%s: Could not force unghost player %u; mysql error %s"), method, player_id, mysql_error(&m_mysql));
+		return MYSQL_ERROR;
+	}
+	return 0;
+}
 ////
 // Logout
 ////
@@ -783,7 +796,7 @@ int LmPlayerDBC::SetInitiator(lyra_id_t player_id, lyra_id_t initiator_id, lyra_
 // CanLogin
 ////
 
-int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, bool* first_login, int pmare_type)
+int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, bool* first_login, int pmare_type, bool ghost_fix)
 {
   DEFMETHOD(LmPlayerDBC, CanLogin);
   LmLocker mon(lock_); // lock object for method duration
@@ -925,8 +938,12 @@ int LmPlayerDBC::CanLogin(lyra_id_t player_id, int* suspended_days, bool* first_
   if ((db_billing_id > 0) && ((acct_type == LmPlayerDB::ACCT_PLAYER) ||
 			      (acct_type == LmPlayerDB::ACCT_PMARE)))  {
 
-   _stprintf(query, _T("SELECT count(*) FROM player WHERE billing_id = %u AND logged_in = 1"), db_billing_id);
-
+   if( ghost_fix )
+   {
+	_stprintf(query, _T("SELECT count(*) FROM player WHERE billing_id = %u AND logged_in = 1 AND player_id != %s"), db_billing_id, player_id);
+   } else {
+	 _stprintf(query, _T("SELECT count(*) FROM player WHERE billing_id = %u AND logged_in = 1"), db_billing_id);
+   }
     ////timer.Start();
     error = mysql_query(&m_mysql, query);
     ////timer.Stop();
