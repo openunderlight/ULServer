@@ -38,12 +38,11 @@ void LmParty::Create(lyra_id_t leaderid)
   AddPlayer(leaderid);
 }
 
-void LmParty::CreatorID()
+lyra_id_t LmParty::CreatorID()
 {
-    Empty();
-    leaderid_ = leaderid;
   creatorid_ = creatorid;
-  AddPlayer(leaderid);
+
+  return (creatorid_)
 }
 ////
 // Empty: empty party
