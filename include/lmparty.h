@@ -48,14 +48,14 @@ public:
   bool HasPlayer(lyra_id_t playerid) const;
   lyra_id_t LeaderID() const;
   lyra_id_t PlayerID(int index) const;
-
+  lyra_id_t CreatorID(int index) const;
   void Dump(FILE* f, int indent = 0) const;
   void Dump1(FILE* f) const;
 
 private:
 
   int index_of(lyra_id_t playerid) const;
-
+  lyra_id_t creatorid_;
   lyra_id_t leaderid_;
   int num_members_;
   lyra_id_t members_[MAX_PARTYSIZE];

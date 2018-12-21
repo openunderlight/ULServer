@@ -34,7 +34,7 @@ void LmParty::Create(lyra_id_t leaderid)
 {
   Empty();
   leaderid_ = leaderid;
-  creatorID = PlayerID(self)
+  creatorid_ = creatorid;
   AddPlayer(leaderid);
 }
 
