@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmLog.h"
 #include "PThMutex.h"
 

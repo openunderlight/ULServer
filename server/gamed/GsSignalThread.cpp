@@ -21,7 +21,7 @@
 #endif
 
 #include "GsSignalThread.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmLog.h"
 #include "LmLevelDBC.h"
 #include "LmGlobalDB.h"

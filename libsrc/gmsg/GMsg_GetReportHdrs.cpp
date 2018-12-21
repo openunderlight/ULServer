@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "GMsg_GetReportHdrs.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "GMsg.h"
 
 #ifndef USE_INLINE

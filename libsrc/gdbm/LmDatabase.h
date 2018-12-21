@@ -11,7 +11,7 @@
 #pragma interface
 #endif
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "Gdbm.h"
 
 // forward declarations

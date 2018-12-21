@@ -19,7 +19,7 @@
 #include <netinet/in.h>
 #endif
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 // item name definitions
 // these are done as #define's instead of const's so the compiler won't complain

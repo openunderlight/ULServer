@@ -13,10 +13,10 @@
 
 #include <stdio.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/shared/LmMesg.h"
+#include "LyraDefs.h"
+#include "LmMesg.h"
 #include "SMsg.h"
-#include "../../libsrc/shared/LmItem.h"
+#include "LmItem.h"
 
 // forward references
 

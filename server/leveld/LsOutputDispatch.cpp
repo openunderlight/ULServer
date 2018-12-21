@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 #include "LsOutputDispatch.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LsMain.h"
 #include "LmThreadPool.h"
 #include "RMsg_All.h"

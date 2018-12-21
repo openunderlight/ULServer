@@ -14,7 +14,11 @@
 #include <stdio.h>
 #include <list>
 
+<<<<<<< HEAD
 #include "../../libsrc/shared/LyraDefs.h"
+=======
+#include "LyraDefs.h"
+>>>>>>> parent of 07f5efa... include path update
 #include "PThMutex.h"
 #include "LsLevelSerials.h"
 

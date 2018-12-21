@@ -14,8 +14,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/shared/LmMesg.h"
+#include "LyraDefs.h"
+#include "LmMesg.h"
 #include "SMsg.h"
 
 // forward references

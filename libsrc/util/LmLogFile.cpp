@@ -18,7 +18,7 @@
 #include <sys/time.h>
 #endif
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmLogFile.h"
 #include "LmLocker.h"
 

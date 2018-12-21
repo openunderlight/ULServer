@@ -11,7 +11,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmLog.h"
 
 #ifndef USE_INLINE

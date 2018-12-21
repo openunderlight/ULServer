@@ -15,7 +15,7 @@
 #endif
 
 #include "LsInputDispatch.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LsMain.h"
 #include "LmSrvMesgBuf.h"
 #include "LmConnection.h"

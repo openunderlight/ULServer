@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmMesg.h"
 #include "RMsg.h"
 #include "RmRemotePlayer.h"

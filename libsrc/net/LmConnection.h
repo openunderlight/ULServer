@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 #include <time.h>
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmSocket.h"
 #include "LmUtil.h"
 #include "PThMutex.h"

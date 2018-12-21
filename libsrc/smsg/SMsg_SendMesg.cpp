@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "SMsg_SendMesg.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "SMsg.h"
 
 #ifndef USE_INLINE

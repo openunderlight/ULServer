@@ -19,7 +19,7 @@
 #include <netinet/in.h>
 #endif
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 // item definitions class
 

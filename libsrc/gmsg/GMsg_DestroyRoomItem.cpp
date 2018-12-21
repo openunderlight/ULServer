@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "GMsg_DestroyRoomItem.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "GMsg.h"
 #include "LmItemHdr.h"
 

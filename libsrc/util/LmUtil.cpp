@@ -28,7 +28,7 @@
 #include <sys/types.h>
 
 #include "LmUtil.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 ////
 // CloseAllDescriptors: close all open file descriptors

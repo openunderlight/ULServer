@@ -16,7 +16,7 @@
 #include <stdarg.h>
 #include <syslog.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmLog.h"
 
 // log class

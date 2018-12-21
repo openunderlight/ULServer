@@ -15,7 +15,7 @@
 
 
 #include "LmNetworkInput.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmSocket.h"
 #include "LmConnection.h"
 #include "LmConnectionSet.h"

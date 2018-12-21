@@ -20,7 +20,7 @@
 #include <string.h>
 #include <errno.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmUtil.h"
 #include "LmLog.h"
 #include "LsMain.h"

@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <list>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmThread.h"
 
 // class forward declarations

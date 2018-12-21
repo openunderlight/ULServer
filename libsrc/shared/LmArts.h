@@ -9,8 +9,8 @@
 
 #include <stdio.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/shared/SharedConstants.h"
+#include "LyraDefs.h"
+#include "SharedConstants.h"
 
 // base datatype
 

@@ -18,7 +18,7 @@
 #include <map>
 
 #include "LmSignalThread.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 #ifndef USE_INLINE
 #include "LmSignalThread.i"

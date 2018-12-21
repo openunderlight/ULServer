@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmThread.h"
 #include "PThMutex.h"
 

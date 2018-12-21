@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "RMsg_EnterRoom.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "RMsg.h"
 #include "RmRemotePlayer.h"
 

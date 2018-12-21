@@ -15,8 +15,8 @@
 #include <sys/types.h>
 #include <list>
 
-#include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/dbi_mysql/LmServerDBC.h"
+#include "LyraDefs.h"
+#include "LmServerDBC.h"
 
 // forward declarations
 

@@ -21,7 +21,7 @@
 
 #include "RMsg_LeaveRoom.h"
 #include "RMsg.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 #ifndef USE_INLINE
 #include "RMsg_LeaveRoom.i"

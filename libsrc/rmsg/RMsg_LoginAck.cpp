@@ -22,7 +22,7 @@
 
 #include "RMsg_LoginAck.h"
 #include "RMsg.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 #ifndef USE_INLINE
 #include "RMsg_LoginAck.i"

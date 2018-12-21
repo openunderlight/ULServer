@@ -11,7 +11,7 @@
 //#include <algo.h>
 #include <algorithm>
 #include "LsComputeGroups.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LsMain.h"
 #include "LsRoomState.h"
 #include "LsPlayer.h"

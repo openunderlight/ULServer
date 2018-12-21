@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "RMsg_NewlyAwakened.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "RMsg.h"
 
 #ifndef USE_INLINE

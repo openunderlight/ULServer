@@ -14,7 +14,7 @@
 #include <unordered_map>
 
 #include "LsPlayerSet.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LsMain.h"
 #include "LsPlayer.h"
 #include "LmLevelDBC.h"

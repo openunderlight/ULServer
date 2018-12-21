@@ -13,7 +13,7 @@
 #include <list>
 
 #include "GsLevelSet.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "GsMain.h"
 #include "PThMutex.h"
 #include "LmLevelDBC.h"

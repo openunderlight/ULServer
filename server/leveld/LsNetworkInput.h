@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <list>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmNetworkInput.h"
 #include "LmLogFile.h"
 #include "PThMutex.h"

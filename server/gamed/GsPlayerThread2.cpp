@@ -14,7 +14,7 @@
 #endif
 
 #include "GsPlayerThread.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmParty.h"
 #include "GsMain.h"
 #include "LmLevelDBC.h"
@@ -44,7 +44,7 @@
 #include "GsPlayerThreadSet.h"
 #include "LmRand.h"
 #include "GMsg_SenseDreamersAck.h"
-#include "../../libsrc/gmsg/GMsg_LocateNewliesAck.h"
+#include "GMsg_LocateNewliesAck.h"
 #include "GMsg_LocateMaresAck.h"
 #include "LmPlayerDBC.h"
 #include "LmItemDBC.h"

@@ -21,7 +21,7 @@
 
 #include "SMsg_DBQuery.h"
 #include "SMsg_DBQueryAck.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "SMsg.h"
 
 #ifndef USE_INLINE

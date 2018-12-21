@@ -9,7 +9,7 @@
 #include <cstdlib>
 
 #include "LsRoomThread.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmParty.h"
 #include "LsMain.h"
 #include "LmRoomDB.h"

@@ -13,7 +13,7 @@
 //#include <hash_map.h>
 #include <unordered_map>
 #include "GsPlayerSet.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "GsMain.h"
 #include "GsPlayer.h"
 #include "PThMutex.h"

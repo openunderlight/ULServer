@@ -16,7 +16,7 @@
 #endif
 
 #include "GsOutputDispatch.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "GsMain.h"
 #include "LmThreadPool.h"
 #include "GMsg_All.h"

@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 // forward declarations
 

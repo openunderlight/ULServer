@@ -15,7 +15,7 @@
 #include <sys/types.h>
 #include <sys/types.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 #include <stdlib.h>
 #ifndef WIN32

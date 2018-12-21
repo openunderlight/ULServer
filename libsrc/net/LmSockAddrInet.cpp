@@ -23,7 +23,7 @@
 #include <string.h>
 
 #include "LmSockAddrInet.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 #ifndef USE_INLINE
 #include "LmSockAddrInet.i"

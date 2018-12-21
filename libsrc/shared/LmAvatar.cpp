@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../../libsrc/shared/SharedConstants.h"
+#include "SharedConstants.h"
 #include "LmAvatar.h"
 
 #ifndef USE_INLINE

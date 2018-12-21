@@ -38,7 +38,7 @@
 #include "LmServerDBC.h"
 #include "PThMutex.h"
 #include "LmLocker.h"
-#include "../../libsrc/shared/SharedConstants.h"
+#include "SharedConstants.h"
 #include "GsPlayer.h"
 #include "LmItemDBC.h"
 #include "LmPlayerDBC.h"

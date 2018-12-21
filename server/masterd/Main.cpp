@@ -15,10 +15,10 @@
 #include <sys/wait.h>
 #include <errno.h>
 
-#include  "../../libsrc/util/LmUtil.h"
+#include "LmUtil.h"
 #include "MsMain.h"
-#include "../../libsrc/util/LmLogFile.h"
-#include "../../libsrc/util/LmNew.h"
+#include "LmLogFile.h"
+#include "LmNew.h"
 
 ////
 // _tmain()

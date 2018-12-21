@@ -27,7 +27,7 @@ extern int h_errno;
 
 #include "GsMain.h"
 #include "GsUtil.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmNew.h"
 #include "LmUtil.h"
 #include "LmGlobalDB.h"

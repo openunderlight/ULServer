@@ -22,7 +22,7 @@
 #endif
 
 #include "LsPositionThread.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LsMain.h"
 #include "LmGlobalDB.h"
 #include "LmLevelDBC.h"

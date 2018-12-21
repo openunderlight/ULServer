@@ -9,7 +9,7 @@
 
 #include <stdarg.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 // the class
 

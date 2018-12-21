@@ -13,7 +13,7 @@
 #include <algorithm>
 
 #include "LsRoomState.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmDatabase.h"
 #include "LmDatabaseKey.h"
 #include "LsMain.h"

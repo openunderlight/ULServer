@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <list>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmPlayerDB.h"
 #include "LmPosition.h"
 #include "LmPeerUpdate.h"

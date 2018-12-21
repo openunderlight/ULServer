@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D37FA726-9495-4C0B-98A6-04BFCD1FB1F5}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="server\gamed\GsForwardThread.cpp" />
+    <ClCompile Include="server\gamed\GsGameThread.cpp" />
+    <ClCompile Include="server\gamed\GsInputDispatch.cpp" />
+    <ClCompile Include="server\gamed\GsLevelSet.cpp" />
+    <ClCompile Include="server\gamed\GsMain.cpp" />
+    <ClCompile Include="server\gamed\GsMessageReader.cpp" />
+    <ClCompile Include="server\gamed\GsNetworkInput.cpp" />
+    <ClCompile Include="server\gamed\GsNetworkOutput.cpp" />
+    <ClCompile Include="server\gamed\GsOutputDispatch.cpp" />
+    <ClCompile Include="server\gamed\GsPlayer.cpp" />
+    <ClCompile Include="server\gamed\GsPlayer1.cpp" />
+    <ClCompile Include="server\gamed\GsPlayer2.cpp" />
+    <ClCompile Include="server\gamed\GsPlayer3.cpp" />
+    <ClCompile Include="server\gamed\GsPlayer4.cpp" />
+    <ClCompile Include="server\gamed\GsPlayerSet.cpp" />
+    <ClCompile Include="server\gamed\GsPlayerThread.cpp" />
+    <ClCompile Include="server\gamed\GsPlayerThread1.cpp" />
+    <ClCompile Include="server\gamed\GsPlayerThread2.cpp" />
+    <ClCompile Include="server\gamed\GsPlayerThread3.cpp" />
+    <ClCompile Include="server\gamed\GsPlayerThread4.cpp" />
+    <ClCompile Include="server\gamed\GsPlayerThreadSet.cpp" />
+    <ClCompile Include="server\gamed\GsPositionThread.cpp" />
+    <ClCompile Include="server\gamed\GsSignalThread.cpp" />
+    <ClCompile Include="server\gamed\GsUtil.cpp" />
+    <ClCompile Include="server\gamed\Main.cpp" />
+    <ClCompile Include="server\leveld\LsCodexText.cpp" />
+    <ClCompile Include="server\leveld\LsComputeGroups.cpp" />
+    <ClCompile Include="server\leveld\LsInputDispatch.cpp" />
+    <ClCompile Include="server\leveld\LsItemGen.cpp" />
+    <ClCompile Include="server\leveld\LsLevelSerials.cpp" />
+    <ClCompile Include="server\leveld\LsLevelState.cpp" />
+    <ClCompile Include="server\leveld\LsLevelThread.cpp" />
+    <ClCompile Include="server\leveld\LsMain.cpp" />
+    <ClCompile Include="server\leveld\LsMessageReader.cpp" />
+    <ClCompile Include="server\leveld\LsNetworkInput.cpp" />
+    <ClCompile Include="server\leveld\LsNetworkOutput.cpp" />
+    <ClCompile Include="server\leveld\LsOutputDispatch.cpp" />
+    <ClCompile Include="server\leveld\LsPlayer.cpp" />
+    <ClCompile Include="server\leveld\LsPlayerSet.cpp" />
+    <ClCompile Include="server\leveld\LsPositionThread.cpp" />
+    <ClCompile Include="server\leveld\LsRoomState.cpp" />
+    <ClCompile Include="server\leveld\LsRoomThread.cpp" />
+    <ClCompile Include="server\leveld\LsRoomThread1.cpp" />
+    <ClCompile Include="server\leveld\LsRoomThread2.cpp" />
+    <ClCompile Include="server\leveld\LsRoomThread3.cpp" />
+    <ClCompile Include="server\leveld\LsSignalThread.cpp" />
+    <ClCompile Include="server\leveld\LsUtil.cpp" />
+    <ClCompile Include="server\leveld\Main.cpp" />
+    <ClCompile Include="server\masterd\Main.cpp" />
+    <ClCompile Include="server\masterd\MsMain.cpp" />
+    <ClCompile Include="server\masterd\MsServerInfo.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="server\gamed\GsForwardThread.h" />
+    <ClInclude Include="server\gamed\GsGameThread.h" />
+    <ClInclude Include="server\gamed\GsInputDispatch.h" />
+    <ClInclude Include="server\gamed\GsLevelSet.h" />
+    <ClInclude Include="server\gamed\GsMacros.h" />
+    <ClInclude Include="server\gamed\GsMain.h" />
+    <ClInclude Include="server\gamed\GsMessageReader.h" />
+    <ClInclude Include="server\gamed\GsNetworkInput.h" />
+    <ClInclude Include="server\gamed\GsNetworkOutput.h" />
+    <ClInclude Include="server\gamed\GsOutputDispatch.h" />
+    <ClInclude Include="server\gamed\GsPlayer.h" />
+    <ClInclude Include="server\gamed\GsPlayerList.h" />
+    <ClInclude Include="server\gamed\GsPlayerSet.h" />
+    <ClInclude Include="server\gamed\GsPlayerThread.h" />
+    <ClInclude Include="server\gamed\GsPlayerThreadSet.h" />
+    <ClInclude Include="server\gamed\GsPositionThread.h" />
+    <ClInclude Include="server\gamed\GsSignalThread.h" />
+    <ClInclude Include="server\gamed\GsUtil.h" />
+    <ClInclude Include="server\gamed\resource.h" />
+    <ClInclude Include="server\leveld\LsCodexText.h" />
+    <ClInclude Include="server\leveld\LsComputeGroups.h" />
+    <ClInclude Include="server\leveld\LsInputDispatch.h" />
+    <ClInclude Include="server\leveld\LsItemGen.h" />
+    <ClInclude Include="server\leveld\LsLevelSerials.h" />
+    <ClInclude Include="server\leveld\LsLevelState.h" />
+    <ClInclude Include="server\leveld\LsLevelThread.h" />
+    <ClInclude Include="server\leveld\LsMacros.h" />
+    <ClInclude Include="server\leveld\LsMain.h" />
+    <ClInclude Include="server\leveld\LsMessageReader.h" />
+    <ClInclude Include="server\leveld\LsNetworkInput.h" />
+    <ClInclude Include="server\leveld\LsNetworkOutput.h" />
+    <ClInclude Include="server\leveld\LsOutputDispatch.h" />
+    <ClInclude Include="server\leveld\LsPlayer.h" />
+    <ClInclude Include="server\leveld\LsPlayerList.h" />
+    <ClInclude Include="server\leveld\LsPlayerSet.h" />
+    <ClInclude Include="server\leveld\LsPositionThread.h" />
+    <ClInclude Include="server\leveld\LsRoomState.h" />
+    <ClInclude Include="server\leveld\LsRoomThread.h" />
+    <ClInclude Include="server\leveld\LsSignalThread.h" />
+    <ClInclude Include="server\leveld\LsUtil.h" />
+    <ClInclude Include="server\masterd\MsMain.h" />
+    <ClInclude Include="server\masterd\MsServerInfo.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

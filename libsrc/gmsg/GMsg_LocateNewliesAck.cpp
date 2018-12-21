@@ -5,7 +5,7 @@
 // message implementation
 
 #ifdef __GNUC__
-#pragma implementation "../../libsrc/gmsg/GMsg_LocateNewliesAck.h"
+#pragma implementation "GMsg_LocateNewliesAck.h"
 #endif
 
 #ifdef WIN32
@@ -19,8 +19,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../../libsrc/gmsg/GMsg_LocateNewliesAck.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "GMsg_LocateNewliesAck.h"
+#include "LyraDefs.h"
 #include "GMsg.h"
 
 #ifndef USE_INLINE

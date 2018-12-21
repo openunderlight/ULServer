@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "SMsg_GS_Logout.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "SMsg.h"
 
 #ifndef USE_INLINE

@@ -15,7 +15,7 @@
 #ifdef WIN32
 #include "../Underlight/SharedConstants.h"
 #else
-#include "../../libsrc/shared/SharedConstants.h"
+#include "SharedConstants.h"
 #endif
 #include "LmItemNames.h"
 #include "LmItem.h"

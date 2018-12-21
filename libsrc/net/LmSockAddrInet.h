@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 #ifdef WIN32
-#include "../shared/unix.h"
+#include "unix.h"
 #include <winsock.h>
 typedef int socklen_t;
 #else /* !WIN32 */
@@ -23,7 +23,7 @@ typedef int socklen_t;
 #include <sys/socket.h>
 #endif /* WIN32 */
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmSockAddr.h"
 
 // forward declarations

@@ -17,7 +17,7 @@
 //#include <hash_map.h>
 #include <time.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LmPosition.h"
 #include "LmParty.h"
 #include "LmIdSet.h"

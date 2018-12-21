@@ -13,7 +13,7 @@
 
 #include <list>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 // class forward declarations
 

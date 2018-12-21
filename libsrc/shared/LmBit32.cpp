@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "LmBit32.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 // optionally inline methods
 

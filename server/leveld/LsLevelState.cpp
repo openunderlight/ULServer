@@ -11,7 +11,7 @@
 #include <stdio.h>
 
 #include "LsLevelState.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LsRoomState.h"
 #include "LsMain.h"
 #include "LmLevelDBC.h"

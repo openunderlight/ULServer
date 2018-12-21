@@ -17,7 +17,7 @@
 #include <time.h>
 
 #include "LsNetworkOutput.h"
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "LsMain.h"
 #include "LsUtil.h"
 #include "LmLevelDBC.h"
