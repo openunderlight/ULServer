@@ -1081,7 +1081,7 @@ void GsPlayer::clear_information()
   num_updates_ = 0;
   last_mod_100_update_ = 0;
   num_too_fast_updates_ = 0;
-
+  newly_announce = false;
   num_neighbors_ = 0;
 }
 
