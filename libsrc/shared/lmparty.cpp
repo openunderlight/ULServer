@@ -38,7 +38,7 @@ void LmParty::Create(lyra_id_t leaderid)
   AddPlayer(leaderid);
 }
 
-void LmPart::CreatorID()
+void LmParty::CreatorID()
 {
     Empty();
     leaderid_ = leaderid;
