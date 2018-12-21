@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmBit32.h"
 
 // forward decls

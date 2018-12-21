@@ -12,7 +12,7 @@
 #endif
 
 #include <stdio.h>
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 // forward declarations
 

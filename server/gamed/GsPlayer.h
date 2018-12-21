@@ -14,13 +14,13 @@
 #include <stdio.h>
 #include <list>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmPlayerDB.h"
 #include "LmPosition.h"
 #include "LmPeerUpdate.h"
 #include "LmParty.h"
 #include "LmIdSet.h"
-#include "PThMutex.h"
+#include "../../libsrc/pth/PThMutex.h"
 #include "LmSockAddrInet.h"
 #include "LmItem.h"
 

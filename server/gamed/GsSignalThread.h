@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmSignalThread.h"
 #include "LmLogFile.h"
 #include "LmTimer.h"

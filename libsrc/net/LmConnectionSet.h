@@ -20,8 +20,8 @@
 #include <netinet/in.h>
 #endif /* WIN32 */
 
-#include "LyraDefs.h"
-#include "PThMutex.h"
+#include "../../libsrc/shared/LyraDefs.h"
+#include "../../libsrc/pth/PThMutex.h"
 
 // class forward declarations
 

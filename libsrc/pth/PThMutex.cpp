@@ -5,10 +5,10 @@
 // implementation
 
 #ifdef __GNUC__
-#pragma implementation "PThMutex.h"
+#pragma implementation "../../libsrc/pth/PThMutex.h"
 #endif
 
-#include "PThMutex.h"
+#include "../../libsrc/pth/PThMutex.h"
 
 #ifndef USE_INLINE
 #include "PThMutex.i"

@@ -16,7 +16,7 @@
 #endif
 
 #include "LsLevelThread.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LsMain.h"
 #include "LmConnection.h"
 #include "LmLevelDBC.h"

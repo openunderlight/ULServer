@@ -7,12 +7,12 @@
 #include <string.h>
 
 #include "LmItemGen.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmRand.h"
 #include "LmItem.h"
 #include "LmItemHdr.h"
 #include "LmItemDefs.h"
-#include "SharedConstants.h"
+#include "../../libsrc/shared/SharedConstants.h"
 #include "LmItemGenTables.h"
 #include "LmItemGenNames.h"
 

@@ -10,7 +10,7 @@
 
 #include "PTh.h"
 #include "PThAttr.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 #ifndef USE_INLINE
 #include "PTh.i"

@@ -20,8 +20,8 @@
 #include <string.h>
 
 #include "RMsg_PlayerMsg.h"
-#include "LyraDefs.h"
-#include "SharedConstants.h"
+#include "../../libsrc/shared/LyraDefs.h"
+#include "../../libsrc/shared/SharedConstants.h"
 #include "RMsg.h"
 
 #ifndef USE_INLINE

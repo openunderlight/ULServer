@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmLogSyslog.h"
 
 #ifndef USE_INLINE

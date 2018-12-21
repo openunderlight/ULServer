@@ -21,7 +21,7 @@
 
 #include "RMsg_Update.h"
 #include "RMsg.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 #ifndef USE_INLINE
 #include "RMsg_Update.i"

@@ -13,7 +13,7 @@
 #include <unistd.h>
 #endif
 #include "GsInputDispatch.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "GsMain.h"
 #include "LmSrvMesgBuf.h"
 #include "LmConnection.h"

@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 #include "GsPlayer.h"
-#include "PThMutex.h"
+#include "../../libsrc/pth/PThMutex.h"
 #include "GsMain.h"
 #include "LmPlayerDB.h"
 #include "LmGlobalDB.h"

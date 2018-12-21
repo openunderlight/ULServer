@@ -11,7 +11,7 @@
 #include <stdio.h>
 
 #include "LmItemGenDB.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 #ifndef USE_INLINE
 #include "LmItemGenDB.i"

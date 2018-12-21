@@ -13,9 +13,9 @@
 
 #include <stdio.h>
 
-#include "LyraDefs.h"
-#include "LmPosition.h"
-#include "LmItem.h"
+#include "../../libsrc/shared/LyraDefs.h"
+#include "../../libsrc/shared/LmPosition.h"
+#include "../../libsrc/shared/LmItem.h"
 
 // forward declarations
 

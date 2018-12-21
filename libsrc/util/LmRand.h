@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 // the class
 

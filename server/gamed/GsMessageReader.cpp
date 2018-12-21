@@ -13,7 +13,7 @@
 #include <stdio.h>
 
 #include "GsMessageReader.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmLog.h"
 #include "GMsg_Logout.h"
 #include "SMsg_Logout.h"

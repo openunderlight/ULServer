@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "GMsg_ItemDrop.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "GMsg.h"
 #include "LmItemHdr.h"
 

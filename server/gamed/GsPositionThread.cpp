@@ -23,7 +23,7 @@
 #endif
 
 #include "GsPositionThread.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "GsMain.h"
 #include "LmGlobalDB.h"
 #include "LmLevelDBC.h"

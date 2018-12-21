@@ -13,7 +13,7 @@
 #endif
 
 #include "GsPlayerThread.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmParty.h"
 #include "GsMain.h"
 #include "LmLevelDBC.h"

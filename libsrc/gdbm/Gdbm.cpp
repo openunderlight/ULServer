@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "Gdbm.h"
 
 #ifndef WIN32

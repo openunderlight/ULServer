@@ -4,7 +4,7 @@
 // implementation of Lyra's MD5 class
 
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "md5global.h"
 #include "md5.h"
 #include "LnMD5.h"

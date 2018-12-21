@@ -12,7 +12,7 @@
 #include <stdlib.h>
 
 #include "LsItemGen.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmItemGenDB.h"
 #include "LmRand.h"
 #include "LmItemGen.h"

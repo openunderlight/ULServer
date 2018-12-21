@@ -14,10 +14,10 @@
 #include <stdio.h>
 #include <list>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmNetworkInput.h"
 #include "LmLogFile.h"
-#include "PThMutex.h"
+#include "../../libsrc/pth/PThMutex.h"
 
 // class forward declarations
 

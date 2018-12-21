@@ -13,10 +13,10 @@
 
 #include <stdio.h>
 #include <time.h>
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmSocket.h"
 #include "LmUtil.h"
-#include "PThMutex.h"
+#include "../../libsrc/pth/PThMutex.h"
 
 // forward declarations
 

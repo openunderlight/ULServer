@@ -14,9 +14,9 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmThread.h"
-#include "PThMutex.h"
+#include "../../libsrc/pth/PThMutex.h"
 
 // class forward declarations
 

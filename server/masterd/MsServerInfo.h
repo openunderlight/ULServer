@@ -12,7 +12,7 @@
 #include <signal.h>
 #include <list>
 #include <stdlib.h>
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 // forward declarations
 

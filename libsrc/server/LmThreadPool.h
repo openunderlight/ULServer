@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <list>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 // forward declarations
 
