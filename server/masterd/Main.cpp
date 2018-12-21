@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../libsrc/unistd.h"
+#include <unistd.h>
 #include <locale.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -32,12 +32,12 @@ int _tmain(int argc, TCHAR** argv)
    _tprintf(_T("Usage: %s root_dir <debugging>\n"), argv[0]);
     exit(1);
     }
-  
+
   TCHAR* root_dir = argv[1];
   bool debugging = false;
   if (argv[2])
     debugging = true;
-    
+
 
   if (!debugging) { // don't spawn new process if debugging
     LmUtil::DaemonStart();
