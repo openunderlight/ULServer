@@ -8,7 +8,7 @@
 #define INCLUDED_LmPlayerNameMap
 
 #include <stdio.h>
-
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LyraDefs.h"
 #include "PThMutex.h"
 
