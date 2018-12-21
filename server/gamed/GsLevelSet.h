@@ -1,6 +1,6 @@
 // GsLevelSet.h  -*- C++ -*-
 // $Id: GsLevelSet.h,v 1.5 1997-09-25 16:31:38-07 jason Exp $
-// Copyright 1996-1997 Lyra LLC, All rights reserved. 
+// Copyright 1996-1997 Lyra LLC, All rights reserved.
 //
 // levels in world
 
@@ -15,7 +15,7 @@
 #include <list>
 
 #include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 
 // class forward declarations
 

@@ -20,7 +20,7 @@
 #include "LmPeerUpdate.h"
 #include "LmParty.h"
 #include "LmIdSet.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "LmSockAddrInet.h"
 #include "LmItem.h"
 

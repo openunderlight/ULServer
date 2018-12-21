@@ -17,7 +17,7 @@
 #include "LmConnectionSet.h"
 #include "../../libsrc/shared/LyraDefs.h"
 #include "LmConnection.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "LmConnectionSetImp.h"
 #include "LmConnectionList.h"
 #include "LmLocker.h"

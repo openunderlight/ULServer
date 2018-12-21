@@ -16,7 +16,7 @@
 #include "../../libsrc/shared/LyraDefs.h"
 #include "LmNetworkInput.h"
 #include "LmLogFile.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 
 // class forward declarations
 

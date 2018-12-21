@@ -16,7 +16,7 @@
 #include "../../libsrc/shared/LyraDefs.h"
 #include "LmSocket.h"
 #include "LmUtil.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 
 // forward declarations
 

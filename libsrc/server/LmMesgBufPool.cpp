@@ -17,7 +17,7 @@
 #include <time.h>
 #include "LmMesgBufPool.h"
 #include "LmMesgBufPoolImp.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "LmLocker.h"
 
 #ifndef USE_INLINE

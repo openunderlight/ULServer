@@ -1,6 +1,6 @@
 // LmIdSet.h  -*- C++ -*-
 // $Id: LmIdSet.h,v 1.7 1997-08-05 14:58:03-07 jason Exp $
-// Copyright 1996-1997 Lyra LLC, All rights reserved. 
+// Copyright 1996-1997 Lyra LLC, All rights reserved.
 //
 // non-resizable set of lyra_id_t's
 
@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #endif
-#include "../pth/PTh.h"
+#include "PTh.h"
 #include <vector>
 
 // class forward declarations

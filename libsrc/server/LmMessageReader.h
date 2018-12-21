@@ -16,7 +16,7 @@
 
 #include "../../libsrc/shared/LyraDefs.h"
 #include "LmThread.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 
 // class forward declarations
 

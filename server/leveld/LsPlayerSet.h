@@ -15,7 +15,7 @@
 #include <list>
 
 #include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "LsPlayerList.h"
 
 // class forward declarations

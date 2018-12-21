@@ -10,7 +10,7 @@
 #include <stdio.h>
 
 #include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 
 // class forward declarations
 

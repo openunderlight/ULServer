@@ -21,7 +21,7 @@
 #endif /* WIN32 */
 
 #include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 
 // class forward declarations
 

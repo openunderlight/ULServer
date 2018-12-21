@@ -17,7 +17,7 @@
 
 #include "../../libsrc/shared/LyraDefs.h"
 #include "LmLog.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 
 // log class
 

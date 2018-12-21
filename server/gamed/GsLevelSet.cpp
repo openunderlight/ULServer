@@ -15,7 +15,7 @@
 #include "GsLevelSet.h"
 #include "../../libsrc/shared/LyraDefs.h"
 #include "GsMain.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "LmLevelDBC.h"
 #include "LmGlobalDB.h"
 #include "LmRoomDB.h"

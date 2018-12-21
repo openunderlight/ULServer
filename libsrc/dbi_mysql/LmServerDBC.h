@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include "../../libsrc/shared/LyraDefs.h"
 #include "mysql.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "../../libsrc/shared/SharedConstants.h"
 
 

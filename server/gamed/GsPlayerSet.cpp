@@ -16,7 +16,7 @@
 #include "../../libsrc/shared/LyraDefs.h"
 #include "GsMain.h"
 #include "GsPlayer.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "LmLevelDBC.h"
 #include "LmLogFile.h"
 #include "GsPlayerList.h"

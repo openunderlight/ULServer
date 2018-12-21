@@ -15,7 +15,7 @@
 #include "GsPlayer.h"
 #include "GsPlayerThread.h"
 #include "GMsg_All.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "GsNetworkInput.h"
 #include "GsMain.h"
 #include "LmPlayerDB.h"

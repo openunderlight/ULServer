@@ -17,7 +17,7 @@
 
 #include "LmThreadPool.h"
 #include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "LmLocker.h"
 #include "LmThread.h"
 

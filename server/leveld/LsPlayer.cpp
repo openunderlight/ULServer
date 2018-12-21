@@ -12,7 +12,7 @@
 
 #include "LsPlayer.h"
 #include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "LmDatabase.h"
 #include "LsMain.h"
 #include "LmPlayerDB.h"

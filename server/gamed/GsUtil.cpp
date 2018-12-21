@@ -36,7 +36,7 @@
 #include "RMsg_RoomLoginAck.h"
 #include "LmLevelDBC.h"
 #include "LmServerDBC.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "LmLocker.h"
 #include "../../libsrc/shared/SharedConstants.h"
 #include "GsPlayer.h"

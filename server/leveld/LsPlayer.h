@@ -21,7 +21,7 @@
 #include "LmPosition.h"
 #include "LmParty.h"
 #include "LmIdSet.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 #include "LmPeerUpdate.h"
 #include "LmSockAddrInet.h"
 #include "LmAvatar.h"

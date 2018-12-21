@@ -1,6 +1,6 @@
 // LmLocker.h  -*- C++ -*-
 // $Id: LmLocker.h,v 1.5 1997-07-30 16:45:48-07 jason Exp $
-// Copyright 1996-1997 Lyra LLC, All rights reserved. 
+// Copyright 1996-1997 Lyra LLC, All rights reserved.
 //
 // object-locking class
 
@@ -12,7 +12,7 @@
 #endif
 
 #include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "PThMutex.h"
 
 // the class
 
