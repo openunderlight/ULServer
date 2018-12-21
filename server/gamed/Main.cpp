@@ -21,7 +21,7 @@
 #include <string.h>
 #include <errno.h>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmUtil.h"
 #include "LmLogFile.h"
 #include "LmNew.h"

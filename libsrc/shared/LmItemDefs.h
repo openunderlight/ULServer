@@ -16,10 +16,10 @@
 #include <winsock2.h>
 #else
 #include <sys/types.h>
-#include <netinet/in.h>
+#include <winsock2.h>
 #endif
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 // item definitions class
 

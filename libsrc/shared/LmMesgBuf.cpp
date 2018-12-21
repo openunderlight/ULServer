@@ -12,7 +12,7 @@
 #include <string.h>
 
 #include "LmMesgBuf.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmMesg.h"
 #include "LmMesgHdr.h"
 

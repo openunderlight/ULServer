@@ -13,13 +13,14 @@
 
 #include <stdio.h>
 
-#include "LyraDefs.h"
-#include "LmStats.h"
-#include "LmInventory.h"
-#include "LmAvatar.h"
-#include "LmArts.h"
-#include "LmIdSet.h"
-#include "SharedConstants.h"
+#include "../../libsrc/shared/LyraDefs.h"
+#include "../shared/LmStats.h"
+#include "../server/LmInventory.h"
+#include "../shared/LmAvatar.h"
+#include "../shared/LmArts.h"
+#include "../util/LmIdSet.h"
+#include "../../libsrc/shared/SharedConstants.h"
+
 
 // forward declarations
 

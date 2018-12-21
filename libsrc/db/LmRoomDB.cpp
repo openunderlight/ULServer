@@ -12,7 +12,7 @@
 #include <string.h>
 
 #include "LmRoomDB.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmItemGenDB.h"
 
 #ifndef USE_INLINE

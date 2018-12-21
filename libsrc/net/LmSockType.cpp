@@ -20,7 +20,7 @@
 #endif /* WIN32 */
 
 #include "LmSockType.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 #ifndef USE_INLINE
 #include "LmSockType.i"

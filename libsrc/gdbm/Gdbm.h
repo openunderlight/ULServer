@@ -11,7 +11,7 @@
 #pragma interface
 #endif
 #ifdef WIN32
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #else
 #include <gdbm.h>
 #endif

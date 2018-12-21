@@ -12,24 +12,24 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
-#include <unistd.h>
+#include "../../libsrc/unistd.h"
 #include <signal.h>
 #include <sys/wait.h>
 #include <netdb.h>
-#include <netinet/in.h>
+#include <winsock2.h>
 
 #include "MsMain.h"
-#include "LmGlobalDB.h"
-#include "LmUtil.h"
-#include "LmServerDBC.h"
+#include "../../libsrc/db/LmGlobalDB.h"
+#include "../../libsrc/util/LmUtil.h"
+#include "../../libsrc/dbi_mysql/LmServerDBC.h"
 #include "MsServerInfo.h"
-#include "LmNew.h"
-#include "LmLogFile.h"
-#include "LmSocket.h"
-#include "LmConnection.h"
-#include "LmSrvMesgBuf.h"
-#include "LmServerDBC.h"
-#include "SMsg_All.h"
+#include "../../libsrc/util/LmNew.h"
+#include "../../libsrc/util/LmLogFile.h"
+#include "../../libsrc/net/LmSocket.h"
+#include "../../libsrc/net/LmConnection.h"
+#include "../../libsrc/server/LmSrvMesgBuf.h"
+#include "../../include/LmServerDBC.h"
+#include "../../libsrc/smsg/SMsg_All.h"
 
 #ifndef USE_INLINE
 #include "MsMain.i"

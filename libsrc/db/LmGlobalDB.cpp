@@ -12,7 +12,7 @@
 #include <string.h>
 
 #include "LmGlobalDB.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 #ifndef USE_INLINE
 #include "LmGlobalDB.i"

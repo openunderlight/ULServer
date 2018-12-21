@@ -886,11 +886,11 @@ typedef int             _TINT;
 #define __TCHAR_DEFINED
 #endif
 
-#ifndef _TCHAR_DEFINED
+#ifndef TCHAR_DEFINED
 #if     !__STDC__
-typedef char            TCHAR;
+typedef char	TCHAR;
 #endif
-#define _TCHAR_DEFINED
+#define TCHAR_DEFINED
 #endif
 
 

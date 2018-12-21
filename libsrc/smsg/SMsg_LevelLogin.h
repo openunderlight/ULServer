@@ -13,11 +13,11 @@
 
 #include <stdio.h>
 
-#include "LyraDefs.h"
-#include "LmMesg.h"
+#include "../../libsrc/shared/LyraDefs.h"
+#include "../../libsrc/shared/LmMesg.h"
 #include "SMsg.h"
-#include "LmPeerUpdate.h"
-#include "LmAvatar.h"
+#include "../../libsrc/shared/LmPeerUpdate.h"
+#include "../../libsrc/shared/LmAvatar.h"
 
 // forward references
 

@@ -34,7 +34,7 @@
 #include "GMsg_LocateAvatar.h"
 #include "GMsg_LocateAvatarAck.h"
 #include "GMsg_LocateMaresAck.h"
-#include "GMsg_LocateNewliesAck.h"
+#include "../../libsrc/gmsg/GMsg_LocateNewliesAck.h"
 #include "GMsg_Login.h"
 #include "GMsg_LoginAck.h"
 #include "GMsg_Logout.h"

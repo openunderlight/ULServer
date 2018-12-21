@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "LmMesgHdr.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 #ifndef USE_INLINE
 #include "LmMesgHdr.i"

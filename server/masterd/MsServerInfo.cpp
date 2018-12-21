@@ -9,15 +9,15 @@
 #include <errno.h>
 #include <string.h>
 #include <time.h>
-#include <unistd.h>
+#include "../../libsrc/unistd.h"
 #include <list>
 
 #include "MsServerInfo.h"
 #include "MsMain.h"
-#include "LmServerDBC.h"
-#include "LmLog.h"
-#include "LmUtil.h"
-#include "LmGlobalDB.h"
+#include "../../libsrc/dbi_mysql/LmServerDBC.h"
+#include "../../libsrc/util/LmLog.h"
+#include "../../libsrc/util/LmUtil.h"
+#include "../../libsrc/db/LmGlobalDB.h"
 
 #define ROUND_ROBIN
 //#define GAMED_POINTER

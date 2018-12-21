@@ -17,11 +17,11 @@
 //#include <hash_map.h>
 #include <time.h>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmPosition.h"
 #include "LmParty.h"
 #include "LmIdSet.h"
-#include "PThMutex.h"
+#include "../../libsrc/pth/PThMutex.h"
 #include "LmPeerUpdate.h"
 #include "LmSockAddrInet.h"
 #include "LmAvatar.h"

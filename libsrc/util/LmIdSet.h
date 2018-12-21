@@ -11,7 +11,7 @@
 #pragma interface
 #endif
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 
 #include <stdio.h>
@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #endif
-#include <pth.h>
+#include "../pth/PTh.h"
 #include <vector>
 
 // class forward declarations

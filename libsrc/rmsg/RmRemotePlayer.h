@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "RMsg.h"
 #include "LmPeerUpdate.h"
 #include "LmAvatar.h"

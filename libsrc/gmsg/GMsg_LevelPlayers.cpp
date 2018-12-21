@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "GMsg_LevelPlayers.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "GMsg.h"
 
 #ifndef USE_INLINE

@@ -14,7 +14,7 @@
 #include <stdio.h>
 //#include <sys/time.h>
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmThread.h"
 #include "LmSocket.h"
 #include "LmLogFile.h"

@@ -11,8 +11,8 @@
 #include <stdio.h>
 
 #include "LsPlayer.h"
-#include "LyraDefs.h"
-#include "PThMutex.h"
+#include "../../libsrc/shared/LyraDefs.h"
+#include "../../libsrc/pth/PThMutex.h"
 #include "LmDatabase.h"
 #include "LsMain.h"
 #include "LmPlayerDB.h"

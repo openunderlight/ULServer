@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include "../../libsrc/unistd.h"
 #include <locale.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -15,10 +15,10 @@
 #include <sys/wait.h>
 #include <errno.h>
 
-#include "LmUtil.h"
+#include  "../../libsrc/util/LmUtil.h"
 #include "MsMain.h"
-#include "LmLogFile.h"
-#include "LmNew.h"
+#include "../../libsrc/util/LmLogFile.h"
+#include "../../libsrc/util/LmNew.h"
 
 ////
 // _tmain()

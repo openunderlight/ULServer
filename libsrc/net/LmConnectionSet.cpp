@@ -15,9 +15,9 @@
 #endif
 
 #include "LmConnectionSet.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmConnection.h"
-#include "PThMutex.h"
+#include "../../libsrc/pth/PThMutex.h"
 #include "LmConnectionSetImp.h"
 #include "LmConnectionList.h"
 #include "LmLocker.h"

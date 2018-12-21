@@ -11,7 +11,7 @@
 #pragma interface
 #endif
 
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 ////
 //// Global Message functions, constants

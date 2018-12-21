@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 #include "LsMessageReader.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "LmLog.h"
 #include "RMsg_Logout.h"
 #include "SMsg_Logout.h"

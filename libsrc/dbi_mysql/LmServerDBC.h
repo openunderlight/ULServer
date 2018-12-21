@@ -8,10 +8,11 @@
 #define INCLUDED_LmServerDBC
 
 #include <stdio.h>
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 #include "mysql.h"
-#include "PThMutex.h"
-#include "SharedConstants.h"
+#include "../../libsrc/pth/PThMutex.h"
+#include "../../libsrc/shared/SharedConstants.h"
+
 
 // local types
 

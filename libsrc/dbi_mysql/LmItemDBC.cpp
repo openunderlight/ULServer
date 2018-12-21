@@ -8,16 +8,16 @@
 #include <stdlib.h>
 
 #include "LmItemDBC.h"
-#include "LmLocker.h"
-#include "LmLog.h"
-#include "LmItem.h"
-#include "LmRoomItem.h"
-#include "LmRoomItemList.h"
-#include "LmInventory.h"
-#include "LmTimer.h"
-#include "LmFuncTimer.h"
+#include "../../libsrc/util/LmLocker.h"
+#include "../../libsrc/util/LmLog.h"
+#include "../../libsrc/shared/LmItem.h"
+#include "../../libsrc/server/LmRoomItem.h"
+#include "../../libsrc/server/LmRoomItemList.h"
+#include "../../libsrc/server/LmInventory.h"
+#include "../../libsrc/util/LmTimer.h"
+#include "../../libsrc/util/LmFuncTimer.h"
 #include "LmPlayerDBC.h"
-#include "GMsg_SenseDreamersAck.h"
+#include "../../libsrc/gmsg/GMsg_SenseDreamersAck.h"
 
 #ifndef USE_INLINE
 #include "LmItemDBC.i"

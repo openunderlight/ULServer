@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "LmPeerUpdate.h"
-#include "LyraDefs.h"
+#include "../../libsrc/shared/LyraDefs.h"
 
 #ifndef USE_INLINE
 #include "LmPeerUpdate.i"
