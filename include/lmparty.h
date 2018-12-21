@@ -47,8 +47,9 @@ public:
   bool IsFull() const;
   bool HasPlayer(lyra_id_t playerid) const;
   lyra_id_t LeaderID() const;
+  lyra_id_t CreatorID() const;
   lyra_id_t PlayerID(int index) const;
-  lyra_id_t CreatorID(int index) const;
+
   void Dump(FILE* f, int indent = 0) const;
   void Dump1(FILE* f) const;
 
