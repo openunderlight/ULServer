@@ -11,8 +11,8 @@
 #pragma interface
 #endif
 
-#include "../../libsrc/shared/LyraDefs.h"
-#include "../../libsrc/pth/PThMutex.h"
+#include "LyraDefs.h"
+#include "PThMutex.h"
 
 // PThCond class
 

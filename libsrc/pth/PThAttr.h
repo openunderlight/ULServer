@@ -11,7 +11,7 @@
 #pragma interface
 #endif
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 // class declarations
 
@@ -25,7 +25,7 @@ public:
   // API methods
   int Init();
   // scope is meaningless with pTh user sthreads
-  // int GetScope(int* contentionscope) 
+  // int GetScope(int* contentionscope)
   // int SetScope(int contentionscope); const;
   //  int SetDetachState(int detachstate);
   //  int GetDetachState(int* detachstate) const;

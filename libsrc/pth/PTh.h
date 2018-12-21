@@ -13,12 +13,12 @@
 
 #include <stdio.h>
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "PThAttr.h"
 
 // PTh class
 
-class PTh 
+class PTh
 {
 
 public:
@@ -39,7 +39,7 @@ public:
   bool IsRunning() const;
   bool IsActive() const;
 
- 
+
 #ifdef WIN32
   pthread_t Thread() const;  // return this thread's id
   static pthread_t Self(); // return caller's id

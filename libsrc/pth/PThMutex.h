@@ -11,7 +11,7 @@
 #pragma interface
 #endif
 
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 
 // PThMutex class
 
@@ -36,7 +36,7 @@ private:
 
   // the mutex object
   //  pth_mutex_t mutex_;
-  
+
 #ifdef WIN32
   pthread_mutex_t mutex_;
 #else
