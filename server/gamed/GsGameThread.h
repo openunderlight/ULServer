@@ -71,8 +71,6 @@ private:
   void handle_SMsg_DBQueryAckGT(LmSrvMesgBuf* msgbuf, LmConnection* conn);
   void handle_SMsg_UniverseBroadcast(LmSrvMesgBuf* msgbuf, LmConnection* conn);
   void handle_SMsg_UniverseBroadcast_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf);
-  void handle_SMsg_UniverseBroadcast_SMsg_FakeLogout(LmSrvMesgBuf* msgbuf);
-
   void broadcast_to_game(LmSrvMesgBuf* mbuf);
   // SMsg_GS_* message handlers
   void handle_SMsg_GS_Action(LmSrvMesgBuf* msgbuf, LmConnection* conn);

@@ -37,7 +37,7 @@ public:
   ~GMsg_Login();
 
   void Init(int version, const TCHAR* playername, int server_port, short pmare_type,
-	    int subversion, unsigned char tcp_only, unsigned char deghost_attempt);
+	    int subversion, short tcp_only);
 
   // standard public methods
   void Dump(FILE* f, int indent = 0) const;
@@ -46,24 +46,23 @@ public:
   int Version() const;
   int SubVersion() const;
   const TCHAR* PlayerName() const;
-  const MD5Hash_t* HashPtr() const;
   // const TCHAR* Password() const;
+  const MD5Hash_t* HashPtr() const;
   int ServerPort() const;
-  //int Firewall() const;
+//  int Firewall() const;
   short PMareType() const;
-  unsigned char TCPOnly() const;
-  unsigned char DeghostAttempt() const;
+  short TCPOnly() const;
 
   // mutators
   void SetVersion(int version);
   void SetSubVersion(int subversion);
   void SetPlayerName(const TCHAR* playername);
-  //void SetPassword(const TCHAR* password);
+//  void SetPassword( const TCHAR* password );
   void SetHash(const MD5Hash_t hash);
   void SetServerPort(int server_port);
-  void SetPMareType(short pmare_type);  
-  void SetTCPOnly(unsigned char tcp_only);
-  void SetDeghostAttempt(unsigned char deghost_attempt);
+  void SetPMareType(short pmare_type);
+//  void SetFirewall(int firewall);
+  void SetTCPOnly(short tcp_only);
 
 private:
 
@@ -78,14 +77,15 @@ private:
   struct data_t {
     int version;                            // client version
     TCHAR playername[Lyra::PLAYERNAME_MAX];  // name
-    // TCHAR password[Lyra::PASSWORD_MAX];      // password
+    //TCHAR password[Lyra::PASSWORD_MAX];      // password
 	MD5Hash_t hash;							// md5 hash of server challenge
     int serv_port;                          // UDP port number for S->C local group updates
     short pmare_type;							// for pmares, type selected
-	unsigned char tcp_only;							// TCP only, for firewalls/NAT/etc.
-	unsigned char deghost_attempt;
+	short tcp_only;							// TCP only, for firewalls/NAT/etc.
     int subversion;                         // another nt to use for version checking
-	//int firewall;							// indicates server must send back updates from same UDP address as they're sent to
+//	int firewall;							// indicates server must send back updates from same UDP address as they're sent to
+//	
+//	short _unused;
   } data_;
 
 };

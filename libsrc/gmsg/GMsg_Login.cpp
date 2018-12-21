@@ -35,7 +35,7 @@ GMsg_Login::GMsg_Login()
   : LmMesg(GMsg::LOGIN, sizeof(data_t), sizeof(data_t), &data_)
 {
   // initialize default message data values
-  Init(DEFAULT_VERSION, _T("name"),  Lyra::PORT_UNKNOWN, 0, 0, 0, 0);
+  Init(DEFAULT_VERSION, _T("name"), Lyra::PORT_UNKNOWN, 0, 0, 0);
 }
 
 ////
@@ -51,17 +51,16 @@ GMsg_Login::~GMsg_Login()
 // Init
 ////
 
-void GMsg_Login::Init(int version, const TCHAR* playername, int serv_port, short pmare_type, int subversion,
-					   unsigned char tcp_only, unsigned char deghost_attempt)
+void GMsg_Login::Init(int version, const TCHAR* playername,  int serv_port, short pmare_type, int subversion, short tcp_only)
 {
   SetVersion(version);
   SetSubVersion(subversion);
   SetPlayerName(playername);
+  // SetPassword(password);
   SetServerPort(serv_port);
   SetPMareType(pmare_type);
-  //SetFirewall(firewall);
+//  SetFirewall(firewall);
   SetTCPOnly(tcp_only);
-  SetDeghostAttempt(deghost_attempt);
 }
 
 ////
@@ -73,9 +72,9 @@ void GMsg_Login::hton()
   HTONL(data_.version);
   HTONL(data_.subversion);
   HTONL(data_.serv_port);
-//  HTONL(data_.firewall);
+  //HTONL(data_.firewall);
   HTONS(data_.pmare_type);
-  //HTONS(data_.tcp_only);
+  HTONS(data_.tcp_only);
   // no conversion: playername, password
 }
 
@@ -90,7 +89,7 @@ void GMsg_Login::ntoh()
   NTOHL(data_.serv_port);
   //NTOHL(data_.firewall);
   NTOHS(data_.pmare_type);
-  //NTOHS(data_.tcp_only);
+  NTOHS(data_.tcp_only);
   // no conversion: playername, password, description
   calc_size();
 }
@@ -126,16 +125,6 @@ void GMsg_Login::SetPlayerName(const TCHAR* playername)
   TRUNC(data_.playername, sizeof(data_.playername));
 }
 
-////
-// SetHash
-////
-/*
-void GMsg_Login::SetPassword(const TCHAR* password)
-{
-	_tcsnccpy(data_.password, password, sizeof(data_.password));
-	TRUNC(data_.password, sizeof(data_.password));
-}
-*/
 void GMsg_Login::SetHash(const MD5Hash_t hash)
 {
 	memcpy((void*)data_.hash, (void*)hash, sizeof(MD5Hash_t));

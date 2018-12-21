@@ -382,7 +382,16 @@ void GsGameThread::handle_GMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
   // put into the name map
   main_->PlayerNameMap()->AddMapping(playerid, player_name);
 
+  // check that player isn't already in this game server
+  if (main_->PlayerSet()->IsInGame(playerid)) {
+    SECLOG(1, _T("%s: player %u: %s already logged in"), method, playerid, msg.PlayerName());
+    send_GMsg_LoginAck(conn, conn_time, GMsg_LoginAck::LOGIN_ALREADYIN);
+    return;
+  }
+
   // check password 
+
+
   if (!main_->PlayerDBC()->CheckPassword(playerid, msg.HashPtr(), conn->Challenge())) {
     SECLOG(1, _T("%s: player %u: %s gave incorrect hash"), method, playerid, msg.PlayerName());
     send_GMsg_LoginAck(conn, conn_time, GMsg_LoginAck::LOGIN_BADPASSWORD);
@@ -392,8 +401,7 @@ void GsGameThread::handle_GMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
   // check that this account can log in to the player db
   int suspended_days = 0;
   bool first_login = false;
-  rc = main_->PlayerDBC()->CanLogin(playerid, &suspended_days, &first_login, pmare_type, msg.DeghostAttempt() > 0); 
-
+  rc = main_->PlayerDBC()->CanLogin(playerid, &suspended_days, &first_login, pmare_type); 
   sc = main_->PlayerDBC()->LastSQLCode();
   lt = main_->PlayerDBC()->LastCallTime();
   //  main_->Log()->Debug(_T("%s: LmPlayerDBC::CanLogin took %d ms"), method, lt);
@@ -409,31 +417,6 @@ void GsGameThread::handle_GMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
     return;
   }
 
-  // check that player isn't already in this game server
-  if (main_->PlayerSet()->IsInGame(playerid)) {
-    if(!msg.DeghostAttempt())
-    {
-	    SECLOG(1, _T("%s: player %u: %s already logged in"), method, playerid, msg.PlayerName());
-	    send_GMsg_LoginAck(conn, conn_time, GMsg_LoginAck::LOGIN_ALREADYIN);
-	    return;
-    } else {
-	GsPlayer* oldplayer = main_->PlayerSet()->GetPlayer(playerid);
-	GsUtil::FakeLogout(main_, oldplayer);
-    }
-  } else if(msg.DeghostAttempt()) {
-	// This is a deghost message but they're not on THIS gamed. 
-	SMsg_GS_FakeLogout fakelogout;
-	fakelogout.Init(playerid, main_->ServerPort());
-	SMsg_UniverseBroadcast bcmsg;
-  	bcmsg.Init(fakelogout);
-	main_->OutputDispatch()->SendMessage(&msg, GsUtil::ConnectToBcastLevelD(main_));
-	//send_SMsg_UniverseBroadcast(fakelogout);
-  }
-
-  if(msg.DeghostAttempt())
-  {
-	main_->PlayerDBC()->ForceGhostLogout(playerid);
-  }
   // allocate player in player set
   GsPlayer* player = main_->PlayerSet()->AllocatePlayer(playerid);
   if (!player) {
@@ -821,28 +804,10 @@ void GsGameThread::handle_SMsg_UniverseBroadcast(LmSrvMesgBuf* msgbuf, LmConnect
 	case RMsg::PLAYERMSG:
 		handle_SMsg_UniverseBroadcast_RMsg_PlayerMsg(mbuf);
 		break;
- 	case SMsg::GS_FAKELOGOUT:
-		handle_SMsg_UniverseBroadcast_SMsg_FakeLogout(mbuf);
-		break;
 	default:
 		broadcast_to_game(mbuf);
 		break;
   }
-}
-
-void GsGameThread::handle_SMsg_UniverseBroadcast_SMsg_FakeLogout(LmSrvMesgBuf* msgbuf)
-{
-	DEFMETHOD(GsGameThread, handle_SMsg_UniverseBroadcast_SMsg_FakeLogout);
-	PROXY_HANDLER_ENTRY(false);
-	PROXY_ACCEPT_MSG(SMsg_GS_FakeLogout);
-	if(msg.OriginatingGamed() == main_->ServerPort())
-		return;
-	// else try to get the Player*
-	GsPlayer* oldplayer = main_->PlayerSet()->GetPlayer(msg.PlayerID());
-	if(!oldplayer)
-		return;
-	else
-		GsUtil::FakeLogout(main_, oldplayer);
 }
 
 void GsGameThread::handle_SMsg_UniverseBroadcast_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)

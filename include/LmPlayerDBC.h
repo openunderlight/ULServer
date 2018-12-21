@@ -78,13 +78,13 @@ public:
   int CheckPassword(lyra_id_t player_id, const MD5Hash_t* phash, const TCHAR* challenge);
   int GetLocation(lyra_id_t player_id, lyra_id_t& level_id, lyra_id_t& room_id, int& acct_type, bool isGM);
   int GetLoginStatus(lyra_id_t player_id);
-  int CanLogin(lyra_id_t player_id, int* suspended_days, bool* first_login, int pmare_type, bool ghost_fix);
+  int CanLogin(lyra_id_t player_id, int* suspended_days, bool* first_login, int pmare_type);
   int GetBillingID(lyra_id_t player_id, lyra_id_t& billing_id);
   int LocateNewlyAwakened(GMsg_LocateNewliesAck* pnewly_msg);
   int LocateMares(GMsg_LocateMaresAck* pmare_msg);
   int FindHouseMembers(GMsg_LocateAvatarAck& locate_msgack, lyra_id_t guild_id, bool gm, lyra_id_t player_id);
   int NewlyNeedsAnnounce(lyra_id_t player_id, bool* announce);
-  int ForceGhostLogout(lyra_id_t player_id);
+
   long LastSQLCode() const;
 
   void SetLog(LmLog* log);
