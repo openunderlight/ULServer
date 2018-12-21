@@ -1,6 +1,6 @@
 // LmParty.h  -*- C++ -*-
 // $Id: LmParty.h,v 1.6 1997-07-09 19:24:52-07 jason Exp $
-// Copyright 1996-1997 Lyra LLC, All rights reserved. 
+// Copyright 1996-1997 Lyra LLC, All rights reserved.
 //
 // "character party" class
 
