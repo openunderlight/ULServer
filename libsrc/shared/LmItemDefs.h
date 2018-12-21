@@ -16,7 +16,7 @@
 #include <winsock2.h>
 #else
 #include <sys/types.h>
-#include <winsock2.h>
+#include <netinet/in.h>
 #endif
 
 #include "../../libsrc/shared/LyraDefs.h"
