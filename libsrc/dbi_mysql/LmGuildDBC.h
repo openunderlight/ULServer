@@ -8,11 +8,11 @@
 #define INCLUDED_LmGuildDBC
 
 #include <stdio.h>
-#include "../../libsrc/shared/LyraDefs.h"
+#include "LyraDefs.h"
 #include "mysql.h"
 #include "PThMutex.h"
 #include "GMsg_All.h"
-#include "../../libsrc/shared/SharedConstants.h"
+#include "SharedConstants.h"
 
 // local types
 

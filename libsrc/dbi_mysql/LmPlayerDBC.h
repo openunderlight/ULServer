@@ -8,14 +8,14 @@
 #define INCLUDED_LmPlayerDBC
 
 #include <stdio.h>
-#include "../../libsrc/shared/LyraDefs.h"
-#include <mysql.h>
+#include "LyraDefs.h"
+#include "mysql.h"
 #include "PThMutex.h"
-#include "../../libsrc/shared/SharedConstants.h"
-#include "../../libsrc/gmsg/GMsg_LocateNewliesAck.h"
-#include "../../libsrc/gmsg/GMsg_LocateMaresAck.h"
-#include "../../libsrc/db/LmPlayerDB.h"
-#include "../../libsrc/shared/LnMD5.h"
+#include "SharedConstants.h"
+#include "GMsg_LocateNewliesAck.h"
+#include "GMsg_LocateMaresAck.h"
+#include "LmPlayerDB.h"
+#include "LnMD5.h"
 
 // local types
 

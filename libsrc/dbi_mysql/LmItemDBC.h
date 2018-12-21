@@ -8,10 +8,11 @@
 #define INCLUDED_LmItemDBC
 
 #include <stdio.h>
-#include "../../libsrc/shared/LyraDefs.h"
-#include <mysql.h>
+#include "LyraDefs.h"
+#include "mysql.h"
 #include "PThMutex.h"
-#include "../../libsrc/shared/SharedConstants.h" 
+#include "SharedConstants.h"
+
 // local types
 
 typedef TCHAR lyra_item_name[20];

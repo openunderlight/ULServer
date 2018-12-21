@@ -7,12 +7,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "../util/LmLocker.h"
-#include "../util/LmLog.h"
-#include "../util/LmTimer.h"
-#include "../util/LmFuncTimer.h"
-#include "../db/LmRoomDB.h"
-#include "../dbi_mysql/LmLevelDBC.h"
+#include "LmLocker.h"
+#include "LmLog.h"
+#include "LmTimer.h"
+#include "LmFuncTimer.h"
+#include "LmRoomDB.h"
+#include "LmLevelDBC.h"
 
 #ifndef USE_INLINE
 #include "LmLevelDBC.i"

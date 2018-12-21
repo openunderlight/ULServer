@@ -12,14 +12,14 @@
 #include <fcntl.h>
 #endif
 
-#include "../../libsrc/util/LmLocker.h"
-#include "../../libsrc/util/LmLog.h"
-#include "../../libsrc/util/LmTimer.h"
-#include "../../libsrc/util/LmFuncTimer.h"
-#include "../../libsrc/util/LmRand.h"
-#include "../../libsrc/db/LmRoomDB.h"
-#include "../../libsrc/net/LmSockAddrInet.h"
-#include "../../libsrc/dbi_mysql/LmServerDBC.h"
+#include "LmLocker.h"
+#include "LmLog.h"
+#include "LmTimer.h"
+#include "LmFuncTimer.h"
+#include "LmRand.h"
+#include "LmRoomDB.h"
+#include "LmSockAddrInet.h"
+#include "LmServerDBC.h"
 
 #ifndef USE_INLINE
 #include "LmServerDBC.i"
