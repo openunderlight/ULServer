@@ -3013,6 +3013,17 @@
 #define IDS_PLAYER_SPRINT_OFF           4486
 #define IDS_SPRINT                      4487
 #define IDS_ENFEEBLE_APPLIED            4488
+#define IDS_ENFEEBLE_MARE               4489
+#define IDS_NO_MISSILE_INVIS            4490
+#define IDS_ENFEEBLE_DEFLECT            4491
+#define IDS_DREAMWIDE_EVOKE             4492
+#define IDS_SHOWXP_PPOINT_PMARE         4493
+#define IDS_OVERLAPPING                 4494
+#define IDS_LIVE_QA_SERVER_IP           4495
+#define IDS_DISTRESS_CALL               4496
+#define IDS_NOT_ENOUGH_PT_DC            4497
+#define IDS_DISTRESS_CALL_HOUSEMEMBERS  4498
+#define IDS_DISTRESS_CALL_UNS           4499
 
 #define IDC_AVATAR_COMBO                16666
 
