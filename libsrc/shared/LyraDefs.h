@@ -31,7 +31,7 @@
 
 #if !defined(WIN32)
 // server
-#include "../../libsrc/util/LmNew.h"
+#include "LmNew.h"
 #else
 // client
 #ifdef _DEBUG
@@ -231,7 +231,7 @@ typedef unsigned int realmid_t;  // backwards compatibility
 #ifndef PTH_SYSCALL_SOFT 
 #define PTH_SYSCALL_SOFT 1
 #endif
-#include "../../libsrc/pth/PTh.h"
+#include "pth.h"
 #else
 #ifdef UL_SERVER_WIN32
 typedef int pid_t;
