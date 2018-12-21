@@ -152,7 +152,6 @@ static const int game_messages[] = {
   SMsg::ROTATE_LOGS, 
   SMsg::DUMP_STATE,
   SMsg::UNIVERSEBROADCAST,
-  SMsg::GS_FAKELOGOUT,
   // SMsg
   SMsg::DS_DB_QUERY_ACK_GT,
   // RMsg
