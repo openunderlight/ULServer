@@ -13,10 +13,7 @@
 
 #include <stdio.h>
 #include "LyraDefs.h"
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 07f5efa... include path update
 
 // forward declarations
 
