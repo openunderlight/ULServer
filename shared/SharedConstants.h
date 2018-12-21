@@ -10,9 +10,9 @@
 // effects constants - indexes into header array for effects
 // NOTE: keep consistent with Visual Effects.ASC!
 
- 
+
 const int NUM_TIMED_EFFECTS = 36; // add one for NONE
-const int NUM_ARTS = 151; // BACARDI N COLA DO IT DO IT
+const int NUM_ARTS = 153; // BACARDI N COLA DO IT DO IT
 const int NUM_MODIFIERS = 64;
 const int NUM_DURATIONS = 64;
 const int NUM_PLAYER_STATS = 5;
@@ -66,7 +66,7 @@ struct Stats {
 		SPHERE_MIN = 0,
 		SPHERE_MAX = 9
 	};
-	enum  
+	enum
 	{
 		DREAMSOUL	= 0,
 		WILLPOWER,
@@ -79,26 +79,26 @@ struct Stats {
 
 struct Avatars
 {
-	enum 
+	enum
 	{
 		UNDEFINED	= -1,
 		// players
-		MALE		= 0, 
-		FEMALE = 1, 
+		MALE		= 0,
+		FEMALE = 1,
 		// nightmares
-		EMPHANT		= 2,	 
+		EMPHANT		= 2,
 		MIN_NIGHTMARE_TYPE = EMPHANT,
-		BOGROM		= 3, 
-		AGOKNIGHT	= 4, 
+		BOGROM		= 3,
+		AGOKNIGHT	= 4,
 		SHAMBLIX	= 5,
 		HORRON		= 6,
-		
+
 		MAX_AVATAR_TYPE = HORRON,
 		MIN_AVATAR_TYPE = MALE,			//RR For consistency
 		VIEWS = 6,
 
 		// PMARE_RESUME is a special avatar constant used to indicate
-		// that a pmare session should be resumed with the avatar it last 
+		// that a pmare session should be resumed with the avatar it last
 		// left off with
 		PMARE_RESUME = MAX_AVATAR_TYPE + 1
 	};
@@ -109,18 +109,18 @@ struct Avatars
 {
   enum {
 	    MALE = 0, // players
-		FEMALE = 1, 
+		FEMALE = 1,
 		EMPHANT, // nightmares
 		MIN_NIGHTMARE_TYPE = EMPHANT,
-		BOGROM, 
-		AGOKNIGHT, 
+		BOGROM,
+		AGOKNIGHT,
 		SHAMBLIX,
 		HORRON,
 		MAX_AVATAR_TYPE = HORRON,
 		MIN_AVATAR_TYPE = MALE,			//RR For consistency
 		VIEWS = 6,
 		// PMARE_RESUME is a special avatar constant used to indicate
-		// that a pmare session should be resumed with the avatar it last 
+		// that a pmare session should be resumed with the avatar it last
 		// left off with
 		PMARE_RESUME = MAX_AVATAR_TYPE + 1
   };
@@ -200,7 +200,7 @@ struct Arts {
 	FATESLAYER,
 	SOULREAPER,
 	FLAMESHAFT,
-	TRANCEFLAME, 
+	TRANCEFLAME,
 	FLAMESEAR,  //70
 	FLAMERUIN,
 	WRITE_SCROLL,
@@ -210,12 +210,12 @@ struct Arts {
 	BOOT, // gm only
 	UNTRAIN, // gm only
 	GRANT_RP_XP,
-	EARTHQUAKE, 
+	EARTHQUAKE,
 	HYPNOTIC_WEAVE, // 80
 	VAMPIRIC_DRAW,
 	TERROR,
 	HEALING_AURA,
-	ROGER_WILCO, 
+	ROGER_WILCO,
 	DREAMSMITH_MARK,
 	SUPPORT_TRAINING,
 	SUPPORT_SPHERING,
@@ -232,7 +232,7 @@ struct Arts {
 	LOCATE_NEWLIES,
 	COMBINE,
 	POWER_TOKEN, // 100
-	SHOW_GRATITUDE, 
+	SHOW_GRATITUDE,
 	QUEST,
 	EMPATHY,
 	RADIANT_BLAZE,
@@ -252,9 +252,9 @@ struct Arts {
 	HOUSE_MEMBERS,
 	FREESOUL_BLADE,
 	ILLUMINATED_BLADE, // 120
-	SUMMON_PRIME, 
+	SUMMON_PRIME,
 	GRANT_PPOINT, // dummy art; it should not be learned
-	SCAN,  // judgement 
+	SCAN,  // judgement
 	PASSLOCK, // blend clone
 	HEAL, // restore clone
 	SANCTIFY, // protection
@@ -267,7 +267,7 @@ struct Arts {
 	SANCTUARY, // recall
 	SHOVE, // push
 	SCRIBE_NOT, // placeholder - not implemented
-	FORGE_MASTER, // dreamsmith mark 
+	FORGE_MASTER, // dreamsmith mark
 	MERGE_TALISMAN, // combine
 	NP_SYMBOL,	 // use NP symbol on chest
 	SENSE_MARE,  // sense pmares & dark mares
@@ -329,12 +329,12 @@ public:
 	bool creates_item()			{ return  (flags & MAKE_ITEM) == MAKE_ITEM;};
 	bool restricted() 			{ return  (flags & FOCUS) == FOCUS;};
 	bool display_learnable()	{ return  (flags & LEARN) == LEARN;};
-	unsigned long my_checksum(int id, unsigned long my_name)	{ return  0xFFFF & (	(unsigned) ( (stat << 8) ^ min_orbit ) + 
+	unsigned long my_checksum(int id, unsigned long my_name)	{ return  0xFFFF & (	(unsigned) ( (stat << 8) ^ min_orbit ) +
 																			(unsigned) ( ( id * 0x2468) & 0xFFFF ) +
 																			(unsigned) (( drain + duration) ^ 0x0124) +
-																		
-																			(unsigned) (casting_time << 4)+ 
-																			(unsigned) (flags << 2) + 
+
+																			(unsigned) (casting_time << 4)+
+																			(unsigned) (flags << 2) +
 																			(unsigned) id) ^ (unsigned) my_name;};//RRR
 
 };
@@ -343,7 +343,7 @@ public:
 struct LyraBitmap {
 	enum visual_effect_IDs {
 		NONE = 0,
-		DREAMBLADE = 1, 
+		DREAMBLADE = 1,
 
 		WARD = 4,				 // lock on teleportal
 		AMULET = 5,				 // pass teleportal
@@ -362,15 +362,15 @@ struct LyraBitmap {
 
 		GUILD_MEMBER_TOKEN_BASE = 21,
 
-		TALISMAN0 = 30, 
+		TALISMAN0 = 30,
 		TALISMAN1 = 31,
-		TALISMAN2 = 32, 
-		TALISMAN3 = 33, 
-		TALISMAN4 = 34, 
-		TALISMAN5 = 35, 
-		TALISMAN6 = 36, 
-		TALISMAN7 = 37, 
-		TALISMAN8 = 38,  
+		TALISMAN2 = 32,
+		TALISMAN3 = 33,
+		TALISMAN4 = 34,
+		TALISMAN5 = 35,
+		TALISMAN6 = 36,
+		TALISMAN7 = 37,
+		TALISMAN8 = 38,
 
 		CODEX = 39,
 
@@ -379,7 +379,7 @@ struct LyraBitmap {
 		BOX = 45,
 		GIFT = 46,
 		STAFF = 47,
-		RING = 48,		
+		RING = 48,
 		FEATHER = 50,
 		EGG = 51,
 
@@ -392,7 +392,7 @@ struct LyraBitmap {
 		PUSH_MISSILE = MARE_MELEE_MISSILE, // dummy bitmap
 		FIREBALL_MISSILE = 42,
 		MAXIMUM_MISSILE_BITMAP = FIREBALL_MISSILE,
-		
+
 		BOGROM_ESSENCE = 60,	 // nightmare essence
 		AGOKNIGHT_ESSENCE = 61,	 // nightmare essence
 		SHAMBLIX_ESSENCE = 62,	 // nightmare essence
@@ -401,8 +401,8 @@ struct LyraBitmap {
 		MALE_AVATAR = 256,
 		FEMALE_AVATAR = 400,
 		EMPHANT_AVATAR = 544,
-		BOGROM_AVATAR = 634, 
-		AGOKNIGHT_AVATAR = 1600, 
+		BOGROM_AVATAR = 634,
+		AGOKNIGHT_AVATAR = 1600,
 		SHAMBLIX_AVATAR = 1500,
 		HORRON_AVATAR = SHAMBLIX_AVATAR,
 		//HORRON_AVATAR = 1680,
@@ -412,7 +412,7 @@ struct LyraBitmap {
 		FORMREFORM_EFFECT = 738,
 		ENTRYEXIT_EFFECT = 758,
 		BANNER_EFFECT = 778,
-		
+
 		HARMLESS_EVOKED = 1100,
 		HARMFUL_EVOKED = 1110,
 		HARMLESS_EVOKING = 1120,
@@ -457,7 +457,7 @@ struct LyraBitmap {
 		COLORS_LABEL   = 1840,
 		GRAPHIC_LABEL = 1841,
 
-		ART_ICONS	   = 1894, 
+		ART_ICONS	   = 1894,
 
 		HOUSE_BITMAPS  = 1901, // add house id to get bitmap id
 
@@ -553,7 +553,7 @@ struct LyraBitmap {
 		CP_GRANTPPB     = 1769,
 
 		BULLET		 = 2030,
-		
+
 		CHANGING_PLANES	= 2044,
 		SPLASH		 = 2045,
 		INTRO		 = 2046,
@@ -562,7 +562,7 @@ struct LyraBitmap {
 };
 
 // NOTE: keep consistent with Sound Effects.ASC
-// NOTE: table controlling whether or not sounds are propagated to other 
+// NOTE: table controlling whether or not sounds are propagated to other
 // players is kept in cDSound.cpp
 struct LyraSound {
 	enum sound_effect_id
@@ -576,8 +576,8 @@ struct LyraSound {
 		MALE_SCREAM3 =  6,
 		EMPHANT_ROAR =  7,		// SCREAM4
 		BANSHEE_ROAR =  8,		// SCREAM5
-		MESSAGE =  9,	
-		INTRO  =  10,	
+		MESSAGE =  9,
+		INTRO  =  10,
 		EXIT    =  11,
 		TELEPORT =  12,
 		MONSTER_ROAR =  13,		// MONSTER
@@ -587,12 +587,12 @@ struct LyraSound {
 		OTHER_STEP_1 = 17,
 		OTHER_STEP_2 = 18,
 		PLAYER_STEP_1 = 19,
-		PLAYER_STEP_2 = 20,		
+		PLAYER_STEP_2 = 20,
 		AGOKNIGHT_ROAR = 21,
-		PUSH = 22, 
+		PUSH = 22,
 		CHAMELE = 23,
 		IDENTIFY = 24,
-		SCARE_LOOP = 25, 
+		SCARE_LOOP = 25,
 		FIRESTORM = 26,
 		CURSE = 27,
 		TRAPMARE = 28,
@@ -610,9 +610,9 @@ struct LyraSound {
 		ABJURE		= 39,
 		FORGE		= 40,
 		RECALL       = 41,
-		BLAST		= 42, 
+		BLAST		= 42,
 		BLEND		= 43,
-		ID_CURSE	= 44, 
+		ID_CURSE	= 44,
 		VISION		= 45,
 		STAGGER		= 46,
 		DREAMBLADE	= 47,
@@ -669,25 +669,25 @@ struct LyraEffect {
     PLAYER_PROT_FEAR,
     PLAYER_PROT_CURSE,
     PLAYER_PROT_PARALYSIS,
-	PLAYER_CHAMELED, 
-    PLAYER_INVISIBLE,   
+	PLAYER_CHAMELED,
+    PLAYER_INVISIBLE,
 	MIN_GOOD_EFFECT = PLAYER_DETECT_INVISIBLE,
-	MAX_GOOD_EFFECT = PLAYER_INVISIBLE,	
+	MAX_GOOD_EFFECT = PLAYER_INVISIBLE,
 
 		// harmful effects
     PLAYER_DEAF,
     PLAYER_DRUNK,
     PLAYER_FEAR,
-    PLAYER_POISONED, 
+    PLAYER_POISONED,
     PLAYER_CURSED,
     PLAYER_BLIND,
     PLAYER_PARALYZED,
 	PLAYER_BLEED,
 
 	MIN_BAD_EFFECT = PLAYER_DEAF,
-	MAX_BAD_EFFECT = PLAYER_BLEED,	
-//	MAX_ITEM_EFFECT = PLAYER_PARALYZED, 
-	PLAYER_RECALL, 
+	MAX_BAD_EFFECT = PLAYER_BLEED,
+//	MAX_ITEM_EFFECT = PLAYER_PARALYZED,
+	PLAYER_RECALL,
 	PLAYER_TRANSFORMED,
 	PLAYER_BLENDED,
     PLAYER_MEDITATING,
@@ -739,7 +739,7 @@ struct Guild { // these values CAN NOT be changed or rearranged
 		RULER_ISSUE = 88
 	};
 
-	enum { 
+	enum {
 		NO_GUILD    =   15,
 		NO_HOUSE	=   15,
 		MOON		=	0,
@@ -798,7 +798,7 @@ struct Guild { // these values CAN NOT be changed or rearranged
 };
 
 struct Quest { // for Quest builder missions
-	enum { // types of quests	
+	enum { // types of quests
 		TALISMAN = 0,
 		CODEX = 1,
 		ANY_COLOR
@@ -828,9 +828,9 @@ const int MAX_DEMOTE_TOKENS_NEEDED = Guild::DEMOTE_RULER;
 
 // for showing guild/sphere/shield patches
 struct Patches {
-	enum {  
+	enum {
 		DONT_SHOW = 0,
-		SHOW_FRONT = 1,    
+		SHOW_FRONT = 1,
 		SHOW_BACK  = 2,
 		SHOW_BOTH = 3
 	};
@@ -850,13 +850,13 @@ struct UsePPoint {
 	};
 };
 
-const int no_dreamstrike_levels[] = 
+const int no_dreamstrike_levels[] =
 {1, 17, 18, 20, 21, 22, 23, 24, 25, 26, 42, 44, 45, 39, 41, 47};
 
 const int num_no_dreamstrike_levels =
   sizeof(no_dreamstrike_levels) / sizeof(int);
 
-const int no_rally_levels[] = 
+const int no_rally_levels[] =
 {1, 46, 47};
 
 const int num_no_rally_levels =
