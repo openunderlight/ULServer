@@ -87,6 +87,8 @@ do
   mysql -u root -p"$ROOTPASS" -e "create database $DATABASE";
   mysql -u root -p"$ROOTPASS" $DATABASE < sql/$DATABASE.sql
   mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'$IPADDR' IDENTIFIED BY '$DBPASS'"
+  mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'localhost' IDENTIFIED BY '$DBPASS'"
+  mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'127.0.0.1' IDENTIFIED BY '$DBPASS'"
 done
 
 mysql -u root -p"$ROOTPASS" -e "UPDATE ul_server.server SET host_name = '$IPADDR'"
