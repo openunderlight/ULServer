@@ -219,8 +219,22 @@ void GsPlayerThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LmConnection* conn
   // process certain kinds of speech in game server
   bool send_out = true, send_universe = msg.IsUniverseWide();
   if (send_universe && player_->DB().AccountType() != LmPlayerDB::ACCT_ADMIN) {
-      SECLOG(2, _T("%s: player %u: illegal UNIVERSE-WIDE GM-only speech (%c)"), method, player_->PlayerID(), msg.SpeechType());
-      return;
+      bool can_send_universe = false;
+      if(msg.SpeechType() == RMsg_Speech::DISTRESS_CALL) {
+	if(!player_->CanUseArt(Arts::DISTRESS_CALL, 1)) {
+		if(player_->PPEvoking() == Arts::DISTRESS_CALL) {
+			player_->SetPPEvoking(Arts::NONE);
+			player_->SetPPSkill(0);
+			can_send_universe = true;
+		}
+	} else {
+		can_send_universe = true;
+	}
+      }
+      if(!can_send_universe) {	
+		SECLOG(2, _T("%s: player %u: illegal UNIVERSE-WIDE GM-only speech (%c)"), method, player_->PlayerID(), msg.SpeechType());
+		return;
+      }
     }
 
   switch (msg.SpeechType()) {
@@ -293,6 +307,7 @@ void GsPlayerThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LmConnection* conn
   case RMsg_Speech::WHISPER_EMOTE:
   case RMsg_Speech::SYSTEM_SPEECH:
   case RMsg_Speech::SYSTEM_WHISPER:
+  case RMsg_Speech::DISTRESS_CALL:
   case RMsg_Speech::TELL_IP:
     // ok
     break;
