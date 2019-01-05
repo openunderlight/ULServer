@@ -145,7 +145,7 @@ static missile_gen_table_entry missile_gen_table[] = {
     10,
     100,
     LyraEffect::MIN_GOOD_EFFECT, LyraEffect::MAX_GOOD_EFFECT,
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+    { 0, 0, 0, 0, 14, 14, 14, 14, 30, 30, 30, 40, 40, 40, 17, 32 }
   },
 
   // class 2
@@ -159,8 +159,7 @@ static missile_gen_table_entry missile_gen_table[] = {
     0, 0,
 
 
-  {17,18,18,23,23,27,27,40,40,44,44,46,46,51,51,60}
-   // { 19, 21, 22, 26, 27, 34, 36, 37, 44, 45, 46, 51, 52, 56, 59, 60 }
+  {40,40,17,47,20,18,54,23,56,21,21,26,25,43,50,27}
   },
 
   // class 3
@@ -172,8 +171,7 @@ static missile_gen_table_entry missile_gen_table[] = {
     50,
     25,
     LyraEffect::MIN_BAD_EFFECT, LyraEffect::PLAYER_CURSED,
-  {27,27,28,38,38,39,39,44,44,44,44,46,46,46,60,60}
-    //{ 19, 21, 22, 26, 27, 34, 36, 37, 44, 45, 46, 51, 52, 56, 59, 60 }
+  {36,36,59,59,27,27,44,44,46,46,28,60,39,39,38,38}
   },
 
   // class 4
@@ -185,9 +183,7 @@ static missile_gen_table_entry missile_gen_table[] = {
     100,
     50,
     LyraEffect::MIN_BAD_EFFECT, LyraEffect::MAX_BAD_EFFECT,
-  { 4,28,29,29,38,38,39,39,46,46,7,59,59,60,60,60 }
-	
-    //{ 17, 18, 19, 20, 21, 23, 29, 30, 39, 40, 44, 45, 46, 47, 51, 52 }
+  { 4,44,44,46,46,46,28,60,60,39,39,38,6,29,29,7 }
   },
 
 };
