@@ -139,12 +139,12 @@ static missile_gen_table_entry missile_gen_table[] = {
   // class 1 - friendly wands
   { 1,
     10, 50,
-    LyraBitmap::TALISMAN2,
+    LyraBitmap::TALISMAN3,
     LyraBitmap::FIREBALL_MISSILE,
-    1, 1,
+    1, 3,
     10,
-    100,
-    LyraEffect::MIN_GOOD_EFFECT, LyraEffect::MAX_GOOD_EFFECT,
+    0,
+    0, 0,
     { 0, 0, 0, 0, 14, 14, 14, 14, 30, 30, 30, 40, 40, 40, 17, 32 }
   },
 

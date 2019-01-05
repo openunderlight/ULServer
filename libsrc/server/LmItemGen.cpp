@@ -335,22 +335,33 @@ void gen_missile_item_state(int gen_type, int& damage_index, lyra_item_missile_t
   CHECK_GENTYPE(gen_type);
   const missile_gen_table_entry& entry = missile_gen_table[gen_type];
 
-  // choose bitmap
-  state.bitmap_id = entry.missile_bitmap;
   // choose velocity (bouncing as well)
   state.velocity = LmRand::Generate(entry.min_velocity, entry.max_velocity);
   if (LmRand::Generate(1, 100) < entry.bounce_chance) {
-    state.velocity = - state.velocity; // negated: bouncing
+	  state.velocity = -state.velocity; // negated: bouncing
   }
+
+  state.bitmap_id = entry.missile_bitmap;
+
   // choose damage
   damage_index = LmRand::Generate(0, 15);
   state.damage = entry.damage[damage_index];
-  // determine if it should have an effect, and choose effect
-  if (LmRand::Generate(1, 100) < entry.effect_chance) {
-    state.effect = LmRand::Generate(entry.min_effect, entry.max_effect);
-    if (state.effect == LyraEffect::PLAYER_INVISIBLE) {
-      state.effect = LyraEffect::PLAYER_CHAMELED;
-    }
+
+  // special handling for charms
+  if (state.damage == 0) {
+	  // charms always get "good" effects
+	  state.effect = LmRand::Generate(LyraEffect::MIN_GOOD_EFFECT, LyraEffect::MAX_GOOD_EFFECT);
+  }
+  else {
+	  // determine if it should have an effect, and choose effect
+	  if (LmRand::Generate(1, 100) < entry.effect_chance) {
+		  state.effect = LmRand::Generate(entry.min_effect, entry.max_effect);
+	  }
+  }
+
+  // make sure we don't enable invisibile missiles
+  if (state.effect == LyraEffect::PLAYER_INVISIBLE) {
+	  state.effect = LyraEffect::PLAYER_CHAMELED;
   }
 }
 
@@ -371,8 +382,14 @@ void gen_missile_item(int gen_type, LmItem& item)
   int damage_index;
   gen_missile_item_state(gen_type, damage_index, state);
 
-  // bitmap to use
-  hdr.SetGraphic(entry.talisman_bitmap);
+  if (damage_index == 0) {
+	  // charms always use talisman2
+	  hdr.SetGraphic(LyraBitmap::TALISMAN2);
+  }
+  else {
+	  // use the entry bitmap for non-charms
+	  hdr.SetGraphic(entry.talisman_bitmap);
+  }
   // flags to set: FLAG_CHANGE_CHARGES (immutable except for # of charges)
   hdr.SetFlags(LyraItem::FLAG_CHANGE_CHARGES);
   // state descriptor to use: 4 (single use, 6 bytes of state)
