@@ -507,7 +507,9 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
 	int i;
 	for (i=0; i<PLANES_SENSED_COUNT; i++)
 		sense_msg.SetLevelID((unsigned char)level_ids[i], i);
-
+	unsigned int totalsense;
+	main_->ItemDBC()->GetTotalNumDreamers(&totalsense);
+	sense_msg.SetTotal(totalsense);
     main_->OutputDispatch()->SendMessage(&sense_msg, player_->Connection());
 	}
 	break;

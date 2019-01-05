@@ -913,6 +913,32 @@ int LmItemDBC::GetItemDescription(int item_id, TCHAR* description)
 
 }
 
+int LmItemDBC::GetTotalNumDreamers(unsigned int* total)
+{
+	DEFMETHOD(LmItemDBC, GetTotalNumDreamers);
+	LmLocker mon(lock_);
+	
+  	MYSQL_RES* res;
+  	MYSQL_ROW row;
+  	TCHAR query[256];
+	
+	_stprintf(query, _T("SELECT SUM(num_dreamers) FROM locations;"));
+	int error = mysql_query(&m_mysql, query);
+  	if (error)
+    	{
+      		LOG_Error(_T("Could not get dreamer concentrations; mysql error %s"), mysql_error(&m_mysql));
+      		return MYSQL_ERROR;
+    	}	
+
+	res = mysql_store_result(&m_mysql);
+	row = mysql_fetch_row(res);
+	*total = ATOI(row[0]);
+  	mysql_free_result(res);
+
+	  return 0;
+
+}
+
 
 ////
 // GetDreamerLocations
