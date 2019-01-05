@@ -344,7 +344,7 @@ void gen_missile_item_state(int gen_type, int& damage_index, lyra_item_missile_t
   state.bitmap_id = entry.missile_bitmap;
 
   // choose damage
-  damage_index = LmRand::Generate(0, 15);
+  damage_index = LmRand::Generate(0, 31);
   state.damage = entry.damage[damage_index];
 
   // special handling for charms
@@ -382,7 +382,7 @@ void gen_missile_item(int gen_type, LmItem& item)
   int damage_index;
   gen_missile_item_state(gen_type, damage_index, state);
 
-  if (damage_index == 0) {
+  if (state.damage == 0) {
 	  // charms always use talisman2
 	  hdr.SetGraphic(LyraBitmap::TALISMAN2);
   }

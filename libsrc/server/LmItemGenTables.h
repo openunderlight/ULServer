@@ -119,7 +119,7 @@ struct missile_gen_table_entry {
   int effect_chance;
   int min_effect;
   int max_effect;
-  int damage[16];
+  int damage[32];
 };
 
 static missile_gen_table_entry missile_gen_table[] = {
@@ -133,10 +133,10 @@ static missile_gen_table_entry missile_gen_table[] = {
     0,
     0,
     0, 0,
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
   },
 
-  // class 1 - friendly wands
+  // class 1
   { 1,
     10, 50,
     LyraBitmap::TALISMAN3,
@@ -145,7 +145,7 @@ static missile_gen_table_entry missile_gen_table[] = {
     10,
     0,
     0, 0,
-    { 0, 0, 0, 0, 14, 14, 14, 14, 30, 30, 30, 40, 40, 40, 17, 32 }
+    {0,0,0,1,12,13,13,14,14,14,14,2,2,16,16,16,30,30,30,19,19,19,40,40,40,15,15,15,17,17,32,32 }
   },
 
   // class 2
@@ -159,7 +159,7 @@ static missile_gen_table_entry missile_gen_table[] = {
     0, 0,
 
 
-  {40,40,17,47,20,18,54,23,56,21,21,26,25,43,50,27}
+  {30,40,22,41,47,24,31,20,52,18,48,54,34,23,56,3,21,26,53,25,36,49,57,43,55,37,58,33,35,50,59,27 }
   },
 
   // class 3
@@ -171,7 +171,7 @@ static missile_gen_table_entry missile_gen_table[] = {
     50,
     25,
     LyraEffect::MIN_BAD_EFFECT, LyraEffect::PLAYER_CURSED,
-  {36,36,59,59,27,27,44,44,46,46,28,60,39,39,38,38}
+  {21,42,36,33,33,59,59,4,27,27,44,44,45,45,51,51,46,46,46,46,5,28,28,60,60,39,39,39,39,38,38,38 }
   },
 
   // class 4
@@ -183,7 +183,7 @@ static missile_gen_table_entry missile_gen_table[] = {
     100,
     50,
     LyraEffect::MIN_BAD_EFFECT, LyraEffect::MAX_BAD_EFFECT,
-  { 4,44,44,46,46,46,28,60,60,39,39,38,6,29,29,7 }
+  { 50,4,4,27,27,44,45,51,51,51,46,46,46,5,28,28,60,60,60,60,39,39,39,38,38,38,6,29,29,29,29,7 }
   },
 
 };
