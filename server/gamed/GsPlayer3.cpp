@@ -56,7 +56,7 @@ bool GsPlayer::FindPrime(int guild_id, int min_charges) const {
       lyra_item_meta_essence_t meta_essence; 
       const void* state;
       memcpy(&meta_essence, item.StateField(0), sizeof(meta_essence));
-      if (meta_essence.guild_id != guild_id) {
+      if (meta_essence.guild() != guild_id) {
 	continue;
       }
       if (meta_essence.strength() >= min_charges) {
