@@ -1127,7 +1127,7 @@ int LmPlayerDBC::NewlyNeedsAnnounce(lyra_id_t player_id, bool* announce)
 	*announce = true;
   else
 	*announce = false;
-  
+  mysql_free_result(res); 
   return ret;
 }
 
@@ -1954,8 +1954,10 @@ int LmPlayerDBC::SaveGuildRanks(lyra_id_t player_id, LmStats& stats)
     res = mysql_store_result(&m_mysql);
     int num_rows = mysql_num_rows(res);
 
-    if (!num_rows)
+    if (!num_rows) {
+      mysql_free_result(res);
       continue;
+    }
 
     row = mysql_fetch_row(res);
 
