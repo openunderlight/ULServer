@@ -23,6 +23,7 @@
 #include "LmFuncTimer.h"
 #include "LmAvatar.h"
 #include "LmUtil.h"
+#include "LyraDefs.h"
 #include "GMsg_LoginAck.h"
 #include "GMsg_LocateAvatarAck.h"
 #include "GMsg_GrantPPoint.h"
@@ -181,7 +182,8 @@ int LmPlayerDBC::SavePlayer(LmPlayerDB& player_record, bool force)
   //LmFuncTimer( timernum_calls_, num_ms_, last_ms_); // time function
   ////LmTimer timer(&sql_ms_); // timer for SQL statements
 
-  TCHAR query[1024];
+  // make buffer slightly longer than the player update statement + max escaped description
+  TCHAR query[350 + 2 * Lyra::MAX_AVATARDESC];
   MYSQL_RES *res;
   MYSQL_ROW row;
   int i;
@@ -224,7 +226,8 @@ int LmPlayerDBC::SavePlayer(LmPlayerDB& player_record, bool force)
 	  pps = player_record.Stats().PP();
 	  pp_pool = player_record.Stats().PPPool();
 
-	  TCHAR escaped_descrip[768];
+    // needs to be twice as long as the max description to allow every character to be escaped
+	  TCHAR escaped_descrip[2 * Lyra::MAX_AVATARDESC];
 	  mysql_escape_string((TCHAR*)escaped_descrip,  player_record.AvatarDescrip(),_tcslen( player_record.AvatarDescrip()));
 
 	  _stprintf(query, _T("UPDATE player SET avatar = %u, avatar2 = %u, xp = %u, xp_bonus = xp_bonus + %u, xp_penalty = xp_penalty + %u, x = %d, y = %d, last_level_id = %u, avatar_descrip = '%s', quest_xp_pool = %u, pps = %u, pp_pool = %u WHERE player_id = %u;"),
