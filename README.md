@@ -114,11 +114,6 @@ reboot to make sure changes are applied if updated.
 
 Install MariaDB
 
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-
-sudo add-apt-repository 'deb [arch=amd64] http://mirror.zol.co.zw/mariadb/repo/10.3/ubuntu bionic main'
-
-sudo apt update
 sudo apt install software-properties-common mariadb-server libmysqlclient-dev -y
 Enter root password (KEEP THIS SAFE, and remember it please)
 
@@ -186,7 +181,7 @@ For security it is best to build and run server as a regular user. The developme
 
 cd ~
 
-git clone -b ubuntu_build https://github.com/openunderlight/ULServer
+git clone -b ubuntu_build https://github.com/christyganger/ULServer
 
 cd $HOME/ULServer/build
 
@@ -210,7 +205,7 @@ To start the server:
 ./ulctl start
 
 To stop the server:
-./ulctl start
+./ulctl stop
 
 To verify it's running.
 ps -ef | grep game
