@@ -21,10 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CC05C14E-25B3-4A24-BB38-622B5979A7ED}</ProjectGuid>
     <Keyword>MakeFileProj</Keyword>
-<<<<<<< HEAD
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-=======
->>>>>>> parent of 07f5efa... include path update
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
