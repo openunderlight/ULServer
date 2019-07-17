@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ "$EUID" -ne 0 ]
-  then echo "Please run with sudo"
-  exit
+if [ $(id -u) = 0 ]; then 
+	echo "Please run with sudo"
+  exit 1
 fi
 
 # Enables egrep-style extended pattern matching
