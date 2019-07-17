@@ -157,7 +157,7 @@ cd ~/ULServer/build/scripts
 
 
 
-./install.sh
+sudo ./install.sh
 enter the database root password you made before.
 
 Available IP addresses 
