@@ -108,7 +108,7 @@ sudo apt update
 sudo apt-get update
 reboot to make sure changes are applied if updated.
 
-sudo apt-get install build-essential mtools python-pip python3-pip ninja-build meson libpth-dev libgdbm-dev tcsh pwgen libapache-dbi-perl -y
+sudo apt-get install build-essential mtools python-pip python3-pip ninja-build meson libpth-dev libgdbm-dev tcsh libgdbm-dev pwgen -y
 sudo apt update
 reboot to make sure changes are applied if updated.
 
