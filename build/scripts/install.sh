@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run with sudo"
+  exit
+fi
+
 # Enables egrep-style extended pattern matching
 shopt -s extglob
 
@@ -84,14 +89,14 @@ echo "ul_billing ul_billing $DBPASS" >> $PWTXT
 echo "Installing databases"
 for DATABASE in ${DATABASES[@]}
 do
-  mysql -u root -p"$ROOTPASS" -e "create database $DATABASE";
-  mysql -u root -p"$ROOTPASS" $DATABASE < sql/$DATABASE.sql
-  mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'$IPADDR' IDENTIFIED BY '$DBPASS'"
-  mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'localhost' IDENTIFIED BY '$DBPASS'"
-  mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'127.0.0.1' IDENTIFIED BY '$DBPASS'"
+  sudo mysql -u root -p"$ROOTPASS" -e "create database $DATABASE";
+  sudo mysql -u root -p"$ROOTPASS" $DATABASE < sql/$DATABASE.sql
+  sudo mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'$IPADDR' IDENTIFIED BY '$DBPASS'"
+  sudo mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'localhost' IDENTIFIED BY '$DBPASS'"
+  sudo mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'127.0.0.1' IDENTIFIED BY '$DBPASS'"
 done
 
-mysql -u root -p"$ROOTPASS" -e "UPDATE ul_server.server SET host_name = '$IPADDR'"
+sudo mysql -u root -p"$ROOTPASS" -e "UPDATE ul_server.server SET host_name = '$IPADDR'"
 
 echo
 echo "Install complete"
