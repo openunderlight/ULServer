@@ -6,7 +6,8 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Enables egrep-style extended pattern matching
-shopt -s extglob
+#shopt -s extglob 
+# replaced above by doing bin bash instead of tcsh 
 
 # Required directories
 INSTALLDIR=$HOME/lyra
@@ -28,7 +29,10 @@ install_binaries() {
 	cp -v ../server/leveld/leveld   $SBINDIR
 
 	echo "Copying utility binaries"
-	cp -v ../util/!(*@exe) $BINDIR
+	# cp -v ../util/!(*@exe) $BINDIR
+	#above no longer works replacing with below
+	#swipped and modified below from https://stackoverflow.com/questions/44402916/copy-only-executable-files-cross-platform
+	find ../util/ -type f -exec test -x {} \; -exec cp -v {} "$BINDIR/"\;
 }
 
 install_scripts() {
