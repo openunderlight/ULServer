@@ -114,49 +114,13 @@ reboot to make sure changes are applied if updated.
 
 Install MariaDB
 
+curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+apt update
 sudo apt install software-properties-common mariadb-server libmysqlclient-dev -y
+mysql_secure_installation
 Enter root password (KEEP THIS SAFE, and remember it please)
 
-sudo vi /etc/mysql/my.conf
-add in [mysqld] section
-plugin-load-add = auth_socket.so
 
-Uncomment the line bind-address=0.0.0.0 and enable skip-name-resolve temporarily add skip-grant-tables
-Press insert on keyboard to edit
-[mariadb]
-   ...
-   bind-address=0.0.0.0
-   skip-name-resolve
-   skip-grant-tables
-   ...
-
-save and exit :wq!
-
-sudo systemctl stop mariadb.service
-sudo systemctl start mariadb.service
-sudo systemctl enable mariadb.service
-
-sudo mysql
-use mysql;
-update user set plugin='' where User='root';
-flush privileges;
-exit
-
-
-sudo vi /etc/mysql/my.conf
-remove skip-grant-tables
-
-save and exit :wq
-
-sudo systemctl stop mariadb.service
-sudo systemctl start mariadb.service
-sudo systemctl enable mariadb.service
-
-mysql -u root -p
-To test (should login with password)
-exit
-
-mysql_secure_installation
 
 
 
