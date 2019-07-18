@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ![ $(id -u) = 0 ]; then 
+if [ "$(id -u)" != "0" ]; then 
 	echo "Please run with sudo"
   exit 1
 fi
@@ -32,7 +32,7 @@ install_binaries() {
 	# cp -v ../util/!(*@exe) $BINDIR
 	#above no longer works replacing with below
 	#swipped and modified below from https://stackoverflow.com/questions/44402916/copy-only-executable-files-cross-platform
-	find ../util/ -type f -exec test -x {} \; -exec cp -v {} "$BINDIR/"\;
+	find ../util/ -type f -exec test -x {} \; -exec cp -v {} "$BINDIR/" \;
 }
 
 install_scripts() {
@@ -51,8 +51,6 @@ if [ -e $HOME/lyra ]; then
   exit
 fi
 
-echo -n "Please enter the database root password:"
-read -s ROOTPASS
 
 echo
 echo "Available IP addresses: " `hostname -I`
@@ -93,14 +91,14 @@ echo "ul_billing ul_billing $DBPASS" >> $PWTXT
 echo "Installing databases"
 for DATABASE in ${DATABASES[@]}
 do
-  sudo mysql -u root -p"$ROOTPASS" -e "create database $DATABASE";
-  sudo mysql -u root -p"$ROOTPASS" $DATABASE < sql/$DATABASE.sql
-  sudo mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'$IPADDR' IDENTIFIED BY '$DBPASS'"
-  sudo mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'localhost' IDENTIFIED BY '$DBPASS'"
-  sudo mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'127.0.0.1' IDENTIFIED BY '$DBPASS'"
+  sudo mysql -e "create database $DATABASE";
+  sudo mysql $DATABASE < sql/$DATABASE.sql
+  sudo mysql -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'$IPADDR' IDENTIFIED BY '$DBPASS'"
+  sudo mysql -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'localhost' IDENTIFIED BY '$DBPASS'"
+  sudo mysql -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'127.0.0.1' IDENTIFIED BY '$DBPASS'"
 done
 
-sudo mysql -u root -p"$ROOTPASS" -e "UPDATE ul_server.server SET host_name = '$IPADDR'"
+sudo mysql -e "UPDATE ul_server.server SET host_name = '$IPADDR'"
 sudo -k
 install_binaries
 install_scripts
