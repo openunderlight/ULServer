@@ -173,3 +173,11 @@ To stop the server:
 
 To verify it's running.
 ps -ef | grep game
+
+to uninstall and (for whatever reason) the database and users of db ( can be repeated for each host if there are multiple entries for users in mysql.)
+cd ~/ULServer/build/scripts/
+./uninstall.sh
+
+To reinstall
+cd ~/ULServer/build/scripts/
+./install.sh
