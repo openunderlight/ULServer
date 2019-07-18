@@ -10,7 +10,7 @@ echo -n "Please enter the database root password:"
 read -s ROOTPASS
 
 echo -e "Available IP ADDRESSES: "`hostname -I`
-echo "it's possible it's localhost, or 127.0.0.1\n"
+echo -e "it's possible it's localhost, or 127.0.0.1"
 echo -n "What is the ip to your database server: "
 read IPADDR
 
