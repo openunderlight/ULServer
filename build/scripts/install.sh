@@ -62,8 +62,8 @@ read IPADDR
 # Initialize variables
 #IPADDR=`hostname -I`
 DBPORT=3306
-DBADMIN="support@underlight.com"
-DBRETURNEMAIL="support@underlight.com"
+DBADMIN="support@example.com"
+DBRETURNEMAIL="support@example.com"
 DBKEY="H16 90293311ALKWEVB"
 DBSALT="3A"
 DBPASS=`pwgen 15 1`
