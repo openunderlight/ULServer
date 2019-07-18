@@ -55,7 +55,7 @@ read -s ROOTPASS
 
 echo
 echo -e "Available IP addresses: " `hostname -I`
-echo "If your using this computer for database use 127.0.0.1 \n"
+echo -e "If your using this computer for database use 127.0.0.1"
 echo -n "Please enter the database IP address:"
 read IPADDR
 
