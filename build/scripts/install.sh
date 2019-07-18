@@ -55,6 +55,7 @@ read -s ROOTPASS
 
 echo
 echo "Available IP addresses: " `hostname -I`
+echo -n "If your using this ocmputer for database as well just use 127.0.0.1"
 echo -n "Please enter the database IP address:"
 read IPADDR
 
@@ -75,6 +76,8 @@ mkdir -v -p $VARDIR/pid $VARDIR/log $VARDIR/text
 
 install_binaries
 install_scripts
+
+echo "1" > $HOSTIDTXT
 
 echo "DBHOST $IPADDR" > $PWTXT
 echo "DBPORT $DBPORT" >> $PWTXT
