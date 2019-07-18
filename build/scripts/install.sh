@@ -45,6 +45,7 @@ install_scripts() {
 
 if [ -e $HOME/lyra ]; then
   echo "Previous install detected. Only binaries and scripts will be replaced."
+  sudo -k
   install_binaries
   install_scripts
   exit
@@ -72,8 +73,7 @@ echo "Creating directories"
 mkdir -v -p $INSTALLDIR $SBINDIR $BINDIR $DBDIR $SRCDIR $VARDIR $LIBDIR
 mkdir -v -p $VARDIR/pid $VARDIR/log $VARDIR/text 
 
-install_binaries
-install_scripts
+
 
 echo "1" > $HOSTIDTXT
 
@@ -101,6 +101,9 @@ do
 done
 
 sudo mysql -u root -p"$ROOTPASS" -e "UPDATE ul_server.server SET host_name = '$IPADDR'"
+sudo -k
+install_binaries
+install_scripts
 
 echo
 echo "Install complete"
