@@ -54,8 +54,8 @@ echo -n "Please enter the database root password:"
 read -s ROOTPASS
 
 echo
-echo "Available IP addresses: " `hostname -I`
-echo -n "If your using this ocmputer for database as well just use 127.0.0.1"
+echo -n "Available IP addresses: " `hostname -I`
+echo -n "If your using this computer for database as well just use 127.0.0.1"
 echo -n "Please enter the database IP address:"
 read IPADDR
 
