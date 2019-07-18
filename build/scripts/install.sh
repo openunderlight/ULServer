@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$(id -u)" != "0" ]; then 
-	echo "Please run with sudo"
+if [ "$(id -u)" = "0" ]; then 
+	echo "Please don't run as sudo"
   exit 1
 fi
 
@@ -45,12 +45,13 @@ install_scripts() {
 
 if [ -e $HOME/lyra ]; then
   echo "Previous install detected. Only binaries and scripts will be replaced."
-  sudo -k
   install_binaries
   install_scripts
   exit
 fi
 
+echo -n "Please enter the database root password:"
+read -s ROOTPASS
 
 echo
 echo "Available IP addresses: " `hostname -I`
@@ -72,8 +73,8 @@ mkdir -v -p $INSTALLDIR $SBINDIR $BINDIR $DBDIR $SRCDIR $VARDIR $LIBDIR
 mkdir -v -p $VARDIR/pid $VARDIR/log $VARDIR/text 
 
 
-
-echo "1" > $HOSTIDTXT
+install_binaries
+install_scripts
 
 echo "DBHOST $IPADDR" > $PWTXT
 echo "DBPORT $DBPORT" >> $PWTXT
@@ -91,17 +92,13 @@ echo "ul_billing ul_billing $DBPASS" >> $PWTXT
 echo "Installing databases"
 for DATABASE in ${DATABASES[@]}
 do
-  sudo mysql -e "create database $DATABASE";
-  sudo mysql $DATABASE < sql/$DATABASE.sql
-  sudo mysql -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'$IPADDR' IDENTIFIED BY '$DBPASS'"
-  sudo mysql -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'localhost' IDENTIFIED BY '$DBPASS'"
-  sudo mysql -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'127.0.0.1' IDENTIFIED BY '$DBPASS'"
+  mysql -u root -p"$ROOTPASS" -e "create database $DATABASE";
+  mysql -u root -p"$ROOTPASS" $DATABASE < sql/$DATABASE.sql
+  mysql -u root -p"$ROOTPASS" -e "GRANT ALL ON $DATABASE.* TO '$DATABASE'@'$IPADDR' IDENTIFIED BY '$DBPASS'"
 done
 
-sudo mysql -e "UPDATE ul_server.server SET host_name = '$IPADDR'"
-sudo -k
-install_binaries
-install_scripts
+mysql -u root -p"$ROOTPASS" -e "UPDATE ul_server.server SET host_name = '$IPADDR'"
+
 
 echo
 echo "Install complete"
