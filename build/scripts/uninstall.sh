@@ -9,8 +9,8 @@ DATABASES=(ul_billing ul_guild ul_item ul_level ul_player ul_server)
 echo -n "Please enter the database root password:"
 read -s ROOTPASS
 
-echo -n "Available IP ADDRESSES: "`hostname -I`
-echo -n "it's possible it's localhost, or 127.0.0.1"
+echo -e "Available IP ADDRESSES: "`hostname -I`
+echo "it's possible it's localhost, or 127.0.0.1\n"
 echo -n "What is the ip to your database server: "
 read IPADDR
 
