@@ -1,148 +1,183 @@
-# Install
-
-## Questions?
+Install
+Questions?
 Find us in Discord: https://discord.gg/yuDngyj
 
-## CentOS 7
+You may use AWS  new ECT instance in region of choice or as I did for this virtualbox, instructions on my setup below:
 
-### AWS
-* Create a new EC2 instance in your region of choice. 
-* For now use CentOS. Technically any distro should work but Underlight uses CentOS for its SELinux capabilities. Note: Amazon doesn't have an AMI of its own for CentOS, but you can get it for free in the AMI Marketplace.
-* Open ports 7500-7509 TCP in/out.
-* Open port 80 if you want an HTTP server.
-* Open all inbound/outbound UDP traffic. This will be necessary for agents.
-* Log on as centos@ec2-blah.12.34.56.78 with the pem/ppk provided during setup of your instance.
-* sudo adduser ulprod
-* sudo su
-* cd ~ulprod
-* cat authorized_keys
-* Now paste your public SSH key into here. It can be the same as the one for your root access but it SHOULDN'T BE, I mean are you INSANE?
-* chmod 700 .ssh/
-* chmod 600 authorized_keys
-* restorecon -R -v .ssh
+VIRTUALBOX ubuntu setup / config:
 
-### Build Dependencies -- Run these as root!
+Ubuntu 18.04 LTS  https://www.ubuntu.com/download/server
+Virtualbox 5.2.18r124319 https://www.virtualbox.org/wiki/Downloads
 
-`yum install -y epel-release`
 
-`yum update -y`
+Following are my settings, yours may vary.
 
-`yum groupinstall -y "Development Tools"`
+Open Virtualbox Manager
+Create New vm
+Name: Ubuntu
+Type: Linux
+Version Ubuntu (64-bit)
 
-`yum install -y bind-utils network-tools pwgen \ 
-                p7zip tcsh vim-enhanced screen telnet  \
-                wget pth pth-devel gdbm-devel gdbm dbi \
-                zlib-devel asciidoc pkgconfig  \
-                python34 python34-setuptools perl-DBD-mysql`
+Memory Size: 8192 (or whatever you want to dedicate to it)
 
-`easy_install-3.4 pip`
 
-### Ninja
+Create a virtual hard disk now
+VDI
+Dynamically Allocated
 
-`cd /usr/src`
 
-`git clone git://github.com/ninja-build/ninja.git`
+type in or select by clicking file folder icon, where you want your virtual hard disk to be created.
+I choose D:\vboxdrive\ubuntu.vdi
+yours may be C:\Users\whateveryourusernameis\VirtualBox VMs\ubuntu
+or wherever you choose and have space.
 
-`cd ninja`
+Select disk space you want to give it with slider bar or type it.
+all in all should take up around 5.1gb installed but give space to grow
+10gb should be a good starting point.
 
-`git checkout release`
 
-`./configure.py --bootstrap`
+Now you should see your Ubuntu vm, Left click it once, then click on settings.
+Click on network tab, click on attached to: drop down, select Bridged Adapter click ok.
 
-`./ninja rpm`
 
-`rpm -i <insert ninja RPM filename here>`
+You'll see a pop up, "Select start-up disk"
+click on the little folder with green arrow, find and select 
+ubuntu-18.04.1-live-server-amd64.iso (or appropriate name)
 
-Verify: `ninja`
 
-### Meson
+Select English or whatever language prefered.
 
-`pip3 install meson=0.44`
 
-Verify: `meson`
+Install Ubuntu
 
-### Install MariaDB
 
-`cd /etc/yum.repos.d`
-`vim MariaDB.repo`
-* Add this to that file in vim
-`[mariadb]
-name = MariaDB
-baseurl = http://yum.mariadb.org/10.1/centos7-amd64
-gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
-gpgcheck = 1
-`
+select network
 
-`yum update -y`
 
-`yum install MariaDB-server MariaDB-client MariaDB-devel -y`
+enter proxy server if you have one
 
-`systemctl enable mariadb`
 
-`systemctl start mariadb`
+mirror for alt install if you use it.
 
-`mysql_secure_installation`
 
-Note: Be sure to remember the root password for MariaDB. This will be needed
-for configuring the server after building.
+Use entire disk
 
-`cd /usr/lib64`
-`ln -s libmysqlclient.so.18 libmysqlclient.so`
 
-`vi /etc/my.cnf.d/server.cnf`
-
-Uncomment the line bind-address=0.0.0.0 and enable skip-name-resolve
-
-```
-   [mariadb]
-   ...
-   bind-address=0.0.0.0
-   skip-name-resolve
-   ...
-```
-
-Restart MariaDB
-
-`systemctl restart mariadb`
-
-### Clone Repository & Build
-
-For security it is best to build and run server as a regular user. The 
-development environment user is 'uldev'. The test and production servers use 
+select disk
+done
+The development environment user is 'uldev'. The test and production servers use 
 'ulprod'. The instructions following assume cloning and building will be done 
 from the current user home directory.
 
-`git clone https://github.com/openunderlight/ULServer`
+name: ulprod
+server name: ulprod
+username: ulprod
+pass: thisisabadpasswordchangeme
+pass: thisisabadpasswordchangeme
 
-`cd $HOME/ulserver/build`
+install any packages or popular "snaps"
+selected none
 
-`meson ..`
 
-`ninja`
+Installation finished
+reboot now
 
-### Install Server
 
-`cd $HOME/ulserver/build/scripts`
 
-`./install.sh`
+Setting up UBUNTU for ul server:
 
-Follow the prompts for entering the root password and IP address assignment.
+Login: ulprod
+Pass: thisisabadpasswordchangeme
 
-### Load Level Files
 
-Copy the server level files generated by the level editor to $HOME/lyra/src
+sudo apt update && sudo apt dist-upgrade && sudo apt autoremove
+Pass:thisisabadpasswordchangeme
 
-`cd $HOME/lyra/src`
+sudo do-release-upgrade -d
 
-`make level`
+sudo apt-get update
+reboot to make sure changes are applied if updated.
 
-### Start Server
+sudo add-apt-repository main;
+sudo add-apt-repository universe;
+sudo add-apt-repository restricted;
+sudo add-apt-repository multiverse;
+sudo apt update
+sudo apt upgrade
+sudo apt update
+sudo apt-get update
+reboot to make sure changes are applied if updated.
 
-`cd $HOME/lyra/bin`
+sudo apt-get install build-essential mtools python-pip python3-pip ninja-build meson libpth-dev libgdbm-dev tcsh libgdbm-dev pwgen -y
+sudo apt update
+reboot to make sure changes are applied if updated.
 
-`./ulctl start`
+Install MariaDB
 
-### Shutdown Server
+curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+apt update
+sudo apt install software-properties-common mariadb-server libmysqlclient-dev -y
+mysql_secure_installation
+Enter root password (KEEP THIS SAFE, and remember it please)
 
-`cd $HOME/lyra/bin`
-`./ulctl stop`
+
+
+
+
+lets check firewall and open ports.
+
+sudo ufw status
+Status:inactive
+
+sudo ufw enable
+Firewall is active and enabled on system startup
+
+sudo ufw allow 7500:7509/tcp
+sudo ufw allow 1:65535/udp
+sudo ufw allow 22/tcp
+sudo ufw allow 3306/tcp
+
+confirm open ports ..
+sudo ufw status
+
+Clone Repository & Build
+For security it is best to build and run server as a regular user. The development environment user is 'uldev'. The test and production servers use 'ulprod'. The instructions following assume cloning and building will be done from the current user home directory.
+
+cd ~
+
+git clone -b ubuntu_build https://github.com/christyganger/ULServer
+
+cd $HOME/ULServer/build
+
+meson ..
+
+ninja
+
+cd ~/ULServer/build/scripts
+
+
+
+sudo ./install.sh
+enter the database root password you made before.
+
+Available IP addresses 
+127.0.0.1
+
+cd ~/lyra/bin
+
+To start the server:
+./ulctl start
+
+To stop the server:
+./ulctl stop
+
+To verify it's running.
+ps -ef | grep game
+
+to uninstall and (for whatever reason) the database and users of db ( can be repeated for each host if there are multiple entries for users in mysql.)
+cd ~/ULServer/build/scripts/
+./uninstall.sh
+
+To reinstall
+cd ~/ULServer/build/scripts/
+./install.sh

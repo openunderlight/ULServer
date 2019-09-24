@@ -1,6 +1,6 @@
 // LmParty.h  -*- C++ -*-
-// $Id: LmParty.h,v 1.2 1997-11-17 14:05:12-08 jason Exp $
-// Copyright 1996-1997 Lyra LLC, All rights reserved. 
+// $Id: LmParty.h,v 1.6 1997-07-09 19:24:52-07 jason Exp $
+// Copyright 1996-1997 Lyra LLC, All rights reserved.
 //
 // "character party" class
 
@@ -56,7 +56,6 @@ public:
 private:
 
   int index_of(lyra_id_t playerid) const;
-
   lyra_id_t creatorid_;
   lyra_id_t leaderid_;
   int num_members_;

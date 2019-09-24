@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,30 +19,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B19A9659-65F0-4F8D-BC2A-25A41DD82F0C}</ProjectGuid>
+    <ProjectGuid>{00DF16DE-2A67-481F-B04C-E1C62DA3EFB2}</ProjectGuid>
     <Keyword>MakeFileProj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+<<<<<<< HEAD
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+=======
+>>>>>>> parent of 07f5efa... include path update
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -71,52 +74,13 @@
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LsCodexText.cpp" />
-    <ClCompile Include="LsComputeGroups.cpp" />
-    <ClCompile Include="LsInputDispatch.cpp" />
-    <ClCompile Include="LsItemGen.cpp" />
-    <ClCompile Include="LsLevelSerials.cpp" />
-    <ClCompile Include="LsLevelState.cpp" />
-    <ClCompile Include="LsLevelThread.cpp" />
-    <ClCompile Include="LsMain.cpp" />
-    <ClCompile Include="LsMessageReader.cpp" />
-    <ClCompile Include="LsNetworkInput.cpp" />
-    <ClCompile Include="LsNetworkOutput.cpp" />
-    <ClCompile Include="LsOutputDispatch.cpp" />
-    <ClCompile Include="LsPlayer.cpp" />
-    <ClCompile Include="LsPlayerSet.cpp" />
-    <ClCompile Include="LsPositionThread.cpp" />
-    <ClCompile Include="LsRoomState.cpp" />
-    <ClCompile Include="LsRoomThread.cpp" />
-    <ClCompile Include="LsRoomThread1.cpp" />
-    <ClCompile Include="LsRoomThread2.cpp" />
-    <ClCompile Include="LsRoomThread3.cpp" />
-    <ClCompile Include="LsSignalThread.cpp" />
-    <ClCompile Include="LsUtil.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MsMain.cpp" />
+    <ClCompile Include="MsServerInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LsCodexText.h" />
-    <ClInclude Include="LsComputeGroups.h" />
-    <ClInclude Include="LsInputDispatch.h" />
-    <ClInclude Include="LsItemGen.h" />
-    <ClInclude Include="LsLevelSerials.h" />
-    <ClInclude Include="LsLevelState.h" />
-    <ClInclude Include="LsLevelThread.h" />
-    <ClInclude Include="LsMacros.h" />
-    <ClInclude Include="LsMain.h" />
-    <ClInclude Include="LsMessageReader.h" />
-    <ClInclude Include="LsNetworkInput.h" />
-    <ClInclude Include="LsNetworkOutput.h" />
-    <ClInclude Include="LsOutputDispatch.h" />
-    <ClInclude Include="LsPlayer.h" />
-    <ClInclude Include="LsPlayerList.h" />
-    <ClInclude Include="LsPlayerSet.h" />
-    <ClInclude Include="LsPositionThread.h" />
-    <ClInclude Include="LsRoomState.h" />
-    <ClInclude Include="LsRoomThread.h" />
-    <ClInclude Include="LsSignalThread.h" />
-    <ClInclude Include="LsUtil.h" />
+    <ClInclude Include="MsMain.h" />
+    <ClInclude Include="MsServerInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
 // LmGlobalDB.h  -*- C++ -*-
 // $Id: LmGlobalDB.h,v 1.10 1997-12-05 14:50:48-08 jason Exp $
-// Copyright 1996-1997 Lyra LLC, All rights reserved. 
+// Copyright 1996-1997 Lyra LLC, All rights reserved.
 //
 // global properties "database"
 
@@ -13,6 +13,7 @@
 
 #include <stdio.h>
 #include "LyraDefs.h"
+
 
 // forward declarations
 

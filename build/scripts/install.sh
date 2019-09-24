@@ -1,7 +1,13 @@
 #!/bin/bash
 
+if [ "$(id -u)" = "0" ]; then 
+	echo "Please don't run as sudo"
+  exit 1
+fi
+
 # Enables egrep-style extended pattern matching
-shopt -s extglob
+#shopt -s extglob 
+# replaced above by doing bin bash instead of tcsh 
 
 # Required directories
 INSTALLDIR=$HOME/lyra
@@ -23,7 +29,10 @@ install_binaries() {
 	cp -v ../server/leveld/leveld   $SBINDIR
 
 	echo "Copying utility binaries"
-	cp -v ../util/!(*@exe) $BINDIR
+	# cp -v ../util/!(*@exe) $BINDIR
+	#above no longer works replacing with below
+	#swipped and modified below from https://stackoverflow.com/questions/44402916/copy-only-executable-files-cross-platform
+	find ../util/ -type f -exec test -x {} \; -exec cp -v {} "$BINDIR/" \;
 }
 
 install_scripts() {
@@ -45,15 +54,16 @@ echo -n "Please enter the database root password:"
 read -s ROOTPASS
 
 echo
-echo "Available IP addresses: " `hostname -I`
+echo -e "Available IP addresses: " `hostname -I`
+echo -e "If your using this computer for database use 127.0.0.1"
 echo -n "Please enter the database IP address:"
 read IPADDR
 
 # Initialize variables
 #IPADDR=`hostname -I`
 DBPORT=3306
-DBADMIN="support@underlight.com"
-DBRETURNEMAIL="support@underlight.com"
+DBADMIN="support@example.com"
+DBRETURNEMAIL="support@example.com"
 DBKEY="H16 90293311ALKWEVB"
 DBSALT="3A"
 DBPASS=`pwgen 15 1`
@@ -62,6 +72,7 @@ DATABASES=(ul_billing ul_guild ul_item ul_level ul_player ul_server)
 echo "Creating directories"
 mkdir -v -p $INSTALLDIR $SBINDIR $BINDIR $DBDIR $SRCDIR $VARDIR $LIBDIR
 mkdir -v -p $VARDIR/pid $VARDIR/log $VARDIR/text 
+
 
 install_binaries
 install_scripts
@@ -90,6 +101,7 @@ do
 done
 
 mysql -u root -p"$ROOTPASS" -e "UPDATE ul_server.server SET host_name = '$IPADDR'"
+
 
 echo
 echo "Install complete"

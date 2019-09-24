@@ -62,7 +62,7 @@ struct ByteOrder {
 // global constants that don't belong anywhere else
 struct Lyra {
   enum {
-    GAME_VERSION = 11386,      // build / protocol version number (MUST be 5 digits)
+    GAME_VERSION = 11388,      // build / protocol version number (MUST be 5 digits)
     GAME_SUBVERSION = GAME_VERSION,
 
     ID_UNKNOWN = 0,         // invalid id
@@ -226,9 +226,9 @@ typedef unsigned int realmid_t;  // backwards compatibility
 #endif
 
 // on Linux, include pth.h to use soft system call mapping for user-level threads
-// on Win32, alias all of pth_ types and calls to use pthread_ 
+// on Win32, alias all of pth_ types and calls to use pthread_
 #if !defined(WIN32)
-#ifndef PTH_SYSCALL_SOFT 
+#ifndef PTH_SYSCALL_SOFT
 #define PTH_SYSCALL_SOFT 1
 #endif
 #include "pth.h"

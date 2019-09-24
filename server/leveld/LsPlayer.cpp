@@ -11,7 +11,9 @@
 #include <stdio.h>
 
 #include "LsPlayer.h"
+
 #include "LyraDefs.h"
+
 #include "PThMutex.h"
 #include "LmDatabase.h"
 #include "LsMain.h"

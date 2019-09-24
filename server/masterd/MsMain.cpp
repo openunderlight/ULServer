@@ -91,13 +91,13 @@ int MsMain::Init(const TCHAR* root_dir)
 
   // get host IP address in string form
   //hostent* lphp = gethostbyname(hostname_);
-  
+
   //in_addr* localIP = (in_addr*)lphp->h_addr;
-  
+
   //char* hoststr = (char*)inet_ntoa((in_addr*)localIP);
-  
+
   //_tcscpy(hostaddrstr_, hoststr);
-  
+
   // create databases
 
   globaldb_ = LmNEW(LmGlobalDB(root_dir));
@@ -185,7 +185,7 @@ _stprintf(dfname, "ms_%lu_dump.%lu", pid_, time(NULL));
 	FILE* df =_tfopen(dumpfile, "w");
 	Dump(df);
 	fclose(df);
-      } 
+      }
 #endif
       if (rotate_logs_) {
 	log_->Log(_T("%s: rotating log"), method);
@@ -196,11 +196,11 @@ _stprintf(dfname, "ms_%lu_dump.%lu", pid_, time(NULL));
 	//	log_->Log(_T("%s: checking server status at time %d"), method, time(NULL));
 	for (int i = 0; i < serverdbc_->NumServers(); ++i) {
 	  // if server arg1 is 0, it's an inactive server, don't try to connect
-	  if (serverdbc_->Arg1(i) == 0) 
+	  if (serverdbc_->Arg1(i) == 0)
 	    continue;
 	  // we're really only worried about gamed's right now
 	  if (serverdbc_->ServerType(i) != LmServerDBC::ST_GAME)
-	    continue; 
+	    continue;
 	  // create socket
 	  LmSocket sock;
 	  if (sock.Socket(LmSockType::Inet_Stream()) < 0) {
@@ -278,7 +278,7 @@ _stprintf(dfname, "ms_%lu_dump.%lu", pid_, time(NULL));
 ////
 
 void MsMain::get_status(LmSocket& sock)
-{ 
+{
   // this function is essentially a dummy, because whether or not we
   // can connect at all tells us if we're OK. However, if we do not
   // properly login and logout, we'll confused the gamed's and they
@@ -495,7 +495,7 @@ void MsMain::handle_child_death(pid_t childpid, int status)
     int cstatus = WEXITSTATUS(status);
     // restart, but sleep a bit longer
     switch (cstatus) {
-    case Lyra::EXIT_CLOSED: 
+    case Lyra::EXIT_CLOSED:
       log_->Log(_T("%s: child %lu exited normally, does not want a restart"), method, childpid);
       restart = false;
     case Lyra::EXIT_OK:
@@ -557,7 +557,7 @@ void MsMain::handle_child_death(pid_t childpid, int status)
     if (pid == -1) {
       Log()->Error(": could not fork to launch fix_ghosts.pl : ", method, strerror(errno));
     }
-    
+
     if (pid == 0) { // child
       LmUtil::CloseAllDescriptors(); // close all files
       const TCHAR* rootdir = GlobalDB()->RootDir();

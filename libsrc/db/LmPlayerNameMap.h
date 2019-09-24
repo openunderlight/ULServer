@@ -1,6 +1,6 @@
 // LmPlayerNameMap.h  -*- C++ -*-
 // $Id: LmPlayerNameMap.h,v 1.4 1997-11-06 18:20:59-08 jason Exp $
-// Copyright 1996-1997 Lyra LLC, All rights reserved. 
+// Copyright 1996-1997 Lyra LLC, All rights reserved.
 //
 // map between player names/ids
 

@@ -55,7 +55,7 @@ int PTh::Create(const PThAttr* p_Attr)
   return pthread_create(&thread_, (p_Attr ? &p_Attr->attr_ : 0), entry, this);
 #else
 
-  // create the stack to be used for the thread	
+  // create the stack to be used for the thread
   // we can't trust the pTh memory management!
   unsigned int stacksize;
   p_Attr->GetStackSize(&stacksize);
