@@ -142,7 +142,7 @@ private:
   void handle_SMsg_LS_Action_GenerateItems();
   void handle_SMsg_LS_Action_ReapItems();
 
-  void compute_RMsg_Speech_Speech(LsPlayer* source, LsPlayerList& t_list, RMsg_Speech& m);
+  void compute_RMsg_Speech_Speech(LsPlayer* source, LsPlayerList& t_list, LsPlayerList& m_list, RMsg_Speech& m);
   void compute_RMsg_Speech_Shout(LsPlayer* source, LsPlayerList& t_list, RMsg_Speech& m);
   void compute_RMsg_Speech_Whisper(LsPlayer* source, LsPlayerList& t_list, RMsg_Speech& m);
   void compute_RMsg_Speech_WhisperEmote(LsPlayer* source, LsPlayerList& t_list, RMsg_Speech& m);
