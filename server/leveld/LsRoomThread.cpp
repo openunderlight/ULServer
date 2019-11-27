@@ -267,6 +267,14 @@ void LsRoomThread::handle_SMsg_PutItem(LmSrvMesgBuf* msgbuf, LmConnection* conn)
     }
   }
 #endif
+  // is portkey and room contains a portkey?
+  if(LyraItem::StateFunction(item.StateField(0)) == LyraItem::PORTKEY_FUNCTION && 
+     room->HasPortkey())
+  {
+    TLOG_Warning(_T("%s: player %u tried to drop a portkey in a room containing a portkey"), method, playerid);
+    send_SMsg_ItemDrop(player, item, SMsg_ItemDrop::DROP_ERROR);
+    return;
+  }
   // if playerid is 0, then item is an "auto-dropped" item, and MUST be placed in the room
   if (playerid != Lyra::ID_UNKNOWN) { // playerid != 0, could reject drop
     // check player's connection
