@@ -142,7 +142,7 @@ private:
   void send_GMsg_ItemPickup(LmConnection* conn, const LmItem& item, int status);
   void send_GMsg_TakeItem(LmConnection* conn, lyra_id_t source_id, const LmItem& item);
   void send_GMsg_TakeItemAck(LmConnection* conn, const LmItemHdr& itemhdr, int status);
-  void send_GMsg_GiveItemAck(LmConnection* conn, const LmItemHdr& itemhdr, int status);
+  void send_GMsg_GiveItemAck(LmConnection* conn, const LmItemHdr& itemhdr, int status, int targetid);
   void send_GMsg_ChangeStat(LmConnection* conn, int req, int stat, int val);
   //void send_GMsg_ChangeAvatar(LmConnection* conn, LmAvatar avtr, int type);
   void send_GMsg_Goal(LmConnection* conn, int req, lyra_id_t id);
