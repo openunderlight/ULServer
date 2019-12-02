@@ -528,7 +528,24 @@ int LmPlayerDBC::ModifyXPJournal(lyra_id_t player_id, int guild, int xp_change)
 
   for (i=0; i<MAX_XPJOURNAL_RECURSIONS; i++)
     {
+	_stprintf(query, _T("SELECT COUNT(*) FROM guildplayer WHERE player_id = %u AND guild = %u"), last_initiator, guild);
+	error = mysql_query(&m_mysql, query);
+        res = mysql_store_result(&m_mysql);
 
+    	if (!mysql_num_rows(res))    
+	{
+		mysql_free_result(res);
+		break;
+	}
+        row = mysql_fetch_row(res);  
+        if (row[0]) 
+	{
+		int count = ATOI(row[0]);
+		if(!count)
+			break;
+	}
+	mysql_free_result(res);
+     
    _stprintf(query, _T("UPDATE player SET xp_bonus = xp_bonus + %u, xp_penalty = xp_penalty + %u WHERE player_id = %u"), bonus, penalty, last_initiator);
 
     ////timer.Start();
