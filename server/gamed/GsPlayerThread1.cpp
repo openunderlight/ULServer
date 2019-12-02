@@ -698,19 +698,19 @@ void GsPlayerThread::handle_GMsg_GiveItem(LmSrvMesgBuf* msgbuf, LmConnection* co
   // check if player can give away ("drop") the item
   if (!player_->CanDropItem(msg.ItemHeader())) {
     TLOG_Warning(_T("%s: player %u cannot give item"), method, player_->PlayerID());
-    send_GMsg_GiveItemAck(conn, msg.ItemHeader(), GMsg_GiveItemAck::GIVE_ERROR);
+    send_GMsg_GiveItemAck(conn, msg.ItemHeader(), GMsg_GiveItemAck::GIVE_ERROR, msg.TargetID());
     return;
   }
   // check that player isn't giving themself an item
   if (player_->PlayerID() == msg.TargetID()) {
     TLOG_Warning(_T("%s: player giving item to self"), method);
-    send_GMsg_GiveItemAck(conn, msg.ItemHeader(), GMsg_GiveItemAck::GIVE_ERROR);
+    send_GMsg_GiveItemAck(conn, msg.ItemHeader(), GMsg_GiveItemAck::GIVE_ERROR, msg.TargetID());
     return;
   }
   // check that player is in level, and connected to level server
   if (!player_->InLevel() || !player_->LevelDBC() || !player_->LevelConnection()) {
     TLOG_Warning(_T("%s: player %u not in level"), method, player_->PlayerID());
-    send_GMsg_GiveItemAck(conn, msg.ItemHeader(), GMsg_GiveItemAck::GIVE_ERROR);
+    send_GMsg_GiveItemAck(conn, msg.ItemHeader(), GMsg_GiveItemAck::GIVE_ERROR, msg.TargetID());
     return;
   }
   TLOG_Debug(_T("%s: giving item %d to player %u"), method, msg.ItemHeader().Serial(), msg.TargetID());
