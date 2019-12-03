@@ -528,7 +528,7 @@ int LmPlayerDBC::ModifyXPJournal(lyra_id_t player_id, int guild, int xp_change)
 
   for (i=0; i<MAX_XPJOURNAL_RECURSIONS; i++)
     {
-	_stprintf(query, _T("SELECT COUNT(*) FROM guildplayer WHERE player_id = %u AND guild = %u"), last_initiator, guild);
+	_stprintf(query, _T("SELECT COUNT(*) FROM guildplayer WHERE player_id = %u AND guild_id = %u"), last_initiator, guild);
 	error = mysql_query(&m_mysql, query);
         res = mysql_store_result(&m_mysql);
 
