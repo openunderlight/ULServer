@@ -1,5 +1,5 @@
 // LmParty.h  -*- C++ -*-
-// $Id: LmParty.h,v 1.2 1997-11-17 14:05:12-08 jason Exp $
+// $Id: LmParty.h,v 1.6 1997-07-09 19:24:52-07 jason Exp $
 // Copyright 1996-1997 Lyra LLC, All rights reserved. 
 //
 // "character party" class
@@ -47,7 +47,6 @@ public:
   bool IsFull() const;
   bool HasPlayer(lyra_id_t playerid) const;
   lyra_id_t LeaderID() const;
-  lyra_id_t CreatorID() const;
   lyra_id_t PlayerID(int index) const;
 
   void Dump(FILE* f, int indent = 0) const;
@@ -57,7 +56,6 @@ private:
 
   int index_of(lyra_id_t playerid) const;
 
-  lyra_id_t creatorid_;
   lyra_id_t leaderid_;
   int num_members_;
   lyra_id_t members_[MAX_PARTYSIZE];
