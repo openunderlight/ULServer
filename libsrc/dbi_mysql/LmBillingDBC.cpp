@@ -691,6 +691,7 @@ int LmBillingDBC::IsPrimary(lyra_id_t player_id, bool* is_prim)
 
   row = mysql_fetch_row(res);
   *is_prim = _tcscmp(row[0], "PRIMARY") == 0;
+  mysql_free_result(res);
   return 0;
 }
 
