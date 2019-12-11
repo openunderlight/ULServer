@@ -264,11 +264,11 @@ void GsPlayerThread::handle_SMsg_GiveItemAck(LmSrvMesgBuf* msgbuf, LmConnection*
   switch (msg.Status()) {
   case GMsg_GiveItemAck::GIVE_YES:
     player_->EndItemDrop(hdr, true); // dropped it
-    send_GMsg_GiveItemAck(player_->Connection(), hdr, GMsg_GiveItemAck::GIVE_YES);
+    send_GMsg_GiveItemAck(player_->Connection(), hdr, GMsg_GiveItemAck::GIVE_YES, msg.SourceID());
     break;
   case GMsg_GiveItemAck::GIVE_NO:
     player_->EndItemDrop(hdr, false); // didn't drop it
-    send_GMsg_GiveItemAck(player_->Connection(), hdr, GMsg_GiveItemAck::GIVE_NO);
+    send_GMsg_GiveItemAck(player_->Connection(), hdr, GMsg_GiveItemAck::GIVE_NO, msg.SourceID());
     break;
   default:
     TLOG_Warning(_T("%s: unknown status '%c'"), method, msg.Status());

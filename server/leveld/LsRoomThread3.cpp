@@ -455,6 +455,7 @@ void LsRoomThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LsPlayer* source)
   }
   LsPlayerList player_list;
   LsPlayerList emote_list;
+  LsPlayerList mumble_list; // people that are too far away to hear speech/
   switch(msg.SpeechType()) {
   case RMsg_Speech::SYSTEM_SPEECH:
     log_speech = false;
@@ -462,7 +463,12 @@ void LsRoomThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LsPlayer* source)
   case RMsg_Speech::MONSTER_SPEECH:
   case RMsg_Speech::SPEECH:
   case RMsg_Speech::EMOTE:
-    compute_RMsg_Speech_Speech(source, player_list, msg);
+    compute_RMsg_Speech_Speech(source, player_list, mumble_list, msg);
+    if(mumble_list.size() > 0) {
+       RMsg_Speech mumbleMsg;
+       mumbleMsg.Init(RMsg_Speech::MUMBLE_EMOTE, 0, 0, "You hear the muffled sound of voices but you are unable to make out the words.");
+       send_RMsg_Speech(source, mumble_list, mumbleMsg);
+    } 
     break;
   case RMsg_Speech::RAW_EMOTE:
   case RMsg_Speech::SHOUT:
