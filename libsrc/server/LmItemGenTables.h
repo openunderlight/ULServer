@@ -119,7 +119,7 @@ struct missile_gen_table_entry {
   int effect_chance;
   int min_effect;
   int max_effect;
-  int damage[16];
+  int damage[32];
 };
 
 static missile_gen_table_entry missile_gen_table[] = {
@@ -133,19 +133,19 @@ static missile_gen_table_entry missile_gen_table[] = {
     0,
     0,
     0, 0,
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
   },
 
-  // class 1 - friendly wands
+  // class 1
   { 1,
     10, 50,
-    LyraBitmap::TALISMAN2,
+    LyraBitmap::TALISMAN3,
     LyraBitmap::FIREBALL_MISSILE,
-    1, 1,
+    1, 3,
     10,
-    100,
-    LyraEffect::MIN_GOOD_EFFECT, LyraEffect::MAX_GOOD_EFFECT,
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+    0,
+    0, 0,
+    {0,0,0,1,12,13,13,14,14,14,14,2,2,16,16,16,30,30,30,19,19,19,40,40,40,15,15,15,17,17,32,32 }
   },
 
   // class 2
@@ -159,8 +159,7 @@ static missile_gen_table_entry missile_gen_table[] = {
     0, 0,
 
 
-  {17,18,18,23,23,27,27,40,40,44,44,46,46,51,51,60}
-   // { 19, 21, 22, 26, 27, 34, 36, 37, 44, 45, 46, 51, 52, 56, 59, 60 }
+  {30,40,22,41,47,24,31,20,52,18,48,54,34,23,56,3,21,26,53,25,36,49,57,43,55,37,58,33,35,50,59,27 }
   },
 
   // class 3
@@ -172,8 +171,7 @@ static missile_gen_table_entry missile_gen_table[] = {
     50,
     25,
     LyraEffect::MIN_BAD_EFFECT, LyraEffect::PLAYER_CURSED,
-  {27,27,28,38,38,39,39,44,44,44,44,46,46,46,60,60}
-    //{ 19, 21, 22, 26, 27, 34, 36, 37, 44, 45, 46, 51, 52, 56, 59, 60 }
+  {21,42,36,33,33,59,59,4,27,27,44,44,45,45,51,51,46,46,46,46,5,28,28,60,60,39,39,39,39,38,38,38 }
   },
 
   // class 4
@@ -185,9 +183,7 @@ static missile_gen_table_entry missile_gen_table[] = {
     100,
     50,
     LyraEffect::MIN_BAD_EFFECT, LyraEffect::MAX_BAD_EFFECT,
-  { 4,28,29,29,38,38,39,39,46,46,7,59,59,60,60,60 }
-	
-    //{ 17, 18, 19, 20, 21, 23, 29, 30, 39, 40, 44, 45, 46, 47, 51, 52 }
+  { 50,4,4,27,27,44,45,51,51,51,46,46,46,5,28,28,60,60,60,60,39,39,39,38,38,38,6,29,29,29,29,7 }
   },
 
 };

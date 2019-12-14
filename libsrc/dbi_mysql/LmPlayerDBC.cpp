@@ -23,6 +23,7 @@
 #include "LmFuncTimer.h"
 #include "LmAvatar.h"
 #include "LmUtil.h"
+#include "LyraDefs.h"
 #include "GMsg_LoginAck.h"
 #include "GMsg_LocateAvatarAck.h"
 #include "GMsg_GrantPPoint.h"
@@ -181,7 +182,8 @@ int LmPlayerDBC::SavePlayer(LmPlayerDB& player_record, bool force)
   //LmFuncTimer( timernum_calls_, num_ms_, last_ms_); // time function
   ////LmTimer timer(&sql_ms_); // timer for SQL statements
 
-  TCHAR query[1024];
+  // make buffer slightly longer than the player update statement + max escaped description
+  TCHAR query[350 + 2 * Lyra::MAX_AVATARDESC];
   MYSQL_RES *res;
   MYSQL_ROW row;
   int i;
@@ -224,7 +226,8 @@ int LmPlayerDBC::SavePlayer(LmPlayerDB& player_record, bool force)
 	  pps = player_record.Stats().PP();
 	  pp_pool = player_record.Stats().PPPool();
 
-	  TCHAR escaped_descrip[768];
+    // needs to be twice as long as the max description to allow every character to be escaped
+	  TCHAR escaped_descrip[2 * Lyra::MAX_AVATARDESC];
 	  mysql_escape_string((TCHAR*)escaped_descrip,  player_record.AvatarDescrip(),_tcslen( player_record.AvatarDescrip()));
 
 	  _stprintf(query, _T("UPDATE player SET avatar = %u, avatar2 = %u, xp = %u, xp_bonus = xp_bonus + %u, xp_penalty = xp_penalty + %u, x = %d, y = %d, last_level_id = %u, avatar_descrip = '%s', quest_xp_pool = %u, pps = %u, pp_pool = %u WHERE player_id = %u;"),
@@ -404,10 +407,10 @@ int LmPlayerDBC::Login(lyra_id_t player_id, int pmare_type, int pmare_billing, T
   int error = mysql_query(&m_mysql, query);
   ////timer.Stop();
 
-  if(first_login)
+  if(first_login) 
   {
     _stprintf(query, _T("UPDATE player SET first_login=CURDATE() WHERE player_id = %u;"), player_id);
-    error = mysql_query(&m_mysql, query);
+    error = mysql_query(&m_mysql, query); 
   }
   if (error)
     {
@@ -1082,9 +1085,9 @@ int LmPlayerDBC::GetLocation(lyra_id_t player_id, lyra_id_t& level_id, lyra_id_t
     level_id = ATOI(row[1]);
   acct_type = ATOI(row[2]);
   _tcscpy(realName, row[3]);
+ 
 
-
-  if(!isGM && acct_type == LmPlayerDB::ACCT_ADMIN && ((NULL != _tcsstr(realName, _T("INVIS"))) ||
+  if(!isGM && acct_type == LmPlayerDB::ACCT_ADMIN && ((NULL != _tcsstr(realName, _T("INVIS"))) || 
 		(NULL != _tcsstr(realName, _T("invis"))) ||
 		(NULL != _tcsstr(realName, _T("Invis")))) && level_id >= Lyra::HIDDEN_DELTA )
   {
@@ -1144,7 +1147,7 @@ int LmPlayerDBC::NewlyNeedsAnnounce(lyra_id_t player_id, bool* announce)
 	*announce = true;
   else
 	*announce = false;
-
+  mysql_free_result(res); 
   return ret;
 }
 
@@ -1971,8 +1974,10 @@ int LmPlayerDBC::SaveGuildRanks(lyra_id_t player_id, LmStats& stats)
     res = mysql_store_result(&m_mysql);
     int num_rows = mysql_num_rows(res);
 
-    if (!num_rows)
+    if (!num_rows) {
+      mysql_free_result(res);
       continue;
+    }
 
     row = mysql_fetch_row(res);
 

@@ -63,6 +63,7 @@ public:
   int SetItemOwners(int item_id, lyra_id_t owner_id, lyra_id_t subowner_id, int owner_type);
   int SetNumDreamers(lyra_id_t level_id, int count);
   int ChangeNumDreamers(lyra_id_t level_id, int change);
+  int GetTotalNumDreamers(unsigned int* total);
 
   // database selectors
   int GetPlayerInventory(lyra_id_t owner, LmInventory& inventory);
@@ -70,7 +71,7 @@ public:
   int GetRoomItems(lyra_id_t level_id, lyra_id_t room_id, LmRoomItemList& room_items);
   int GetItemDescription(int item_id, TCHAR* description); 
   int GetDreamerLocations(lyra_id_t* level_ids, int accountType);
-  int GetTotalNumDreamers(unsigned int* total);
+  
   long LastSQLCode() const;
 
   void SetLog(LmLog* log);
