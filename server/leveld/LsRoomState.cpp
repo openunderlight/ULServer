@@ -544,6 +544,24 @@ bool LsRoomState::has_item(const LmItemHdr& itemhdr) const
   return retval;
 }
 
+bool LsRoomState::HasPortkey() const 
+{
+  DECLARE_TheLineNum;
+  bool ret = false;
+  LmRoomItemList::const_iterator i;
+  for(i = items_.begin(); !(bool)(i == items_.end()); ++i) {
+    void* state = (*i).Item().StateField(0);
+    unsigned char type = *((unsigned char*)state);
+    if(type == LyraItem::PORTKEY_FUNCTION)
+    {
+       ret = true;
+       break;
+    }
+  }
+
+  return ret;
+}
+
 ////
 // has_prime - non-locking
 ////

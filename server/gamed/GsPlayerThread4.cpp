@@ -184,10 +184,10 @@ void GsPlayerThread::send_GMsg_TakeItemAck(LmConnection* conn, const LmItemHdr& 
 // send_GMsg_GiveItemAck - send give item ack to player
 ////
 
-void GsPlayerThread::send_GMsg_GiveItemAck(LmConnection* conn, const LmItemHdr& itemhdr, int status)
+void GsPlayerThread::send_GMsg_GiveItemAck(LmConnection* conn, const LmItemHdr& itemhdr, int status, int targetid)
 {
   GMsg_GiveItemAck msg;
-  msg.Init(status, itemhdr);
+  msg.Init(status, itemhdr, targetid);
   main_->OutputDispatch()->SendMessage(&msg, conn);
 }
 

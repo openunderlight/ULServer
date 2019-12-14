@@ -34,6 +34,7 @@
 #include "LmItemDBC.h"
 #include "LmItemGen.h"
 #include "LmRand.h"
+#include "LmPlayerDB.h"
 
 DECLARE_TheFileName;
 
@@ -690,7 +691,7 @@ void LsRoomThread::compute_PartyList(const LmParty& party, LsPlayerList& player_
 // compute_RMsg_Speech_Speech
 ////
 
-void LsRoomThread::compute_RMsg_Speech_Speech(LsPlayer* player, LsPlayerList& target_list,
+void LsRoomThread::compute_RMsg_Speech_Speech(LsPlayer* player, LsPlayerList& target_list, LsPlayerList& mumble_list,
 					      RMsg_Speech& /* msg */)
 {
   DEFMETHOD(LsRoomThread, compute_RMsg_Speech_Speech);
@@ -719,8 +720,11 @@ void LsRoomThread::compute_RMsg_Speech_Speech(LsPlayer* player, LsPlayerList& ta
       TLOG_Warning(_T("%s: player %u not found in room"), method, targetid);
     }
     else {
-      if (player->Position().DistanceXY2(rplayer->Position()) < LsMain::SPEECH_DIST2) {
+      if (player->AccountType() == LmPlayerDB::ACCT_ADMIN || rplayer->AccountType() == LmPlayerDB::ACCT_ADMIN 
+|| player->Position().DistanceXY2(rplayer->Position()) < LsMain::SPEECH_DIST2) {
 	target_list.push_back(rplayer);
+      } else {
+     	mumble_list.push_back(rplayer); 
       }
     }
   }
