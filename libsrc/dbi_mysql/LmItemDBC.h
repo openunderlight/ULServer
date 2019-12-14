@@ -70,7 +70,7 @@ public:
   int GetRoomItems(lyra_id_t level_id, lyra_id_t room_id, LmRoomItemList& room_items);
   int GetItemDescription(int item_id, TCHAR* description); 
   int GetDreamerLocations(lyra_id_t* level_ids, int accountType);
-  int GetTotalNumDreamers(unsigned int* total)
+  int GetTotalNumDreamers(unsigned int* total);
   long LastSQLCode() const;
 
   void SetLog(LmLog* log);
