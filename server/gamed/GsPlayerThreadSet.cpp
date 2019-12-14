@@ -127,7 +127,6 @@ GsPlayerThread* GsPlayerThreadSet::start_player_thread()
   // start player thread, with reasonable stack size 
   PThAttr attr;
   attr.Init();
-  attr.SetJoinable( false );
   //attr.SetStackSize(65536);
   attr.SetStackSize(131072);
   if (pthr->Create(&attr) < 0) {

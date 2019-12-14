@@ -65,7 +65,7 @@ INLINE int PThCond::Signal()
     int rc = pth_cond_notify(&cond_, FALSE);
 
     pth_attr_set(attr, PTH_ATTR_PRIO, currentPriority);
-    pth_attr_destroy(attr);
+
     return (rc);
 #endif
 }

@@ -6,7 +6,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-
+#include "LyraDefs.h"
 #include "LmPlayerDB.h"
 #include "GMsg_LoginAck.h"
 #include "LmLocker.h"
@@ -383,14 +383,15 @@ int LmBillingDBC::GetBillingStatus(lyra_id_t player_id, int acct_type,
   if (0 == billing_id) {
 	    *gamesite = 0; // game service
 	    *gamesite_id = 0; // game service ID
-  } else {
+  }
+  else {
 
-  _stprintf(query, _T("SELECT game_service, game_service_id FROM accounts WHERE billing_id = %u"), billing_id);
+      _stprintf(query, _T("SELECT game_service, game_service_id FROM accounts WHERE billing_id = % u"), billing_id);
 
-  ////timer.Start();
-  error = mysql_query(&mysql_, query);
-  ////timer.Stop();
-
+          ////timer.Start();
+          error = mysql_query(&mysql_, query);
+      ////timer.Stop();
+  
   if (error)
     {
       LOG_Error(_T("%s: Could not check billing game partner status for player %u; mysql error %s"), method, player_id, mysql_error(&mysql_));
@@ -691,7 +692,6 @@ int LmBillingDBC::IsPrimary(lyra_id_t player_id, bool* is_prim)
 
   row = mysql_fetch_row(res);
   *is_prim = _tcscmp(row[0], "PRIMARY") == 0;
-  mysql_free_result(res);
   return 0;
 }
 

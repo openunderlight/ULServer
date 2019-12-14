@@ -1594,7 +1594,7 @@ void GsPlayerThread::handle_GMsg_Goal_DoesHaveCodex(const GMsg_Goal& gmsg)
   //const LmInventory& inv = ;
   bool completed = false;
   LmItem item;
-  TCHAR buffer[Lyra::MAX_ITEMDESC];
+  TCHAR buffer[Lyra::QUEST_KEYWORDS_LENGTH];
   for (int i = 0; i< player_->DB().Inventory().NumItems(); ++i) {
 	item = player_->DB().Inventory().ItemByIndex(i);
 
