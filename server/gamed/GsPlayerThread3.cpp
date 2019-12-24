@@ -1001,6 +1001,10 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
     bool agent_killed = true;
     if (orbit < 100) { // player, state1 = orbit
       xp_adj = (int) ((double) LmStats::OrbitXPBase(orbit) * 0.01); // gain up to 1%
+      if (xp_adj > 100000) // setting a cap on xp gain to 100k for player kills
+      {
+          xp_adj = 100000;
+      }
       agent_killed = false;
     }
     else if (orbit < 150) { // monster, state1 = 100 + nightmare index
