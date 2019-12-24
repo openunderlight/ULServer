@@ -1,5 +1,5 @@
 // LmParty.cpp  -*- C++ -*-
-// $Id: LmParty.cpp,v 1.4 1997-07-18 16:04:59-07 jason Exp $
+// $Id: LmParty.cpp,v 1.3 1997-11-17 14:05:12-08 jason Exp $
 // Copyright 1996-1997 Lyra LLC, All rights reserved.
 //
 // implementation
@@ -34,6 +34,7 @@ void LmParty::Create(lyra_id_t leaderid)
 {
   Empty();
   leaderid_ = leaderid;
+  creatorid_ = leaderid;
   AddPlayer(leaderid);
 }
 
@@ -47,6 +48,7 @@ void LmParty::Empty()
     members_[i] = DEFAULT_ID;
   }
   leaderid_ = DEFAULT_LEADER;
+  creatorid_ = 0;
   num_members_ = 0;
 }
 
@@ -95,6 +97,8 @@ int LmParty::RemovePlayer(lyra_id_t playerid)
       }
     }
     leaderid_ = newleader;
+    // if leadership changed, creator is no longer necessary
+    creatorid_ = Lyra::ID_UNKNOWN;
   }
   return 0;
 }
@@ -107,14 +111,15 @@ int LmParty::RemovePlayer(lyra_id_t playerid)
 void LmParty::Dump(FILE* f, int indent) const
 {
   INDENT(indent, f);
-  fprintf(f, "<LmParty[%p]: leader=%u members(%d)=[", this, LeaderID(), PartySize());
+ _ftprintf(f, _T("<LmParty[%p,%d]: creator=%u leader=%u members(%d)=["), this, sizeof(LmParty),
+	  CreatorID(), LeaderID(), PartySize());
   for (int i = 0; i < PartySize(); ++i) {
-    fprintf(f, "%u", PlayerID(i));
+   _ftprintf(f, _T("%u"), PlayerID(i));
     if (i != (PartySize() - 1)) {
-      fprintf(f, ",");
+     _ftprintf(f, _T(","));
     }
   }
-  fprintf(f, "]>\n");
+ _ftprintf(f, _T("]>\n"));
 }
 #endif /* USE_DEBUG */
 
@@ -126,17 +131,17 @@ void LmParty::Dump(FILE* f, int indent) const
 void LmParty::Dump1(FILE* f) const
 {
   if (IsEmpty()) {
-    fprintf(f, "[]");
+   _ftprintf(f, _T("[]"));
   }
   else {
-    fprintf(f, "[%u:", LeaderID());
+   _ftprintf(f, _T("[%u:"), LeaderID());
     for (int i = 0; i < PartySize(); ++i) {
-      fprintf(f, "%u", PlayerID(i));
+     _ftprintf(f, _T("%u"), PlayerID(i));
       if (i != (PartySize() - 1)) {
-	fprintf(f, ",");
+_ftprintf(f, _T(","));
       }
     }
-    fprintf(f, "]");
+   _ftprintf(f, _T("]"));
   }
 }
 #endif /* USE_DEBUG */
