@@ -46,6 +46,11 @@ INLINE lyra_id_t LmParty::LeaderID() const
   return leaderid_;
 }
 
+INLINE lyra_id_t LmParty::CreatorID() const		
+{		
+  return creatorid_;		
+}		
+
 INLINE lyra_id_t LmParty::PlayerID(int index) const
 {
   return members_[index];
