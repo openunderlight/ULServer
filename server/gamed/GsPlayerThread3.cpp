@@ -1004,6 +1004,7 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       if (xp_adj > 100000) // setting a cap on xp gain to 100k for player kills
       {
           xp_adj = 100000;
+          multiplier = 1.0;
       }
       agent_killed = false;
     }
