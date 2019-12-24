@@ -1004,7 +1004,6 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       if (xp_adj > 100000) // setting a cap on xp gain to 100k for player kills
       {
           xp_adj = 100000;
-          multiplier = 1.0;
       }
       agent_killed = false;
     }
@@ -1080,6 +1079,10 @@ void GsPlayerThread::handle_SMsg_Proxy_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf)
       // killing someone whose orbit is greater is just fine
       if ((orbit > 29) || (sphere_diff < 2)) {
 	xp_adj = (int) ((double) LmStats::OrbitXPBase(orbit) * 0.01); // gain up to 1%
+      }
+      if (xp_adj > 100000) //if killing this player gives you more than 100k give 100k
+      {
+          xp_adj = 100000;
       }
       adjust_xp(xp_adj, _T("dissolving player"), msg.SenderID(), true);
     } else if (orbit < 150) { // monster, state1 = 100 + nightmare index
