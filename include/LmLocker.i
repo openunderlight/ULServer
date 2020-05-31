@@ -26,6 +26,14 @@ INLINE void LmLocker::UnLock()
   }
 }
 
+INLINE void LmLocker::ReLock()
+{
+  if(!locked_) {
+    m_.Lock();
+    locked_ = true;
+  }
+}
+
 INLINE LmLocker::~LmLocker()
 {
   UnLock();

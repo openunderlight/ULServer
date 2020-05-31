@@ -21,6 +21,8 @@
 #include "LmConnection.h"
 #include "LmThreadMQ.h"
 #include "LmLog.h"
+#include "LmRand.h"
+#include <cxxabi.h>
 
 #ifndef USE_INLINE
 #include "LmThread.i"
@@ -39,9 +41,15 @@ class LmThreadHT : public std::map<int, LmThread::MsgHandler, std::less<int> > {
 ////
 // Constructor
 ////
-
+const unsigned long long base_tick_num = 6000;
 LmThread::LmThread(LmMesgBufPool* bufpool, LmLog* log)
-  : mq_(LmNEW(LmThreadMQ(this))),
+  : LmThread::LmThread(bufpool, log, strdup("unnamed"))
+{ 
+}
+
+LmThread::LmThread(LmMesgBufPool* bufpool, LmLog* log, char* name)
+  : PTh::PTh(name),
+    mq_(LmNEW(LmThreadMQ(this))),
     ht_(LmNEW(LmThreadHT())),
     done_(false),
     busy_(false),
@@ -51,13 +59,13 @@ LmThread::LmThread(LmMesgBufPool* bufpool, LmLog* log)
     default_handler_(0),
     curr_conn_(0),
     curr_mbuf_(0),
-    log_(log)
+    log_(log),
+    ticks(0)
 {
   DECLARE_TheLineNum;
-
-  //pth_cond_init(&condition_); // init condition variable
-  //pth_mutex_init(&mutex_); // init condition variable
-  // empty
+  ticknum = base_tick_num + LmRand::Generate(1, base_tick_num);
+  const char *mname = typeid(this).name();
+  classname = abi::__cxa_demangle(mname, nullptr, nullptr, nullptr);
 }
 
 ////
@@ -77,6 +85,15 @@ LmThread::~LmThread()
   // bad things happen
 }
 
+void LmThread::ThreadYield()
+{
+  PTh::Yield();
+  ticks++;
+  if(ticks % ticknum == 0) {
+    TLOG_Debug(_T("%s: %llu ticks."), classname, ticks);
+  }
+}
+
 ////
 // Run: thread _tmain() function
 ////
@@ -88,8 +105,9 @@ void LmThread::Run()
   SetDone(false);
   while (!Done()) {
     HandleNextMessage();
-    Yield();
+    ThreadYield();
   }
+  TLOG_Debug(_T("LmThread::Run exiting"));
   DoneRunning();
 } 
 

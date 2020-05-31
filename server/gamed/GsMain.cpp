@@ -168,6 +168,8 @@ int GsMain::Init(const TCHAR* root_dir, int max_players, const char* next_ip_add
     return -1;
   }
 
+  st_init();
+
   max_players_ = MIN(max_players, MAX_PLAYERS); // avoid overflow
 
   // create databases
@@ -230,7 +232,7 @@ int GsMain::Init(const TCHAR* root_dir, int max_players, const char* next_ip_add
 	  (0 == _tcscmp(next_ip_address, host_ip_)))
 	  run_forever_ = true;
 
-  log_->Debug(_T("Initialized game server"));
+  log_->Debug(_T("GsMain->Init finished"));
   log_->Debug(_T("Next gamed ip/port: %s, %d"), next_ip_address, next_port_);
 
 
@@ -340,6 +342,7 @@ int GsMain::Go()
 	//}
 
   // start threads
+  log_->Debug(_T("Game server initialized State Threads"));
   if (start_threads() < 0) {
     log_->Error(_T("%s: could not start threads"), method);
     return Lyra::EXIT_EXEC;
@@ -361,32 +364,39 @@ int GsMain::Go()
     return Lyra::EXIT_EXEC;
   }
 
+  log_->Debug(_T("Game server entering main loop"));
   // wait for game thread to exit
+  unsigned long long ticks = 0;
   while (gthr->IsRunning()) {
     // we now check the alarm timer manually
     if ((time(NULL) - last_alrm_) > (2*ALARM_DELAY)) { 
-      //log_->Debug(_T("%s: time to manually raising SIGALRM"), method);
+      if(ticks % 13 == 0) log_->Debug(_T("%s: time to manually raise SIGALRM"), method);
       last_alrm_ = time(NULL);
       process_SIGALRM();
     }
 
-    if (sigterm_)
+    if (sigterm_) {
+      if(ticks % 13 == 0) log_->Debug(_T("%s: Received SIGTERM"), method);
       process_SIGTERM();
+    }
     if (sigerr_) {
       log_->Error(sigerrtxt_);
       sigerr_ = false;
     }
-#ifdef WIN32
-	Sleep(1000);
-#else
-	pth_sleep(1); 
-#endif
-    
-
+    #ifdef WIN32
+    Sleep(1000);
+    #else
+    st_usleep(1);
+    ticks++;
+    // if(ticks % 60000 == 0) {
+    //   log_->Debug(_T("GS mainloop ticks: %llu"), ticks);
+    // }
+    #endif
   }
+
   // TODO: possibly periodically check if all main server threads
   //   are running, and if one isn't, restart it?  or exit?
-  
+  log_->Debug(_T("GS mainloop DONE!"));
   // cleanup
   remove_pidfile();
 
@@ -639,7 +649,7 @@ int GsMain::start_threads()
 
   attr.Init();
   // none of the server threads have any return state, and thus are detached
-  attr.SetJoinable(FALSE);
+  attr.SetJoinable(false);
   //  attr.SetDetachState(PTH_CREATE_DETACHED);
   // set the stack size to a more reasonable value: 128K (default is 1MB)
   attr.SetStackSize(2091752);
@@ -653,6 +663,7 @@ int GsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(GsMain::THREAD_SIGNAL, thread);
+  log_->Debug("%s: Created signal thread", method);
 
   // create game server thread
   thread = LmNEW(GsGameThread(this));
@@ -661,6 +672,7 @@ int GsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(GsMain::THREAD_GAMESERVER, thread);
+  log_->Debug("%s: Created game server thread", method);
 
   // create message forwarding thread
   thread = LmNEW(GsForwardThread(this));
@@ -669,6 +681,7 @@ int GsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(GsMain::THREAD_FORWARD, thread);
+  log_->Debug("%s: Created forward thread", method);
 
 
   // networking threads have system scope (ie. bound to LWP)
@@ -681,6 +694,7 @@ int GsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(GsMain::THREAD_NETOUTPUT, thread);
+  log_->Debug("%s: Created network output thread", method);
 
   // create position update thread
   thread = LmNEW(GsPositionThread(this));
@@ -689,6 +703,7 @@ int GsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(GsMain::THREAD_POSITION, thread);
+  log_->Debug("%s: Created position update thread", method);
 
 
  // create network input thread
@@ -698,9 +713,11 @@ int GsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(GsMain::THREAD_NETINPUT, thread);
+  log_->Debug("%s: Created network input thread", method);
 
   // start up idle player threads 
   ptset_->StartIdlePlayerThreads(20);
+  log_->Debug("%s: Started 20 idle player threads", method);
  //ptset_->StartIdlePlayerThreads(20);
 
   // all threads created

@@ -15,7 +15,7 @@
 
 int _tmain(int argc, TCHAR** argv)
 {
-  pth_init();
+  st_init();
 
   if (argc < 2) {
    _tprintf(_T("usage: check_level <level_id>\n"));
@@ -51,7 +51,7 @@ int _tmain(int argc, TCHAR** argv)
   LmDELETE(serverdbc_);
   LmDELETE(leveldbc_);
 
-  pth_kill();
+  //st_kill();
 
   return 0;
 }

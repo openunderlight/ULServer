@@ -18,7 +18,7 @@ int _tmain(int argc, TCHAR** argv)
     exit(1);
   }
 
-  pth_init();
+  st_init();
 
   // parse args
 
@@ -56,7 +56,7 @@ int _tmain(int argc, TCHAR** argv)
   gdbm_close(db_in);
   gdbm_close(db_out);
 
-  pth_kill();
+  //st_kill();
 
   return 0;
 }

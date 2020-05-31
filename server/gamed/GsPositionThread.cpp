@@ -105,7 +105,7 @@ void GsPositionThread::Run()
   while (!Done()) {
     HandleUDP();
     HandleAvailableMessages();
-    Yield();
+    ThreadYield();
   }
   DoneRunning();
 }
@@ -129,7 +129,7 @@ void GsPositionThread::HandleUDP()
 #ifdef WIN32
   int rc = select(usock_->Descriptor() + 1, &fds, NULL, NULL, &tv);
 #else
-  int rc = pth_select(usock_->Descriptor() + 1, &fds, NULL, NULL, &tv);
+  int rc = select(usock_->Descriptor() + 1, &fds, NULL, NULL, &tv);
 #endif
   if (rc < 0) {
     TLOG_Error(_T("%s: select: %s"), method, strerror(errno));

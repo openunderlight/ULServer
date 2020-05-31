@@ -15,6 +15,13 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+/*!40000 DROP DATABASE IF EXISTS `ul_item`*/;
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ul_item` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `ul_item`;
+
+
 --
 -- Table structure for table `debug_err`
 --

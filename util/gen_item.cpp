@@ -18,7 +18,7 @@
 
 int _tmain()
 {
-  pth_init();
+  st_init();
   LmItem item;
 
   LmRand::InitSeed();
@@ -60,7 +60,7 @@ int _tmain()
     }
 
   }
-  pth_kill();
+  //st_kill();
   return 0;
 }
 

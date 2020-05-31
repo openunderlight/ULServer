@@ -231,7 +231,7 @@ typedef unsigned int realmid_t;  // backwards compatibility
 #ifndef PTH_SYSCALL_SOFT 
 #define PTH_SYSCALL_SOFT 1
 #endif
-#include "pth.h"
+#include "st.h"
 #else
 #ifdef UL_SERVER_WIN32
 typedef int pid_t;

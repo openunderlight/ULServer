@@ -42,7 +42,7 @@ LmLogFile::LmLogFile()
   memset(logname_, 0, sizeof(logname_));
   //memset(hostname_, 0, sizeof(hostname_));
   // get hostname
-  // REMOVED due to conflicts between unistd.h and pth.h
+  // REMOVED due to conflicts between unistd.h and st.h
 #ifdef _UNICODE
   //char sbcs[64];
   //gethostname(sbcs, sizeof(sbcs));

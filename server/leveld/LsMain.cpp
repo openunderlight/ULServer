@@ -228,9 +228,9 @@ int LsMain::Init(const TCHAR* root_dir, int port_num, int levelnum)
 ////
 // Go: run the server; when this returns, the server program exits
 ////
-
 int LsMain::Go(const char* ip_address)
 {
+  unsigned long long tix = 0;
   DEFMETHOD(LsMain, Go);
 #ifndef WIN32
   pid_ = getpid();
@@ -300,17 +300,21 @@ int LsMain::Go(const char* ip_address)
   unsigned int next_send;
   timeval now;
 
-  while (lthr->IsRunning()) {
+  bool lir = lthr->IsRunning();
+  while (lir) {
 
     // we now check the alarm timer manually
     if ((time(NULL) - last_alrm_) > (2*ALARM_DELAY)) { 
       //log_->Debug(_T("%s: manually raising SIGALRM"), method);
       last_alrm_ = time(NULL);
+      //TLOG_Debug("Main loop processing SIGALRM");
       process_SIGALRM();
     }
 
-    if (sigterm_)
+    if (sigterm_) {
+      TLOG_Debug("Main loop processing SIGTERM");
       process_SIGTERM();
+    }
     if (sigerr_) {
       log_->Error(sigerrtxt_);
       sigerr_ = false;
@@ -319,47 +323,66 @@ int LsMain::Go(const char* ip_address)
     // now we check to see if its time to send updates
     gettimeofday(&now,NULL);
 
- sec_elapsed = now.tv_sec - first_update_time_.tv_sec;
- sec_last = now.tv_sec - last_update_time_.tv_sec;
- msec_elapsed = sec_elapsed*1000 + ((now.tv_usec - first_update_time_.tv_usec)/1000);
- msec_last_interval = sec_last*1000 + ((now.tv_usec - last_update_time_.tv_usec)/1000);
- sec_now = now.tv_sec;
- msec_last_time = last_update_time_.tv_sec*1000 + (last_update_time_.tv_usec/1000);
- msec_now = sec_now*1000 + (now.tv_usec/1000);
- next_send = msec_last_time + POS_UPDATE_INTERVAL;
+    sec_elapsed = now.tv_sec - first_update_time_.tv_sec;
+    sec_last = now.tv_sec - last_update_time_.tv_sec;
+    msec_elapsed = sec_elapsed*1000 + ((now.tv_usec - first_update_time_.tv_usec)/1000);
+    msec_last_interval = sec_last*1000 + ((now.tv_usec - last_update_time_.tv_usec)/1000);
+    sec_now = now.tv_sec;
+    msec_last_time = last_update_time_.tv_sec*1000 + (last_update_time_.tv_usec/1000);
+    msec_now = sec_now*1000 + (now.tv_usec/1000);
+    next_send = msec_last_time + POS_UPDATE_INTERVAL;
 
- // TLOG_Debug(_T("Total elapsed = %d, since last=%d, last send=%d, msec now=%d, next send=%d \n"), msec_elapsed, msec_last_interval, msec_last_time, msec_now, next_send);
+    // TLOG_Debug(_T("Total elapsed = %d, since last=%d, last send=%d, msec now=%d, next send=%d \n"), msec_elapsed, msec_last_interval, msec_last_time, msec_now, next_send);
 
-  unsigned int sleep_interval;
+    // unsigned int sleep_interval;
 
-  if (msec_now >= next_send) {
-    sleep_interval = 0;
-  } else {
-  sleep_interval = next_send - msec_now;
-  sleep_interval = sleep_interval * 1000; // turn into usec
-    if (sleep_interval > 50000)
-      sleep_interval = 50000;
+    // if (msec_now >= next_send) {
+    //   sleep_interval = 0;
+    // } else {
+    // sleep_interval = next_send - msec_now;
+    // sleep_interval = sleep_interval * 1000; // turn into usec
+    //   if (sleep_interval > 50000)
+    //     sleep_interval = 50000;
+    // }
+
+    #ifdef WIN32
+      Sleep(200);
+    #else
+      //TLOG_Debug(_T("sleeping for %d msec"), sleep_interval); 
+        // if (sleep_interval > 0) { 
+        //   if(tix % 31 == 0) TLOG_Debug("Main loop sleeping for %u", sleep_interval);
+        //   tix++;
+          //st_usleep(sleep_interval);
+          st_usleep(1);
+        //}
+    #endif
+
+    gettimeofday(&now,NULL);
+    sec_now = now.tv_sec;
+    msec_now = sec_now*1000 + now.tv_usec;
+
+    if (msec_now >= next_send) {
+      gettimeofday(&last_update_time_,NULL);
+      if(tix % 23 == 0) TLOG_Debug("Main loop processing SIGINT");
+      tix++;
+      process_SIGINT();
+    }
+    lir = lthr->IsRunning();
+    if(!lir) {
+      TLOG_Debug("Caught lthr->IsRunning as false!");
+    }
+    // else {
+    //   TLOG_Debug("The LsLevelThread seems to be running.");
+    // }
+    tix++;
+    if(tix % 60 == 0) {
+      TLOG_Debug("Tick");
+    }
   }
 
-#ifdef WIN32
-	Sleep(200);
-#else
-	//TLOG_Debug(_T("sleeping for %d msec"), sleep_interval); 
-  	if (sleep_interval > 0) { 
-	  pth_nap(pth_time(0, sleep_interval));
-	}
-#endif
-
-	gettimeofday(&now,NULL);
-	sec_now = now.tv_sec;
-	msec_now = sec_now*1000 + now.tv_usec;
-
-	if (msec_now >= next_send) {
-	  gettimeofday(&last_update_time_,NULL);
-	  process_SIGINT();
-	}
+  if(lir) {
+    TLOG_Debug("Got out of the mainloop some way other than lthr->IsRunning set to false!");
   }
-
 
   // TODO: possibly periodically check if all main server threads
   //   are running, and if one isn't, restart it?  or exit?
@@ -545,7 +568,7 @@ int LsMain::start_threads()
 
   attr.Init();
   // none of the server threads have any return state, and thus are detached
-  attr.SetJoinable(FALSE);
+  attr.SetJoinable(false);
   //  attr.SetDetachState(PTH_CREATE_DETACHED);
  // set the stack size to a more reasonable value: 256K (default is 1MB)
   attr.SetStackSize(262144);
@@ -559,6 +582,7 @@ int LsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(LsMain::THREAD_SIGNAL, thread);
+  log_->Debug("Created signal thread");
 
  // create level server thread
    thread = LmNEW(LsLevelThread(this));
@@ -567,6 +591,7 @@ int LsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(LsMain::THREAD_LEVELSERVER, thread);
+  log_->Debug("Created level server thread");
 
   // create room server thread
   thread = LmNEW(LsRoomThread(this));
@@ -575,6 +600,7 @@ int LsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(LsMain::THREAD_ROOMSERVER, thread);
+  log_->Debug("Created room server thread");
 
 
   // create position update thread
@@ -584,6 +610,7 @@ int LsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(LsMain::THREAD_POSITION, thread);
+  log_->Debug("Created position thread");
 
 
   // networking threads have system scope (ie. bound to LWP)
@@ -596,6 +623,7 @@ int LsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(LsMain::THREAD_NETOUTPUT, thread);
+  log_->Debug("Created network output thread");
 
   // create network input thread
   thread = LmNEW(LsNetworkInput(this));
@@ -605,6 +633,7 @@ int LsMain::start_threads()
     return -1;
   }
   tpool_->AddThread(LsMain::THREAD_NETINPUT, thread);
+  log_->Debug("Created level server thread");
 
   return 0;
 }

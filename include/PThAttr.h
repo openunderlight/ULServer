@@ -51,12 +51,13 @@ private:
   //operator=(const PThAttr&);
 
   // the attribute object
-  //  pth_attr_t attr_;
+  //  st_attr_t attr_;
 
 #ifdef WIN32
   pthread_attr_t attr_;
 #else
-  pth_attr_t attr_;
+  int joinable;
+  unsigned int stacksize;
 #endif
 
   // friend classes

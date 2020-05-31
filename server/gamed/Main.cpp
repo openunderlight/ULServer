@@ -79,7 +79,7 @@ int _tmain(int argc, TCHAR** argv)
 	LmUtil::CloseAllDescriptors(); 
 	LmUtil::NullStdDescriptors();
 	
-	pth_init();
+
 	
 	// open log file
 	// DebugLog.Init("gamed", "", 0, getpid());
@@ -112,7 +112,7 @@ int _tmain(int argc, TCHAR** argv)
 	
 	// DEBUGLOG(("main: exiting"));
 	// DebugLog.Close();
-	pth_kill();
+	//st_kill();
 	// now do chdir so that profiling output is seperated for game/level servers
 	_tchdir(RootDirectory);
 	//_tchdir("./var/log/prof_gs");

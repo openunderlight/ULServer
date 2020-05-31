@@ -64,7 +64,7 @@ void LmMessageReader::Run()
   SetDone(false);
   while (!Done()) {
     HandleNextMessage();
-    Yield();
+    ThreadYield();
   }
   DoneRunning();
 }

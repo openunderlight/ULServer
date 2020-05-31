@@ -111,7 +111,7 @@ LmMessageReader* LsNetworkInput::StartReader()
   // stack size on these can be smaller (64K should be more than plenty)
   PThAttr attr;
   attr.Init();
-  attr.SetJoinable(FALSE);
+  attr.SetJoinable(false);
 //  attr.SetStackSize(262144);
   attr.SetStackSize(131072);
   // create thread

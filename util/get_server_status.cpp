@@ -37,7 +37,7 @@ int _tmain(int argc, TCHAR** argv)
     bail(_T("usage: get_server_status list_players hostid [universe] [outfile] "));
   }
 
-  pth_init();
+  st_init();
 
   // list players?
   bool list_players = _ttoi(argv[1]);
@@ -123,7 +123,7 @@ int _tmain(int argc, TCHAR** argv)
   }
   fclose(outf);
   LmDELETE(serverdbc_);
-  pth_kill();
+  //st_kill();
   return 0;
 }
 

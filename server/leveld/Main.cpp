@@ -25,6 +25,7 @@
 #include "LmLog.h"
 #include "LsMain.h"
 #include "LmNew.h"
+#include "PTh.h"
 //#include "Quantify.h"
 
 
@@ -63,7 +64,8 @@ int _tmain(int argc, TCHAR** argv)
   LmUtil::CloseAllDescriptors();
   LmUtil::NullStdDescriptors();
 
-  pth_init(); // initialize GNU pTh user threads library
+  st_init(); // initialize GNU pTh user threads library
+  st_key_create(&PTh::PthKey, NULL);
 
 #ifdef USE_LMNEW
   // open new/delete log file
@@ -95,7 +97,7 @@ int _tmain(int argc, TCHAR** argv)
   log.Close();
 #endif /* USE_LMNEW */
 
-  pth_kill();
+  //st_kill();
   // now do chdir so that profiling output is seperated for game/level servers
   _tchdir(root_dir);
   _tchdir(_T("./var/log/prof_ls"));

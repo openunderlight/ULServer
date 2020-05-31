@@ -225,14 +225,14 @@ typedef unsigned int realmid_t;  // backwards compatibility
 #define DEFMETHOD(Class,Method) static const TCHAR* method = #Class "::" #Method ;
 #endif
 
-// on Linux, include pth.h to use soft system call mapping for user-level threads
+// on Linux, include st.h to use State Threads
 // on Win32, alias all of pth_ types and calls to use pthread_ 
 #if !defined(WIN32)
 #ifndef PTH_SYSCALL_SOFT 
 #define PTH_SYSCALL_SOFT 1
 #endif
 #include <stdlib.h>
-#include <pth.h>
+#include <st.h>
 #else
 #ifdef UL_SERVER_WIN32
 typedef int pid_t;

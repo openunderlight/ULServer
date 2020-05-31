@@ -367,9 +367,9 @@ LmConnection* GsUtil::ConnectToLevelServer(GsMain* main, const LmLevelDBC* ldb)
     saddr.Init(level_ip, port);
     LmSocket sock;
     sock.Socket(LmSockType::Inet_Stream());
-    if (sock.Connect(saddr) < 0) {
-      main->Log()->Error(_T("%s: could not connect to level server: %s"), method, strerror(errno));
-      return 0;
+    while (sock.Connect(saddr) < 0) {
+      main->Log()->Warning(_T("%s: could not connect to level server for level %u: %s. Retrying."), method, levelid, strerror(errno));
+      usleep(1000000);
     }
     // add socket to set of connections
     conn = main->ConnectionSet()->AllocateConnection(sock);

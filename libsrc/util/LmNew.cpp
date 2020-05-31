@@ -82,7 +82,7 @@ void* LmNew::New(size_t size, const TCHAR* file, int line)
     //pthread_t self = PTh::Self();
 	void* brk = NULL;
 #else
-   // pth_t self = PTh::Self(); // NOTE: removed for gcc 3.0
+   // st_thread_t self = PTh::Self(); // NOTE: removed for gcc 3.0
     void* brk = sbrk(0);
 #endif
     if (line != 0) {
@@ -137,7 +137,7 @@ void LmNew::LogDelete(void* ptr, const TCHAR* file, int line)
     //pthread_t self = PTh::Self();
     void* brk = NULL;
 #else
-    //pth_t self = PTh::Self(); // NOTE: removed for gcc 3.0
+    //st_thread_t self = PTh::Self(); // NOTE: removed for gcc 3.0
     void* brk = sbrk(0);
 #endif
     if (line != 0) {

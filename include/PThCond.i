@@ -4,6 +4,8 @@
 //
 // optionally inlined methods
 
+#include <sys/time.h>
+
 INLINE PThCond::PThCond()
 {
 }
@@ -20,7 +22,8 @@ INLINE int PThCond::Init()
 #ifdef WIN32
   return pthread_cond_init(&cond_, 0);
 #else
-  return pth_cond_init(&cond_);
+  cond_ = st_cond_new();
+  return 0;
 #endif
 }
 
@@ -30,17 +33,17 @@ INLINE int PThCond::Wait(PThMutex* mutex)
 #ifdef WIN32
   return pthread_cond_wait(&cond_, &(mutex->mutex_));
 #else
-  pth_cond_await(&cond_, &(mutex->mutex_), NULL);
+  mutex->Lock();
+  st_cond_wait(cond_);
+  mutex->UnLock();
 #endif
 }
 
 INLINE int PThCond::TimedWait(PThMutex* mutex, const struct timespec* abstime)
 {
-  return -1; // deprecated in Linux port - to re-implement, 
-  // create a pTh event loop with a timer event that will simulate
-  // the pth_cond_timedwait function
-
-  //  return pth_cond_timedwait(&cond_, &(mutex->mutex_), abstime);
+  struct timeval now;
+  gettimeofday(&now, nullptr);
+  return st_cond_timedwait(cond_, llabs((abstime->tv_nsec * 1000) - now.tv_usec));
 }
 
 INLINE int PThCond::Signal()
@@ -48,25 +51,7 @@ INLINE int PThCond::Signal()
 #ifdef WIN32
   return pthread_cond_signal(&cond_);
 #else
-    
-    // Save the current thread priority then jack it up to the max.
-    // This will stop the current thread from suspending when signaling 
-    // other threads that they have messages waiting.
-
-
-    pth_attr_t attr;
-    int currentPriority;
-
-    attr = pth_attr_of(pth_self());
-    
-    pth_attr_get(attr, PTH_ATTR_PRIO, &currentPriority);
-    pth_attr_set(attr, PTH_ATTR_PRIO, PTH_PRIO_MAX);
-
-    int rc = pth_cond_notify(&cond_, FALSE);
-
-    pth_attr_set(attr, PTH_ATTR_PRIO, currentPriority);
-    pth_attr_destroy(attr);
-    return (rc);
+    return st_cond_signal(cond_);
 #endif
 }
 
@@ -75,7 +60,7 @@ INLINE int PThCond::Broadcast()
 #ifdef WIN32
   return pthread_cond_signal(&cond_);
 #else
-  return pth_cond_notify(&cond_, TRUE);
+  return st_cond_signal(cond_);
 #endif
 }
 

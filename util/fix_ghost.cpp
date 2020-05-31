@@ -19,7 +19,7 @@
 
 int _tmain(int argc, TCHAR** argv)
 {
-  pth_init();
+  st_init();
 
   if (argc < 3) {
    _tprintf(_T("usage: fix_ghost <gamed ip address> <gamed port> (to unghost a given ip address/port) OR fix_ghost <gamed host ID> 0 (to unghost all players last logged into a gamd on the host ID)\n"));
@@ -93,7 +93,7 @@ int _tmain(int argc, TCHAR** argv)
   LmDELETE(serverdbc_);
   LmDELETE(playerdbc_);
 
-  pth_kill();
+  //st_kill();
 
   return 0;
 }

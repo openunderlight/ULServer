@@ -30,7 +30,7 @@ int _tmain(int argc, TCHAR** argv)
     bail(_T("usage: ping_servers [universe] [outfile]"));
   }
 
-  pth_init();
+  st_init();
     
   TCHAR default_universe[] = _T("prod");
   TCHAR *universe;
@@ -95,6 +95,6 @@ int _tmain(int argc, TCHAR** argv)
   fclose(outf);
   LmDELETE(serverdbc_);
 
-  pth_kill();
+  //st_kill();
   return 0;
 }

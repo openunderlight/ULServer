@@ -48,7 +48,7 @@ int _tmain(int argc, TCHAR** argv)
 
   _tsetlocale(LC_ALL, _T("C"));
 
-  pth_init();
+  //st_init();
 
 #ifdef USE_LMNEW
   // open new/delete log file
@@ -82,7 +82,7 @@ int _tmain(int argc, TCHAR** argv)
   log.Close();
 #endif /* USE_LMNEW */
 
-  pth_kill();
+  //st_kill();
 
   return 0;
 }

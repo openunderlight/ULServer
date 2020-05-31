@@ -60,10 +60,11 @@ DECLARE_TheFileName;
 ////
 
 LsLevelThread::LsLevelThread(LsMain* lsmain)
-  : LmThread(lsmain->BufferPool(), lsmain->Log() /* &logf_*/ ),
+  : LmThread(lsmain->BufferPool(), lsmain->Log(), strdup("LsLevelThread") ),
     main_(lsmain)
 {
   DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread constructor"));
   // initialize members
   dbc_ = main_->LevelDBC();
   state_ = main_->LevelState();
@@ -89,8 +90,10 @@ LsLevelThread::~LsLevelThread()
 void LsLevelThread::Run()
 {
   DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread::Run"));
   LmUtil::BlockAllSignals();
   LmThread::Run();
+  TLOG_Warning(_T("LsLevelThread exiting"));
 }
 
 ////
@@ -100,6 +103,7 @@ void LsLevelThread::Run()
 void LsLevelThread::Dump(FILE* f, int indent) const
 {
   DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread::Dump"));
   INDENT(indent, f);
  _ftprintf(f, _T("<LsLevelThread[%p,%d]: main=%p leveldb=%p levelstate=%p>\n"), this, sizeof(LsLevelThread),
 	  main_, dbc_, state_);
@@ -112,6 +116,7 @@ void LsLevelThread::Dump(FILE* f, int indent) const
 
 void LsLevelThread::open_log()
 {
+  TLOG_Debug(_T("In LsLevelThread::open_log"));
   // logf_.Init("ls", "level", dbc_->LevelID());
   // logf_.Open(main_->GlobalDB()->LogDir());
 }
@@ -122,6 +127,7 @@ void LsLevelThread::open_log()
 
 void LsLevelThread::close_log()
 {
+  TLOG_Debug(_T("In LsLevelThread::close_log"));
   // logf_.Close();
 }
 
@@ -133,6 +139,7 @@ void LsLevelThread::close_log()
 void LsLevelThread::register_handlers()
 {
   DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread::register_handlers"));
   // default message handler
   SetDefaultHandler((MsgHandler) &LsLevelThread::handle_Default);
   // register SMsg message handlers
@@ -157,6 +164,7 @@ void LsLevelThread::register_handlers()
 
 void LsLevelThread::handle_Default(LmSrvMesgBuf* msgbuf, LmConnection* conn)
 {
+  TLOG_Debug(_T("In LsLevelThread::handle_Default"));
   DEFMETHOD(LsLevelThread, handle_Default);
   DECLARE_TheLineNum;
   HANDLER_ENTRY(false);
@@ -170,6 +178,7 @@ void LsLevelThread::handle_Default(LmSrvMesgBuf* msgbuf, LmConnection* conn)
 
 void LsLevelThread::handle_SMsg_Ping(LmSrvMesgBuf* msgbuf, LmConnection* conn)
 {
+  TLOG_Debug(_T("In LsLevelThread::handle_SMsg_Ping"));
   DEFMETHOD(LsLevelThread, handle_SMsg_Ping);
   DECLARE_TheLineNum;
   HANDLER_ENTRY(false);
@@ -197,6 +206,7 @@ void LsLevelThread::handle_SMsg_UniverseBroadcast(LmSrvMesgBuf* msgbuf, LmConnec
 {	
 	DEFMETHOD(LsLevelThread, handle_SMsg_UniverseBroadcast);
 	DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread::handle_SMsg_UniverseBroadcast"));
 	HANDLER_ENTRY(false);
 	//TLOG_Warning(_T("%s: recv bcast msg"), method);
 	CHECK_CONN_NONNULL();
@@ -224,6 +234,7 @@ void LsLevelThread::handle_SMsg_LevelLogin(LmSrvMesgBuf* msgbuf, LmConnection* c
 {
   DEFMETHOD(LsLevelThread, handle_SMsg_LevelLogin);
   DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread::handle_SMsg_LevelLogin"));
   HANDLER_ENTRY(false);
   // pre-conditions
   CHECK_CONN_NONNULL();
@@ -343,6 +354,7 @@ void LsLevelThread::handle_SMsg_LevelLogin(LmSrvMesgBuf* msgbuf, LmConnection* c
 
 void LsLevelThread::handle_SMsg_Error(LmSrvMesgBuf* msgbuf, LmConnection* conn)
 {
+  TLOG_Debug(_T("In LsLevelThread::handle_SMsg_Error"));
   DEFMETHOD(LsLevelThread, handle_SMsg_Error);
   DECLARE_TheLineNum;
   HANDLER_ENTRY(false);
@@ -362,6 +374,7 @@ void LsLevelThread::handle_SMsg_Login(LmSrvMesgBuf* msgbuf, LmConnection* conn)
 {
   DEFMETHOD(LsLevelThread, handle_SMsg_Login);
   DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread::handle_SMsg_Login"));
   HANDLER_ENTRY(false);
   // pre-conditions
   CHECK_CONN_NONNULL();
@@ -389,6 +402,7 @@ void LsLevelThread::handle_SMsg_Logout(LmSrvMesgBuf* msgbuf, LmConnection* conn)
   DEFMETHOD(LsLevelThread, handle_SMsg_Logout);
   DECLARE_TheLineNum;
   HANDLER_ENTRY(false);
+  TLOG_Debug(_T("In handle_SMsg_Logout"));
   // pre-conditions
   CHECK_CONN_NONNULL();
   // accept message
@@ -412,6 +426,7 @@ void LsLevelThread::handle_SMsg_Logout_GSRV(LmConnection* gsconn)
 {
   DEFMETHOD(LsLevelThread, handle_SMsg_Logout_GSRV);
   DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread::handle_SMsg_Logout_GSRV"));
   // get players
   LsPlayerList players;
   main_->PlayerSet()->GetPlayerList(players);
@@ -446,6 +461,7 @@ void LsLevelThread::handle_SMsg_GetServerStatus(LmSrvMesgBuf* msgbuf, LmConnecti
 {
   DEFMETHOD(LsLevelThread, handle_SMsg_GetServerStatus);
   DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread::handle_SMsg_GetServerStatus"));
   HANDLER_ENTRY(false);
   // pre-conditions
   CHECK_CONN_NONNULL();
@@ -483,6 +499,7 @@ void LsLevelThread::handle_SMsg_DumpState(LmSrvMesgBuf* msgbuf, LmConnection* co
 {
   DEFMETHOD(LsLevelThread, handle_SMsg_DumpState);
   DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread::handle_SMsg_DumpState"));
   HANDLER_ENTRY(false);
   // pre-conditions
   CHECK_CONN_NONNULL();
@@ -523,6 +540,7 @@ void LsLevelThread::handle_SMsg_RotateLogs(LmSrvMesgBuf* msgbuf, LmConnection* c
 {
   DEFMETHOD(LsLevelThread, handle_SMsg_RotateLogs);
   DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread::handle_SMsg_RotateLogs"));
   HANDLER_ENTRY(false);
   // pre-conditions
   CHECK_CONN_NONNULL();
@@ -549,7 +567,7 @@ void LsLevelThread::handle_SMsg_ResetPort(LmSrvMesgBuf* msgbuf, LmConnection* co
 {
   DEFMETHOD(LsLevelThread, handle_SMsg_ResetPort);
   DECLARE_TheLineNum;
-
+  TLOG_Debug(_T("In LsLevelThread::handle_SMsg_ResetPort"));
   HANDLER_ENTRY(false);
 
   // pre-conditions
@@ -578,6 +596,7 @@ void LsLevelThread::handle_SMsg_LS_Action(LmSrvMesgBuf* msgbuf, LmConnection* co
 {
   DEFMETHOD(LsLevelThread, handle_SMsg_LS_Action);
   DECLARE_TheLineNum;
+  TLOG_Debug(_T("In LsLevelThread::handle_SMsg_LS_Action"));
   HANDLER_ENTRY(false);
   // pre-conditions
   CHECK_CONN_NULL();
@@ -588,6 +607,7 @@ void LsLevelThread::handle_SMsg_LS_Action(LmSrvMesgBuf* msgbuf, LmConnection* co
   switch (msg.Action()) {
   case SMsg_LS_Action::ACTION_EXIT:
   case SMsg_LS_Action::ACTION_RESTART: // deprecated
+    TLOG_Debug(_T("In handle_SMsg_LS_Action, we were told to exit or restart"));
     handle_SMsg_LS_Action_Exit();
     break;
   case SMsg_LS_Action::ACTION_HEARTBEAT:
@@ -657,7 +677,7 @@ void LsLevelThread::handle_SMsg_LS_Action_Exit()
 #ifdef WIN32
   Sleep(5000);
 #else
-  pth_sleep(5);
+  st_sleep(5);
 #endif
 
   if (main_->LevelState()->SaveToDB() < 0) {
@@ -724,6 +744,7 @@ void LsLevelThread::send_RMsg_CupSummons(LmConnection* conn, lyra_id_t playerid,
 
 void LsLevelThread::send_SMsg_ServerStatus(LmConnection* conn)
 {
+  TLOG_Debug(_T("In LsLevelThread::send_SMsg_ServerStatus"));
   SMsg_ServerStatus msg;
   // get playerlist
   LsPlayerList plist;
@@ -750,6 +771,7 @@ void LsLevelThread::send_SMsg_ServerStatus(LmConnection* conn)
 
 void LsLevelThread::send_SMsg_ConnStatus(LmConnection* conn)
 {
+  TLOG_Debug(_T("In LsLevelThread::send_SMsg_ConnStatus"));
   DEFMETHOD(LsLevelThread, send_SMsg_ConnStatus);
   SMsg_ConnStatus msg;
   LmConnectionList conn_list;
@@ -769,6 +791,7 @@ void LsLevelThread::send_SMsg_ConnStatus(LmConnection* conn)
 
 void LsLevelThread::send_SMsg_PlayerStatus(LmConnection* conn, lyra_id_t playerid)
 {
+  TLOG_Debug(_T("In LsLevelThread::send_SMsg_PlayerStatus"));
   SMsg_PlayerStatus msg;
   // get player
   LsPlayer* player = main_->PlayerSet()->GetPlayer(playerid);

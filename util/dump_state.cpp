@@ -39,7 +39,7 @@ int _tmain(int argc, TCHAR** argv)
     bail(_T("usage: dump_state hostid [universe]"));
   }
 
-  pth_init();
+  st_init();
 
   // list players?
   // get target hostid ("all" == all hosts)
@@ -108,7 +108,7 @@ int _tmain(int argc, TCHAR** argv)
   }
   fclose(outf);
   LmDELETE(serverdbc_);
-  pth_kill();
+  //st_kill();
   return 0;
 }
 

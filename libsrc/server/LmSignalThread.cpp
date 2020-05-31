@@ -57,7 +57,7 @@ LmSignalThread::LmSignalThread(LmMesgBufPool* bufpool, LmLog* log)
   ts_.tv_sec = 15;
   ts_.tv_nsec = 0;
 
-  // to use the pth_sigwait, we must add the signals one by one
+  // to use the st_sigwait, we must add the signals one by one
   // note: use of all signals except SIGTERM deprecated
   sigemptyset(&allsigs_);
   sigaddset(&allsigs_, SIGTERM);
@@ -93,14 +93,14 @@ void LmSignalThread::Run()
   // modified LmThread main loop
   SetDone(false);
   // unblock all signals
-  pth_sigmask(SIG_UNBLOCK, &allsigs_, NULL);
+  sigprocmask(SIG_UNBLOCK, &allsigs_, NULL);
   while (!Done()) {
     int sig = WaitForSignal();
     if (sig != -1) {
       HandleSignal(sig);
     }
     HandleAvailableMessages();
-    Yield();
+    ThreadYield();
   }
   DoneRunning();
 #endif
@@ -116,10 +116,23 @@ int LmSignalThread::WaitForSignal()
 #ifndef WIN32
   DECLARE_TheLineNum;
   // wait for any and all signals that can be caught
-  int rc = sigwait(&allsigs_, &sig);
-  if (rc < 0) {
-    return -1;
-  }
+  struct timespec timeout;
+  timeout.tv_sec = 0;
+  timeout.tv_nsec = 1000000;  //0.0001 seconds
+  int rc = -1;
+  do {
+    rc = sigtimedwait(&allsigs_, NULL, &timeout);
+    // int rc = sigwait(&allsigs_, &sig);
+    // if (rc < 0) {
+    //   return -1;
+    // }
+    if(rc == -1 && errno == EINTR || errno == EINVAL) {
+      return -1;
+    }
+    if(rc >= 0)
+      return rc;
+    st_usleep(1); // 0.1 millisecond
+  } while(rc < 0);
 #endif
   return sig;
 }

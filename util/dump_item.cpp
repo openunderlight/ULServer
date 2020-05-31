@@ -16,7 +16,7 @@
 
 int _tmain(int argc, TCHAR** argv)
 {
-  pth_init();
+  st_init();
   // if there's an argument, it is the item string, otherwise prompt for it
   TCHAR itemstr[80];
   if (argc == 2) {
@@ -35,7 +35,7 @@ int _tmain(int argc, TCHAR** argv)
    _tprintf(_T("Item Dump:\n\n"));
     item.Dump(stdout);
   }
-  pth_kill();
+  //st_kill();
   return 0;
 }
 

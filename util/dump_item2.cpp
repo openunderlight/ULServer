@@ -16,7 +16,7 @@
 
 int _tmain(int argc, TCHAR** argv)
 {
-  pth_init();
+  st_init();
   // if there are 5 arguments, treat them as item state
   int h1, h2, s1, s2, s3;
   h1 = h2 = s1 = s2 = s3 = 0;
@@ -39,7 +39,7 @@ int _tmain(int argc, TCHAR** argv)
  _tprintf(_T("Item Dump:\n\n"));
   item.Dump(stdout);
 
-  pth_kill();
+  //st_kill();
  
   return 0;
 }

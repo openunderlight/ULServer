@@ -32,6 +32,7 @@ class LmThread : public PTh {
 public:
 
   LmThread(LmMesgBufPool* bufpool, LmLog* log);
+  LmThread(LmMesgBufPool* bufpool, LmLog* log, char* name);
   virtual ~LmThread();
 
   void PassMessage(LmSrvMesgBuf* msgbuf, LmConnection* conn);
@@ -79,6 +80,8 @@ protected:
 
   bool Done() const;
   void SetDone(bool done = true);
+  //virtual void Yield();
+  void ThreadYield();
 
 private:
 
@@ -98,6 +101,9 @@ private:
   LmConnection* curr_conn_;
   LmSrvMesgBuf* curr_mbuf_;
   LmLog* log_;
+  unsigned long long ticks;
+  unsigned long long ticknum;
+  char *classname;
   //PthCond condition_;
   //PthMutex mutex_;
 

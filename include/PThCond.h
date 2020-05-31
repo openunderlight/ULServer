@@ -41,7 +41,7 @@ private:
 #ifdef WIN32
   pthread_cond_t cond_;
 #else
-  pth_cond_t cond_;
+  st_cond_t cond_;
 #endif
 
 };

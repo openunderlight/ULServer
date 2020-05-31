@@ -84,7 +84,7 @@ void LsPositionThread::Run()
   while (!Done()) {
     HandleUDP();
     HandleAvailableMessages();
-    Yield();
+    ThreadYield();
   }
   DoneRunning();
 }
@@ -104,11 +104,11 @@ void LsPositionThread::HandleUDP()
   FD_ZERO(&fds);
   FD_SET(usock_->Descriptor(), &fds);
 
- // TLOG_Error(_T("%s: In HandleUDP() in Position Thread; pid = %d"), method, getpid());
+  //  TLOG_Debug(_T("%s: In HandleUDP() in Position Thread; pid = %d"), method, getpid());
 #ifdef WIN32
   int rc = select(usock_->Descriptor() + 1, &fds, NULL, NULL, &tv);
 #else
-  int rc = pth_select(usock_->Descriptor() + 1, &fds, NULL, NULL, &tv);
+  int rc = select(usock_->Descriptor() + 1, &fds, NULL, NULL, &tv);
 #endif
   if (rc < 0) {
     TLOG_Error(_T("%s: select: %s"), method, strerror(errno));
@@ -321,7 +321,7 @@ void LsPositionThread::handle_RMsg_Update(LmSrvMesgBuf* msgbuf, LmSockAddrInet& 
   //TLOG_Debug(_T("%s: received peer update from player %u"), playerid);
   msg.PeerUpdate().SetRealtimeID(player->RealtimeID());
 
-  //TLOG_Debug(_T("got peer update packet from player %u on port %d; x= %d, y=%d, z=%d, rtid=%d"), playerid, caddr.Port(), msg.PeerUpdate().X(), msg.PeerUpdate().Y(), msg.PeerUpdate().Z(), player->RealtimeID());
+  //TLOG_Debug(_T("got peer update packet from player %u on port %d; x= %d, y=%d, rtid=%d"), playerid, caddr.Port(), msg.PeerUpdate().X(), msg.PeerUpdate().Y(), player->RealtimeID());
 
   player->SetPlayerUpdate(msg.PeerUpdate());
 }

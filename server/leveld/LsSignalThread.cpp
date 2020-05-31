@@ -94,7 +94,7 @@ void LsSignalThread::Run()
 {
   DECLARE_TheLineNum;
   //  TLOG_Debug(_T("Signal thread starting"));
-  //  TLOG_Debug(_T("%d ready, %d running, %d new, %d dead threads"), pth_ctrl(PTH_CTRL_GETTHREADS_READY), pth_ctrl(PTH_CTRL_GETTHREADS_RUNNING), pth_ctrl(PTH_CTRL_GETTHREADS_NEW), pth_ctrl(PTH_CTRL_GETTHREADS_DEAD));
+  //  TLOG_Debug(_T("%d ready, %d running, %d new, %d dead threads"), st_ctrl(PTH_CTRL_GETTHREADS_READY), st_ctrl(PTH_CTRL_GETTHREADS_RUNNING), st_ctrl(PTH_CTRL_GETTHREADS_NEW), st_ctrl(PTH_CTRL_GETTHREADS_DEAD));
   LmSignalThread::Run();
 }
 

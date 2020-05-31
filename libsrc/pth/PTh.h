@@ -24,6 +24,7 @@ class PTh
 public:
 
   PTh();
+  PTh(char*);
   virtual ~PTh();
 
   // API methods
@@ -38,14 +39,18 @@ public:
   // is thread active?
   bool IsRunning() const;
   bool IsActive() const;
+  const char* GetName() const;
+
+  static int PthKey;
+  static PTh* PthFromSt(st_thread_t thread);
 
  
 #ifdef WIN32
   pthread_t Thread() const;  // return this thread's id
   static pthread_t Self(); // return caller's id
 #else
-  pth_t Thread() const;  // return this thread's id
-  static pth_t Self(); // return caller's id
+  st_thread_t Thread() const;  // return this thread's id
+  static st_thread_t Self(); // return caller's id
 #endif
 
   // print contents
@@ -88,12 +93,13 @@ private:
   static void* entry(void *arg);
 
   char* stackaddr_;
+  char* name_;
 
   // thread id
 #ifdef WIN32
   pthread_t thread_;
 #else
-  pth_t thread_;
+  st_thread_t thread_;
 #endif
 
   // prevent multiple calls to Create()

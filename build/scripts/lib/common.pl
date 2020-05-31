@@ -10,6 +10,9 @@ $ENV{UL_PW_FILE} = $ENV{UL_HOME} . "/lyra/src/pw.txt";
 # this is kinda ugly and slow, but its simple and it works
 
 $db_host = LookupDBHost();
+if($db_host == "localhost") {
+  $db_host = "127.0.0.1";
+}
 $db_port = LookupDBPort();
 $mysql_db = "DBI:mysql:mysql:$db_host:$db_port";
 $billing_db = "DBI:mysql:ul_billing:$db_host:$db_port";

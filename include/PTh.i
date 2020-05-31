@@ -4,6 +4,8 @@
 //
 // optionally inlined methods
 
+#include <st.h>
+
 INLINE bool PTh::IsRunning() const
 {
   return running_;
@@ -18,7 +20,7 @@ INLINE bool PTh::IsActive() const
   return true;
   //return (pthread_kill(thread_, 0) == 0);
 #else
-  return pth_raise(thread_, 0);
+  return true;
 #endif
 }
 
@@ -30,7 +32,7 @@ INLINE void PTh::DoneRunning()
 #ifdef WIN32
 INLINE pthread_t PTh::Thread() const
 #else
-INLINE pth_t PTh::Thread() const
+INLINE st_thread_t PTh::Thread() const
 #endif
 {
   return thread_;
@@ -38,11 +40,8 @@ INLINE pth_t PTh::Thread() const
 
 INLINE int PTh::Cancel()
 {
-#ifdef WIN32
-  return pthread_cancel(thread_);
-#else
-  return pth_cancel(thread_);
-#endif
+  st_thread_interrupt(thread_);
+  return 0;
 }
 
 INLINE void PTh::Exit(void* status)
@@ -50,7 +49,7 @@ INLINE void PTh::Exit(void* status)
 #ifdef WIN32
   pthread_exit(status);
 #else
-  pth_exit(status);
+  st_thread_exit(status);
 #endif
 }
 
@@ -59,7 +58,7 @@ INLINE int PTh::Join(void** status)
 #ifdef WIN32
   return pthread_join(thread_, status);
 #else
-  return pth_join(thread_, status);
+  return st_thread_join(thread_, status);
 #endif
 }
 
@@ -70,9 +69,9 @@ INLINE pthread_t PTh::Self()
   return pthread_self();
 }
 #else
-INLINE pth_t PTh::Self()
+INLINE st_thread_t PTh::Self()
 {
-  return pth_self();
+  return st_thread_self();
 }
 #endif
 
@@ -84,7 +83,7 @@ INLINE void PTh::YieldSlice()
 #else
 INLINE void PTh::Yield()
 {
-  pth_yield(NULL);
+  st_usleep(1);
 }
 #endif
 

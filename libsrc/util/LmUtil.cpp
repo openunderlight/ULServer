@@ -115,8 +115,8 @@ void LmUtil::BlockAllSignals()
   sigset_t ss;
   //  sigemptyset(&ss);
   sigfillset(&ss);
-  //  sigprocmask(SIG_BLOCK, &ss, 0);
-  pth_sigmask(SIG_SETMASK, &ss, 0);
+  sigprocmask(SIG_BLOCK, &ss, 0);
+  //st_sigmask(SIG_SETMASK, &ss, 0);
 #endif
 }
 
@@ -130,7 +130,7 @@ void LmUtil::UnBlockAllSignals()
   sigset_t ss;
   //  sigemptyset(&ss);
   sigfillset(&ss);
-  pth_sigmask(SIG_UNBLOCK, &ss, 0);
+  sigprocmask(SIG_UNBLOCK, &ss, 0);
 #endif
 }
 
@@ -145,7 +145,7 @@ void LmUtil::SendMail(const TCHAR* source, const TCHAR* target, const TCHAR* sub
   // we do this by first creating a temp file with the headers/message, and then
   // running "sendmail -t" to send it.  simplicity itself...  who needs MAPI?  :)
 
-#if 0
+
 #ifdef WIN32
 	// NO EMAIL SUPPORT YET FOR WIN32 PORT
 #else
@@ -178,7 +178,6 @@ void LmUtil::SendMail(const TCHAR* source, const TCHAR* target, const TCHAR* sub
  _tsystem(cmd);
   // remove temp file
   _tunlink(tmpfname);
-#endif
 #endif
 }
 

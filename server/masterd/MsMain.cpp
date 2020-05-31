@@ -89,6 +89,8 @@ int MsMain::Init(const TCHAR* root_dir)
     return -1;
   }
 
+  st_init();
+
   // get host IP address in string form
   //hostent* lphp = gethostbyname(hostname_);
   

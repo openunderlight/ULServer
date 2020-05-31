@@ -24,6 +24,7 @@ public:
   LmLocker(const PThMutex& m);
   ~LmLocker();
 
+  void ReLock(); // explicitly relock mutex
   void UnLock(); // explicitly unlock mutex
 
 private:

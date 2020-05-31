@@ -15,7 +15,7 @@
 
 int _tmain(int argc, TCHAR** argv)
 {
-  pth_init();
+  st_init();
 
   // load server database
   TCHAR root_dir[FILENAME_MAX] = _T("/opt/lyra/ul/prod/");
@@ -33,7 +33,7 @@ int _tmain(int argc, TCHAR** argv)
   serverdbc_->Dump(stdout);
   LmDELETE(serverdbc_);
 
-  pth_kill();
+  //st_kill();
 
   return 0;
 }

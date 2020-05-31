@@ -93,7 +93,7 @@ void LmNetworkInput::Run()
   while (!Done()) {
     HandleNetworkInput();
     HandleAvailableMessages();
-    Yield();
+    ThreadYield();
   }
   DoneRunning();
 }

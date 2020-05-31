@@ -13,7 +13,7 @@
         (ts)->tv_sec = (tv)->tv_sec;                                    \
         (ts)->tv_nsec = (tv)->tv_usec * 1000;}
 #endif
-
+#include <sys/time.h>
 
 INLINE LmTimer::LmTimer(unsigned long* accum)
   : accum_(accum)

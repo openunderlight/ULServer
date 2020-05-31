@@ -20,7 +20,8 @@ INLINE int PThMutex::Init()
 #ifdef WIN32
   return pthread_mutex_init(&mutex_, 0);
 #else
-  return pth_mutex_init(&mutex_);
+  mutex_ = st_mutex_new();
+  return 0;
 #endif
 }
 
@@ -29,7 +30,10 @@ INLINE int PThMutex::Lock()
 #ifdef WIN32
   return pthread_mutex_lock(&mutex_);
 #else
-  return pth_mutex_acquire(&mutex_, FALSE, NULL);
+  int rv = st_mutex_lock(mutex_);
+  if(rv == EDEADLK)
+    return 0;
+  return rv;
 #endif
 }
 
@@ -38,7 +42,7 @@ INLINE int PThMutex::TryLock()
 #ifdef WIN32
   return pthread_mutex_trylock(&mutex_);
 #else
-  return pth_mutex_acquire(&mutex_, TRUE, NULL);
+  return st_mutex_trylock(mutex_);
 #endif
 }
 
@@ -47,6 +51,6 @@ INLINE int PThMutex::UnLock()
 #ifdef WIN32
   return pthread_mutex_unlock(&mutex_);
 #else
-  return pth_mutex_release(&mutex_);
+  return st_mutex_unlock(mutex_);
 #endif
 }

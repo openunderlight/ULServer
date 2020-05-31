@@ -1098,7 +1098,7 @@ void GsGameThread::handle_SMsg_GS_Action_Exit()
 #ifdef WIN32
   Sleep(5000);
 #else
-  pth_sleep(5); // wait for those messages to get sent
+  st_sleep(5); // wait for those messages to get sent
 #endif
   // initialize exit message
   SMsg_GS_Action msg;
@@ -1109,7 +1109,7 @@ void GsGameThread::handle_SMsg_GS_Action_Exit()
 #ifdef WIN32
   Sleep(5000);
 #else
-  pth_sleep(5); 
+  st_sleep(5); 
 #endif
   // then wait until all player threads have exited, or up to a minute
   for (int i = 0; i < 30; ++i) {
@@ -1117,14 +1117,14 @@ void GsGameThread::handle_SMsg_GS_Action_Exit()
 #ifdef WIN32
   Sleep(2000);
 #else
-  pth_sleep(2); 
+  st_sleep(2); 
 #endif
     }
   }
 #ifdef WIN32
   Sleep(5000);
 #else
-  pth_sleep(5); 
+  st_sleep(5); 
 #endif
   // then exit ourselves
   SetDone();

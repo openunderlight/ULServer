@@ -19,7 +19,7 @@
 
 int _tmain(int argc, TCHAR** argv)
 {
-  pth_init();
+  st_init();
   
   // check args
   if (argc != 2) {
@@ -105,7 +105,7 @@ int _tmain(int argc, TCHAR** argv)
   // remove player db file
   _tunlink(infile);
 
-  pth_kill();
+  //st_kill();
 
   return 0;
 }
