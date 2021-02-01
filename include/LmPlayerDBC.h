@@ -84,7 +84,8 @@ public:
   int LocateMares(GMsg_LocateMaresAck* pmare_msg);
   int FindHouseMembers(GMsg_LocateAvatarAck& locate_msgack, lyra_id_t guild_id, bool gm, lyra_id_t player_id);
   int NewlyNeedsAnnounce(lyra_id_t player_id, bool* announce);
-
+  int GetLoggedInPlayersForGamed(unsigned int gamed_port, unsigned int* num_players, lyra_id_t** player_list);
+  int ForceDeghost(lyra_id_t player_id);
   long LastSQLCode() const;
 
   void SetLog(LmLog* log);

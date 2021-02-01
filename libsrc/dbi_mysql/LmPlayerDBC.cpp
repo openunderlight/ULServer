@@ -2337,3 +2337,54 @@ int LmPlayerDBC::LogQuest(lyra_id_t origin_id, lyra_id_t target_id, int art, int
 
    return 0;
 }
+
+int LmPlayerDBC::GetLoggedInPlayersForGamed(unsigned int gamed_port, unsigned int* num_players, lyra_id_t** player_list)
+{
+	DEFMETHOD(LmPlayerDBC, GetLoggedInPlayersForGamed);
+	LmLocker mon(lock_);
+	TCHAR query[512];
+	MYSQL_RES* res;
+	MYSQL_ROW row;
+
+	_stprintf(query, _T("SELECT player_id FROM player WHERE logged_in=1 and gamed_port=%u"), gamed_port);	
+	int error = mysql_query(&m_mysql, query);
+	if(error)
+	{
+		LOG_Error(_T("%s: Could not get logged in players for gamed %u"), method, gamed_port);
+		return MYSQL_ERROR;
+	}
+
+        res = mysql_store_result(&m_mysql);
+        *num_players = mysql_num_rows(res);
+        
+        if (!(*num_players))
+        {
+                mysql_free_result(res);
+                return 0;
+        }
+	
+	*player_list = new lyra_id_t[*num_players];
+        for (int i=0; i<*num_players; i++) {
+        	row = mysql_fetch_row(res);
+		(*player_list)[i] = ATOI(row[0]);
+                //player_id = ATOI(row[0]);
+	}
+
+	return 0;
+}
+
+int LmPlayerDBC::ForceDeghost(lyra_id_t player_id)
+{
+	DEFMETHOD(LmPlayerDBC, ForceDeghost);
+	LmLocker mon(lock_);
+	TCHAR query[512];
+	_stprintf(query, _T("UPDATE player SET logged_in=0,level_id=0,room_id=0 WHERE player_id=%u"), player_id);
+	int error = mysql_query(&m_mysql, query);
+	if(error)
+	{
+		LOG_Error(_T("%s: Could not force deghost player %u for gamed %u"), method, player_id);
+		return MYSQL_ERROR;
+	}
+
+	return 0;
+}
