@@ -29,11 +29,11 @@ Find us in Discord: https://discord.gg/yuDngyj
 
 `yum groupinstall -y "Development Tools"`
 
-`yum install -y bind-utils network-tools pwgen \ 
+```yum install -y bind-utils network-tools pwgen \ 
                 p7zip tcsh vim-enhanced screen telnet  \
                 wget pth pth-devel gdbm-devel gdbm dbi \
                 zlib-devel asciidoc pkgconfig  \
-                python34 python34-setuptools perl-DBD-mysql`
+                python34 python34-setuptools perl-DBD-mysql```
 
 `easy_install-3.4 pip`
 
@@ -74,12 +74,12 @@ _Note: If this does not work it is possible that meson installed in a directory 
 `cd /etc/yum.repos.d`
 `vim MariaDB.repo`
 * Add this to that file in vim
-`[mariadb]
+```[mariadb]
 name = MariaDB
-baseurl = http://yum.mariadb.org/10.1/centos7-amd64
+baseurl = http://yum.mariadb.org/10.3/centos7-amd64
 gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
 gpgcheck = 1
-`
+```
 
 `yum update -y`
 
