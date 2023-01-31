@@ -62,9 +62,12 @@ Verify: `ninja`
 ### Meson
 
 `pip3 install meson==0.44`
+
 _Note: ==_
 
 Verify: `meson`
+
+_Note: If this does not work it is possible that meson installed in a directory not in your PATH. For me it installed into /usr/local/bin; check to find the meson binary and ensure that that directory is in your PATH. If not export PATH to the correct place._
 
 ### Install MariaDB
 
