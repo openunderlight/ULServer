@@ -41,7 +41,7 @@ Find us in Discord: https://discord.gg/yuDngyj
 
 `cd /usr/src`
 
-`git clone git://github.com/ninja-build/ninja.git`
+`git clone https://github.com/ninja-build/ninja.git`
 
 `cd ninja`
 
