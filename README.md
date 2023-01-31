@@ -37,6 +37,8 @@ Find us in Discord: https://discord.gg/yuDngyj
 
 `easy_install-3.4 pip`
 
+`yum install -y python-pip`
+
 ### Ninja
 
 `cd /usr/src`
