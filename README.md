@@ -33,7 +33,8 @@ Find us in Discord: https://discord.gg/yuDngyj
                 p7zip tcsh vim-enhanced screen telnet  \
                 wget pth pth-devel gdbm-devel gdbm dbi \
                 zlib-devel asciidoc pkgconfig  \
-                python34 python34-setuptools perl-DBD-mysql```
+                python34 python34-setuptools perl-DBD-mysql
+```
 
 `easy_install-3.4 pip`
 
