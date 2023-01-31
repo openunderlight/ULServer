@@ -37,7 +37,9 @@ Find us in Discord: https://discord.gg/yuDngyj
 
 `easy_install-3.4 pip`
 
-`yum install -y python-pip`
+`yum install -y python3-pip`
+
+_Note: You may not need to easy_install AND yum install pip3, but I couldn't get it working without installing via yum. YMMV._
 
 ### Ninja
 
@@ -59,7 +61,8 @@ Verify: `ninja`
 
 ### Meson
 
-`pip3 install meson=0.44`
+`pip3 install meson==0.44`
+_Note: ==_
 
 Verify: `meson`
 
