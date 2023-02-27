@@ -36,7 +36,7 @@ public:
     // owner types
     OWNER_ROOM = 0,    // item owned by room
     OWNER_PLAYER = 1,  // item owned by player
-
+    OWNER_PERSONAL_VAULT = 2, // item in player personal vault
     // return codes
     MYSQL_ERROR = -1, // bad things, man
   };
@@ -64,11 +64,12 @@ public:
   int SetNumDreamers(lyra_id_t level_id, int count);
   int ChangeNumDreamers(lyra_id_t level_id, int change);
   int GetTotalNumDreamers(unsigned int* total);
-
+  int PutItemInPersonalVault(lyra_id_t playerId, const LmRoomItem& item);
   // database selectors
   int GetPlayerInventory(lyra_id_t owner, LmInventory& inventory);
   int GetLevelItems(lyra_id_t level_id, int* item_ids);
   int GetRoomItems(lyra_id_t level_id, lyra_id_t room_id, LmRoomItemList& room_items);
+  int GetPersonalVaultItems(lyra_id_t player_id, LmRoomItemList& room_items);
   int GetItemDescription(int item_id, TCHAR* description); 
   int GetDreamerLocations(lyra_id_t* level_ids, int accountType);
   

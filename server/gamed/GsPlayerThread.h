@@ -179,6 +179,7 @@ private:
   void send_RMsg_PlayerMsg_SelfTrain(int art, bool success);
   void send_RMsg_PlayerMsg_GratitudeAck(bool success);
   void send_RMsg_PlayerMsg_GrantPPoint(lyra_id_t target);
+  void send_RMsg_PlayerMsg_PersonalVault(bool success);
 
   // message handler auxiliary methods
   void perform_locateavatar(lyra_id_t playerid, const TCHAR* playername);

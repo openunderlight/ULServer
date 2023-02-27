@@ -180,8 +180,11 @@ public:
 
   void SaveReturnInfo();
   void SaveRecallInfo();
+  void SavePersonalVaultReturnInfo();
   void SaveGoalReturnInfo();
   void SaveSummonInfo(bool initial);
+  void SetInPersonalVault(bool inVault);
+  bool InPersonalVault();  
 
   bool CanAddItem(const LmItemHdr& itemhdr) const;
   bool CanCreateItem(const LmItem& item) const;
@@ -303,7 +306,11 @@ private:
   lyra_id_t g_levelid_;        // ID of level player left to read goals
   lyra_id_t g_roomid_;         // ID of room player left to read goals
   
+  lyra_id_t pv_levelid_;
+  lyra_id_t pv_roomid_;
+  
   bool is_being_summoned_;
+  bool inPersonalVault_;
 
   std::list<LmItem> d_items_;       // items being dropped
   std::list<LmItemHdr> p_items_;    // items being picked up

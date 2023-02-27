@@ -3024,6 +3024,7 @@
 #define IDS_NOT_ENOUGH_PT_DC            4497
 #define IDS_DISTRESS_CALL_HOUSEMEMBERS  4498
 #define IDS_DISTRESS_CALL_UNS           4499
+#define IDS_PERSONAL_VAULT		4500
 
 #define IDC_AVATAR_COMBO                16666
 

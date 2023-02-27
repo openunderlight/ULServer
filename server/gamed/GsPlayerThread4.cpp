@@ -266,6 +266,14 @@ void GsPlayerThread::send_RMsg_PlayerMsg_Ascend(int guild, bool success)
   main_->OutputDispatch()->SendMessage(&msg, player_->Connection());
 }
 
+void GsPlayerThread::send_RMsg_PlayerMsg_PersonalVault(bool success)
+{
+  RMsg_PlayerMsg msg;
+  msg.Init(player_->PlayerID(), player_->PlayerID(), RMsg_PlayerMsg::PERSONAL_VAULT_ACK);
+  msg.SetState1(success);
+  main_->OutputDispatch()->SendMessage(&msg, player_->Connection());
+}
+
 ////
 // send_RMsg_PlayerMsg_SelfTrain - send to player
 ////

@@ -387,6 +387,33 @@ int LmItemDBC::UpdateItemFullState(const LmItem& item)
 
 }
 
+int LmItemDBC::PutItemInPersonalVault(lyra_id_t playerId, const LmRoomItem& item)
+{
+	DEFMETHOD(LmItemDBC, PutItemInPersonalVault);
+	LmLocker mon(lock_);
+	TCHAR query[256];
+	TCHAR escaped_name[40];
+
+  	mysql_escape_string((TCHAR*)escaped_name, item.Item().Name(),_tcslen(item.Item().Name()));
+
+	 _stprintf(query, _T("UPDATE item SET owner_type=%u, owner_id=%u, owner_subid=0, x=%d, y=%d WHERE item_id = %u;"), OWNER_PERSONAL_VAULT, playerId, item.Position().X(), item.Position().Y(), item.Item().Serial());
+
+  ////timer.Start();
+  int error = mysql_query(&m_mysql, query);
+  ////timer.Stop();  
+
+  //  delete escaped_name;
+
+  if (error)
+    {
+      LOG_Error(_T("Could not update item full state; mysql error %s"), mysql_error(&m_mysql));
+      return MYSQL_ERROR;
+    }
+
+     
+  return 0;
+}
+
  
 ////
 // UpdateRoomItem - update state of an item in a room (serial, state, name, x, y)
@@ -779,6 +806,115 @@ int LmItemDBC::GetRoomItems(lyra_id_t level_id, lyra_id_t room_id, LmRoomItemLis
 
 }
 
+
+int LmItemDBC::GetPersonalVaultItems(lyra_id_t player_id, LmRoomItemList& room_items) {
+
+  DEFMETHOD(LmItemDBC, GetRoomItems);
+  LmLocker mon(lock_); // lock object for method duration
+  //LmFuncTimer( timernum_calls_, num_ms_, last_ms_); // time function
+  ////LmTimer timer(&sql_ms_); // timer for SQL statements
+  MYSQL_RES* res;
+  MYSQL_ROW row;
+  int i, num_items = 0;
+  TCHAR query[256];
+ 
+  // zero out result variables (only zero out id's, rest are invalid if id is unknown)
+
+  for (LmRoomItemList::iterator it = room_items.begin(); !(bool)(it == room_items.end()); ++it) {
+    LmRoomItem& ritem = *it;
+    ritem.Item().Header().SetSerial(Lyra::ID_UNKNOWN);
+  }
+
+ _stprintf(query, _T("SELECT count(item_id) FROM item WHERE owner_id = %u AND owner_type = %u;"), player_id, OWNER_PERSONAL_VAULT);
+
+  ////timer.Start();
+  int error = mysql_query(&m_mysql, query);
+  ////timer.Stop();
+  if (error)
+    {
+      LOG_Error(_T("Could not get room item count; mysql error %s"), mysql_error(&m_mysql));
+      return MYSQL_ERROR;
+    }
+
+  res = mysql_store_result(&m_mysql);
+
+  num_items = mysql_num_rows(res);
+
+  mysql_free_result(res);
+
+  if (num_items > Lyra::MAX_ROOMITEMS) {
+    // room has more items than server can handle -- burn 'em!
+
+    LOG_Warning(_T("%s: deleting items from player %d, (DB has %d)"), method, player_id, num_items);
+
+   _stprintf(query, _T("DELETE FROM item WHERE owner_id = %u AND owner_type = %u AND (item_name LIKE '%s' OR item_name LIKE '%s' OR item_name LIKE '%s' OR item_name LIKE '%s'OR item_name LIKE '%s')"), player_id, OWNER_PERSONAL_VAULT, _T("\%Essence"), _T("\%Elemen"), _T("\%Alteror"), _T("\%Charm"), _T("\%Chakram"));
+
+    ////timer.Start();
+    int error = mysql_query(&m_mysql, query);
+    ////timer.Stop();
+    if (error)
+      {
+	LOG_Error(_T("Could not get room item count; mysql error %s"), mysql_error(&m_mysql));
+	return MYSQL_ERROR;
+      }
+
+    res = mysql_store_result(&m_mysql);
+
+    int num_deleted_items = mysql_affected_rows(&m_mysql);
+
+    mysql_free_result(res);
+
+    if ((num_items - num_deleted_items) > Lyra::MAX_ROOMITEMS)
+      {
+	LOG_Error(_T("%s: deleted %d room items, but still %d remaining - can not start\n"), method, num_deleted_items, num_items);
+	return MYSQL_ERROR;
+      }
+
+  } // end if too many items in DB for server to handle
+
+
+  // else: not too many items, load their ids
+
+ _stprintf(query, _T("SELECT item_id, item_hdr, item_state1, item_state2, item_state3, item_name, x, y, item_hdr_2 FROM item WHERE owner_id = %u AND owner_type = %u;"), player_id, OWNER_PERSONAL_VAULT);
+
+  ////timer.Start();
+  error = mysql_query(&m_mysql, query);
+  ////timer.Stop();
+
+  if (error)
+    {
+      LOG_Error(_T("Could not get room items; mysql error %s"), mysql_error(&m_mysql));
+      return MYSQL_ERROR;
+    }
+
+  res = mysql_store_result(&m_mysql);
+
+  num_items = mysql_num_rows(res);
+
+  for (i = 0; i < num_items; ++i) {
+
+    row = mysql_fetch_row(res);
+
+    // if returned id is 0, then we're done
+    if (ATOI(row[0]) == Lyra::ID_UNKNOWN) {
+      break;
+    }
+
+    // create and initialize new room item
+    LmRoomItem ritem; 
+    ritem.Item().Init(ATOI(row[0]), ATOI(row[1]), ATOI(row[8]), row[5], ATOI(row[2]), ATOI(row[3]), ATOI(row[4]));
+    ritem.Position().Init(_ttoi(row[6]), _ttoi(row[7]), 0, 0); // height/angle not stored
+    ritem.SetLifetime(60); // live for a minute after being loaded?
+    // append to list
+    room_items.push_back(ritem);
+  }
+
+  mysql_free_result(res);
+
+  // done
+  return 0;
+
+}
 
 ////
 // GetLevelItems - get item ids that were allocated for a given level, but have not been used

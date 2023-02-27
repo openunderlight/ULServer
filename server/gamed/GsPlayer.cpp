@@ -205,6 +205,7 @@ art_t art_info[NUM_ARTS] = // 		  			    Evoke
 {IDS_ENFEEBLEMENT,					Stats::LUCIDITY,	35, 20, 13, 2, 	 2, LEARN | FOCUS | NEIGH },
 {IDS_DREAMWIDE_EVOKE,				Stats::NO_STAT, 0, 0, 0, 0, -1, SANCT},
 {IDS_DISTRESS_CALL,					Stats::DREAMSOUL, 0, 10, 0, 1, 2, SANCT | LEARN | NEED_ITEM },
+{IDS_PERSONAL_VAULT,				Stats::DREAMSOUL, 0, 15, 0, 15, -1, SANCT | LEARN },
 };
 
 
@@ -684,6 +685,13 @@ void GsPlayer::SaveRecallInfo()
   rc_roomid_ = roomid_;
 }
 
+void GsPlayer::SavePersonalVaultReturnInfo()
+{
+  LmLocker mon(lock_);
+  pv_levelid_ = levelid_;
+  pv_roomid_ = roomid_;
+}
+
 ////
 // SaveGoalReturnInfo
 ////
@@ -831,6 +839,9 @@ bool GsPlayer::CanGotoLevel(lyra_id_t levelid, lyra_id_t roomid) const
   }
   if ((levelid == rc_levelid_) && (roomid == rc_roomid_)) {
     return true; // RECALL point
+  }
+  if((levelid == pv_levelid_) && (roomid == pv_roomid_)) {
+    return true;
   }
   return false;
 }
@@ -1055,7 +1066,8 @@ void GsPlayer::clear_information()
 
   g_levelid_ = 0;
   g_roomid_ = 0;
-
+  pv_levelid_ = 0;
+  pv_roomid_ = 0;
   if (d_items_.size() > 0) {
     d_items_.erase(d_items_.begin(), d_items_.end());
   }

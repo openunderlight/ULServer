@@ -31,6 +31,7 @@
 #include "LmTimer.h"
 #include "LmSockAddrInet.h"
 #include "LmMesgBufPool.h"
+#include "LmRoomItem.h"
 #include "RMsg_All.h"
 #include "GsLevelSet.h"
 #include "GsMacros.h"
@@ -522,26 +523,32 @@ void GsPlayerThread::handle_GMsg_PutItem(LmSrvMesgBuf* msgbuf, LmConnection* con
   CHECK_CONN_ID();
   // accept message
   ACCEPT_MSG(GMsg_PutItem, true); // send error
+ SECLOG(6, "%s: player %u: received PutItem!", method, player_->PlayerID());
+
   // check if player can drop the item
   if (!player_->CanDropItem(msg.ItemHeader())) {
+    SECLOG(6, "%s: player %u can't drop", method, player_->PlayerID());
     TLOG_Warning(_T("%s: player %u cannot drop item"), method, player_->PlayerID());
     send_GMsg_ItemDrop(conn, msg.ItemHeader(), GMsg_ItemDrop::DROP_ERROR);
     return;
   }
   // check that player is in level, and connected to level server
-  if (!player_->InLevel() || !player_->LevelDBC() || !player_->LevelConnection()) {
+  if (!player_->InPersonalVault() && (!player_->InLevel() || !player_->LevelDBC() || !player_->LevelConnection())) {
+    SECLOG(6, "%s: player %u not in level", method, player_->PlayerID());
     TLOG_Warning(_T("%s: player %u not in level"), method, player_->PlayerID());
     send_GMsg_ItemDrop(conn, msg.ItemHeader(), GMsg_ItemDrop::DROP_ERROR);
     return;
   }
   // room 0?
-  if (msg.RoomID() == 0) {
+  if (!player_->InPersonalVault() && msg.RoomID() == 0) {
+    SECLOG(6, "%s: player %u r0", method, player_->PlayerID());
     TLOG_Warning(_T("%s: room 0 detected"), method, msg.RoomID());
     send_GMsg_ItemDrop(conn, msg.ItemHeader(), GMsg_ItemDrop::DROP_ERROR);
     return;
   }
   // check that target room is in player's level
-  if (!player_->LevelDBC()->ContainsRoom(msg.RoomID())) {
+  if (!player_->InPersonalVault() && !player_->LevelDBC()->ContainsRoom(msg.RoomID())) {
+    SECLOG(6, "%s: player %u not in level", method, player_->PlayerID());
     TLOG_Warning(_T("%s: room %u not in level"), method, msg.RoomID());
     send_GMsg_ItemDrop(conn, msg.ItemHeader(), GMsg_ItemDrop::DROP_ERROR);
     return;
@@ -558,7 +565,27 @@ void GsPlayerThread::handle_GMsg_PutItem(LmSrvMesgBuf* msgbuf, LmConnection* con
   // provisionally drop item
   player_->StartItemDrop(tmpitem);
   // send request to level server
-  send_SMsg_PutItem(player_->LevelConnection(), player_->PlayerID(), msg.RoomID(), tmpitem, msg.Position(), msg.TTL());
+  if(!player_->InPersonalVault())
+	  send_SMsg_PutItem(player_->LevelConnection(), player_->PlayerID(), msg.RoomID(), tmpitem, msg.Position(), msg.TTL());
+  else // in vault
+  {
+	LmRoomItem roomitem;
+	roomitem.Init(tmpitem, msg.Position(), GMsg_PutItem::DEFAULT_TTL);
+	int rc = main_->ItemDBC()->PutItemInPersonalVault(player_->PlayerID(), roomitem);
+	if(rc < 0)
+	{
+	        SECLOG(6, "%s: player %u DB ERROR", method, player_->PlayerID());
+		TLOG_Warning(_T("%s: player %u failed to put item in vault - db returned error"), method, player_->PlayerID());
+		player_->EndItemDrop(msg.ItemHeader(), false);
+		send_GMsg_ItemDrop(conn, msg.ItemHeader(), GMsg_ItemDrop::DROP_ERROR);		
+	}
+	else
+	{
+		player_->EndItemDrop(msg.ItemHeader(), true);
+		send_GMsg_ItemDrop(conn, msg.ItemHeader(), GMsg_ItemDrop::DROP_OK);
+	}
+
+  }
   // response: handle_SMsg_ItemDrop
 }
 
@@ -1061,6 +1088,9 @@ void GsPlayerThread::handle_GMsg_GotoLevel(LmSrvMesgBuf* msgbuf, LmConnection* c
   //  SECLOG(-1, _T("%s: player %u: entering level %u, room %u"), method, player_->PlayerID(), levelid, roomid);
   player_->ReceivedUpdate(msg.PeerUpdate()); // so timeout doesn't happen immediately
   player_->GotoLevel(lsconn, ldb, roomid);
+  if(player_->InPersonalVault())
+	player_->SetInPersonalVault(false);
+
   player_->SetInLevel(true);
   // send player login to level server
   // TLOG_Debug(_T("%s: sending login message to level server (conn %p)"), method, lsconn);

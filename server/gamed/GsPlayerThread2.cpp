@@ -48,6 +48,7 @@
 #include "GMsg_LocateMaresAck.h"
 #include "LmPlayerDBC.h"
 #include "LmItemDBC.h"
+#include "LmRoomItemList.h"
 
 ////
 // handle_RMsg_Party
@@ -335,9 +336,10 @@ void GsPlayerThread::handle_RMsg_Speech(LmSrvMesgBuf* msgbuf, LmConnection* conn
 ////
 
 void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* conn)
-{
-  DEFMETHOD(GsPlayerThread, handle_RMsg_PlayerMsg);
+{ 
+ DEFMETHOD(GsPlayerThread, handle_RMsg_PlayerMsg);
  HANDLER_ENTRY(false);
+ TLOG_Debug( _T( "%s: blarggggg" ), method );
   // pre-conditions
   CHECK_CONN_NONNULL();
   CHECK_CONN_ISCLIENT();
@@ -353,7 +355,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
     // TODO: return?  set sender?
   }
   // debug log
-  TLOG_Debug(_T("%s: player %u sending playermsg %d [%d,%d] to %u"), method,
+  SECLOG(5, _T("%s: player %u sending playermsg %d [%d,%d] to %u"), method,
 	     msg.SenderID(), msg.MsgType(), msg.State1(), msg.State1(), msg.ReceiverID());
   // process, depending on type of player message
   // NOTE: this is the client->gs->rs message; the rs->gs->message is in SMsg_Proxy_RMsg_PlayerMsg
@@ -967,6 +969,30 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
     send_to_level = false; // don't ever send to level server
   }
   break;
+
+  case RMsg_PlayerMsg::PERSONAL_VAULT: {
+    SECLOG(7, _T("%s: player %u using PV!"), method, player_->PlayerID());
+    if(player_->DB().Arts().Skill(Arts::PERSONAL_VAULT) > 0) {
+	player_->SavePersonalVaultReturnInfo();
+	player_->SetInPersonalVault(true);
+	send_RMsg_PlayerMsg_PersonalVault(true);
+	LmRoomItemList items;
+	main_->ItemDBC()->GetPersonalVaultItems(player_->PlayerID(), items);
+	int nItems = 0;
+	RMsg_ItemDrop msg_itemdrop;
+	for (LmRoomItemList::const_iterator i = items.begin(); !(bool)(i == items.end()); ++i) {		
+    		LmRoomItem item = *i;
+		msg_itemdrop.SetItem(nItems++, item.Item(), item.Position());
+	}
+	msg_itemdrop.SetNumItems(nItems);
+	main_->OutputDispatch()->SendMessage(&msg_itemdrop, conn);
+    }
+    else
+    {
+    	SECLOG(4, _T("%s: player %u: illegal use of PERSONAL VAULT"), method, player_->PlayerID());
+    }	
+    send_to_level = false;
+  }
 
   // save recall location
   case RMsg_PlayerMsg::RECALL: {            // not used, not used

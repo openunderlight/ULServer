@@ -102,6 +102,17 @@ void GsPlayer::EndItemPickup(const LmItem& item, bool retrieved)
   }
 }
 
+void GsPlayer::SetInPersonalVault(bool inVault)
+{
+  LmLocker mon(lock_);
+  inPersonalVault_ = inVault;  
+}
+
+bool GsPlayer::InPersonalVault()
+{
+  return inPersonalVault_;
+}
+
 ////
 // StartItemDrop - remove item from inventory, and add to list of items being dropped
 ////
