@@ -419,7 +419,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
   case RMsg_PlayerMsg::EXPEL:				// skill, guild_id
   case RMsg_PlayerMsg::CHAOS_PURGE:			// skill, not used
   case RMsg_PlayerMsg::CUP_SUMMONS:			// skill, not used
- // case RMsg_PlayerMsg::SUMMON_PRIME:		// skill, success     This goes through the given art at given skill level check below.. msg.State1() for this art is guildid not skill level
+  case RMsg_PlayerMsg::SUMMON_PRIME:		// skill, success
   case RMsg_PlayerMsg::SCAN:				// skill, not used
   case RMsg_PlayerMsg::HEAL:				// skill, not used
   case RMsg_PlayerMsg::SANCTIFY:			// skill, not used
@@ -721,16 +721,7 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
     break;
 
 
-  // summon prime check
-  case RMsg_PlayerMsg::SUMMON_PRIME:
-   if (!player_->CanUseArt(Arts::SUMMON_PRIME, 1) || !player_->HasMinRank(Guild::RULER)) {
-      int p_skill = player_->DB().Arts().Skill(Arts::SUMMON_PRIME);
-      SECLOG(4, _T("%s: player %u: illegal attempt to use Summon Prime art, own skill is %d or doesn't posess necessary guild rank"), method,
-          player_->PlayerID(), p_skill);
-      send_to_level = false;
-  }
 
-   break;
 
   // player attempting to spheretrain someone
   case RMsg_PlayerMsg::TRAIN_SPHERE: {       // success, max sphere trainable
@@ -987,6 +978,10 @@ void GsPlayerThread::handle_RMsg_PlayerMsg(LmSrvMesgBuf* msgbuf, LmConnection* c
     // determine how much XP to lose
     float xp_adj_pct = msg.State3() ? 0.009 : 0.01;
     int xp_adj = - (int) ((double) player_->DB().Stats().XP() * xp_adj_pct); // lose up to 1%
+    if (xp_adj < -100000) // setting a cap on xp loss to 100k
+    {
+        xp_adj = -100000;
+    }
     adjust_xp(xp_adj, _T("being dissolved by player"), msg.ReceiverID(), true);
     // fill in orbit (state1), DS field with "1", if player (monster/admin client will fill in fields)
     if (player_->DB().AccountType() == LmPlayerDB::ACCT_PLAYER)
