@@ -485,26 +485,61 @@ void GsPlayerThread::handle_GMsg_GetItem(LmSrvMesgBuf* msgbuf, LmConnection* con
   tmpitem.Init(msg.ItemHeader());
   // check if player could add item to inventory
   if (!player_->CanAddItem(msg.ItemHeader())) {
-    TLOG_Warning(_T("%s: player cannot add item"), method);
+    SECLOG(6, _T("%s: player cannot add item"), method);
     send_GMsg_ItemPickup(conn, tmpitem, GMsg_ItemPickup::PICKUP_ERROR);
     return;
   }
-  // check that player is in a level, and is connected to level server
-  if (!player_->InLevel() || !player_->LevelDBC() || !player_->LevelConnection()) {
-    TLOG_Warning(_T("%s: player %u not in level"), method, player_->PlayerID());
-    send_GMsg_ItemPickup(conn, tmpitem, GMsg_ItemPickup::PICKUP_ERROR);
-    return;
-  }
-  // check that source room is in player's level
-  if (!player_->LevelDBC()->ContainsRoom(msg.RoomID())) {
-    TLOG_Warning(_T("%s: room %u not in level"), method, msg.RoomID());
-    send_GMsg_ItemPickup(conn, tmpitem, GMsg_ItemPickup::PICKUP_ERROR);
-    return;
-  }
+  if(!player_->InPersonalVault())
+  {
+	SECLOG(6, _T("%s: player not in PV"), method);
+	  // check that player is in a level, and is connected to level server
+	  if (!player_->InLevel() || !player_->LevelDBC() || !player_->LevelConnection()) {
+	    TLOG_Warning(_T("%s: player %u not in level"), method, player_->PlayerID());
+	    send_GMsg_ItemPickup(conn, tmpitem, GMsg_ItemPickup::PICKUP_ERROR);
+	    return;
+	  }
+	  // check that source room is in player's level
+	  if (!player_->LevelDBC()->ContainsRoom(msg.RoomID())) {
+	    TLOG_Warning(_T("%s: room %u not in level"), method, msg.RoomID());
+	    send_GMsg_ItemPickup(conn, tmpitem, GMsg_ItemPickup::PICKUP_ERROR);
+	    return;
+	  }
+   }
   // provisionally pick up item
   player_->StartItemPickup(msg.ItemHeader());
   // send to level server
-  send_SMsg_GetItem(player_->LevelConnection(), msg.RoomID(), msg.ItemHeader());
+  if(!player_->InPersonalVault())
+	  send_SMsg_GetItem(player_->LevelConnection(), msg.RoomID(), msg.ItemHeader());
+  else
+  {
+	LmItem item;
+	item.Init(msg.ItemHeader());
+	int serial = item.Header().Serial();
+	int rc = main_->ItemDBC()->GetFullItemState(item);
+	int sqlcode = main_->ItemDBC()->LastSQLCode();
+	if(rc < 0)
+	{
+		SECLOG(6, _T("%s: failed to update item state"), method);
+		TLOG_Warning(_T("%s: could not update fullstate of item %d; rc=%d, sql=%d"), method, serial, rc, sqlcode);
+		send_GMsg_ItemPickup(conn, tmpitem, GMsg_ItemPickup::PICKUP_ERROR);
+		return;
+	}
+	SECLOG(6, _T("%s: item details: %d %s %d %d %d %d %d"), method, item.Serial(), item.Name(), item.State1(), item.State2(), item.State3(), item.Header().ItemHdr1(),
+		item.Header().ItemHdr2());
+	rc = main_->ItemDBC()->UpdateItemOwnership(serial, LmItemDBC::OWNER_PLAYER, player_->PlayerID(), 0);
+	sqlcode = main_->ItemDBC()->LastSQLCode();
+	if(rc < 0)
+	{
+		SECLOG(6, _T("%s: failed to take item"), method);
+		TLOG_Warning(_T("%s: player %u could not take item %d; rc=%d, sql=%d"), method, player_->PlayerID(), serial, rc, sqlcode);
+		send_GMsg_ItemPickup(conn, tmpitem, GMsg_ItemPickup::PICKUP_ERROR);
+		return;
+	}
+
+	// We're good!
+	player_->EndItemPickup(item, true);
+	send_GMsg_ItemPickup(conn, item, GMsg_ItemPickup::PICKUP_OK);
+  }
   // response: handle_SMsg_ItemPickup
 }
 

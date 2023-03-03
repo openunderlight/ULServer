@@ -65,6 +65,7 @@ public:
   int ChangeNumDreamers(lyra_id_t level_id, int change);
   int GetTotalNumDreamers(unsigned int* total);
   int PutItemInPersonalVault(lyra_id_t playerId, const LmRoomItem& item);
+  int GetFullItemState(const LmItem& item);
   // database selectors
   int GetPlayerInventory(lyra_id_t owner, LmInventory& inventory);
   int GetLevelItems(lyra_id_t level_id, int* item_ids);

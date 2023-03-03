@@ -387,6 +387,37 @@ int LmItemDBC::UpdateItemFullState(const LmItem& item)
 
 }
 
+int LmItemDBC::GetFullItemState(const LmItem& item)
+{
+	DEFMETHOD(LmItemDBC, GetFullItemState);
+	LmLocker mon(lock_);
+	MYSQL_RES* res;
+	MYSQL_ROW row;
+	TCHAR query[256];
+	//TCHAR escaped_name[40];
+	_stprintf(query, _T("SELECT item_id,item_state1,item_state2,item_state3,item_hdr,item_hdr_2,item_name FROM item WHERE item_id=%u;"),
+		item.Serial());
+	int error = mysql_query(&m_mysql, query);
+	if(error)
+	{
+		LOG_Error(_T("Could not get full item state for item %u; mysql error%s"), item.Serial(), mysql_error(&m_mysql));
+		return MYSQL_ERROR;
+	}
+	res = mysql_store_result(&m_mysql);
+	int num_items = mysql_num_rows(res);
+	if(num_items != 1)
+	{
+		LOG_Error(_T("Could not get full item state - expecting 1 item, found %d"), num_items);
+		return MYSQL_ERROR;
+	}
+	row = mysql_fetch_row(res);
+	// Just reinit, whatever
+	item.Init(ATOI(row[0]), ATOI(row[4]), ATOI(row[5]), row[6], ATOI(row[1]), ATOI(row[2]), ATOI(row[3]));
+	mysql_free_result(res);
+	return 0;
+	
+}
+
 int LmItemDBC::PutItemInPersonalVault(lyra_id_t playerId, const LmRoomItem& item)
 {
 	DEFMETHOD(LmItemDBC, PutItemInPersonalVault);
